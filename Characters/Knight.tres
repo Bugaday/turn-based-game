@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="UnitStats" format=3 uid="uid://64xnv0xhbdih"]
+
+[ext_resource type="Script" uid="uid://cvrfh8dxox5u0" path="res://Characters/CharacterData/UnitStats.gd" id="1_icafy"]
+[ext_resource type="Texture2D" uid="uid://doi0b23r8rg40" path="res://Kenney-Tiny-Dungeon/Tiles/tile_0087.png" id="2_icafy"]
+
+[resource]
+script = ExtResource("1_icafy")
+unit_name = "Knight"
+strength = 50
+sprite = ExtResource("2_icafy")
+metadata/_custom_type_script = "uid://cvrfh8dxox5u0"

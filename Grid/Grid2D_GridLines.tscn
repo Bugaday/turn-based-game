@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://borql2lwbcihj"]
+
+[ext_resource type="Script" uid="uid://2sj1khsndn63" path="res://Grid/Grid2D_DrawLines.gd" id="1_dsehp"]
+
+[node name="Grid2dGridLines" type="Node2D" unique_id=1351000964]
+script = ExtResource("1_dsehp")

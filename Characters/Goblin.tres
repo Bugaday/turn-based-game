@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="UnitStats" format=3 uid="uid://b5k0hqe1epc2p"]
+
+[ext_resource type="Script" uid="uid://cvrfh8dxox5u0" path="res://Characters/CharacterData/UnitStats.gd" id="1_viq8k"]
+[ext_resource type="Texture2D" uid="uid://cg4a2miy7vd5n" path="res://Kenney-Tiny-Dungeon/Tiles/tile_0085.png" id="2_viq8k"]
+
+[resource]
+script = ExtResource("1_viq8k")
+unit_name = "Goblin"
+sprite = ExtResource("2_viq8k")
+metadata/_custom_type_script = "uid://cvrfh8dxox5u0"

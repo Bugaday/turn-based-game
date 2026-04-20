@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://vkye7cj77h2f"]
+
+[ext_resource type="Texture2D" uid="uid://dpff3gpwguu3q" path="res://Kenney-Tiny-Dungeon/Tiles/tile_0049.png" id="1_aqvrw"]
+
+[node name="GridCell2d" type="Node2D" unique_id=67922548]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1324039548]
+z_index = -1
+texture = ExtResource("1_aqvrw")

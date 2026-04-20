@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bv6hn4ogt6ph4"]
+
+[ext_resource type="Script" uid="uid://diucnkh412kge" path="res://Grid/Grid2D_Constructor.gd" id="1_1r8xs"]
+[ext_resource type="PackedScene" uid="uid://borql2lwbcihj" path="res://Grid/Grid2D_GridLines.tscn" id="2_1r8xs"]
+[ext_resource type="PackedScene" uid="uid://vkye7cj77h2f" path="res://Grid/GridCell2D.tscn" id="2_gp0sy"]
+
+[node name="Node2D" type="Node2D" unique_id=17497945]
+script = ExtResource("1_1r8xs")
+gridCell = ExtResource("2_gp0sy")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1743110368]
+position = Vector2(77, 57)
+zoom = Vector2(2, 2)
+
+[node name="Grid2dGridLines" parent="." unique_id=1351000964 instance=ExtResource("2_1r8xs")]
+z_index = 1

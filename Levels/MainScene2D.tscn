@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://bv6hn4ogt6ph4"]
+
+[ext_resource type="Script" uid="uid://diucnkh412kge" path="res://Grid/Grid2D_Constructor.gd" id="1_1r8xs"]
+[ext_resource type="PackedScene" uid="uid://borql2lwbcihj" path="res://Grid/Grid2D_GridLines.tscn" id="2_1r8xs"]
+[ext_resource type="PackedScene" uid="uid://vkye7cj77h2f" path="res://Grid/GridCell2D.tscn" id="2_gp0sy"]
+[ext_resource type="Script" uid="uid://gbheq3hw8qxv" path="res://Game/BattleManager.gd" id="5_o4v6t"]
+[ext_resource type="Script" uid="uid://ch0otjmh1dgcx" path="res://Levels/LevelInit.gd" id="6_dgxli"]
+[ext_resource type="PackedScene" uid="uid://cdlfini0ykxkm" path="res://Characters/Character.tscn" id="6_di1rq"]
+[ext_resource type="Resource" uid="uid://64xnv0xhbdih" path="res://Characters/Knight.tres" id="7_di1rq"]
+
+[node name="Node2D" type="Node2D" unique_id=17497945]
+script = ExtResource("1_1r8xs")
+gridCell = ExtResource("2_gp0sy")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1743110368]
+position = Vector2(80, 70)
+zoom = Vector2(3, 3)
+
+[node name="Grid2dGridLines" parent="." unique_id=1351000964 instance=ExtResource("2_1r8xs")]
+z_index = 1
+
+[node name="LevelInit" type="Node" parent="." unique_id=521745549]
+script = ExtResource("6_dgxli")
+
+[node name="BattleManager" type="Node" parent="." unique_id=942781913 node_paths=PackedStringArray("charParent")]
+script = ExtResource("5_o4v6t")
+charParent = NodePath("../CharacterManager")
+
+[node name="CharacterManager" type="Node" parent="." unique_id=1607116677]
+
+[node name="Character" parent="CharacterManager" unique_id=325950488 instance=ExtResource("6_di1rq")]
+
+[node name="Character2" parent="CharacterManager" unique_id=250516024 instance=ExtResource("6_di1rq")]
+
+[node name="Character3" parent="CharacterManager" unique_id=638873371 instance=ExtResource("6_di1rq")]
+stats = ExtResource("7_di1rq")
+
+[node name="Character4" parent="CharacterManager" unique_id=1849480990 instance=ExtResource("6_di1rq")]
+stats = ExtResource("7_di1rq")

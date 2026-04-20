@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cdlfini0ykxkm"]
+
+[ext_resource type="Script" uid="uid://dcpjy8i623v2x" path="res://Characters/Character.gd" id="1_3wwac"]
+[ext_resource type="Resource" uid="uid://b5k0hqe1epc2p" path="res://Characters/Goblin.tres" id="2_wbsri"]
+
+[node name="Character" type="Node2D" unique_id=325950488 node_paths=PackedStringArray("spriteComp")]
+script = ExtResource("1_3wwac")
+stats = ExtResource("2_wbsri")
+spriteComp = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=236294916]

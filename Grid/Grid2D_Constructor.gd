@@ -7,8 +7,11 @@ func _ready() -> void:
 
 # Called when the node enters the scene tree for the first time.
 func CreateGrid() -> void:
-	for i in GridProps2D.gridXCount:
-		for j in GridProps2D.gridYCount:
-			var gridCell_instance = gridCell.instantiate() as Node2D
+	for x in GridProps2D.gridXCount:
+		for y in GridProps2D.gridYCount:
+			var gridCell_instance = gridCell.instantiate()
 			add_child(gridCell_instance)
-			gridCell_instance.global_position = Vector2(i*GridProps2D.cellSize,j*GridProps2D.cellSize)
+			gridCell_instance.cellID = x + y*GridProps2D.gridYCount
+			gridCell_instance.global_position = Vector2(x*GridProps2D.cellSize,y*GridProps2D.cellSize)
+			print(gridCell_instance. cellID);
+			

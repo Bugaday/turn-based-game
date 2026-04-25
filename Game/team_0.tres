@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Team" format=3 uid="uid://0uql5lrdmfsh"]
+
+[ext_resource type="Script" uid="uid://b7jf7ce86qwkj" path="res://Game/team.gd" id="1_68npy"]
+[ext_resource type="Script" uid="uid://cvrfh8dxox5u0" path="res://Characters/CharacterData/UnitStats.gd" id="2_necnr"]
+[ext_resource type="Resource" uid="uid://64xnv0xhbdih" path="res://Characters/Knight.tres" id="3_68npy"]
+
+[resource]
+script = ExtResource("1_68npy")
+teamMembers = Array[ExtResource("2_necnr")]([ExtResource("3_68npy"), ExtResource("3_68npy"), ExtResource("3_68npy"), ExtResource("3_68npy")])
+metadata/_custom_type_script = "uid://b7jf7ce86qwkj"

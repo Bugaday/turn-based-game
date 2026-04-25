@@ -5,8 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://vkye7cj77h2f" path="res://Grid/GridCell2D.tscn" id="2_gp0sy"]
 [ext_resource type="Script" uid="uid://gbheq3hw8qxv" path="res://Game/BattleManager.gd" id="5_o4v6t"]
 [ext_resource type="Script" uid="uid://ch0otjmh1dgcx" path="res://Levels/LevelInit.gd" id="6_dgxli"]
-[ext_resource type="PackedScene" uid="uid://cdlfini0ykxkm" path="res://Characters/Character.tscn" id="6_di1rq"]
-[ext_resource type="Resource" uid="uid://64xnv0xhbdih" path="res://Characters/Knight.tres" id="7_di1rq"]
+[ext_resource type="Script" uid="uid://b7jf7ce86qwkj" path="res://Game/team.gd" id="6_epiq7"]
+[ext_resource type="Resource" uid="uid://0uql5lrdmfsh" path="res://Game/team_0.tres" id="7_e5q4x"]
+[ext_resource type="Resource" uid="uid://buisjxpin73mi" path="res://Game/team_1.tres" id="8_limvo"]
+[ext_resource type="Script" uid="uid://8e4pe2s88ama" path="res://Levels/input.gd" id="9_5kbai"]
+[ext_resource type="Script" uid="uid://yt7weryc7e33" path="res://PlayerController/playerController_script.gd" id="10_rxovs"]
 
 [node name="Node2D" type="Node2D" unique_id=17497945]
 script = ExtResource("1_1r8xs")
@@ -22,18 +25,13 @@ z_index = 1
 [node name="LevelInit" type="Node" parent="." unique_id=521745549]
 script = ExtResource("6_dgxli")
 
-[node name="BattleManager" type="Node" parent="." unique_id=942781913 node_paths=PackedStringArray("charParent")]
+[node name="BattleManager" type="Node" parent="." unique_id=942781913]
 script = ExtResource("5_o4v6t")
-charParent = NodePath("../CharacterManager")
+teams = Array[ExtResource("6_epiq7")]([ExtResource("7_e5q4x"), ExtResource("8_limvo")])
 
-[node name="CharacterManager" type="Node" parent="." unique_id=1607116677]
+[node name="Input" type="Node" parent="." unique_id=51935616]
+script = ExtResource("9_5kbai")
 
-[node name="Character" parent="CharacterManager" unique_id=325950488 instance=ExtResource("6_di1rq")]
-
-[node name="Character2" parent="CharacterManager" unique_id=250516024 instance=ExtResource("6_di1rq")]
-
-[node name="Character3" parent="CharacterManager" unique_id=638873371 instance=ExtResource("6_di1rq")]
-stats = ExtResource("7_di1rq")
-
-[node name="Character4" parent="CharacterManager" unique_id=1849480990 instance=ExtResource("6_di1rq")]
-stats = ExtResource("7_di1rq")
+[node name="PlayerController" type="Node2D" parent="." unique_id=1713919548]
+script = ExtResource("10_rxovs")
+metadata/_custom_type_script = "uid://yt7weryc7e33"

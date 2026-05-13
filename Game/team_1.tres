@@ -3,8 +3,12 @@
 [ext_resource type="Script" uid="uid://b7jf7ce86qwkj" path="res://Game/team.gd" id="1_7vkv3"]
 [ext_resource type="Script" uid="uid://cvrfh8dxox5u0" path="res://Characters/CharacterData/UnitStats.gd" id="2_vdbgx"]
 [ext_resource type="Resource" uid="uid://b5k0hqe1epc2p" path="res://Characters/Goblin.tres" id="3_v53dn"]
+[ext_resource type="Resource" uid="uid://dk0l615q2vgai" path="res://Characters/Bat.tres" id="4_11nem"]
+[ext_resource type="Resource" uid="uid://i0l4a0v0lm6a" path="res://Characters/Skeleton.tres" id="5_slw5j"]
+[ext_resource type="Resource" uid="uid://b56icsqafvgar" path="res://Characters/Zombie.tres" id="6_xpsim"]
 
 [resource]
 script = ExtResource("1_7vkv3")
-teamMembers = Array[ExtResource("2_vdbgx")]([ExtResource("3_v53dn"), ExtResource("3_v53dn"), ExtResource("3_v53dn"), ExtResource("3_v53dn")])
+teamMembers = Array[ExtResource("2_vdbgx")]([ExtResource("3_v53dn"), ExtResource("4_11nem"), ExtResource("5_slw5j"), ExtResource("6_xpsim")])
+TeamTint = Color(0.95445794, 3.6098063e-06, 1.347661e-06, 1)
 metadata/_custom_type_script = "uid://b7jf7ce86qwkj"

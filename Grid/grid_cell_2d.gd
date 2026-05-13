@@ -5,7 +5,7 @@ var hover : bool = false;
 var isBlocked : bool = false;
 var hoverRect : Rect2;
 
-	
+
 func _draw() -> void:
 	if hover:
 		draw_rect(Rect2(Vector2.ZERO-Vector2(7,7),Vector2(14,14)),Color.RED,false,1.0,true)
@@ -18,7 +18,7 @@ func _on_area_2d_mouse_entered() -> void:
 	hover = true;
 	queue_redraw()
 	print("Mouse is over cell: ", cellID) # Replace with function body.
-	
+
 
 func _on_area_2d_mouse_exited() -> void:
 	hover = false;

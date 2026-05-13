@@ -15,6 +15,15 @@ run/main_scene="uid://bv6hn4ogt6ph4"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[file_customization]
+
+folder_colors={
+"res://TileSet-Test/Kenney-New-Platformer/": "green",
+"res://TileSet-Test/Kenney-Tiny-Dungeon/": "green",
+"res://TileSet-Test/Kenney-abstract-platformer/": "green",
+"res://TileSet-Test/Kenney_pirate-pack/": "green"
+}
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

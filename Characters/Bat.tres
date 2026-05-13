@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="UnitStats" format=3 uid="uid://dk0l615q2vgai"]
+
+[ext_resource type="Script" uid="uid://cvrfh8dxox5u0" path="res://Characters/CharacterData/UnitStats.gd" id="1_31ej5"]
+[ext_resource type="Texture2D" uid="uid://byo6sw14dlhp2" path="res://TileSets/IMG_5673.png" id="2_wlfn6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vu45i"]
+atlas = ExtResource("2_wlfn6")
+region = Rect2(64, 64, 64, 64)
+
+[resource]
+script = ExtResource("1_31ej5")
+unit_name = "Zombie"
+stamina = 5
+strength = 12
+sprite = SubResource("AtlasTexture_vu45i")
+metadata/_custom_type_script = "uid://cvrfh8dxox5u0"

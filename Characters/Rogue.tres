@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="UnitStats" format=3 uid="uid://deronn6553lsb"]
+
+[ext_resource type="Script" uid="uid://cvrfh8dxox5u0" path="res://Characters/CharacterData/UnitStats.gd" id="1_ti8bi"]
+[ext_resource type="Texture2D" uid="uid://byo6sw14dlhp2" path="res://TileSets/IMG_5673.png" id="2_jkr4f"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e2usl"]
+atlas = ExtResource("2_jkr4f")
+region = Rect2(256, 0, 64, 64)
+
+[resource]
+script = ExtResource("1_ti8bi")
+unit_name = "Rogue"
+stamina = 15
+strength = 15
+sprite = SubResource("AtlasTexture_e2usl")
+metadata/_custom_type_script = "uid://cvrfh8dxox5u0"

@@ -3,8 +3,12 @@
 [ext_resource type="Script" uid="uid://b7jf7ce86qwkj" path="res://Game/team.gd" id="1_68npy"]
 [ext_resource type="Script" uid="uid://cvrfh8dxox5u0" path="res://Characters/CharacterData/UnitStats.gd" id="2_necnr"]
 [ext_resource type="Resource" uid="uid://64xnv0xhbdih" path="res://Characters/Knight.tres" id="3_68npy"]
+[ext_resource type="Resource" uid="uid://deronn6553lsb" path="res://Characters/Rogue.tres" id="4_d83f3"]
+[ext_resource type="Resource" uid="uid://cb3a7pug7dtk4" path="res://Characters/Dwarf.tres" id="4_necnr"]
+[ext_resource type="Resource" uid="uid://bpwxllkia0gkr" path="res://Characters/Wizard.tres" id="5_tqnhw"]
 
 [resource]
 script = ExtResource("1_68npy")
-teamMembers = Array[ExtResource("2_necnr")]([ExtResource("3_68npy"), ExtResource("3_68npy"), ExtResource("3_68npy"), ExtResource("3_68npy")])
+teamMembers = Array[ExtResource("2_necnr")]([ExtResource("3_68npy"), ExtResource("4_d83f3"), ExtResource("4_necnr"), ExtResource("5_tqnhw")])
+TeamTint = Color(9.62615e-07, 0.8081867, 0, 1)
 metadata/_custom_type_script = "uid://b7jf7ce86qwkj"

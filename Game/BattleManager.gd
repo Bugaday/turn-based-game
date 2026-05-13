@@ -15,19 +15,13 @@ func _ready() -> void:
 			var newChar = Char.instantiate() as Character
 			add_child(newChar)
 			newChar._setStats(teams[i].teamMembers[j])
-			newChar.position = GetRandomGridCell()
-		
-func GetGridIDAtPos(pos : Vector2) -> int:
-	return 0
-		
-func GetRandomGridCell() -> Vector2:
-		var x = randi_range(0,GridProps2D.gridXCount-1)
-		var y = randi_range(0,GridProps2D.gridYCount-1)
-		return Vector2(x*16,y*16)
+			newChar.position = GetRandomGridCell(i)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+		
+func GetRandomGridCell(team : int) -> Vector2:
+		var x = randi_range(team*GridProps2D.gridXCount/2,(GridProps2D.gridXCount-1)/2+team*GridProps2D.gridXCount/2)
+		var y = randi_range(0,GridProps2D.gridYCount-1)
+		return Vector2(x*GridProps2D.cellSize+GridProps2D.cellSize/2,y*GridProps2D.cellSize+GridProps2D.cellSize/2)
 	
 func endTurn() -> void:
 	teamTurn = (teamTurn + 1) % teamCount;

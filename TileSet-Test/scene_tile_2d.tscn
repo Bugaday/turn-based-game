@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://c6tmm3j2y7w3x"]
+
+[ext_resource type="Texture2D" uid="uid://u8lq6mrnhe2g" path="res://TileSet-Test/Kenney-Tiny-Dungeon/Tiles/tile_0000.png" id="1_cdjax"]
+
+[node name="SceneTile-CPUParticles2D" type="CPUParticles2D" unique_id=314158402]
+texture = ExtResource("1_cdjax")
+emission_shape = 1
+emission_sphere_radius = 30.0
+direction = Vector2(0, -1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 91.8
+initial_velocity_max = 219.67

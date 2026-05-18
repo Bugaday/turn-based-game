@@ -33,7 +33,6 @@ teams = Array[ExtResource("6_epiq7")]([ExtResource("7_e5q4x"), ExtResource("8_li
 script = ExtResource("9_5kbai")
 
 [node name="PlayerController" type="Node2D" parent="." unique_id=1713919548]
-unique_name_in_owner = true
 script = ExtResource("10_rxovs")
 metadata/_custom_type_script = "uid://yt7weryc7e33"
 
@@ -42,5 +41,3 @@ position = Vector2(-33, -21)
 
 [node name="GridPathfinding" type="Node2D" parent="." unique_id=192550194]
 script = ExtResource("2_rxovs")
-
-[connection signal="ActivateMove" from="Input" to="PlayerController" method="_on_input_activate_move"]

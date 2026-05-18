@@ -17,8 +17,10 @@ metadata/_edit_horizontal_guides_ = [1687.0]
 [node name="TilesGround" type="TileMapLayer" parent="." unique_id=1109722853]
 unique_name_in_owner = true
 tile_set = ExtResource("1_5kbai")
+script = ExtResource("2_rxovs")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1743110368]
+zoom = Vector2(2, 2)
 script = ExtResource("2_5kbai")
 
 [node name="LevelInit" type="Node" parent="." unique_id=521745549]
@@ -33,14 +35,22 @@ teams = Array[ExtResource("6_epiq7")]([ExtResource("7_e5q4x"), ExtResource("8_li
 script = ExtResource("9_5kbai")
 
 [node name="PlayerController" type="Node2D" parent="." unique_id=1713919548]
-unique_name_in_owner = true
 script = ExtResource("10_rxovs")
 metadata/_custom_type_script = "uid://yt7weryc7e33"
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1718865846]
 position = Vector2(-33, -21)
 
-[node name="GridPathfinding" type="Node2D" parent="." unique_id=192550194]
-script = ExtResource("2_rxovs")
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1935764369]
 
-[connection signal="ActivateMove" from="Input" to="PlayerController" method="_on_input_activate_move"]
+[node name="Panel" type="Panel" parent="CanvasLayer" unique_id=1219684052]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="CanvasLayer/Panel" unique_id=817199385]
+layout_mode = 0
+offset_left = -57.0
+offset_top = -45.0
+offset_right = 41.0
+offset_bottom = -10.0
+text = "End Turn"

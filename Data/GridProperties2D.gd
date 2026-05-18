@@ -2,8 +2,8 @@ extends Node
 
 class_name GridProps2D
 
-static var cellSize : float = 64.0;
-static var gridXCount : int = 8;
-static var gridYCount : int = 8;
-static var gridSizeX : float = gridXCount * cellSize
-static var gridSizeY : float = gridYCount * cellSize
+static var cellSize : Vector2i = Vector2i(64.0,64.0);
+static var gridXCount : int = 16;
+static var gridYCount : int = 16;
+static var gridSizeX : float = gridXCount * cellSize.x
+static var gridSizeY : float = gridYCount * cellSize.y

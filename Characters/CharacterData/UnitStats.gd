@@ -8,7 +8,11 @@ class_name UnitStats
 @export var sprite: AtlasTexture;
 
 #Offensive stats
-var attackPower = strength * 2;
+var attackPower:
+	get:
+		return strength * 2
 
 #Defensive stats
-var health = stamina * 10;
+var health : int:
+	get:
+		return stamina * 10;

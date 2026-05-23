@@ -44,4 +44,3 @@ position = Vector2(-33, -21)
 script = ExtResource("2_rxovs")
 
 [connection signal="ActivateMove" from="Input" to="PlayerController" method="_on_input_activate_move"]
-[connection signal="Select" from="Input" to="PlayerController" method="_on_input_select"]

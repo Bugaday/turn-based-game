@@ -3,4 +3,5 @@ extends Node
 class_name GridCellData
 
 var cellID : int;
-var isBlocked : bool = false;
+var isOccupied : bool = false;
+var UnitOccupying : Character = null

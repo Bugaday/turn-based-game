@@ -10,7 +10,7 @@ region = Rect2(0, 64, 64, 64)
 [resource]
 script = ExtResource("1_21u6b")
 unit_name = "Skeleton"
-stamina = 5
+stamina = 4
 strength = 8
 sprite = SubResource("AtlasTexture_vu45i")
 metadata/_custom_type_script = "uid://cvrfh8dxox5u0"

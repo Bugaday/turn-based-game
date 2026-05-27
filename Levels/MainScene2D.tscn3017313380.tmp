@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://bv6hn4ogt6ph4"]
+
+[ext_resource type="TileSet" uid="uid://uf68vmgahhy8" path="res://TileSet-Test/new_tile_set.tres" id="1_5kbai"]
+[ext_resource type="Script" uid="uid://8q86ld088lto" path="res://Game/camera_2d.gd" id="2_5kbai"]
+[ext_resource type="Script" uid="uid://gbheq3hw8qxv" path="res://Game/BattleManager.gd" id="5_o4v6t"]
+[ext_resource type="Script" uid="uid://ch0otjmh1dgcx" path="res://Game/GameManager.gd" id="6_dgxli"]
+[ext_resource type="Script" uid="uid://b7jf7ce86qwkj" path="res://Game/team.gd" id="6_epiq7"]
+[ext_resource type="Resource" uid="uid://0uql5lrdmfsh" path="res://Game/team_0.tres" id="7_e5q4x"]
+[ext_resource type="Resource" uid="uid://buisjxpin73mi" path="res://Game/team_1.tres" id="8_limvo"]
+[ext_resource type="Script" uid="uid://8e4pe2s88ama" path="res://PlayerController/InputController.gd" id="9_5kbai"]
+[ext_resource type="Script" uid="uid://yt7weryc7e33" path="res://PlayerController/playerController_script.gd" id="10_rxovs"]
+
+[node name="Node2D" type="Node2D" unique_id=17497945]
+metadata/_edit_horizontal_guides_ = [1687.0]
+
+[node name="TilesGround" type="TileMapLayer" parent="." unique_id=1109722853]
+unique_name_in_owner = true
+tile_set = ExtResource("1_5kbai")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1743110368]
+script = ExtResource("2_5kbai")
+
+[node name="LevelInit" type="Node" parent="." unique_id=521745549]
+unique_name_in_owner = true
+script = ExtResource("6_dgxli")
+
+[node name="BattleManager" type="Node" parent="." unique_id=942781913]
+unique_name_in_owner = true
+script = ExtResource("5_o4v6t")
+teams = Array[ExtResource("6_epiq7")]([ExtResource("7_e5q4x"), ExtResource("8_limvo")])
+
+[node name="Input" type="Node" parent="." unique_id=51935616]
+script = ExtResource("9_5kbai")
+
+[node name="PlayerController" type="Node2D" parent="." unique_id=1713919548]
+unique_name_in_owner = true
+script = ExtResource("10_rxovs")
+metadata/_custom_type_script = "uid://yt7weryc7e33"
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1718865846]
+position = Vector2(-33, -21)
+
+[connection signal="ActivateMove" from="Input" to="PlayerController" method="_on_input_activate_move"]
+[connection signal="Select" from="Input" to="PlayerController" method="_on_input_select"]

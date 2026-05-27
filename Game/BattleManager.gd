@@ -1,24 +1,35 @@
-extends Node
+extends RefCounted
 
 class_name BattleManager
 
+var _gm : GameManager
+
 var teamTurn : int = 0;
 var teamCount : int = 2;
-@export var teams : Array[Team]
+var charScene : PackedScene
+var characters : Array[Character] = []
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	var Char : PackedScene = load("res://Characters/Character.tscn")
+var teams : Array[Team]
+
+func _setup(gm:GameManager):
+	_gm = gm
+	
+	charScene = preload("res://Characters/Character.tscn")
+	
+	var team0 : Team = load("res://Characters/Teams/team_0.tres")
+	var team1 : Team = load("res://Characters/Teams/team_1.tres")
+	teams.append(team0)
+	teams.append(team1)
+	
+func _initChars():
 	
 	for i in teams.size():
 		for j in teams[i].teamMembers.size():
-			var newChar = Char.instantiate() as Character
-			add_child(newChar)
-			newChar._setStats(teams[i].teamMembers[j])
+			var newChar = charScene.instantiate()
+			newChar.stats = teams[i].teamMembers[j]
+			characters.append(newChar)
+			_gm.add_child(newChar)
 			newChar.global_position = GetRandomGridCell(i)
-			var cell: Vector2i = %TilesGround.local_to_map(newChar.global_position)
-			%LevelInit.Grid2D[cell].isOccupied = true
-			%LevelInit.Grid2D[cell].UnitOccupying = newChar
 
 		
 func GetRandomGridCell(team : int) -> Vector2:

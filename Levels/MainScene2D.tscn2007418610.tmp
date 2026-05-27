@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://bv6hn4ogt6ph4"]
+
+[ext_resource type="PackedScene" uid="uid://3jei4yrv1ydm" path="res://Levels/tiles_ground.tscn" id="1_t8vbk"]
+[ext_resource type="Script" uid="uid://8q86ld088lto" path="res://Game/camera_2d.gd" id="2_5kbai"]
+[ext_resource type="Script" uid="uid://ch0otjmh1dgcx" path="res://Game/GameManager.gd" id="6_dgxli"]
+[ext_resource type="Script" uid="uid://yt7weryc7e33" path="res://PlayerController/playerController_script.gd" id="10_rxovs"]
+
+[node name="Node2D" type="Node2D" unique_id=17497945]
+metadata/_edit_horizontal_guides_ = [1687.0]
+
+[node name="TilesGround" parent="." unique_id=485285120 instance=ExtResource("1_t8vbk")]
+unique_name_in_owner = true
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1743110368]
+script = ExtResource("2_5kbai")
+
+[node name="GameManager" type="Node" parent="." unique_id=521745549]
+unique_name_in_owner = true
+script = ExtResource("6_dgxli")
+
+[node name="PlayerController" type="Node2D" parent="." unique_id=1713919548]
+unique_name_in_owner = true
+script = ExtResource("10_rxovs")
+metadata/_custom_type_script = "uid://yt7weryc7e33"
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1718865846]
+position = Vector2(-33, -21)

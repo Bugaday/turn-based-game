@@ -7,6 +7,7 @@ var _tilesGround : TileMapLayer
 var MousePosX : int
 var MousePosY : int
 var MouseGridPos : Vector2i
+var MouseGrid : Vector2
 
 signal ActivateMove
 signal Select
@@ -29,3 +30,4 @@ func _process(delta: float) -> void:
 	MousePosX = clamp(get_global_mouse_position().x,0,GridProps2D.gridSizeX-GridProps2D.cellSize.x)
 	MousePosY = clamp(get_global_mouse_position().y,0,GridProps2D.gridSizeY-GridProps2D.cellSize.y)
 	MouseGridPos = _tilesGround.local_to_map(Vector2(MousePosX,MousePosY))
+	#MouseGrid = _tilesGround.map_to_local()

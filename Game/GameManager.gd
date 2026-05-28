@@ -35,13 +35,6 @@ func _ready() -> void:
 	
 	add_child(DrawingObj)
 	add_child(InputObj)
-	
-
-	
-	#var new_unit : Character = load("res://Characters/Character.tscn").instantiate()
-	#add_child(new_unit)
-	#new_unit._setStats(load("res://Characters/Knight.tres"))
-	pass
 
 func SetTiles():
 	for i in Grid2D:

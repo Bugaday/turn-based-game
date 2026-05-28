@@ -15,4 +15,5 @@ unique_name_in_owner = true
 script = ExtResource("6_dgxli")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1743110368]
+unique_name_in_owner = true
 script = ExtResource("2_5kbai")

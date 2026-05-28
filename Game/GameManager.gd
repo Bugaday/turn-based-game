@@ -27,6 +27,7 @@ func _ready() -> void:
 	DrawingObj = Drawing2D.new()
 	InputObj = InputController.new()
 	
+	%Camera2D.InputCtrl = InputObj
 	InputObj._setup(TilesGroundObj)
 	BattleManagerObj._setup(self)
 	DrawingObj._setup(PathfinderObj,InputObj)

@@ -1,6 +1,6 @@
 extends Camera2D
 
-
+var InputCtrl : InputController
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -9,6 +9,7 @@ func _ready() -> void:
 	position = Vector2(GridCentreX,GridCentreY)
 	
 func _process(delta: float) -> void:
-	#print("Local: ",get_local_mouse_position(), " : Global: ", get_global_mouse_position())
+	if (InputCtrl):
+		position += Vector2(InputCtrl.MoveHorz * 10,InputCtrl.MoveVert * 10)
 	pass
 	

@@ -13,8 +13,8 @@ var drawn_path : PackedVector2Array
 
 #Select Box
 var HighlightBox : Rect2 = Rect2(Vector2.ZERO,Vector2(GridProps2D.cellSize.x,GridProps2D.cellSize.y))
-var Filled : bool = true
-var BoxColour : Color = Color.GREEN
+var Filled : bool = false
+var BoxColour : Color = Color.YELLOW
 
 func _setup(pf:Pathfinder2D,inp:InputController):
 	pathfinder = pf
@@ -28,23 +28,23 @@ func _drawGridLines():
 func _process(delta: float) -> void:
 	
 	HighlightBox.position = floor(get_global_mouse_position()/GridProps2D.cellSize.x)*GridProps2D.cellSize.x
-	
-	if input.MousePosX > 0 and input.MousePosX < GridProps2D.gridXCount:
-		if input.MousePosY > 0 and input.MousePosY < GridProps2D.gridYCount:
-			drawn_path = pathfinder.get_point_path(Vector2i(0, 0), Vector2(input.MousePosX,input.MousePosY))
-			queue_redraw()
-	else:
-		drawn_path.clear()
-		queue_redraw()
+	#queue_redraw()
+	#if input.MousePosX > 0 and input.MousePosX < GridProps2D.gridXCount:
+		#if input.MousePosY > 0 and input.MousePosY < GridProps2D.gridYCount:
+			#drawn_path = pathfinder.get_point_path(Vector2i(0, 0), Vector2(input.MousePosX,input.MousePosY))
+			#queue_redraw()
+	#else:
+		#drawn_path.clear()
+		#queue_redraw()
 
 func _draw() -> void:
+	#_drawSelectBox()
+	#_drawMovePath()
 	_drawGridLines()
-	_drawMovePath()
-	_drawSelectBox()
 	pass
 	
 func _drawSelectBox():
-	draw_rect(HighlightBox,BoxColour,Filled,1.0)
+	draw_rect(HighlightBox,BoxColour,Filled,2.0)
 
 	
 func _drawMovePath():

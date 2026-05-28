@@ -14,4 +14,4 @@ func _setStats(statData: Resource) -> void:
 	stats = statData;
 	%CharSprite2D.texture = stats.sprite
 	currentHealth = stats.health
-	print(stats.health, " : ", currentHealth, " : ", stats.stamina)
+	#print(stats.health, " : ", currentHealth, " : ", stats.stamina)

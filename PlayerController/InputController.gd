@@ -4,6 +4,9 @@ class_name InputController
 
 var _tilesGround : TileMapLayer
 
+var MoveVert : float
+var MoveHorz : float
+
 var MousePosX : int
 var MousePosY : int
 var MouseGridPos : Vector2i
@@ -31,3 +34,5 @@ func _process(delta: float) -> void:
 	MousePosY = clamp(get_global_mouse_position().y,0,GridProps2D.gridSizeY-GridProps2D.cellSize.y)
 	MouseGridPos = _tilesGround.local_to_map(Vector2(MousePosX,MousePosY))
 	#MouseGrid = _tilesGround.map_to_local()
+	MoveVert = Input.get_axis("MoveUp","MoveDown")
+	MoveHorz = Input.get_axis("MoveLeft","MoveRight")

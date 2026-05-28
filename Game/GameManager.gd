@@ -30,9 +30,11 @@ func _ready() -> void:
 	%Camera2D.InputCtrl = InputObj
 	InputObj._setup(TilesGroundObj)
 	BattleManagerObj._setup(self)
-	DrawingObj._setup(PathfinderObj,InputObj)
+	DrawingObj._setup(InputObj)
 	
 	BattleManagerObj._initChars()
+	
+	InputObj.MouseGridPosChanged.connect(_OnMousePosChanged)
 	
 	add_child(DrawingObj)
 	add_child(InputObj)
@@ -40,3 +42,6 @@ func _ready() -> void:
 func SetTiles():
 	for i in Grid2D:
 		%TilesGround.set_cell(i,0,Vector2i(0,1))
+		
+func _OnMousePosChanged():
+	pass

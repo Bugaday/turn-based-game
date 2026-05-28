@@ -2,54 +2,24 @@ extends Node2D
 
 class_name Drawing2D
 
-var pathfinder : Pathfinder2D
 var input : InputController
 
+#Selection Box
+var SelectionBox : DrawSelectionBox
 #Grid Lines
 var GridLines : Grid2DLines
 
-#Movement Path
-var drawn_path : PackedVector2Array
 
-#Select Box
-var HighlightBox : Rect2 = Rect2(Vector2.ZERO,Vector2(GridProps2D.cellSize.x,GridProps2D.cellSize.y))
-var Filled : bool = false
-var BoxColour : Color = Color.YELLOW
-
-func _setup(pf:Pathfinder2D,inp:InputController):
-	pathfinder = pf
+func _setup(inp:InputController):
 	input = inp
 	
-func _drawGridLines():
+	SelectionBox = DrawSelectionBox.new()
+	add_child(SelectionBox)
+	
 	GridLines = Grid2DLines.new()
 	add_child(GridLines)
-
-
-func _process(delta: float) -> void:
 	
-	HighlightBox.position = floor(get_global_mouse_position()/GridProps2D.cellSize.x)*GridProps2D.cellSize.x
-	#queue_redraw()
-	#if input.MousePosX > 0 and input.MousePosX < GridProps2D.gridXCount:
-		#if input.MousePosY > 0 and input.MousePosY < GridProps2D.gridYCount:
-			#drawn_path = pathfinder.get_point_path(Vector2i(0, 0), Vector2(input.MousePosX,input.MousePosY))
-			#queue_redraw()
-	#else:
-		#drawn_path.clear()
-		#queue_redraw()
+	inp.MouseGridPosChanged.connect(_on_Mouse_Grid_Pos_Changed)
 
-func _draw() -> void:
-	#_drawSelectBox()
-	#_drawMovePath()
-	_drawGridLines()
-	pass
-	
-func _drawSelectBox():
-	draw_rect(HighlightBox,BoxColour,Filled,2.0)
-
-	
-func _drawMovePath():
-	for i in len(drawn_path)-1:
-		var point = drawn_path[i]
-		var nextPoint = drawn_path[i+1]
-		draw_line(point,nextPoint,Color.WHITE_SMOKE,2.0)
-		draw_circle(nextPoint,6.0,Color.WHITE_SMOKE)
+func _on_Mouse_Grid_Pos_Changed():
+	SelectionBox.position = floor(get_global_mouse_position()/GridProps2D.cellSize.x)*GridProps2D.cellSize.x

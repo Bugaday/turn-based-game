@@ -21,5 +21,6 @@ func _setup(inp:InputController):
 	
 	inp.MouseGridPosChanged.connect(_on_Mouse_Grid_Pos_Changed)
 
-func _on_Mouse_Grid_Pos_Changed():
-	SelectionBox.position = floor(get_global_mouse_position()/GridProps2D.cellSize.x)*GridProps2D.cellSize.x
+func _on_Mouse_Grid_Pos_Changed(gridPos : Vector2i):
+	SelectionBox.position = gridPos * GridProps2D.cellSize
+	#SelectionBox.position = floor(get_global_mouse_position()/GridProps2D.cellSize.x)*GridProps2D.cellSize.x

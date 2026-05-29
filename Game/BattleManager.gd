@@ -24,22 +24,29 @@ func _setup(gm:GameManager):
 
 
 func _initChars():
-
 	for i in teams.size():
 		for j in teams[i].teamMembers.size():
 			var newChar = charScene.instantiate()
 			newChar.stats = teams[i].teamMembers[j]
 			characters.append(newChar)
 			_gm.add_child(newChar)
+			
 			newChar.global_position = GetRandomGridCell(i)
 
 
 func GetRandomGridCell(team : int) -> Vector2:
-	var x = randi_range(team*GridProps2D.gridXCount/2,(GridProps2D.gridXCount-1)/2+team*GridProps2D.gridXCount/2)
-	var y = randi_range(0,GridProps2D.gridYCount-1)
+	var gridX = GridProps2D.gridXCount
+	var gridY = GridProps2D.gridYCount
+	var cellX = GridProps2D.cellSize.x
+	var cellY = GridProps2D.cellSize.y
+	
+	var x = randi_range(team*gridX/2.0,(gridX-1.0)/2.0+team*gridX/2.0)
+	var y = randi_range(0,gridY-1)
 
-	return Vector2(x*GridProps2D.cellSize.x+GridProps2D.cellSize.x/2,y*GridProps2D.cellSize.y+GridProps2D.cellSize.y/2)
+	return Vector2(x*cellX+cellX/2.0,y*cellY+cellY/2.0)
 
+func _getGridInfo(gridPos : Vector2i):
+	pass
 
 func endTurn() -> void:
 	teamTurn = (teamTurn + 1) % teamCount;

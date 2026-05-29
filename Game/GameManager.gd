@@ -7,6 +7,7 @@ var PathfinderObj : Pathfinder2D
 @onready var TilesGroundObj : TileMapLayer = %TilesGround
 
 var InputObj : InputController
+var InputHoverObj : InputHover
 var BattleManagerObj : BattleManager
 var DrawingObj : Drawing2D
 
@@ -26,7 +27,9 @@ func _ready() -> void:
 	BattleManagerObj = BattleManager.new()
 	DrawingObj = Drawing2D.new()
 	InputObj = InputController.new()
-	
+	InputHoverObj = InputHover.new()
+	InputObj.MouseGridPosChanged.connect(InputHoverObj._hover)
+
 	%Camera2D.InputCtrl = InputObj
 	InputObj._setup(TilesGroundObj)
 	BattleManagerObj._setup(self)
@@ -34,14 +37,9 @@ func _ready() -> void:
 	
 	BattleManagerObj._initChars()
 	
-	InputObj.MouseGridPosChanged.connect(_OnMousePosChanged)
-	
 	add_child(DrawingObj)
 	add_child(InputObj)
 
 func SetTiles():
 	for i in Grid2D:
 		%TilesGround.set_cell(i,0,Vector2i(0,1))
-		
-func _OnMousePosChanged():
-	pass

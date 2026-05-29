@@ -8,7 +8,7 @@ func _ready() -> void:
 	var GridCentreY : float = GridProps2D.gridSizeY / 2
 	position = Vector2(GridCentreX,GridCentreY)
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if (InputCtrl):
 		position += Vector2(InputCtrl.MoveHorz * 10,InputCtrl.MoveVert * 10)
 	pass

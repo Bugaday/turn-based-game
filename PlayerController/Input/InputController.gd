@@ -4,6 +4,8 @@ class_name InputController
 
 var _tilesGround : TileMapLayer
 
+var InputHoverObj : InputHover
+
 var MoveVert : float
 var MoveHorz : float
 
@@ -13,8 +15,7 @@ var MouseGridPos : Vector2i
 var MouseGridPosLast : Vector2i
 var MouseGrid : Vector2
 
-signal ActivateMove
-signal MouseGridPosChanged
+signal MouseGridPosChanged(GridPos : Vector2i)
 signal Select
 
 func _setup(tml:TileMapLayer):
@@ -22,6 +23,7 @@ func _setup(tml:TileMapLayer):
 	
 	MouseGridPos = _tilesGround.local_to_map(Vector2(MousePosX,MousePosY))
 	MouseGridPosLast = MouseGridPos
+
 
 func _unhandled_input(event):
 	if event is InputEventKey:
@@ -33,13 +35,14 @@ func _input(event: InputEvent) -> void:
 		print("Mouse is selecting!")
 		Select.emit()
 
-func _process(delta: float) -> void:
+
+func _process(_delta: float) -> void:
 	MousePosX = clamp(get_global_mouse_position().x,0,GridProps2D.gridSizeX-GridProps2D.cellSize.x)
 	MousePosY = clamp(get_global_mouse_position().y,0,GridProps2D.gridSizeY-GridProps2D.cellSize.y)
 	MouseGridPos = _tilesGround.local_to_map(Vector2(MousePosX,MousePosY))
 	
 	if MouseGridPos != MouseGridPosLast:
-		MouseGridPosChanged.emit()
+		MouseGridPosChanged.emit(MouseGridPos)
 		MouseGridPosLast = MouseGridPos
 	
 	MoveVert = Input.get_axis("MoveUp","MoveDown")

@@ -4,7 +4,7 @@ class_name Grid2DConstructor
 
 # Called when the node enters the scene tree for the first time.
 static func CreateGrid() -> Dictionary:
-	var Grid2D : Dictionary
+	var Grid2D : Dictionary[Vector2i,GridCellData]
 	for x in GridProps2D.gridXCount:
 		for y in GridProps2D.gridYCount:
 			var coords : Vector2i = Vector2i(x,y)

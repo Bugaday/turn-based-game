@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://3jei4yrv1ydm" path="res://Levels/Tiles_Ground.tscn" id="1_t8vbk"]
 [ext_resource type="Script" uid="uid://8q86ld088lto" path="res://Game/camera_2d.gd" id="2_5kbai"]
+[ext_resource type="PackedScene" uid="uid://cidshhyphx7ky" path="res://UI/UnitInfo/unit_card.tscn" id="4_pobbf"]
 [ext_resource type="Script" uid="uid://ch0otjmh1dgcx" path="res://Game/GameManager.gd" id="6_dgxli"]
 
 [node name="Node2D" type="Node2D" unique_id=17497945]
@@ -17,3 +18,12 @@ script = ExtResource("6_dgxli")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1743110368]
 unique_name_in_owner = true
 script = ExtResource("2_5kbai")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1195542874]
+
+[node name="UnitCard" parent="CanvasLayer" unique_id=1931889088 instance=ExtResource("4_pobbf")]
+unique_name_in_owner = true
+offset_left = 1597.0
+offset_top = 128.0
+offset_right = 1597.0
+offset_bottom = 128.0

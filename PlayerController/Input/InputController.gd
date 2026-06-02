@@ -4,8 +4,6 @@ class_name InputController
 
 var _tilesGround : TileMapLayer
 
-var InputHoverObj : InputHover
-
 var MoveVert : float
 var MoveHorz : float
 
@@ -16,7 +14,8 @@ var MouseGridPosLast : Vector2i
 var MouseGrid : Vector2
 
 signal MouseGridPosChanged(GridPos : Vector2i)
-signal Select
+signal Select(GridPos : Vector2i)
+
 
 func _setup(tml:TileMapLayer):
 	_tilesGround = tml
@@ -27,13 +26,15 @@ func _setup(tml:TileMapLayer):
 
 func _unhandled_input(event):
 	if event is InputEventKey:
+		# Quit Game
 		if event.pressed and event.keycode == KEY_ESCAPE:
-			get_tree().quit()
+			get_tree().quit() 
+
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Select"):
 		print("Mouse is selecting!")
-		Select.emit()
+		Select.emit(MouseGridPos)
 
 
 func _process(_delta: float) -> void:

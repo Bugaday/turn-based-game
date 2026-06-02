@@ -45,8 +45,5 @@ func GetRandomGridCell(team : int) -> Vector2:
 
 	return Vector2(x*cellX+cellX/2.0,y*cellY+cellY/2.0)
 
-func _getGridInfo(gridPos : Vector2i):
-	pass
-
 func endTurn() -> void:
 	teamTurn = (teamTurn + 1) % teamCount;

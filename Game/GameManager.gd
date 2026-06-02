@@ -2,69 +2,50 @@ extends Node
 
 class_name GameManager
 
-var PathfinderObj : Pathfinder2D
-
 @onready var TilesGroundObj : TileMapLayer = %TilesGround
 
-var InputObj : InputController
-var InputHoverObj : InputHover
-var BattleManagerObj : BattleManager
-var DrawingObj : Drawing2D
+var input_controller : InputController
+var grid_controller : GridController
+var ui_controller : UIController
+var battle_manager : BattleManager
+var drawing_2D : Drawing2D
 
 var characters : Array[Character]
 var charNum : int = 4;
 
-var Grid2D : Dictionary[Vector2i,GridCellData] = {}
 var DrawLines : Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
-	Grid2D = Grid2DConstructor.CreateGrid()
-	SetTiles()
-	
-	PathfinderObj = Pathfinder2D.new()
-	BattleManagerObj = BattleManager.new()
-	DrawingObj = Drawing2D.new()
-	InputObj = InputController.new()
-	InputHoverObj = InputHover.new()
-	InputObj.MouseGridPosChanged.connect(InputHoverObj._hover)
-	InputObj.MouseGridPosChanged.connect(_onHoveredCell)
 
-	%Camera2D.InputCtrl = InputObj
-	InputObj._setup(TilesGroundObj)
-	BattleManagerObj._setup(self)
-	DrawingObj._setup(InputObj)
+	grid_controller = GridController.new()
+	ui_controller = UIController.new()
+	battle_manager = BattleManager.new()
+	drawing_2D = Drawing2D.new()
+	input_controller = InputController.new()
+
+	#input_controller.MouseGridPosChanged.connect(_onHoveredCell)
+	input_controller.Select.connect(grid_controller.on_cell_clicked)
+
+	%Camera2D.InputCtrl = input_controller
+	grid_controller.setup_grid(%TilesGround)
+	input_controller._setup(TilesGroundObj)
+	battle_manager._setup(self)
+	drawing_2D._setup(input_controller)
 	
-	BattleManagerObj._initChars()
+	battle_manager._initChars()
 	
-	for i in BattleManagerObj.characters:
+	for i in battle_manager.characters:
 		var CharGridPos = Vector2i(i.global_position) / GridProps2D.cellSize
-		Grid2D[CharGridPos].UnitOccupying = i
-		Grid2D[CharGridPos].isOccupied = true
+		#Grid2D[CharGridPos].UnitOccupying = i
+		#Grid2D[CharGridPos].isOccupied = true
 	
-	add_child(DrawingObj)
-	add_child(InputObj)
-	
-func _onHoveredCell(cellPos : Vector2i):
-	var getCell : GridCellData = Grid2D[cellPos]
-	if getCell.UnitOccupying:
-		print(getCell.UnitOccupying.stats.unit_name)
-		%UnitCard.visible = true
-		%UnitCard._setInfo(getCell.UnitOccupying.stats,%TilesGround.map_to_local(cellPos)+Vector2(128,64))
-	else:
-		%UnitCard.visible = false
+	add_child(drawing_2D)
+	add_child(input_controller)
 
-func SetTiles():
-	var rng = RandomNumberGenerator.new()
-	rng.randomize()
-		
-	var cells = [Vector2i(0,0),Vector2i(0,2)]
-	var weights = PackedFloat32Array([0.9,0.1])
-	
-	for i in Grid2D:
-			
-		var pickedIndex = rng.rand_weighted(weights)
-		var pickedCell : Vector2i = cells[pickedIndex]
 
-		%TilesGround.set_cell(i,0,pickedCell)
+func spawn_characters():
+	for i in battle_manager.characters:
+		pass
+	

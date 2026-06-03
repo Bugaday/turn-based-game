@@ -2,6 +2,7 @@ extends Node2D
 
 class_name Character
 
+var currentCellPos : Vector2i
 var currentHealth : int
 
 @export var stats : UnitStats;

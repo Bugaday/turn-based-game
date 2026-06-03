@@ -11,6 +11,7 @@ var characters : Array[Character] = []
 
 var teams : Array[Team]
 
+signal CharsInitialised(chars : Array[Character])
 signal CharacterMoved(char : Character,pos : Vector2i)
 
 
@@ -33,21 +34,20 @@ func _initChars():
 			characters.append(newChar)
 			_gm.add_child(newChar)
 			var randomGridCell : Vector2i = GetRandomGridCell(i)
-			newChar.global_position = GetRandomGridCell(i)
-			#CharacterMoved.emit(newChar,)
+			newChar.currentCellPos = randomGridCell
+			var finalPos = randomGridCell * GridProps2D.cellSize + GridProps2D.cellSize/2
+			newChar.position = finalPos
+	CharsInitialised.emit(characters)
 
 
 func GetRandomGridCell(team : int) -> Vector2i:
 	var gridX = GridProps2D.gridXCount
 	var gridY = GridProps2D.gridYCount
-	var cellX = GridProps2D.cellSize.x
-	var cellY = GridProps2D.cellSize.y
 	
 	var x = randi_range(team*gridX/2.0,(gridX-1.0)/2.0+team*gridX/2.0)
 	var y = randi_range(0,gridY-1)
-
-
-	return Vector2(x*cellX+cellX/2.0,y*cellY+cellY/2.0)
+	
+	return Vector2i(x,y)
 
 
 func endTurn() -> void:

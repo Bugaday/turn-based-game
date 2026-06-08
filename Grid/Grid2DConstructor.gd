@@ -10,6 +10,7 @@ static func CreateGrid() -> Dictionary:
 			var coords : Vector2i = Vector2i(x,y)
 			var newCell = GridCellData.new()
 			newCell.cellID = x + y * GridProps2D.gridXCount
+			newCell.cell_pos = Vector2i(x,y)
 			Grid2D[coords] = newCell
 			
 	return Grid2D

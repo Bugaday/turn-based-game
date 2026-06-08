@@ -2,25 +2,35 @@ extends Node2D
 
 class_name Drawing2D
 
-var input : InputController
-
 #Selection Box
-var SelectionBox : DrawSelectionBox
+var SelectionBox : DrawBox
+#Mouse Cursor Box
+var MouseCursorBox : DrawBox
+#Draw Path
+var DrawnPath : DrawMovePath
+
 #Grid Lines
 var GridLines : Grid2DLines
 
 
-func _setup(inp:InputController):
-	input = inp
+func _setup():
 	
-	SelectionBox = DrawSelectionBox.new()
-	add_child(SelectionBox)
+	MouseCursorBox = DrawBox.new()
+	add_child(MouseCursorBox)
 	
 	GridLines = Grid2DLines.new()
 	add_child(GridLines)
 	
-	inp.MouseGridPosChanged.connect(_on_Mouse_Grid_Pos_Changed)
+	DrawnPath = DrawMovePath.new()
+	add_child(DrawnPath)
+
+func on_select_unit(cell : GridCellData):
+	if !SelectionBox:
+		SelectionBox = DrawBox.new()
+		SelectionBox.BoxColour = Color.GREEN
+		add_child(SelectionBox)
+	SelectionBox.position = Vector2(cell.cell_pos*GridProps2D.cellSize)
 
 func _on_Mouse_Grid_Pos_Changed(gridPos : Vector2i):
-	SelectionBox.position = gridPos * GridProps2D.cellSize
-	#SelectionBox.position = floor(get_global_mouse_position()/GridProps2D.cellSize.x)*GridProps2D.cellSize.x
+	MouseCursorBox.position = gridPos * GridProps2D.cellSize
+	#DrawnPath._drawPath()

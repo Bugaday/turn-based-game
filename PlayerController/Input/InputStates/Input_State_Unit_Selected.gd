@@ -7,6 +7,9 @@ func _enter_state():
 	
 func _exit_state():
 	print("Exiting UNIT SELECTION Input mode!")
+	
+func _select(pos:Vector2):
+	pass
 
 func _on_cell_clicked(cell : GridCellData):
 	if !cell.UnitOccupying:

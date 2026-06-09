@@ -34,3 +34,6 @@ func on_select_unit(cell : GridCellData):
 func _on_Mouse_Grid_Pos_Changed(gridPos : Vector2i):
 	MouseCursorBox.position = gridPos * GridProps2D.cellSize
 	#DrawnPath._drawPath()
+	
+func draw_path(path:PackedVector2Array):
+	DrawnPath._drawPath(path)

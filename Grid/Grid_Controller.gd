@@ -25,9 +25,10 @@ func setup_grid(tmap : TileMapLayer):
 	Grid2D = Grid2DConstructor.CreateGrid()
 	set_tiles()
 
-func on_cell_clicked():
-	cellSelected = cell_hovered
-	print("Running on_cell_clicked from Grid Controller at: ", cellSelected.cell_pos)
+func on_cell_clicked(pos:Vector2):
+	#print("Running on_cell_clicked from Grid Controller at: ", cellSelected.cell_pos)
+	var gridPos = tilemap.local_to_map(pos)
+	cellSelected = Grid2D[gridPos]
 	cell_selected.emit(cellSelected)
 	pass
 	

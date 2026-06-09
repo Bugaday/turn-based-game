@@ -31,20 +31,25 @@ func _ready() -> void:
 	
 	#SETUP FUNCTIONS
 	camera_2d.InputCtrl = input_controller
+	input_state_machine.grid_controller = grid_controller
 	grid_controller.setup_grid(TilesGroundObj)
 	battle_manager._setup()
 	drawing_2D._setup()
 
 	#SIGNALS CONNECTIONS
 	input_controller.MouseGridPosChanged.connect(grid_controller.get_hovered_cell)
-	input_controller.Select.connect(grid_controller.on_cell_clicked)
+	input_controller.Select.connect(input_state_machine.route_select)
 	input_controller.RightClick.connect(input_state_machine.route_rightclick)
 	input_controller.MouseGridPosChanged.connect(drawing_2D._on_Mouse_Grid_Pos_Changed)
+	
+	input_state_machine.check_for_selection.connect(grid_controller.on_cell_clicked)
 	input_state_machine.StartMovePreview.connect(grid_controller.get_move_preview_cells)
+	
 	battle_manager.CharsInitialised.connect(grid_controller.on_chars_initialised)
+	
 	grid_controller.cell_selected.connect(drawing_2D.on_select_unit)
 	grid_controller.cell_selected.connect(input_state_machine.route_cell_clicked)
-	grid_controller.send_move_preview_cells.connect(drawing_2D.DrawnPath._drawPath)
+	grid_controller.send_move_preview_cells.connect(drawing_2D.draw_path)
 	
 	battle_manager._initChars()
 	

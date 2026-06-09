@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://8e4pe2s88ama" path="res://PlayerController/Input/InputController.gd" id="5_5kbai"]
 [ext_resource type="Script" uid="uid://dcdosyn8h6fjb" path="res://PlayerController/Input/InputStates/Input_State_Machine.gd" id="5_o4v6t"]
 [ext_resource type="Script" uid="uid://ch0otjmh1dgcx" path="res://Game/GameManager.gd" id="6_dgxli"]
-[ext_resource type="Script" uid="uid://db3qgi7yag2io" path="res://PlayerController/Input/InputStates/Input_State.gd" id="6_di1rq"]
 [ext_resource type="Script" uid="uid://cmqv528thvt2g" path="res://PlayerController/Input/InputStates/Input_State_Selection.gd" id="7_t8vbk"]
 [ext_resource type="Script" uid="uid://dwcvv2l86130e" path="res://PlayerController/Input/InputStates/Input_State_Move_Preview.gd" id="9_rxovs"]
 [ext_resource type="Script" uid="uid://dh5xgwnhvee8t" path="res://PlayerController/Input/InputStates/Input_State_Unit_Selected.gd" id="10_rxovs"]
@@ -28,21 +27,20 @@ metadata/_edit_horizontal_guides_ = [1687.0]
 
 [node name="TilesGround" parent="." unique_id=485285120 instance=ExtResource("1_t8vbk")]
 unique_name_in_owner = true
-visible = false
 
 [node name="InputController" type="Node2D" parent="." unique_id=767637259]
 unique_name_in_owner = true
 script = ExtResource("5_5kbai")
 metadata/_custom_type_script = "uid://8e4pe2s88ama"
 
-[node name="InputStateMachine" type="Node" parent="." unique_id=224053424]
+[node name="InputStateMachine" type="Node" parent="." unique_id=224053424 node_paths=PackedStringArray("states")]
 unique_name_in_owner = true
 script = ExtResource("5_o4v6t")
-states = Dictionary[String, ExtResource("6_di1rq")]({
+states = {
 "MOVEPREVIEW": SubResource("Resource_tsaht"),
 "SELECTION": SubResource("Resource_5kbai"),
 "UNITSELECTED": SubResource("Resource_eipr8")
-})
+}
 metadata/_custom_type_script = "uid://dcdosyn8h6fjb"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1743110368]

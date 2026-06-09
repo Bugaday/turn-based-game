@@ -9,12 +9,13 @@ var MoveHorz : float
 
 var MousePosX : int
 var MousePosY : int
+var mouse_pos : Vector2
 var MouseGridPos : Vector2i
 var MouseGridPosLast : Vector2i
 var MouseGrid : Vector2
 
 signal MouseGridPosChanged(GridPos : Vector2i)
-signal Select()
+signal Select(pos : Vector2)
 signal RightClick()
 
 
@@ -35,7 +36,7 @@ func _unhandled_input(event):
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Select"):
-		Select.emit()
+		Select.emit(get_global_mouse_position())
 
 
 func _process(_delta: float) -> void:

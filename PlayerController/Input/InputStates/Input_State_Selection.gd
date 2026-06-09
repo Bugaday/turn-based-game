@@ -7,6 +7,9 @@ func _enter_state():
 	
 func _exit_state():
 	pass
+	
+func _select(pos:Vector2):
+	input_state_machine.check_for_selection.emit(pos)
 
 func _on_cell_clicked(cell : GridCellData):
 	if cell.UnitOccupying:

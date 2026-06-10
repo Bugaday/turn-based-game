@@ -3,23 +3,13 @@ extends InputState
 class_name InputStateUnitSelected
 
 func _enter_state():
-	print("Entering UNIT SELECTION Input mode!")
+	print("Entering UNIT SELECTED Input Mode")
+	pass
 	
 func _exit_state():
-	print("Exiting UNIT SELECTION Input mode!")
-	
-func _select(pos:Vector2):
-	pass
-
-func _on_cell_clicked(cell : GridCellData):
-	if !cell.UnitOccupying:
-		print("Cell not occupied in UNIT SELECTION mode")
-		input_state_machine.state_change("MOVEPREVIEW")
-	else:
-		print("Cell occupied in UNIT SELECTION mode")
-		
-func _on_rightclick():
+	print("Exiting UNIT SELECTED Input Mode")
 	pass
 	
-func _on_mouse_hover():
+func handle_input(_event : InputEvent):
+	print("Handling input for UNIT SELECTED Input Mode")
 	pass

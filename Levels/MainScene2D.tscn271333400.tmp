@@ -2,7 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://3jei4yrv1ydm" path="res://Levels/Tiles_Ground.tscn" id="1_t8vbk"]
 [ext_resource type="Script" uid="uid://8q86ld088lto" path="res://Game/camera_2d.gd" id="2_5kbai"]
-[ext_resource type="Script" uid="uid://cykn8om4tqr52" path="res://Grid/Grid_Controller.gd" id="2_rxovs"]
 [ext_resource type="PackedScene" uid="uid://cidshhyphx7ky" path="res://UI/UnitInfo/unit_card.tscn" id="4_pobbf"]
 [ext_resource type="Script" uid="uid://db3qgi7yag2io" path="res://PlayerController/Input/InputStates/Input_State.gd" id="4_rxovs"]
 [ext_resource type="Script" uid="uid://dcdosyn8h6fjb" path="res://PlayerController/Input/InputStates/Input_State_Machine.gd" id="5_o4v6t"]
@@ -28,7 +27,6 @@ metadata/_edit_horizontal_guides_ = [1687.0]
 
 [node name="TilesGround" parent="." unique_id=485285120 instance=ExtResource("1_t8vbk")]
 unique_name_in_owner = true
-script = ExtResource("2_rxovs")
 
 [node name="InputStateMachine" type="Node2D" parent="." unique_id=1413144412]
 unique_name_in_owner = true

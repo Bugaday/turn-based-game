@@ -1,8 +1,7 @@
-extends Node
+extends TileMapLayer
 
 class_name GridController
 
-var tilemap : TileMapLayer
 var pathfinder : Pathfinder2D
 var Chars : Array[Character]
 var cellSelected : GridCellData
@@ -16,18 +15,16 @@ var Grid2D : Dictionary[Vector2i,GridCellData] = {}
 
 func _process(delta: float) -> void:
 	pass
-		
+	
 
-func setup_grid(tmap : TileMapLayer):
-	tilemap = tmap
+func _ready() -> void:
 	pathfinder = Pathfinder2D.new()
 	add_child(pathfinder)
 	Grid2D = Grid2DConstructor.CreateGrid()
 	set_tiles()
 
 func on_cell_clicked(pos:Vector2):
-	#print("Running on_cell_clicked from Grid Controller at: ", cellSelected.cell_pos)
-	var gridPos = tilemap.local_to_map(pos)
+	var gridPos = local_to_map(pos)
 	cellSelected = Grid2D[gridPos]
 	cell_selected.emit(cellSelected)
 	pass
@@ -69,8 +66,7 @@ func set_tiles():
 		var pickedIndex = rng.rand_weighted(weights)
 		var pickedCell : Vector2i = cells[pickedIndex]
 
-		tilemap.set_cell(i,0,pickedCell)
-		#print(pickedCell, " : ", tilemap.get_cell_tile_data(pickedCell).get_custom_data(Block))
+		set_cell(i,0,pickedCell)
 		
 func on_chars_initialised(chars : Array[Character]):
 	Chars = chars
@@ -79,4 +75,4 @@ func on_chars_initialised(chars : Array[Character]):
 		var cell = GetRandomGridCell()
 		Grid2D[cell].UnitOccupying = i
 		i.currentCellPos = cell
-		i.position = tilemap.map_to_local(cell)
+		i.position = map_to_local(cell)

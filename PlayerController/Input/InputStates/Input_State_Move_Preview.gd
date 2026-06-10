@@ -4,22 +4,12 @@ class_name InputStateMovePreview
 
 func _enter_state():
 	print("Entering MOVE PREVIEW Input Mode")
-	input_state_machine.StartMovePreview.emit()
+	pass
 	
 func _exit_state():
 	print("Exiting MOVE PREVIEW Input Mode")
-	
-func _unhandled_input(event: InputEvent) -> void:
 	pass
-
-func _select(pos:Vector2):
-	pass
-
-func _on_cell_clicked(cell : GridCellData):
-	print("Running cell clicked on MOVE PREVIEW")
 	
-func _on_rightclick():
-	input_state_machine.state_change("UNITSELECTED")
-	
-func _on_mouse_hover():
+func handle_input(_event : InputEvent):
+	print("Handling input for MOVE PREVIEW Input Mode")
 	pass

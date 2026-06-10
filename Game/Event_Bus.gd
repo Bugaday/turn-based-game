@@ -1,3 +1,3 @@
-extends RefCounted
+extends Node
 
 signal character_selected()

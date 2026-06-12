@@ -7,22 +7,24 @@ var SelectionBox : DrawBox
 #Mouse Cursor Box
 var MouseCursorBox : DrawBox
 #Draw Path
-var DrawnPath : DrawMovePath
+var draw_move_path : DrawMovePath
 
 #Grid Lines
 var GridLines : Grid2DLines
 
+func _draw() -> void:
+	draw_circle(Vector2.ZERO,10.0,Color.RED)
 
 func _setup():
 	
-	MouseCursorBox = DrawBox.new()
-	add_child(MouseCursorBox)
+	#MouseCursorBox = DrawBox.new()
+	#add_child(MouseCursorBox)
 	
 	GridLines = Grid2DLines.new()
 	add_child(GridLines)
 	
-	DrawnPath = DrawMovePath.new()
-	add_child(DrawnPath)
+	draw_move_path = DrawMovePath.new()
+	add_child(draw_move_path)
 
 func on_select_unit(cell : GridCellData):
 	if !SelectionBox:
@@ -34,6 +36,10 @@ func on_select_unit(cell : GridCellData):
 func _on_Mouse_Grid_Pos_Changed(gridPos : Vector2i):
 	MouseCursorBox.position = gridPos * GridProps2D.cellSize
 	#DrawnPath._drawPath()
-	
+
 func draw_path(path:PackedVector2Array):
-	DrawnPath._drawPath(path)
+	draw_move_path._drawPath(path)
+	
+func clear_path():
+	draw_move_path.clear_path()
+	

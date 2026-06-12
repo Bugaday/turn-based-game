@@ -4,11 +4,11 @@ class_name GameManager
 
 @onready var input_state_machine : InputStateMachine = %InputStateMachine
 @onready var camera_2d : Camera2D = %Camera2D
+@onready var battle_manager : BattleManager = %BattleManager
 @onready var grid_controller : GridController = %TilesGround
+@onready var drawing_2D : Drawing2D = %Drawing2D
 
 var ui_controller : UIController
-var battle_manager : BattleManager
-var drawing_2D : Drawing2D
 
 var characters : Array[Character]
 var charNum : int = 4;
@@ -19,30 +19,7 @@ var DrawLines : Node2D
 func _ready() -> void:
 	
 	ui_controller = UIController.new()
-	battle_manager = BattleManager.new()
-	drawing_2D = Drawing2D.new()
-	
-	add_child(drawing_2D)
 	
 	#SETUP FUNCTIONS
 	input_state_machine.grid_controller = grid_controller
-	battle_manager._setup()
 	drawing_2D._setup()
-
-	#SIGNALS CONNECTIONS
-	#input_controller.MouseGridPosChanged.connect(grid_controller.get_hovered_cell)
-	#input_controller.Select.connect(input_state_machine.route_select)
-	#input_controller.RightClick.connect(input_state_machine.route_rightclick)
-	#input_controller.MouseGridPosChanged.connect(drawing_2D._on_Mouse_Grid_Pos_Changed)
-	
-	input_state_machine.check_for_selection.connect(grid_controller.on_cell_clicked)
-	input_state_machine.StartMovePreview.connect(grid_controller.get_move_preview_cells)
-	
-	battle_manager.CharsInitialised.connect(grid_controller.on_chars_initialised)
-	
-	grid_controller.cell_selected.connect(drawing_2D.on_select_unit)
-	grid_controller.cell_selected.connect(input_state_machine.route_cell_clicked)
-	grid_controller.send_move_preview_cells.connect(drawing_2D.draw_path)
-	
-	battle_manager._initChars()
-	

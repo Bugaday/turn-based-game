@@ -11,5 +11,8 @@ func _exit_state():
 	pass
 	
 func handle_input(_event : InputEvent):
-	print("Handling input for SELECTION Input Mode")
-	pass
+	if _event.is_action_pressed("Escape"):
+		state_machine.quit_game()
+	elif _event.is_action_pressed("Select"):
+		if state_machine.check_for_character():
+			state_machine.state_change("UNITSELECTED")

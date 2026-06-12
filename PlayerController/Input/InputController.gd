@@ -3,6 +3,7 @@ extends Node2D
 class_name InputController
 
 @onready var tile_map : TileMapLayer = %TilesGround
+@onready var battle_manager : BattleManager = %BattleManager
 
 var MoveVert : float
 var MoveHorz : float

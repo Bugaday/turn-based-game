@@ -10,10 +10,6 @@
 [ext_resource type="Script" uid="uid://ch0otjmh1dgcx" path="res://Game/GameManager.gd" id="6_dgxli"]
 [ext_resource type="Script" uid="uid://dh5xgwnhvee8t" path="res://PlayerController/Input/InputStates/Input_State_Unit_Selected.gd" id="6_eipr8"]
 [ext_resource type="Script" uid="uid://dwcvv2l86130e" path="res://PlayerController/Input/InputStates/Input_State_Move_Preview.gd" id="7_epiq7"]
-[ext_resource type="Script" uid="uid://cylkpayq6g6tj" path="res://PlayerController/Input/InputStates/Input_State_Moving_Character.gd" id="9_e5q4x"]
-[ext_resource type="Script" uid="uid://gbheq3hw8qxv" path="res://Game/Battle/BattleManager.gd" id="10_eipr8"]
-[ext_resource type="Script" uid="uid://fy46tn4iix5g" path="res://Grid/Drawing/Draw_Cursor.gd" id="10_tsaht"]
-[ext_resource type="Script" uid="uid://dekvbobvtkaug" path="res://Grid/Drawing/Drawing2D.gd" id="12_epiq7"]
 
 [sub_resource type="Resource" id="Resource_eipr8"]
 script = ExtResource("7_epiq7")
@@ -27,16 +23,8 @@ metadata/_custom_type_script = "uid://cmqv528thvt2g"
 script = ExtResource("6_eipr8")
 metadata/_custom_type_script = "uid://dh5xgwnhvee8t"
 
-[sub_resource type="Resource" id="Resource_limvo"]
-script = ExtResource("9_e5q4x")
-metadata/_custom_type_script = "uid://cylkpayq6g6tj"
-
 [node name="Node2D" type="Node2D" unique_id=17497945]
 metadata/_edit_horizontal_guides_ = [1687.0]
-
-[node name="GameManager" type="Node" parent="." unique_id=521745549]
-unique_name_in_owner = true
-script = ExtResource("6_dgxli")
 
 [node name="TilesGround" parent="." unique_id=485285120 instance=ExtResource("1_t8vbk")]
 unique_name_in_owner = true
@@ -47,7 +35,6 @@ unique_name_in_owner = true
 script = ExtResource("5_o4v6t")
 states = Dictionary[String, ExtResource("4_rxovs")]({
 "MOVEMENTPREVIEW": SubResource("Resource_eipr8"),
-"MOVINGCHARACTER": SubResource("Resource_limvo"),
 "SELECTION": SubResource("Resource_rxovs"),
 "UNITSELECTED": SubResource("Resource_tsaht")
 })
@@ -56,20 +43,9 @@ states = Dictionary[String, ExtResource("4_rxovs")]({
 unique_name_in_owner = true
 script = ExtResource("2_5kbai")
 
-[node name="BattleManager" type="Node" parent="." unique_id=1983058171]
+[node name="GameManager" type="Node" parent="." unique_id=521745549]
 unique_name_in_owner = true
-script = ExtResource("10_eipr8")
-metadata/_custom_type_script = "uid://gbheq3hw8qxv"
-
-[node name="Cursor" type="Node2D" parent="." unique_id=542488809]
-unique_name_in_owner = true
-script = ExtResource("10_tsaht")
-metadata/_custom_type_script = "uid://fy46tn4iix5g"
-
-[node name="Drawing2D" type="Node2D" parent="." unique_id=638765900]
-unique_name_in_owner = true
-script = ExtResource("12_epiq7")
-metadata/_custom_type_script = "uid://dekvbobvtkaug"
+script = ExtResource("6_dgxli")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1195542874]
 

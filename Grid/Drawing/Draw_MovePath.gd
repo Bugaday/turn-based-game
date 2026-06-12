@@ -5,7 +5,7 @@ class_name DrawMovePath
 var points : PackedVector2Array
 
 #Movement Path
-var drawn_path : PackedVector2Array = [Vector2(0,0),Vector2(1,1)*(Vector2(GridProps2D.cellSize)/2),Vector2(1,2)*(Vector2(GridProps2D.cellSize)/2)]
+#var drawn_path : PackedVector2Array = [Vector2(0,0),Vector2(1,1)*(Vector2(GridProps2D.cellSize)/2),Vector2(1,2)*(Vector2(GridProps2D.cellSize)/2)]
 
 var cellOffset : float = 0.0;
 var cellSizeX : float = GridProps2D.cellSize.x;
@@ -17,8 +17,12 @@ var gridSizeY : float = gridYCount * cellSizeY
 	
 func _drawPath(path_points : PackedVector2Array):
 	points = path_points
+	print(points)
 	queue_redraw()
 
+func clear_path():
+	points.clear()
+	queue_redraw()
 
 func _draw() -> void:
 	for i in len(points)-1:

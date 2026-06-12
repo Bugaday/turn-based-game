@@ -2,6 +2,8 @@ extends Resource
 
 class_name InputState
 
+var state_machine : InputStateMachine
+
 func _enter_state():
 	pass
 	

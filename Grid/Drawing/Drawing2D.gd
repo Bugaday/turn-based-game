@@ -2,6 +2,8 @@ extends Node2D
 
 class_name Drawing2D
 
+@onready var battle_manager : BattleManager = %BattleManager
+
 #Selection Box
 var SelectionBox : DrawBox
 #Mouse Cursor Box
@@ -39,6 +41,9 @@ func _on_Mouse_Grid_Pos_Changed(gridPos : Vector2i):
 
 func draw_path(path:PackedVector2Array):
 	draw_move_path._drawPath(path)
+	
+func update_draw_path():
+	draw_move_path.update_draw_path(battle_manager.character_selected.position)
 	
 func clear_path():
 	draw_move_path.clear_path()

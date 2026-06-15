@@ -19,6 +19,10 @@
 script = ExtResource("7_epiq7")
 metadata/_custom_type_script = "uid://dwcvv2l86130e"
 
+[sub_resource type="Resource" id="Resource_limvo"]
+script = ExtResource("9_e5q4x")
+metadata/_custom_type_script = "uid://cylkpayq6g6tj"
+
 [sub_resource type="Resource" id="Resource_rxovs"]
 script = ExtResource("5_tsaht")
 metadata/_custom_type_script = "uid://cmqv528thvt2g"
@@ -26,10 +30,6 @@ metadata/_custom_type_script = "uid://cmqv528thvt2g"
 [sub_resource type="Resource" id="Resource_tsaht"]
 script = ExtResource("6_eipr8")
 metadata/_custom_type_script = "uid://dh5xgwnhvee8t"
-
-[sub_resource type="Resource" id="Resource_limvo"]
-script = ExtResource("9_e5q4x")
-metadata/_custom_type_script = "uid://cylkpayq6g6tj"
 
 [node name="Node2D" type="Node2D" unique_id=17497945]
 metadata/_edit_horizontal_guides_ = [1687.0]
@@ -44,6 +44,7 @@ script = ExtResource("2_rxovs")
 
 [node name="InputStateMachine" type="Node2D" parent="." unique_id=1413144412]
 unique_name_in_owner = true
+process_mode = 3
 script = ExtResource("5_o4v6t")
 states = Dictionary[String, ExtResource("4_rxovs")]({
 "MOVEMENTPREVIEW": SubResource("Resource_eipr8"),
@@ -75,7 +76,7 @@ metadata/_custom_type_script = "uid://dekvbobvtkaug"
 
 [node name="UnitCard" parent="CanvasLayer" unique_id=1931889088 instance=ExtResource("4_pobbf")]
 unique_name_in_owner = true
-offset_left = 1597.0
+offset_left = 2008.0
 offset_top = 128.0
-offset_right = 1597.0
+offset_right = 2008.0
 offset_bottom = 128.0

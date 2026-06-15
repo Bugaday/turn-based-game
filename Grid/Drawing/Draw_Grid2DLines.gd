@@ -12,9 +12,9 @@ var gridSizeY : float = gridYCount * cellSizeY
 
 func _draw() -> void:
 	for i in gridXCount + 1:
-		draw_line(Vector2(i*cellSizeX,0.0),Vector2(i*cellSizeX,gridYCount*cellSizeY),Color.DARK_GRAY,1.0)
+		draw_line(Vector2(i*cellSizeX,0.0),Vector2(i*cellSizeX,gridYCount*cellSizeY),Color.DARK_GRAY,2.0)
 		pass
 			
 	for i in gridYCount + 1:
-		draw_line(Vector2(0.0,i*cellSizeY),Vector2(gridXCount*cellSizeX,i*cellSizeY),Color.DARK_GRAY,1.0)
+		draw_line(Vector2(0.0,i*cellSizeY),Vector2(gridXCount*cellSizeX,i*cellSizeY),Color.DARK_GRAY,2.0)
 		pass

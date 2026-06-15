@@ -19,6 +19,10 @@ func _drawPath(path_points : PackedVector2Array):
 	points = path_points
 	print(points)
 	queue_redraw()
+	
+func update_draw_path(character_pos:Vector2):
+	points[0] = character_pos
+	queue_redraw()
 
 func clear_path():
 	points.clear()

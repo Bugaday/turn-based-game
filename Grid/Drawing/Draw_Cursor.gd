@@ -6,8 +6,10 @@ var HighlightBox : Rect2 = Rect2(Vector2.ZERO,Vector2(GridProps2D.cellSize.x,Gri
 var Filled : bool = false
 var BoxColour : Color = Color.YELLOW
 
+
 func _draw() -> void:
 	_drawBox()
-	
+
+
 func _drawBox():
-	draw_rect(HighlightBox,BoxColour,Filled,2.0)
+	draw_rect(HighlightBox,BoxColour,Filled,3.0)

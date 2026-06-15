@@ -4,6 +4,7 @@ class_name InputStateMovingCharacter
 
 func _enter_state():
 	print("Entering MOVING CHARACTER Input Mode")
+	state_machine.move_character()
 	pass
 	
 func _exit_state():
@@ -11,6 +12,5 @@ func _exit_state():
 	pass
 	
 func handle_input(_event : InputEvent):
-	#if _event.is_action_pressed("Select"):
-		#state_machine.move_character()
-	pass
+	if _event.is_action_pressed("Pause"):
+		state_machine.pause_toggle()

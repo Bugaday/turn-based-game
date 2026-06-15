@@ -27,6 +27,7 @@ func init_chars():
 		for j in teams[i].teamMembers.size():
 			var newChar : Character = charScene.instantiate()
 			newChar.stats = teams[i].teamMembers[j]
+			newChar.faction = i
 			characters.append(newChar)
 	
 func add_chars():
@@ -37,6 +38,7 @@ func add_chars():
 		i.currentCellPos = cell
 		i.position = grid_controller.map_to_local(cell)
 
+
 func selection_check_cell(mousepos : Vector2) -> GridCellData:
 	var cell_clicked : GridCellData = grid_controller.get_cell_data(mousepos)
 	if cell_clicked.UnitOccupying:
@@ -46,6 +48,9 @@ func selection_check_cell(mousepos : Vector2) -> GridCellData:
 
 func select_character(unit : Character):
 	character_selected = unit
+	
+func move_character(path:PackedVector2Array):
+	character_selected.start_move(path)
 
 func endTurn() -> void:
 	teamTurn = (teamTurn + 1) % teamCount;

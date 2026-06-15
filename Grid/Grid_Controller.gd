@@ -3,12 +3,9 @@ extends TileMapLayer
 class_name GridController
 
 var pathfinder : Pathfinder2D
-var Chars : Array[Character]
 var cellSelected : GridCellData
 var cell_hovered : GridCellData
-var mouse_grid_pos : Vector2i
-
-signal character_hovered(character : Character)
+var current_path : PackedVector2Array
 
 var Grid2D : Dictionary[Vector2i,GridCellData] = {}
 
@@ -25,16 +22,10 @@ func get_cell_data(pos:Vector2) -> GridCellData:
 	return Grid2D[gridPos]
 
 
-func get_preview_path() -> PackedVector2Array:
-	var path_points : PackedVector2Array
-	path_points = pathfinder._astar.get_point_path(cellSelected.cell_pos,mouse_grid_pos)
-	return path_points
-
-
-func get_hovered_cell(cellPos : Vector2i):
-	cell_hovered = Grid2D[cellPos]
-	if cell_hovered.UnitOccupying:
-		character_hovered.emit(cell_hovered.UnitOccupying)
+func get_preview_path(mouse_pos:Vector2) -> PackedVector2Array:
+	var cell_grid_pos : Vector2i = local_to_map(mouse_pos)
+	current_path = pathfinder._astar.get_point_path(cellSelected.cell_pos,cell_grid_pos)
+	return current_path
 
 
 func GetRandomGridCell() -> Vector2i:
@@ -58,8 +49,4 @@ func set_tiles():
 		var pickedIndex = rng.rand_weighted(weights)
 		var pickedCell : Vector2i = cells[pickedIndex]
 		set_cell(i,0,pickedCell)
-
-
-func on_chars_initialised(chars : Array[Character]):
-	Chars = chars
 	

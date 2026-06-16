@@ -7,47 +7,44 @@ var currentHealth : int
 var faction : int
 var move_path : PackedVector2Array
 
-signal path_finished()
-
 @export var stats : UnitStats;
 
 func _ready() -> void:
 	if stats:
 		_setStats(stats)
 
+#Start the movement code
 func start_move(path:PackedVector2Array):
 	move_path = path
-	if move_path.size() <= 0:
+	if move_path.is_empty():
 		return
 
 	move_to_next_waypoint()
 
-	
+#Progress to next waypoint
 func move_to_next_waypoint():
-	
-	if move_path.is_empty():
-		pass
-	
+	#Remove the first waypoint that we're standing on, pushing the next into index 0 to move towards
 	move_path.remove_at(0)
 	
-	if move_path.size() <= 0:
-		path_finished.emit()
+	#If there are no more waypoints, finish the path
+	if move_path.is_empty():
+		path_complete()
 		return
-
+	
 	var tween : Tween = create_tween()
 	tween.tween_property(self,"global_position",move_path[0],1.0)
-	tween.finished.connect(move_complete)
-	
-func move_complete():
-	if move_path.size() <= 0:
-		return
+	tween.finished.connect(section_complete)
+
+#A section of path has just completed
+func section_complete():
+	EventBus.char_path_section_completed.emit()
 	move_to_next_waypoint()	
-	
+
+#The whole path is now complete	
 func path_complete():
-	path_finished
+	EventBus.char_path_finished.emit()
 
 func _setStats(statData: Resource) -> void:
 	stats = statData;
 	%CharSprite2D.texture = stats.sprite
 	currentHealth = stats.health
-	#print(stats.health, " : ", currentHealth, " : ", stats.stamina)

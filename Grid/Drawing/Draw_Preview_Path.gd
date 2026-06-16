@@ -2,10 +2,8 @@ extends Node2D
 
 class_name DrawMovePath
 
-var points : PackedVector2Array
-
 #Movement Path
-#var drawn_path : PackedVector2Array = [Vector2(0,0),Vector2(1,1)*(Vector2(GridProps2D.cellSize)/2),Vector2(1,2)*(Vector2(GridProps2D.cellSize)/2)]
+var points : PackedVector2Array
 
 var cellOffset : float = 0.0;
 var cellSizeX : float = GridProps2D.cellSize.x;
@@ -14,23 +12,27 @@ var gridXCount : int = GridProps2D.gridXCount;
 var gridYCount : int = GridProps2D.gridYCount;
 var gridSizeX : float = gridXCount * cellSizeX
 var gridSizeY : float = gridYCount * cellSizeY
-	
+
+
 func _drawPath(path_points : PackedVector2Array):
 	points = path_points
-	print(points)
 	queue_redraw()
-	
-func update_draw_path(character_pos:Vector2):
-	points[0] = character_pos
-	queue_redraw()
+
 
 func clear_path():
 	points.clear()
 	queue_redraw()
 
+
 func _draw() -> void:
 	for i in len(points)-1:
 		var point = points[i]
 		var nextPoint = points[i+1]
-		draw_line(point,nextPoint,Color.WHITE_SMOKE,2.0)
+		
+		var value : float = 1.0/(points.size())
+		var point_colour : Color = Color.from_hsv(value*i,1,1,1.0)
+		var f = SystemFont.new()
+		draw_string(f,point+Vector2(0,-10.0),str(i))
+		
+		draw_line(point,nextPoint,point_colour,2.0)
 		draw_circle(nextPoint,6.0,Color.WHITE_SMOKE)

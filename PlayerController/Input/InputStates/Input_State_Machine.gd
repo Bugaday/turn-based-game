@@ -39,7 +39,8 @@ func _process(_delta: float) -> void:
 	
 	if current_state:
 		if current_state == states["MOVINGCHARACTER"]:
-			drawing_2D.update_draw_path()
+			drawing_2D.draw_move_path()
+			pass
 	
 	#MoveVert = Input.get_axis("MoveUp","MoveDown")
 	#MoveHorz = Input.get_axis("MoveLeft","MoveRight")
@@ -67,7 +68,7 @@ func check_for_player_character() -> bool:
 		
 func show_move_preview():
 	var path : PackedVector2Array = grid_controller.get_preview_path(mouse_pos)
-	drawing_2D.draw_path(path)
+	drawing_2D.draw_path()
 
 
 func exit_move_preview():
@@ -77,9 +78,7 @@ func exit_move_preview():
 
 func move_character():
 	var dest : Vector2 = mouse_pos
-	battle_manager.character_selected.path_finished.connect(character_finished_move)
 	battle_manager.move_character(grid_controller.current_path)
-	#battle_manager.character_selected.global_position = grid_controller.local_to_map(dest)*GridProps2D.cellSize+GridProps2D.cellSize/2
 	drawing_2D.SelectionBox.position = grid_controller.local_to_map(dest)*GridProps2D.cellSize
 	
 func character_finished_move():

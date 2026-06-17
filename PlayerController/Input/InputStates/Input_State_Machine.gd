@@ -22,6 +22,7 @@ func _ready() -> void:
 	var keys : Array[String] = states.keys()
 	for key in keys:
 		states[key].state_machine = self
+	EventBus.char_path_finished.connect(character_finished_move)
 	
 
 func _process(_delta: float) -> void:
@@ -48,6 +49,7 @@ func _process(_delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if current_state:
 		current_state.handle_input(event)
+		
 
 func state_change(newState : String):
 	#Check if state name exists
@@ -81,7 +83,7 @@ func move_character():
 	battle_manager.move_character(grid_controller.current_path)
 	drawing_2D.SelectionBox.position = grid_controller.local_to_map(dest)*GridProps2D.cellSize
 	
-func character_finished_move():
+func character_finished_move(char:Character):
 	state_change("SELECTION")
 
 

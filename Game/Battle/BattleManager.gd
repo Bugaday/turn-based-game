@@ -20,6 +20,7 @@ func _ready() -> void:
 	teams.append(team1)
 	init_chars()
 	add_chars()
+	EventBus.char_path_finished.connect(char_move_finished)
 
 
 func init_chars():
@@ -51,6 +52,9 @@ func select_character(unit : Character):
 	
 func move_character(path:PackedVector2Array):
 	character_selected.start_move(path)
+	
+func char_move_finished(char:Character):
+	grid_controller.set_cell_data(char)
 
 func endTurn() -> void:
 	teamTurn = (teamTurn + 1) % teamCount;

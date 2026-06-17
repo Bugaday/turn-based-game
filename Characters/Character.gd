@@ -37,12 +37,12 @@ func move_to_next_waypoint():
 
 #A section of path has just completed
 func section_complete():
-	EventBus.char_path_section_completed.emit()
+	EventBus.char_path_section_completed.emit(self)
 	move_to_next_waypoint()	
 
 #The whole path is now complete	
 func path_complete():
-	EventBus.char_path_finished.emit()
+	EventBus.char_path_finished.emit(self)
 
 func _setStats(statData: Resource) -> void:
 	stats = statData;

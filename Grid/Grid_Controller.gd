@@ -15,6 +15,19 @@ func _ready() -> void:
 	add_child(pathfinder)
 	Grid2D = Grid2DConstructor.CreateGrid()
 	set_tiles()
+	
+	call_deferred("check_for_blocked_cells")
+
+func check_for_blocked_cells():	
+	for i in Grid2D.keys():
+		var tile : TileData = %TilesGround.get_cell_tile_data(i)
+		if tile.get_custom_data("Block"):
+			pathfinder.set_blocked_cells(i)
+	pass
+	
+func set_cell_data(unit:Character):
+	var gridPos : Vector2i = local_to_map(unit.position)
+	Grid2D[gridPos].UnitOccupying = unit
 
 
 func get_cell_data(pos:Vector2) -> GridCellData:
@@ -44,7 +57,7 @@ func set_tiles():
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	var cells = [Vector2i(0,0),Vector2i(0,2)]
-	var weights = PackedFloat32Array([0.9,0.1])
+	var weights = PackedFloat32Array([0.85,0.15])
 	for i in Grid2D:
 		var pickedIndex = rng.rand_weighted(weights)
 		var pickedCell : Vector2i = cells[pickedIndex]

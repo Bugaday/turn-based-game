@@ -28,11 +28,10 @@ func _draw() -> void:
 	for i in len(points)-1:
 		var point = points[i]
 		var nextPoint = points[i+1]
-		
-		var value : float = 1.0/(points.size())
-		var point_colour : Color = Color.from_hsv(value*i,1,1,1.0)
-		var f = SystemFont.new()
-		draw_string(f,point+Vector2(0,-10.0),str(i))
-		
+		var point_colour : Color = Color.WHITE_SMOKE
 		draw_line(point,nextPoint,point_colour,2.0)
 		draw_circle(nextPoint,6.0,Color.WHITE_SMOKE)
+		
+		#var f = SystemFont.new()
+		#draw_string(f,point+Vector2(0,-10.0),str(i))
+		

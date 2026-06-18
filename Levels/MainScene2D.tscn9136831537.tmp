@@ -4,15 +4,58 @@
 [ext_resource type="Script" uid="uid://8q86ld088lto" path="res://Game/camera_2d.gd" id="2_5kbai"]
 [ext_resource type="Script" uid="uid://cykn8om4tqr52" path="res://Grid/Grid_Controller.gd" id="2_rxovs"]
 [ext_resource type="PackedScene" uid="uid://cidshhyphx7ky" path="res://UI/UnitInfo/unit_card.tscn" id="4_pobbf"]
+[ext_resource type="Script" uid="uid://db3qgi7yag2io" path="res://PlayerController/Input/InputStates/Input_State.gd" id="4_rxovs"]
 [ext_resource type="Script" uid="uid://dcdosyn8h6fjb" path="res://PlayerController/Input/InputStates/Input_State_Machine.gd" id="5_o4v6t"]
 [ext_resource type="Script" uid="uid://cmqv528thvt2g" path="res://PlayerController/Input/InputStates/Input_State_Selection.gd" id="5_tsaht"]
 [ext_resource type="Script" uid="uid://ch0otjmh1dgcx" path="res://Game/GameManager.gd" id="6_dgxli"]
 [ext_resource type="Script" uid="uid://dh5xgwnhvee8t" path="res://PlayerController/Input/InputStates/Input_State_Unit_Selected.gd" id="6_eipr8"]
-[ext_resource type="Script" uid="uid://dwcvv2l86130e" path="res://PlayerController/Input/InputStates/Input_State_Move_Preview.gd" id="7_epiq7"]
 [ext_resource type="Script" uid="uid://cylkpayq6g6tj" path="res://PlayerController/Input/InputStates/Input_State_Moving_Character.gd" id="9_e5q4x"]
 [ext_resource type="Script" uid="uid://gbheq3hw8qxv" path="res://Game/Battle/BattleManager.gd" id="10_eipr8"]
 [ext_resource type="Script" uid="uid://fy46tn4iix5g" path="res://Grid/Drawing/Draw_Cursor.gd" id="10_tsaht"]
 [ext_resource type="Script" uid="uid://dekvbobvtkaug" path="res://Grid/Drawing/Drawing2D.gd" id="12_epiq7"]
+
+[sub_resource type="GDScript" id="GDScript_epiq7"]
+script/source = "extends InputState
+
+class_name InputStateMovePreview
+
+func _enter_state():
+	print(\"Entering MOVE PREVIEW Input Mode\")
+	pass
+	
+func _exit_state():
+	print(\"Exiting MOVE PREVIEW Input Mode\")
+	state_machine.exit_move_preview()
+	pass
+	
+func handle_input(_event : InputEvent):
+	if _event is InputEventMouseMotion:
+		state_machine.show_move_preview()
+		print(\"Input is mouse\")
+	elif _event.is_action_pressed(\"Select\"):
+		if state_machine.check_movable_location():
+			state_machine.state_change(\"MOVINGCHARACTER\")
+	elif _event.is_action_pressed(\"Escape\") or _event.is_action_pressed(\"RightClick\"):
+		state_machine.state_change(\"UNITSELECTED\")
+		#print(_event, \" input for MOVE PREVIEW Input Mode\")
+	pass
+"
+
+[sub_resource type="Resource" id="Resource_eipr8"]
+script = SubResource("GDScript_epiq7")
+metadata/_custom_type_script = "uid://dwcvv2l86130e"
+
+[sub_resource type="Resource" id="Resource_limvo"]
+script = ExtResource("9_e5q4x")
+metadata/_custom_type_script = "uid://cylkpayq6g6tj"
+
+[sub_resource type="Resource" id="Resource_rxovs"]
+script = ExtResource("5_tsaht")
+metadata/_custom_type_script = "uid://cmqv528thvt2g"
+
+[sub_resource type="Resource" id="Resource_tsaht"]
+script = ExtResource("6_eipr8")
+metadata/_custom_type_script = "uid://dh5xgwnhvee8t"
 
 [node name="Node2D" type="Node2D" unique_id=17497945]
 metadata/_edit_horizontal_guides_ = [1687.0]
@@ -29,26 +72,12 @@ script = ExtResource("2_rxovs")
 unique_name_in_owner = true
 process_mode = 3
 script = ExtResource("5_o4v6t")
-
-[node name="InputStateSelection" type="Node2D" parent="InputStateMachine" unique_id=1370929008]
-unique_name_in_owner = true
-script = ExtResource("5_tsaht")
-metadata/_custom_type_script = "uid://cmqv528thvt2g"
-
-[node name="InputStateUnitSelected" type="Node2D" parent="InputStateMachine" unique_id=242496640]
-unique_name_in_owner = true
-script = ExtResource("6_eipr8")
-metadata/_custom_type_script = "uid://dh5xgwnhvee8t"
-
-[node name="InputStateMovePreview" type="Node2D" parent="InputStateMachine" unique_id=1869952644]
-unique_name_in_owner = true
-script = ExtResource("7_epiq7")
-metadata/_custom_type_script = "uid://dwcvv2l86130e"
-
-[node name="InputStateMovingCharacter" type="Node2D" parent="InputStateMachine" unique_id=1439265301]
-unique_name_in_owner = true
-script = ExtResource("9_e5q4x")
-metadata/_custom_type_script = "uid://cylkpayq6g6tj"
+states = Dictionary[String, ExtResource("4_rxovs")]({
+"MOVEMENTPREVIEW": SubResource("Resource_eipr8"),
+"MOVINGCHARACTER": SubResource("Resource_limvo"),
+"SELECTION": SubResource("Resource_rxovs"),
+"UNITSELECTED": SubResource("Resource_tsaht")
+})
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1743110368]
 unique_name_in_owner = true

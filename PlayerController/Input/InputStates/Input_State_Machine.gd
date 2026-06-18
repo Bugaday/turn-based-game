@@ -2,9 +2,9 @@ extends Node2D
 
 class_name InputStateMachine
 
-@export var states : Dictionary[String,InputState] = {}
+var states : Dictionary[String,InputState] = {}
 
-@onready var current_state : InputState = states["SELECTION"]
+@onready var current_state : InputState
 @onready var grid_controller : GridController = %TilesGround
 @onready var battle_manager : BattleManager = %BattleManager
 @onready var drawing_2D : Drawing2D = %Drawing2D
@@ -19,9 +19,14 @@ signal mouse_grid_pos_changed()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var keys : Array[String] = states.keys()
-	for key in keys:
-		states[key].state_machine = self
+	for state in get_children():
+		if state is InputState:
+			states[state.name] = state
+			state.state_machine = self
+			state.grid_controller = grid_controller
+			state.battle_manager = battle_manager
+			state.drawing_2D = drawing_2D
+
 	EventBus.char_path_finished.connect(character_finished_move)
 	
 

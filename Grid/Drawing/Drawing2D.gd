@@ -43,7 +43,7 @@ func _on_Mouse_Grid_Pos_Changed(gridPos : Vector2i):
 	MouseCursorBox.position = gridPos * GridProps2D.cellSize
 
 func draw_path():
-	draw_preview_path._drawPath(grid_controller.current_path)
+	draw_preview_path._drawPath(grid_controller.get_preview_path())
 	
 func draw_move_path():
 	if grid_controller.current_path.size() > 0:

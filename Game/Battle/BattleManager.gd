@@ -50,11 +50,11 @@ func selection_check_cell(mousepos : Vector2) -> GridCellData:
 func select_character(unit : Character):
 	character_selected = unit
 	
-func move_character(path:PackedVector2Array):
-	character_selected.start_move(path)
+func move_character():
+	character_selected.start_move(grid_controller.current_path)
 	
-func char_move_finished(char:Character):
-	grid_controller.set_cell_data(char)
+func char_move_finished(unit:Character):
+	grid_controller.set_cell_data(unit)
 
 func endTurn() -> void:
 	teamTurn = (teamTurn + 1) % teamCount;

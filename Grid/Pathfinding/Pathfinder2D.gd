@@ -18,5 +18,5 @@ func _ready() -> void:
 
 func set_blocked_cells(cell:Vector2i):
 	_astar.set_point_solid(cell,true)
-	print("Blocked cell by unit at: ",cell)
+	#print("Blocked cell by unit at: ",cell)
 	

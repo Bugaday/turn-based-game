@@ -3,12 +3,18 @@ extends TileMapLayer
 class_name GridController
 
 var pathfinder : Pathfinder2D
-var cellSelected : GridCellData
-var cell_hovered : GridCellData
-var current_path : PackedVector2Array
-
 var Grid2D : Dictionary[Vector2i,GridCellData] = {}
 
+#Mouse Position on Grid
+var mouse_map_pos : Vector2i
+var cell_hovered : GridCellData
+var hovered_grid_pos : Vector2i
+var hovered_grid_pos_last : Vector2i
+
+var cellSelected : GridCellData
+var current_path : PackedVector2Array
+
+signal mouse_grid_pos_changed()
 
 func _ready() -> void:
 	pathfinder = Pathfinder2D.new()
@@ -18,13 +24,27 @@ func _ready() -> void:
 	
 	call_deferred("check_for_blocked_cells")
 
+
+func _process(delta: float) -> void:
+	mouse_map_pos = local_to_map(get_local_mouse_position())
+	var mouse_map_x_clamped = clamp(mouse_map_pos.x,0,GridProps2D.gridXCount-1)
+	var mouse_map_y_clamped = clamp(mouse_map_pos.y,0,GridProps2D.gridYCount-1)
+	hovered_grid_pos = Vector2i(mouse_map_x_clamped,mouse_map_y_clamped)
+	cell_hovered = Grid2D[hovered_grid_pos]
+	
+	if hovered_grid_pos != hovered_grid_pos_last:
+		mouse_grid_pos_changed.emit(hovered_grid_pos)
+		hovered_grid_pos_last = hovered_grid_pos
+
+
 func check_for_blocked_cells():	
 	for i in Grid2D.keys():
 		var tile : TileData = %TilesGround.get_cell_tile_data(i)
 		if tile.get_custom_data("Block"):
 			pathfinder.set_blocked_cells(i)
 	pass
-	
+
+
 func set_cell_data(unit:Character):
 	var gridPos : Vector2i = local_to_map(unit.position)
 	Grid2D[gridPos].UnitOccupying = unit
@@ -35,9 +55,8 @@ func get_cell_data(pos:Vector2) -> GridCellData:
 	return Grid2D[gridPos]
 
 
-func get_preview_path(mouse_pos:Vector2) -> PackedVector2Array:
-	var cell_grid_pos : Vector2i = local_to_map(mouse_pos)
-	current_path = pathfinder._astar.get_point_path(cellSelected.cell_pos,cell_grid_pos)
+func get_preview_path() -> PackedVector2Array:
+	current_path = pathfinder._astar.get_point_path(cellSelected.cell_pos,hovered_grid_pos)
 	return current_path
 
 
@@ -62,4 +81,3 @@ func set_tiles():
 		var pickedIndex = rng.rand_weighted(weights)
 		var pickedCell : Vector2i = cells[pickedIndex]
 		set_cell(i,0,pickedCell)
-	

@@ -1,6 +1,6 @@
 extends Camera2D
 
-var InputCtrl : InputController
+var pan_speed : float = 500.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -9,7 +9,5 @@ func _ready() -> void:
 	position = Vector2(GridCentreX,GridCentreY)
 	
 func _process(_delta: float) -> void:
-	if (InputCtrl):
-		position += Vector2(InputCtrl.MoveHorz * 10,InputCtrl.MoveVert * 10)
-	pass
-	
+	var input_dir : Vector2 = Input.get_vector("MoveLeft", "MoveRight", "MoveUp", "MoveDown")
+	global_position += input_dir * pan_speed * _delta

@@ -20,7 +20,6 @@ func handle_input(_event : InputEvent):
 
 func move_character():
 	battle_manager.move_character()
-	#drawing_2D.SelectionBox.position = grid_controller.local_to_map(dest)*GridProps2D.cellSize
 
 func handle_path_finished(unit:Character):
 	grid_controller.set_cell_data(unit)

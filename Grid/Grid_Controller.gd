@@ -22,7 +22,7 @@ func _ready() -> void:
 	Grid2D = Grid2DConstructor.CreateGrid()
 	set_tiles()
 	
-	call_deferred("check_for_blocked_cells")
+	call_deferred("add_blocked_cells_for_pathfinder")
 
 
 func _process(delta: float) -> void:
@@ -37,8 +37,8 @@ func _process(delta: float) -> void:
 		hovered_grid_pos_last = hovered_grid_pos
 
 
-func check_for_blocked_cells():	
-	for i in Grid2D.keys():
+func add_blocked_cells_for_pathfinder():	
+	for i:Vector2i in Grid2D.keys():
 		var tile : TileData = %TilesGround.get_cell_tile_data(i)
 		if tile.get_custom_data("Block"):
 			pathfinder.set_blocked_cells(i)
@@ -66,9 +66,11 @@ func GetRandomGridCell() -> Vector2i:
 	var x : int = randi_range(0,gridX-1)
 	var y : int  = randi_range(0,gridY-1)
 	var randCell : Vector2i = Vector2i(x,y)
-	while Grid2D[randCell].isOccupied:
+	var cell_data : TileData = %TilesGround.get_cell_tile_data(randCell)
+	var cell_is_blocked : bool = cell_data.get_custom_data("Block")
+	if Grid2D[randCell].isOccupied or cell_is_blocked:
 		randCell = GetRandomGridCell()
-		
+	
 	return randCell
 
 
@@ -76,7 +78,7 @@ func set_tiles():
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	var cells = [Vector2i(0,0),Vector2i(0,2)]
-	var weights = PackedFloat32Array([0.85,0.15])
+	var weights = PackedFloat32Array([0.9,0.1])
 	for i in Grid2D:
 		var pickedIndex = rng.rand_weighted(weights)
 		var pickedCell : Vector2i = cells[pickedIndex]

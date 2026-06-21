@@ -15,7 +15,7 @@ var gridSizeY : float = gridYCount * cellSizeY
 
 
 func _drawPath(path_points : PackedVector2Array):
-	points = path_points
+	points = path_points.duplicate()
 	queue_redraw()
 
 

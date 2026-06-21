@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bv6hn4ogt6ph4"]
 
 [ext_resource type="PackedScene" uid="uid://3jei4yrv1ydm" path="res://Levels/Tiles_Ground.tscn" id="1_t8vbk"]
-[ext_resource type="Script" uid="uid://8q86ld088lto" path="res://Game/Camera_2D.gd" id="2_5kbai"]
+[ext_resource type="Script" uid="uid://8q86ld088lto" path="res://Game/camera_2d.gd" id="2_5kbai"]
 [ext_resource type="Script" uid="uid://cykn8om4tqr52" path="res://Grid/Grid_Controller.gd" id="2_rxovs"]
 [ext_resource type="PackedScene" uid="uid://cidshhyphx7ky" path="res://UI/UnitInfo/unit_card.tscn" id="4_pobbf"]
 [ext_resource type="Script" uid="uid://dcdosyn8h6fjb" path="res://PlayerController/Input/InputStates/Input_State_Machine.gd" id="5_o4v6t"]

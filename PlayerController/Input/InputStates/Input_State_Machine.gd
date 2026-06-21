@@ -28,11 +28,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	mouse_pos = get_local_mouse_position()
-	#MousePosX = clamp(get_global_mouse_position().x,0,GridProps2D.gridSizeX-GridProps2D.cellSize.x)
-	#MousePosY = clamp(get_global_mouse_position().y,0,GridProps2D.gridSizeY-GridProps2D.cellSize.y)
-	
 	cursor.global_position = grid_controller.hovered_grid_pos*GridProps2D.cellSize
-			
 	current_state.Update(_delta)
 
 

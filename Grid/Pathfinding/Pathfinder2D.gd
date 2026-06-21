@@ -13,10 +13,8 @@ func _ready() -> void:
 	_astar.default_estimate_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
 	_astar.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_ALWAYS
 	_astar.update()
-	#print(_astar.get_id_path(Vector2i(0, 0), Vector2i(3, 4))) # Prints [(0, 0), (1, 1), (2, 2), (3, 3), (3, 4)]
-	#print(_astar.get_point_path(Vector2i(0, 0), Vector2i(3, 4))) # Prints [(0, 0), (16, 16), (32, 32), (48, 48), (48, 64)]
+
 
 func set_blocked_cells(cell:Vector2i):
 	_astar.set_point_solid(cell,true)
-	#print("Blocked cell by unit at: ",cell)
 	

@@ -1,13 +1,12 @@
 [gd_scene format=3 uid="uid://bv6hn4ogt6ph4"]
 
 [ext_resource type="PackedScene" uid="uid://3jei4yrv1ydm" path="res://Levels/Tiles_Ground.tscn" id="1_t8vbk"]
-[ext_resource type="Script" uid="uid://8q86ld088lto" path="res://Game/camera_2d.gd" id="2_5kbai"]
+[ext_resource type="Script" uid="uid://8q86ld088lto" path="res://Game/Camera_2D.gd" id="2_5kbai"]
 [ext_resource type="Script" uid="uid://cykn8om4tqr52" path="res://Grid/Grid_Controller.gd" id="2_rxovs"]
 [ext_resource type="PackedScene" uid="uid://cidshhyphx7ky" path="res://UI/UnitInfo/unit_card.tscn" id="4_pobbf"]
 [ext_resource type="Script" uid="uid://dcdosyn8h6fjb" path="res://PlayerController/Input/InputStates/Input_State_Machine.gd" id="5_o4v6t"]
 [ext_resource type="Script" uid="uid://cmqv528thvt2g" path="res://PlayerController/Input/InputStates/Input_State_Selection.gd" id="5_tsaht"]
 [ext_resource type="Script" uid="uid://ch0otjmh1dgcx" path="res://Game/GameManager.gd" id="6_dgxli"]
-[ext_resource type="Script" uid="uid://dh5xgwnhvee8t" path="res://PlayerController/Input/InputStates/Input_State_Unit_Selected.gd" id="6_eipr8"]
 [ext_resource type="Script" uid="uid://dwcvv2l86130e" path="res://PlayerController/Input/InputStates/Input_State_Move_Preview.gd" id="7_epiq7"]
 [ext_resource type="Script" uid="uid://cylkpayq6g6tj" path="res://PlayerController/Input/InputStates/Input_State_Moving_Character.gd" id="9_e5q4x"]
 [ext_resource type="Script" uid="uid://gbheq3hw8qxv" path="res://Game/Battle/BattleManager.gd" id="10_eipr8"]
@@ -34,11 +33,6 @@ script = ExtResource("5_o4v6t")
 unique_name_in_owner = true
 script = ExtResource("5_tsaht")
 metadata/_custom_type_script = "uid://cmqv528thvt2g"
-
-[node name="InputStateUnitSelected" type="Node2D" parent="InputStateMachine" unique_id=242496640]
-unique_name_in_owner = true
-script = ExtResource("6_eipr8")
-metadata/_custom_type_script = "uid://dh5xgwnhvee8t"
 
 [node name="InputStateMovePreview" type="Node2D" parent="InputStateMachine" unique_id=1869952644]
 unique_name_in_owner = true

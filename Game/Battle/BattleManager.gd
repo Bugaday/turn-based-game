@@ -36,8 +36,18 @@ func add_chars():
 		add_child(i)
 		var cell = grid_controller.GetRandomGridCell()
 		grid_controller.Grid2D[cell].UnitOccupying = i
-		i.currentCellPos = cell
 		i.position = grid_controller.map_to_local(cell)
+		
+func block_other_characters(unit_moving:Character):
+	for unit in characters:
+		if unit != unit_moving:
+			grid_controller.set_blocked_position(unit.position)
+	pass
+
+
+func free_all_characters():
+	for unit in characters:
+		grid_controller.set_free_position(unit.position)
 
 
 func selection_check_cell(mousepos : Vector2) -> GridCellData:
@@ -47,11 +57,17 @@ func selection_check_cell(mousepos : Vector2) -> GridCellData:
 		drawing_2D.on_select_unit(cell_clicked)
 	return cell_clicked
 
-func select_character(unit : Character):
-	character_selected = unit
+func select_character(from_position : Vector2):
+	#var grid_pos = grid_controller.local_to_map(from_position)
+	var cell : GridCellData = grid_controller.get_cell_data(from_position)
+	if cell.UnitOccupying:
+		character_selected = cell.UnitOccupying
+		grid_controller.cellSelected = cell
+		drawing_2D.on_select_unit(cell)
 	
 func move_character():
 	character_selected.start_move(grid_controller.current_path)
+	drawing_2D.on_char_moving()
 	
 func char_move_finished(unit:Character):
 	grid_controller.set_cell_data(unit)

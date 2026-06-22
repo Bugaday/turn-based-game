@@ -4,11 +4,13 @@ class_name InputStateMovePreview
 
 func _enter_state():
 	print("Entering ",%InputStateMovePreview.name, " Input Mode")
+	battle_manager.block_other_characters(battle_manager.character_selected)
 	show_move_preview()
 	pass
 	
 func _exit_state():
 	print("Exiting ",%InputStateMovePreview.name, " Input Mode")
+	battle_manager.free_all_characters()
 	drawing_2D.clear_path()
 	pass
 
@@ -20,7 +22,7 @@ func handle_input(_event : InputEvent):
 		if check_movable_location():
 			state_machine.state_change(%InputStateMovingCharacter.name)
 	elif _event.is_action_pressed("Escape") or _event.is_action_pressed("RightClick"):
-		state_machine.state_change(%InputStateUnitSelected.name)
+		state_machine.state_change(%InputStateSelection.name)
 	pass
 	
 func check_movable_location() -> bool:

@@ -22,6 +22,8 @@ func _ready() -> void:
 	Grid2D = Grid2DConstructor.CreateGrid()
 	set_tiles()
 	
+	EventBus.char_path_section_completed.connect(update_char_moved_data)
+	
 	call_deferred("add_blocked_cells_for_pathfinder")
 
 
@@ -45,6 +47,16 @@ func add_blocked_cells_for_pathfinder():
 	pass
 
 
+func set_blocked_position(pos:Vector2):
+	var cell_at_pos : Vector2i = local_to_map(pos)
+	pathfinder.set_blocked_cells(cell_at_pos)
+
+
+func set_free_position(pos:Vector2):
+	var cell_at_pos : Vector2i = local_to_map(pos)
+	pathfinder.set_cell_free(cell_at_pos)
+
+
 func set_cell_data(unit:Character):
 	var gridPos : Vector2i = local_to_map(unit.position)
 	Grid2D[gridPos].UnitOccupying = unit
@@ -60,6 +72,13 @@ func get_preview_path() -> PackedVector2Array:
 	return current_path
 
 
+func update_char_moved_data(unit: Character):
+	var last_pos : Vector2i = local_to_map(unit.char_last_cell_pos)
+	var current_grid_pos : Vector2i = local_to_map(unit.position)
+	Grid2D[last_pos].UnitOccupying = null
+	Grid2D[current_grid_pos].UnitOccupying = unit
+
+
 func GetRandomGridCell() -> Vector2i:
 	var gridX : int = GridProps2D.gridXCount
 	var gridY : int = GridProps2D.gridYCount
@@ -68,7 +87,7 @@ func GetRandomGridCell() -> Vector2i:
 	var randCell : Vector2i = Vector2i(x,y)
 	var cell_data : TileData = %TilesGround.get_cell_tile_data(randCell)
 	var cell_is_blocked : bool = cell_data.get_custom_data("Block")
-	if Grid2D[randCell].isOccupied or cell_is_blocked:
+	if Grid2D[randCell].UnitOccupying or cell_is_blocked:
 		randCell = GetRandomGridCell()
 	
 	return randCell

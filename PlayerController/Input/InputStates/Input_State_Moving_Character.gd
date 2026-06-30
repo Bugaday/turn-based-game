@@ -4,7 +4,7 @@ class_name InputStateMovingCharacter
 
 func _enter_state():
 	print("Entering ",%InputStateMovingCharacter.name, " Input Mode")
-	move_character()
+	EventBus.char_start_move.emit()
 	pass
 
 

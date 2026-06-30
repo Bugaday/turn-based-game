@@ -19,7 +19,6 @@ func start_move(path:PackedVector2Array):
 	move_path = path
 	if move_path.is_empty():
 		return
-
 	move_to_next_waypoint()
 
 

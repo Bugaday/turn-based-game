@@ -8,7 +8,9 @@ var states : Dictionary[String,InputState] = {}
 @onready var grid_controller : GridController = %TilesGround
 @onready var battle_manager : BattleManager = %BattleManager
 @onready var drawing_2D : Drawing2D = %Drawing2D
-@onready var cursor : Cursor = %Cursor
+
+#Note, this is a node and not part of drawing as we just need to move the position of the node, not use queue_redraw()
+@onready var cursor : DrawCursor = %Cursor
 
 var mouse_pos : Vector2
 var pause_mode

@@ -1,16 +1,28 @@
 [gd_scene format=3 uid="uid://cdlfini0ykxkm"]
 
 [ext_resource type="Script" uid="uid://dcpjy8i623v2x" path="res://Characters/Character.gd" id="1_3wwac"]
-[ext_resource type="Resource" uid="uid://b5k0hqe1epc2p" path="res://Characters/Goblin.tres" id="2_wbsri"]
+[ext_resource type="Script" uid="uid://c7nec1xn11u8a" path="res://Characters/CharacterActions/AI_Action.gd" id="2_x4c3g"]
 [ext_resource type="Texture2D" uid="uid://byo6sw14dlhp2" path="res://TileSets/IMG_5673.png" id="3_3wwac"]
+[ext_resource type="Script" uid="uid://coh5p3imqmxic" path="res://Characters/CharacterActions/AI_Decisions.gd" id="3_wbsri"]
+[ext_resource type="Script" uid="uid://dtoxrqvw40km8" path="res://Characters/CharacterActions/AI_Action_Attack.gd" id="4_j8nnj"]
+[ext_resource type="Resource" uid="uid://64xnv0xhbdih" path="res://Characters/Knight.tres" id="5_j8nnj"]
+[ext_resource type="Script" uid="uid://c1gmj252y8xdh" path="res://Characters/CharacterActions/AI_Action_Move_To_Enemy.gd" id="5_mso7d"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3wwac"]
 atlas = ExtResource("3_3wwac")
 region = Rect2(0, 0, 64, 64)
 
+[sub_resource type="Resource" id="Resource_cet2a"]
+script = ExtResource("5_mso7d")
+metadata/_custom_type_script = "uid://c1gmj252y8xdh"
+
+[sub_resource type="Resource" id="Resource_j8nnj"]
+script = ExtResource("4_j8nnj")
+metadata/_custom_type_script = "uid://dtoxrqvw40km8"
+
 [node name="Character" type="Node2D" unique_id=325950488]
 script = ExtResource("1_3wwac")
-stats = ExtResource("2_wbsri")
+stats = ExtResource("5_j8nnj")
 
 [node name="CharSprite2D" type="Sprite2D" parent="." unique_id=236294916]
 unique_name_in_owner = true
@@ -19,3 +31,9 @@ texture = SubResource("AtlasTexture_3wwac")
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1077893553]
 z_index = 99
 gizmo_extents = 149.2
+
+[node name="AIDecisions" type="Node" parent="." unique_id=1468153862]
+unique_name_in_owner = true
+script = ExtResource("3_wbsri")
+available_actions = Array[ExtResource("2_x4c3g")]([SubResource("Resource_cet2a"), SubResource("Resource_j8nnj")])
+metadata/_custom_type_script = "uid://coh5p3imqmxic"

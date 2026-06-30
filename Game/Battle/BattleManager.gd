@@ -5,39 +5,57 @@ class_name BattleManager
 var teamTurn : int = 0;
 var teamCount : int = 2;
 var charScene : PackedScene
-var teams : Array[Team]
+var teams : Array[Team] = []
 var characters : Array[Character]
 var character_selected : Character
+var ai_registry : AIRegistry
 
 @onready var grid_controller : GridController = %TilesGround
 @onready var drawing_2D : Drawing2D = %Drawing2D
 
 func _ready() -> void:
+	
+	ai_registry = AIRegistry.new()
+
 	charScene = preload("res://Characters/Character.tscn")
-	var team0 : Team = load("res://Characters/Teams/team_0.tres")
-	var team1 : Team = load("res://Characters/Teams/team_1.tres")
+	var team0 : Team = load("res://Characters/Teams/team_2.tres")
+	var team1 : Team = load("res://Characters/Teams/team_3.tres")
 	teams.append(team0)
 	teams.append(team1)
 	init_chars()
 	add_chars()
-	EventBus.char_path_finished.connect(char_move_finished)
+	
+	# When initializing the match:
+	var global_blackboard = AIBlackboard.new()
+	global_blackboard.set_value("weather", "rain")
+
+	var enemy_faction_blackboard = AIBlackboard.new(global_blackboard)
+	enemy_faction_blackboard.set_value("player_spotted", false)
+
+	# For each individual unit spawned:
+	var goblin_blackboard = AIBlackboard.new(enemy_faction_blackboard)
+	goblin_blackboard.set_value("is_wounded", true)
+	
+	EventBus.char_start_move.connect(start_move_character)
 
 
 func init_chars():
-	for i in teams.size():
-		for j in teams[i].teamMembers.size():
+	for i:int in teams.size():
+		for j:int in teams[i].teamMembers.size():
 			var newChar : Character = charScene.instantiate()
 			newChar.stats = teams[i].teamMembers[j]
 			newChar.faction = i
 			characters.append(newChar)
-	
+
+
 func add_chars():
-	for i in characters:
+	for i:Character in characters:
 		add_child(i)
 		var cell = grid_controller.GetRandomGridCell()
 		grid_controller.Grid2D[cell].UnitOccupying = i
 		i.position = grid_controller.map_to_local(cell)
-		
+
+
 func block_other_characters(unit_moving:Character):
 	for unit in characters:
 		if unit != unit_moving:
@@ -50,13 +68,6 @@ func free_all_characters():
 		grid_controller.set_free_position(unit.position)
 
 
-func selection_check_cell(mousepos : Vector2) -> GridCellData:
-	var cell_clicked : GridCellData = grid_controller.get_cell_data(mousepos)
-	if cell_clicked.UnitOccupying:
-		character_selected = cell_clicked.UnitOccupying
-		drawing_2D.on_select_unit(cell_clicked)
-	return cell_clicked
-
 func select_character(from_position : Vector2):
 	#var grid_pos = grid_controller.local_to_map(from_position)
 	var cell : GridCellData = grid_controller.get_cell_data(from_position)
@@ -64,13 +75,11 @@ func select_character(from_position : Vector2):
 		character_selected = cell.UnitOccupying
 		grid_controller.cellSelected = cell
 		drawing_2D.on_select_unit(cell)
-	
-func move_character():
+
+
+func start_move_character():
 	character_selected.start_move(grid_controller.current_path)
-	drawing_2D.on_char_moving()
-	
-func char_move_finished(unit:Character):
-	grid_controller.set_cell_data(unit)
+
 
 func endTurn() -> void:
 	teamTurn = (teamTurn + 1) % teamCount;

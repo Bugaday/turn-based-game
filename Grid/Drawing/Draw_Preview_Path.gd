@@ -5,14 +5,6 @@ class_name DrawMovePath
 #Movement Path
 var points : PackedVector2Array
 
-var cellOffset : float = 0.0;
-var cellSizeX : float = GridProps2D.cellSize.x;
-var cellSizeY : float = GridProps2D.cellSize.y;
-var gridXCount : int = GridProps2D.gridXCount;
-var gridYCount : int = GridProps2D.gridYCount;
-var gridSizeX : float = gridXCount * cellSizeX
-var gridSizeY : float = gridYCount * cellSizeY
-
 
 func _drawPath(path_points : PackedVector2Array):
 	points = path_points.duplicate()
@@ -34,4 +26,3 @@ func _draw() -> void:
 		
 		#var f = SystemFont.new()
 		#draw_string(f,point+Vector2(0,-10.0),str(i))
-		

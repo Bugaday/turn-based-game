@@ -13,6 +13,8 @@
 [ext_resource type="Script" uid="uid://fy46tn4iix5g" path="res://Grid/Drawing/Draw_Cursor.gd" id="10_tsaht"]
 [ext_resource type="Script" uid="uid://dekvbobvtkaug" path="res://Grid/Drawing/Drawing2D.gd" id="12_epiq7"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_eipr8"]
+
 [node name="Node2D" type="Node2D" unique_id=17497945]
 metadata/_edit_horizontal_guides_ = [1687.0]
 
@@ -71,3 +73,28 @@ offset_left = 2008.0
 offset_top = 128.0
 offset_right = 2008.0
 offset_bottom = 128.0
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=1981113182]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 939.0
+offset_top = 987.0
+offset_right = 939.0
+offset_bottom = 987.0
+
+[node name="EndTurnButton" type="Button" parent="CanvasLayer/Control" unique_id=1532416257]
+layout_mode = 0
+offset_left = -797.0
+offset_top = -100.0
+offset_right = -719.0
+offset_bottom = -69.0
+text = "End Turn"
+
+[node name="Label" type="Label" parent="CanvasLayer/Control" unique_id=1651194216]
+layout_mode = 0
+offset_left = -799.0
+offset_top = -381.0
+offset_right = -710.0
+offset_bottom = -358.0
+text = "Player Turn"
+label_settings = SubResource("LabelSettings_eipr8")

@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 EventBus="*uid://je3ajp127i1x"
 PlayerTeam="*uid://se1gw8ndgcat"
+GameFeatures="*uid://b5pc3d7lu6phk"
 
 [display]
 

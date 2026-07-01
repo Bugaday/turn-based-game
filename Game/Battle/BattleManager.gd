@@ -16,6 +16,7 @@ var ai_registry : AIRegistry
 func _ready() -> void:
 	
 	ai_registry = AIRegistry.new()
+	ai_registry.register_faction(str(GameFeatures.factions.Enemy))
 
 	charScene = preload("res://Characters/Character.tscn")
 
@@ -53,6 +54,7 @@ func init_chars_ai():
 			var newChar : Character = charScene.instantiate()
 			newChar.stats = teams[i].teamMembers[j]
 			newChar.faction = i
+			ai_registry.register_unit(newChar,"Enemy")
 			characters.append(newChar)
 
 

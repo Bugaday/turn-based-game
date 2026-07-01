@@ -16,14 +16,14 @@ func handle_input(_event : InputEvent):
 	elif _event.is_action_pressed("Select"):
 		if check_for_player_character():
 			battle_manager.select_character(state_machine.mouse_pos)
-		else:
+		elif battle_manager.character_selected:
 			state_machine.state_change(%InputStateMovePreview.name)
 
 
 func check_for_player_character() -> bool:
 	var cell = grid_controller.get_cell_data(state_machine.mouse_pos)
 	if cell.UnitOccupying:
-		if cell.UnitOccupying.faction == 0:
+		if PlayerTeam.team_members.has(cell.UnitOccupying.get_instance_id()):
 			return true
 	return false
 	

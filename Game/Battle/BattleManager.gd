@@ -3,7 +3,7 @@ extends Node
 class_name BattleManager
 
 var teamTurn : int = 0;
-var teamCount : int = 2;
+var teamCount : int = 1;
 var charScene : PackedScene
 var teams : Array[Team] = []
 var characters : Array[Character]
@@ -18,11 +18,11 @@ func _ready() -> void:
 	ai_registry = AIRegistry.new()
 
 	charScene = preload("res://Characters/Character.tscn")
-	var team0 : Team = load("res://Characters/Teams/team_2.tres")
+
 	var team1 : Team = load("res://Characters/Teams/team_3.tres")
-	teams.append(team0)
 	teams.append(team1)
-	init_chars()
+	init_player_team()
+	init_chars_ai()
 	add_chars()
 	
 	# When initializing the match:
@@ -37,9 +37,17 @@ func _ready() -> void:
 	goblin_blackboard.set_value("is_wounded", true)
 	
 	EventBus.char_start_move.connect(start_move_character)
+	
+func init_player_team():
+	var player_team : Team = load("res://Characters/Teams/team_player_temp.tres")
+	for i in player_team.teamMembers:
+		var newChar : Character = charScene.instantiate()
+		newChar.stats = i
+		PlayerTeam.team_members[newChar.get_instance_id()] = newChar
+		characters.append(newChar)
 
 
-func init_chars():
+func init_chars_ai():
 	for i:int in teams.size():
 		for j:int in teams[i].teamMembers.size():
 			var newChar : Character = charScene.instantiate()

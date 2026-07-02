@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bv6hn4ogt6ph4"]
 
 [ext_resource type="PackedScene" uid="uid://3jei4yrv1ydm" path="res://Levels/Tiles_Ground.tscn" id="1_t8vbk"]
-[ext_resource type="Script" uid="uid://8q86ld088lto" path="res://Game/Camera_2D.gd" id="2_5kbai"]
+[ext_resource type="Script" uid="uid://8q86ld088lto" path="res://Game/camera_2d.gd" id="2_5kbai"]
 [ext_resource type="Script" uid="uid://cykn8om4tqr52" path="res://Grid/Grid_Controller.gd" id="2_rxovs"]
 [ext_resource type="PackedScene" uid="uid://cidshhyphx7ky" path="res://UI/UnitInfo/unit_card.tscn" id="4_pobbf"]
 [ext_resource type="Script" uid="uid://dcdosyn8h6fjb" path="res://PlayerController/Input/InputStates/Input_State_Machine.gd" id="5_o4v6t"]
@@ -10,12 +10,15 @@
 [ext_resource type="Script" uid="uid://dwcvv2l86130e" path="res://PlayerController/Input/InputStates/Input_State_Move_Preview.gd" id="7_epiq7"]
 [ext_resource type="Script" uid="uid://cylkpayq6g6tj" path="res://PlayerController/Input/InputStates/Input_State_Moving_Character.gd" id="9_e5q4x"]
 [ext_resource type="Script" uid="uid://gbheq3hw8qxv" path="res://Game/Battle/BattleManager.gd" id="10_eipr8"]
+[ext_resource type="Script" uid="uid://buepukriypoxr" path="res://Game/Battle/Turn_Manager.gd" id="10_limvo"]
 [ext_resource type="Script" uid="uid://fy46tn4iix5g" path="res://Grid/Drawing/Draw_Cursor.gd" id="10_tsaht"]
 [ext_resource type="Script" uid="uid://dekvbobvtkaug" path="res://Grid/Drawing/Drawing2D.gd" id="12_epiq7"]
+[ext_resource type="Script" uid="uid://c0sokovxqojy5" path="res://UI/UI_Controller.gd" id="13_epiq7"]
+[ext_resource type="Script" uid="uid://dfi0ppbp0ouxo" path="res://Input/Buttons/end_turn_button.gd" id="14_e5q4x"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_eipr8"]
 
-[node name="Node2D" type="Node2D" unique_id=17497945]
+[node name="BattleScene" type="Node2D" unique_id=17497945]
 metadata/_edit_horizontal_guides_ = [1687.0]
 
 [node name="GameManager" type="Node" parent="." unique_id=521745549]
@@ -55,6 +58,11 @@ unique_name_in_owner = true
 script = ExtResource("10_eipr8")
 metadata/_custom_type_script = "uid://gbheq3hw8qxv"
 
+[node name="TurnManager" type="Node" parent="BattleManager" unique_id=807104194]
+unique_name_in_owner = true
+script = ExtResource("10_limvo")
+metadata/_custom_type_script = "uid://buepukriypoxr"
+
 [node name="Cursor" type="Node2D" parent="." unique_id=542488809]
 unique_name_in_owner = true
 script = ExtResource("10_tsaht")
@@ -81,16 +89,20 @@ offset_left = 939.0
 offset_top = 987.0
 offset_right = 939.0
 offset_bottom = 987.0
+script = ExtResource("13_epiq7")
 
 [node name="EndTurnButton" type="Button" parent="CanvasLayer/Control" unique_id=1532416257]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = -797.0
 offset_top = -100.0
 offset_right = -719.0
 offset_bottom = -69.0
 text = "End Turn"
+script = ExtResource("14_e5q4x")
 
-[node name="Label" type="Label" parent="CanvasLayer/Control" unique_id=1651194216]
+[node name="TurnText" type="Label" parent="CanvasLayer/Control" unique_id=1651194216]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = -799.0
 offset_top = -381.0

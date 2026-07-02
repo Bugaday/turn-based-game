@@ -2,16 +2,19 @@ extends Node
 
 class_name BattleManager
 
-var teamTurn : int = 0;
-var teamCount : int = 1;
 var charScene : PackedScene
-var teams : Array[Team] = []
 var characters : Array[Character]
 var character_selected : Character
+
+var teamCount : int = 2;
+var teams : Array[Team] = []
+
 var ai_registry : AIRegistry
 
+@onready var turn_manager : TurnManager = %TurnManager
 @onready var grid_controller : GridController = %TilesGround
 @onready var drawing_2D : Drawing2D = %Drawing2D
+
 
 func _ready() -> void:
 	
@@ -19,29 +22,19 @@ func _ready() -> void:
 	ai_registry.register_faction(str(GameFeatures.factions.Enemy))
 
 	charScene = preload("res://Characters/Character.tscn")
-
+	var player_team : Team = load("res://Characters/Teams/team_player_temp.tres")
 	var team1 : Team = load("res://Characters/Teams/team_3.tres")
+	teams.append(player_team)
 	teams.append(team1)
 	init_player_team()
 	init_chars_ai()
 	add_chars()
 	
-	# When initializing the match:
-	var global_blackboard = AIBlackboard.new()
-	global_blackboard.set_value("weather", "rain")
-
-	var enemy_faction_blackboard = AIBlackboard.new(global_blackboard)
-	enemy_faction_blackboard.set_value("player_spotted", false)
-
-	# For each individual unit spawned:
-	var goblin_blackboard = AIBlackboard.new(enemy_faction_blackboard)
-	goblin_blackboard.set_value("is_wounded", true)
-	
 	EventBus.char_start_move.connect(start_move_character)
-	
+
+
 func init_player_team():
-	var player_team : Team = load("res://Characters/Teams/team_player_temp.tres")
-	for i in player_team.teamMembers:
+	for i in teams[0].teamMembers:
 		var newChar : Character = charScene.instantiate()
 		newChar.stats = i
 		PlayerTeam.team_members[newChar.get_instance_id()] = newChar
@@ -53,8 +46,9 @@ func init_chars_ai():
 		for j:int in teams[i].teamMembers.size():
 			var newChar : Character = charScene.instantiate()
 			newChar.stats = teams[i].teamMembers[j]
-			newChar.faction = i
 			ai_registry.register_unit(newChar,"Enemy")
+			var bb: AIBlackboard = ai_registry.get_unit_blackboard(newChar)
+			#bb.set_value()
 			characters.append(newChar)
 
 
@@ -89,7 +83,3 @@ func select_character(from_position : Vector2):
 
 func start_move_character():
 	character_selected.start_move(grid_controller.current_path)
-
-
-func endTurn() -> void:
-	teamTurn = (teamTurn + 1) % teamCount;

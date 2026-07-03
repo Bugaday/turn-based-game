@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://byo6sw14dlhp2" path="res://TileSets/IMG_5673.png" id="3_3wwac"]
 [ext_resource type="Script" uid="uid://coh5p3imqmxic" path="res://Characters/CharacterActions/AI_Decisions.gd" id="3_wbsri"]
 [ext_resource type="Script" uid="uid://dtoxrqvw40km8" path="res://Characters/CharacterActions/AI_Action_Attack.gd" id="4_j8nnj"]
-[ext_resource type="Resource" uid="uid://64xnv0xhbdih" path="res://Characters/Knight.tres" id="5_j8nnj"]
+[ext_resource type="Resource" uid="uid://64xnv0xhbdih" path="res://Characters/CharacterData/Knight.tres" id="5_j8nnj"]
 [ext_resource type="Script" uid="uid://c1gmj252y8xdh" path="res://Characters/CharacterActions/AI_Action_Move_To_Enemy.gd" id="5_mso7d"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3wwac"]

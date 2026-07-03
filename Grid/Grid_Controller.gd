@@ -91,6 +91,10 @@ func GetRandomGridCell() -> Vector2i:
 		randCell = GetRandomGridCell()
 	
 	return randCell
+	
+func GetRandomGridPosition() -> Vector2:
+	var cell = GetRandomGridCell()
+	return map_to_local(cell)
 
 
 func set_tiles():

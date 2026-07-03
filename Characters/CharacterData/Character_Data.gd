@@ -1,6 +1,6 @@
 extends Resource
 
-class_name UnitStats
+class_name CharacterData
 
 @export var unit_name : String = "Generic Unit";
 @export var stamina : int = 10;

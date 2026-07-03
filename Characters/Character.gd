@@ -3,16 +3,15 @@ extends Node2D
 class_name Character
 
 var char_last_cell_pos : Vector2
-var currentHealth : int
-var faction : int
+var faction : String
 var move_path : PackedVector2Array
 
-
-@export var stats : UnitStats;
+@export var stats : CharacterData;
 
 func _ready() -> void:
 	if stats:
 		_setStats(stats)
+
 
 #Start the movement code
 func start_move(path:PackedVector2Array):
@@ -52,4 +51,3 @@ func path_complete():
 func _setStats(statData: Resource) -> void:
 	stats = statData;
 	%CharSprite2D.texture = stats.sprite
-	currentHealth = stats.health

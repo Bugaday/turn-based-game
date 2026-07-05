@@ -8,9 +8,11 @@ var teamTurn : int = 0
 
 
 func _ready() -> void:
-	end_turn_button.pressed.connect(endTurn)
+	end_turn_button.pressed.connect(advance_turn)
 
+func start_faction_turn():
+	pass
 
-func endTurn() -> void:
+func advance_turn() -> void:
 	teamTurn = (teamTurn + 1) % battle_manager.teamCount;
 	EventBus.turn_finished.emit()

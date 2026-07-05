@@ -19,6 +19,7 @@ func _ready() -> void:
 	
 	var global_blackboard = AIBlackboard.new()
 	global_blackboard.set_value("turn_count", 1)
+	global_blackboard.set_value("Weather", "Clear")
 	
 	ai_registry = AIRegistry.new(global_blackboard)
 	

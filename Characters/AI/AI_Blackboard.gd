@@ -2,14 +2,14 @@ extends RefCounted
 
 class_name AIBlackboard
 
-var characters : Array[Character]
-
 var local_data: Dictionary = {}
 var parent_blackboard: AIBlackboard = null # Points to Faction or Global
+
 
 #_init is Godot's constructor
 func _init(_parent: AIBlackboard = null) -> void:
 	parent_blackboard = _parent
+
 
 func get_value(key: String, default = null):
 	#Check if key exists here first
@@ -21,6 +21,7 @@ func get_value(key: String, default = null):
 		return parent_blackboard.get_value(key, default)
 
 	return default
+
 
 #Sets value using Generic/Template/Untyped value allowing any type to be set
 #Note, Unreal uses 'Set Blackboard Value as Float'

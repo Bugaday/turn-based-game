@@ -71,12 +71,14 @@ func get_preview_path() -> PackedVector2Array:
 	current_path = pathfinder._astar.get_point_path(cellSelected.cell_pos,hovered_grid_pos)
 	return current_path
 
+func set_char_moved_data(unit:Character):
+	var grid_pos : Vector2i = local_to_map(unit.position)
+	Grid2D[grid_pos].UnitOccupying = unit
 
 func update_char_moved_data(unit: Character):
 	var last_pos : Vector2i = local_to_map(unit.char_last_cell_pos)
-	var current_grid_pos : Vector2i = local_to_map(unit.position)
 	Grid2D[last_pos].UnitOccupying = null
-	Grid2D[current_grid_pos].UnitOccupying = unit
+	set_char_moved_data(unit)
 
 
 func GetRandomGridCell() -> Vector2i:

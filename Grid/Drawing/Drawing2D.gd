@@ -42,7 +42,7 @@ func on_char_start_move():
 
 
 func draw_path():
-	draw_preview_path._drawPath(grid_controller.get_preview_path())
+	draw_preview_path._drawPath(grid_controller.get_astar2D_path())
 
 
 func draw_move_path():

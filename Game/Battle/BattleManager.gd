@@ -9,6 +9,8 @@ var character_selected : Character
 var ai_registry : AIRegistry
 var active_factions : Array[String] = []
 var current_faction_index : int = 0
+var current_faction_units : Array[Character]
+var active_ai_char_index : int = 0
 
 @onready var turn_manager : TurnManager = %TurnManager
 @onready var grid_controller : GridController = %TilesGround
@@ -29,7 +31,13 @@ func _ready() -> void:
 	init_chars_ai()
 	
 	EventBus.char_start_move.connect(start_move_character)
-	
+
+
+func _process(delta: float) -> void:
+	if not %Timer.is_stopped():
+		print(%Timer.time_left)
+
+
 func determine_active_factions() -> void:
 	active_factions.clear()
 	active_factions = battle_data.factions
@@ -87,3 +95,31 @@ func select_character(from_position : Vector2):
 
 func start_move_character():
 	character_selected.start_move(grid_controller.current_path)
+
+
+func faction_turn_finished():
+	current_faction_index = (current_faction_index + 1) % active_factions.size()
+	%TurnText.text = active_factions[current_faction_index]
+	start_faction_turn()
+
+
+func start_faction_turn():
+	if active_factions[current_faction_index] == "Player":
+		print("Player's turn!")
+	else:
+		print("AI's turn!")
+		current_faction_units = ai_registry.get_faction_units(active_factions[current_faction_index])
+		start_ai_unit_turn()
+		
+func start_ai_unit_turn():
+	
+	finish_ai_unit_turn()
+
+
+func finish_ai_unit_turn():
+	if active_ai_char_index+1 >= active_factions.size():
+		active_ai_char_index = 0
+		faction_turn_finished()
+		return
+	active_ai_char_index+=1
+	start_ai_unit_turn()

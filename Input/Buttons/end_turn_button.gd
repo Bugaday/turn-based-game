@@ -1,4 +1,4 @@
 extends Button
 
 func _pressed() -> void:
-	EventBus.turn_finished.emit()
+	%BattleManager.faction_turn_finished()

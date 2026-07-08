@@ -67,9 +67,10 @@ func get_cell_data(pos:Vector2) -> GridCellData:
 	return Grid2D[gridPos]
 
 
-func get_preview_path() -> PackedVector2Array:
+func get_astar2D_path() -> PackedVector2Array:
 	current_path = pathfinder._astar.get_point_path(cellSelected.cell_pos,hovered_grid_pos)
 	return current_path
+
 
 func set_char_moved_data(unit:Character):
 	var grid_pos : Vector2i = local_to_map(unit.position)

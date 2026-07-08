@@ -8,6 +8,12 @@ class_name CharacterData
 @export var strength : int = 25;
 @export var sprite: AtlasTexture;
 
+var max_action_points : int = 100
+var current_action_points : int
+
+func _init() -> void:
+	current_action_points = max_action_points
+
 #Offensive stats
 var attackPower:
 	get:

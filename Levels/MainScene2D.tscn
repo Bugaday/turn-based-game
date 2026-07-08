@@ -77,6 +77,10 @@ unique_name_in_owner = true
 script = ExtResource("10_limvo")
 metadata/_custom_type_script = "uid://buepukriypoxr"
 
+[node name="Timer" type="Timer" parent="BattleManager" unique_id=438937050]
+unique_name_in_owner = true
+one_shot = true
+
 [node name="Cursor" type="Node2D" parent="." unique_id=542488809]
 unique_name_in_owner = true
 script = ExtResource("10_tsaht")

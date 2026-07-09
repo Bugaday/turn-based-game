@@ -67,8 +67,8 @@ func get_cell_data(pos:Vector2) -> GridCellData:
 	return Grid2D[gridPos]
 
 
-func get_astar2D_path() -> PackedVector2Array:
-	current_path = pathfinder._astar.get_point_path(cellSelected.cell_pos,hovered_grid_pos)
+func get_astar2D_path(start:Vector2i,end:Vector2i) -> PackedVector2Array:
+	current_path = pathfinder._astar.get_point_path(start,end)
 	return current_path
 
 

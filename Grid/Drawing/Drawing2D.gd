@@ -41,8 +41,8 @@ func on_char_start_move():
 		SelectionBox.queue_free()
 
 
-func draw_path():
-	draw_preview_path._drawPath(grid_controller.get_astar2D_path())
+func draw_path(start:Vector2i,end:Vector2i):
+	draw_preview_path._drawPath(grid_controller.get_astar2D_path(start,end))
 
 
 func draw_move_path():

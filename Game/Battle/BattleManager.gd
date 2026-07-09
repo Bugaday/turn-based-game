@@ -9,7 +9,7 @@ var character_selected : Character
 var ai_registry : AIRegistry
 var active_factions : Array[String] = []
 var current_faction_index : int = 0
-var current_faction_units : Array[Character]
+var active_faction_units : Array[Character]
 var active_ai_char_index : int = 0
 
 @onready var turn_manager : TurnManager = %TurnManager
@@ -65,9 +65,11 @@ func init_chars_ai():
 			var newChar : Character = charScene.instantiate()
 			var class_int : int = randi_range(0,battle_data.allowed_classes.size()-1)
 			var unit_class : CharacterData = battle_data.allowed_classes[class_int]
+			
 			newChar.stats = unit_class
 			ai_registry.register_unit(newChar,faction_blackboard_key)
 			add_child(newChar)
+			newChar.decisions.decisions_finished.connect(finish_ai_unit_turn)
 			newChar.position = grid_controller.GetRandomGridPosition()
 			grid_controller.set_char_moved_data(newChar)
 
@@ -97,23 +99,23 @@ func start_move_character():
 	character_selected.start_move(grid_controller.current_path)
 
 
+func start_faction_turn():
+	if active_factions[current_faction_index] == "Player":
+		print("Player's turn!")
+	else:
+		print("AI's turn!")
+		active_faction_units = ai_registry.get_faction_units(active_factions[current_faction_index])
+		start_ai_unit_turn()
+
+
 func faction_turn_finished():
 	current_faction_index = (current_faction_index + 1) % active_factions.size()
 	%TurnText.text = active_factions[current_faction_index]
 	start_faction_turn()
 
 
-func start_faction_turn():
-	if active_factions[current_faction_index] == "Player":
-		print("Player's turn!")
-	else:
-		print("AI's turn!")
-		current_faction_units = ai_registry.get_faction_units(active_factions[current_faction_index])
-		start_ai_unit_turn()
-		
 func start_ai_unit_turn():
-	
-	finish_ai_unit_turn()
+	active_faction_units[active_ai_char_index].decisions.start_decisions()
 
 
 func finish_ai_unit_turn():

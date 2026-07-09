@@ -3,6 +3,7 @@ extends Node
 class_name AIDecisions
 
 var char_parent : Character
+signal decisions_finished()
 
 @export var available_actions : Array[AIAction] = []
 var action_scores : Dictionary[AIAction,float] = {}
@@ -10,13 +11,22 @@ var action_scores : Dictionary[AIAction,float] = {}
 func _ready() -> void:
 	char_parent = get_parent()
 
+
+func start_decisions():
+	print("Starting decision on ",char_parent.name," - ",char_parent.stats.unit_name)
+	make_decision()._execute_action(char_parent)
+	decisions_finished.emit()
+
+
 func make_decision() -> AIAction:
+	print("Making decision on ",char_parent.name," - ",char_parent.stats.unit_name)
 	#Reset the actions dictionary
 	action_scores.clear()
 	#Set scores in dictionary
 	for action in available_actions:
 		if action:
 			action_scores[action] = action._get_score(char_parent)
+			print("Score is ",action_scores[action])
 	return get_highest_scoring_action()
 
 

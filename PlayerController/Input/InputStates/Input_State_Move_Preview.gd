@@ -32,4 +32,4 @@ func check_movable_location() -> bool:
 	return true
 	
 func show_move_preview():
-	drawing_2D.draw_path()
+	drawing_2D.draw_path(grid_controller.cellSelected.cell_pos,grid_controller.cell_hovered.cell_pos)

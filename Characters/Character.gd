@@ -8,6 +8,9 @@ var move_path : PackedVector2Array
 
 @export var stats : CharacterData;
 
+@onready var decisions : AIDecisions = %AIDecisions
+
+
 func _ready() -> void:
 	if stats:
 		_setStats(stats)

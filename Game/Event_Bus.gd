@@ -5,3 +5,5 @@ signal char_path_section_completed(char:Character)
 signal char_path_finished(char:Character)
 
 signal turn_finished()
+signal action_finished()
+signal decisions_finished()

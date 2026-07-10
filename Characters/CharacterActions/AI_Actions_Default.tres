@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="AIActionsData" format=3 uid="uid://ch1etbkd8w2y4"]
+
+[ext_resource type="Script" uid="uid://c7nec1xn11u8a" path="res://Characters/CharacterActions/AI_Action.gd" id="1_drfvr"]
+[ext_resource type="Script" uid="uid://c1gmj252y8xdh" path="res://Characters/CharacterActions/AI_Action_Move_To_Enemy.gd" id="2_7ygpw"]
+[ext_resource type="Script" uid="uid://dtoxrqvw40km8" path="res://Characters/CharacterActions/AI_Action_Attack.gd" id="3_fgmot"]
+[ext_resource type="Script" uid="uid://b6gre1y0trycc" path="res://Characters/CharacterActions/AI_Actions_Data.gd" id="4_iwxtp"]
+
+[sub_resource type="Resource" id="Resource_7ygpw"]
+script = ExtResource("2_7ygpw")
+metadata/_custom_type_script = "uid://c1gmj252y8xdh"
+
+[sub_resource type="Resource" id="Resource_fgmot"]
+script = ExtResource("3_fgmot")
+metadata/_custom_type_script = "uid://dtoxrqvw40km8"
+
+[resource]
+script = ExtResource("4_iwxtp")
+ai_actions = Array[ExtResource("1_drfvr")]([SubResource("Resource_7ygpw"), SubResource("Resource_fgmot")])
+metadata/_custom_type_script = "uid://b6gre1y0trycc"

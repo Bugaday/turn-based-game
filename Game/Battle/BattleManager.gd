@@ -7,6 +7,7 @@ var character_selected : Character
 
 @export var battle_data : BattleData
 var ai_registry : AIRegistry
+var ai_decision_maker : AIDecisionMaker
 var active_factions : Array[String] = []
 var current_faction_index : int = 0
 var active_faction_units : Array[Character]
@@ -24,6 +25,7 @@ func _ready() -> void:
 	global_blackboard.set_value("Weather", "Clear")
 	
 	ai_registry = AIRegistry.new(global_blackboard)
+	ai_decision_maker = AIDecisionMaker.new()
 	
 	determine_active_factions()
 
@@ -31,11 +33,7 @@ func _ready() -> void:
 	init_chars_ai()
 	
 	EventBus.char_start_move.connect(start_move_character)
-
-
-func _process(delta: float) -> void:
-	if not %Timer.is_stopped():
-		print(%Timer.time_left)
+	EventBus.decisions_finished.connect(finish_ai_unit_turn)
 
 
 func determine_active_factions() -> void:
@@ -69,7 +67,6 @@ func init_chars_ai():
 			newChar.stats = unit_class
 			ai_registry.register_unit(newChar,faction_blackboard_key)
 			add_child(newChar)
-			newChar.decisions.decisions_finished.connect(finish_ai_unit_turn)
 			newChar.position = grid_controller.GetRandomGridPosition()
 			grid_controller.set_char_moved_data(newChar)
 
@@ -115,11 +112,11 @@ func faction_turn_finished():
 
 
 func start_ai_unit_turn():
-	active_faction_units[active_ai_char_index].decisions.start_decisions()
+	ai_decision_maker.start_decisions(active_faction_units[active_ai_char_index])
 
 
 func finish_ai_unit_turn():
-	if active_ai_char_index+1 >= active_factions.size():
+	if active_ai_char_index + 1 >= active_faction_units.size():
 		active_ai_char_index = 0
 		faction_turn_finished()
 		return

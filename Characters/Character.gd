@@ -6,9 +6,8 @@ var char_last_cell_pos : Vector2
 var faction : String
 var move_path : PackedVector2Array
 
-@export var stats : CharacterData;
-
-@onready var decisions : AIDecisions = %AIDecisions
+@export var stats : CharacterData
+@export var ai_actions_list : AIActionsData
 
 
 func _ready() -> void:

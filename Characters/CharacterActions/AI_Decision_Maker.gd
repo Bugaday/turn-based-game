@@ -1,21 +1,19 @@
-extends Node
+extends RefCounted
 
-class_name AIDecisions
+class_name AIDecisionMaker
 
 var char_parent : Character
-signal decisions_finished()
 
-@export var available_actions : Array[AIAction] = []
+var available_actions : Array[AIAction] = []
 var action_scores : Dictionary[AIAction,float] = {}
 
-func _ready() -> void:
-	char_parent = get_parent()
 
-
-func start_decisions():
+func start_decisions(unit:Character):
+	char_parent = unit
+	available_actions = char_parent.ai_actions_list.ai_actions
 	print("Starting decision on ",char_parent.name," - ",char_parent.stats.unit_name)
 	make_decision()._execute_action(char_parent)
-	decisions_finished.emit()
+	EventBus.decisions_finished.emit()
 
 
 func make_decision() -> AIAction:

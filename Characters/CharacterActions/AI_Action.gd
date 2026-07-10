@@ -2,8 +2,6 @@ extends Resource
 
 class_name AIAction
 
-signal action_finished()
-
 
 func _execute_action(unit:Character):
 	pass

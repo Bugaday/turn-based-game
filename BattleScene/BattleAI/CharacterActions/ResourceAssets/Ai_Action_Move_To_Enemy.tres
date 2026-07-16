@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="ActionMoveToEnemy" format=3 uid="uid://dnhm4lhcmgqs1"]
+
+[ext_resource type="Script" uid="uid://c1gmj252y8xdh" path="res://BattleScene/BattleAI/CharacterActions/AI_Action_Move_To_Enemy.gd" id="1_d6i0b"]
+
+[resource]
+script = ExtResource("1_d6i0b")
+action_name = "Move to Enemy"
+metadata/_custom_type_script = "uid://c1gmj252y8xdh"

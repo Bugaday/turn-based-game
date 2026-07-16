@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="ActionAttack" format=3 uid="uid://2cy4s82o5kkm"]
+
+[ext_resource type="Script" uid="uid://dtoxrqvw40km8" path="res://BattleScene/BattleAI/CharacterActions/AI_Action_Attack.gd" id="1_rq2yt"]
+
+[resource]
+script = ExtResource("1_rq2yt")
+action_name = "Action Attack"
+metadata/_custom_type_script = "uid://c1gmj252y8xdh"

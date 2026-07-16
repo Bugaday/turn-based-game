@@ -1,0 +1,42 @@
+extends AIAction
+
+class_name ActionMoveToEnemy
+
+var path : PackedVector2Array
+
+func _init() -> void:
+	action_name = "Move to Enemy"
+	super()
+
+func _execute_action(unit:Character):
+	super(unit)
+
+	var start : Vector2i = bm.grid_controller.local_to_map(unit.position)
+	var end : Vector2i = bm.grid_controller.GetRandomGridCell()
+	if !path:
+		get_move_path(start,end)
+	unit.start_move(path)
+	
+	print("Action moving to enemy! by ",unit.name," - ",unit.stats.unit_name)
+	
+	if EventBus.char_path_finished.is_connected(finished_move):
+		return
+	EventBus.char_path_finished.connect(finished_move)
+
+
+func finished_move(unit:Character):
+	action_finished.emit()
+
+
+func get_move_path(start:Vector2,end:Vector2):
+	path = bm.grid_controller.get_astar2D_path(start,end)
+
+
+#func get_in_range_enemies(bm:BattleManager)->Array[Character]:
+	#var enemies : Array[Character] = bm.ai_registry.faction_unit_mappings
+
+
+func _get_score(unit:Character) -> float:
+	super(unit)
+
+	return 0.5

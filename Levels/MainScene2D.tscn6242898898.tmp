@@ -11,7 +11,6 @@
 [ext_resource type="Script" uid="uid://ch0otjmh1dgcx" path="res://BattleScene/GameManager.gd" id="6_dgxli"]
 [ext_resource type="Script" uid="uid://dwcvv2l86130e" path="res://BattleScene/BattleInput/InputStates/Input_State_Move_Preview.gd" id="7_epiq7"]
 [ext_resource type="Script" uid="uid://cylkpayq6g6tj" path="res://BattleScene/BattleInput/InputStates/Input_State_Moving_Character.gd" id="9_e5q4x"]
-[ext_resource type="Script" uid="uid://d2am65pu455n4" path="res://BattleScene/BattleInput/InputStates/Input_State_AI_Turn.gd" id="9_gk37c"]
 [ext_resource type="Script" uid="uid://gbheq3hw8qxv" path="res://BattleScene/BattleManager.gd" id="10_eipr8"]
 [ext_resource type="Script" uid="uid://buepukriypoxr" path="res://BattleScene/Turn_Manager.gd" id="10_limvo"]
 [ext_resource type="Script" uid="uid://fy46tn4iix5g" path="res://BattleScene/BattleGrid/Drawing/Draw_Cursor.gd" id="10_tsaht"]
@@ -61,11 +60,6 @@ script = ExtResource("7_epiq7")
 [node name="InputStateMovingCharacter" type="Node2D" parent="InputStateMachine" unique_id=1439265301]
 unique_name_in_owner = true
 script = ExtResource("9_e5q4x")
-
-[node name="InputStateAITurn" type="Node2D" parent="InputStateMachine" unique_id=1443591858]
-unique_name_in_owner = true
-script = ExtResource("9_gk37c")
-metadata/_custom_type_script = "uid://d2am65pu455n4"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1743110368]
 unique_name_in_owner = true

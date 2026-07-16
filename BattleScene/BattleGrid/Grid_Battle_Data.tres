@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="BattleGridData" format=3 uid="uid://dkrtw1b4eajle"]
+
+[ext_resource type="Script" uid="uid://cij7l2gepvjdj" path="res://BattleScene/BattleGrid/GridBattleData.gd" id="1_lqoqa"]
+
+[resource]
+script = ExtResource("1_lqoqa")
+metadata/_custom_type_script = "uid://cij7l2gepvjdj"

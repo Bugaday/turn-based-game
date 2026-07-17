@@ -4,9 +4,6 @@ class_name ActionMoveToEnemy
 
 var path : PackedVector2Array
 
-func _init() -> void:
-	action_name = "Move to Enemy"
-	super()
 
 func _execute_action(unit:Character):
 	super(unit)

@@ -129,3 +129,5 @@ offset_right = -710.0
 offset_bottom = -358.0
 text = "Player Turn"
 label_settings = SubResource("LabelSettings_eipr8")
+
+[connection signal="button_up" from="CanvasLayer/Control/EndTurnButton" to="CanvasLayer/Control/EndTurnButton" method="_on_button_up"]

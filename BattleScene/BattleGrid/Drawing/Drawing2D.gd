@@ -16,7 +16,8 @@ var draw_char_move_path : DrawCharMovePath
 var GridLines : Grid2DLines
 
 func _draw() -> void:
-	draw_circle(Vector2.ZERO,10.0,Color.RED)
+	#draw_circle(Vector2.ZERO,10.0,Color.RED)
+	pass
 
 func _setup():
 	GridLines = Grid2DLines.new()

@@ -9,7 +9,7 @@ signal action_finished()
 var bm : BattleManager
 
 func _init() -> void:
-	print("Loading resource: ", action_name)
+	call_deferred("print_name")
 
 func _execute_action(unit:Character):
 	if !bm:
@@ -24,3 +24,6 @@ func _get_score(unit:Character) -> float:
 		return 0
 	print("Scoring Action ", resource_path, "! by ", unit.name," - ",unit.stats.unit_name)
 	return 0
+	
+func print_name():
+	print("Loading resource: ", action_name)

@@ -1,11 +1,19 @@
 [gd_resource type="Resource" script_class="AIActionsData" format=3 uid="uid://ch1etbkd8w2y4"]
 
 [ext_resource type="Script" uid="uid://c7nec1xn11u8a" path="res://BattleScene/BattleAI/CharacterActions/AI_Action.gd" id="1_4n1x5"]
-[ext_resource type="Resource" uid="uid://dnhm4lhcmgqs1" path="res://BattleScene/BattleAI/CharacterActions/ResourceAssets/Ai_Action_Move_To_Enemy.tres" id="2_ibmh0"]
-[ext_resource type="Resource" uid="uid://2cy4s82o5kkm" path="res://BattleScene/BattleAI/CharacterActions/ResourceAssets/Ai_Action_Attack.tres" id="3_drf4r"]
+[ext_resource type="Script" uid="uid://c1gmj252y8xdh" path="res://BattleScene/BattleAI/CharacterActions/AI_Action_Move_To_Enemy.gd" id="2_4n1x5"]
+[ext_resource type="Script" uid="uid://dtoxrqvw40km8" path="res://BattleScene/BattleAI/CharacterActions/AI_Action_Attack.gd" id="3_ibmh0"]
 [ext_resource type="Script" uid="uid://b6gre1y0trycc" path="res://BattleScene/BattleAI/CharacterActions/Collections/AI_Actions_Data.gd" id="4_julrd"]
+
+[sub_resource type="Resource" id="Resource_drf4r"]
+script = ExtResource("2_4n1x5")
+metadata/_custom_type_script = "uid://c1gmj252y8xdh"
+
+[sub_resource type="Resource" id="Resource_julrd"]
+script = ExtResource("3_ibmh0")
+metadata/_custom_type_script = "uid://dtoxrqvw40km8"
 
 [resource]
 script = ExtResource("4_julrd")
-ai_actions = Array[ExtResource("1_4n1x5")]([ExtResource("2_ibmh0"), ExtResource("3_drf4r")])
+ai_actions = Array[ExtResource("1_4n1x5")]([SubResource("Resource_drf4r"), SubResource("Resource_julrd")])
 metadata/_custom_type_script = "uid://b6gre1y0trycc"

@@ -13,6 +13,10 @@ var action_scores : Dictionary[AIAction,float] = {}
 func start_decisions(unit:Character):
 	char_parent = unit
 	available_actions = char_parent.ai_actions_list.ai_actions
+	if available_actions.size() <= 0:
+		all_actions_finished.emit()
+		return
+		
 	for action in available_actions:
 		if !action.action_finished.is_connected(current_action_finished):
 			action.action_finished.connect(current_action_finished)

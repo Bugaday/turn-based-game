@@ -66,8 +66,17 @@ func set_cell_data(unit:Character):
 
 
 func get_cell_data(pos:Vector2) -> GridCellData:
-	var gridPos = local_to_map(pos)
+	var gridPos = grid_clamp(pos)
 	return Grid2D.GridData[gridPos]
+	
+	
+func grid_clamp(pos:Vector2)->Vector2i:
+	var new_pos : Vector2i = local_to_map(pos)
+	var pos_x_clamp : int = clamp(new_pos.x,0,GridProps2D.gridXCount-1)
+	var pos_y_clamp = clamp(new_pos.y,0,GridProps2D.gridYCount-1)
+	var new_grid_pos = Vector2i(pos_x_clamp,pos_y_clamp)
+	return new_grid_pos
+	
 
 
 func get_astar2D_path(start:Vector2i,end:Vector2i) -> PackedVector2Array:

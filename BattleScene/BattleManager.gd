@@ -53,6 +53,8 @@ func init_player_team():
 
 
 func init_chars_ai():
+	var ai_actions : AIActionsData = load("res://BattleScene/BattleAI/CharacterActions/Collections/AI_Actions_Default.tres")
+	
 	if ai_registry.faction_blackboards.keys().is_empty():
 		return
 
@@ -70,6 +72,8 @@ func init_chars_ai():
 			add_child(newChar)
 			newChar.position = grid_controller.GetRandomGridPosition()
 			grid_controller.set_char_moved_data(newChar)
+			
+			newChar.ai_actions_list = ai_actions
 			
 			for action:AIAction in newChar.ai_actions_list.ai_actions:
 				action.bm = self
@@ -102,10 +106,12 @@ func start_move_character():
 
 func start_faction_turn():
 	if active_factions[current_faction_index] == "Player":
+		EventBus.ai_turn_finished.emit()
 		EventBus.change_input_state.emit(%InputStateSelection.name)
 		print("Player's turn!")
 	else:
 		print("AI's turn!")
+		EventBus.ai_turn_started.emit()
 		EventBus.change_input_state.emit(%InputStateAITurn.name)
 		active_faction_units = ai_registry.get_faction_units(active_factions[current_faction_index])
 		start_ai_unit_turn()

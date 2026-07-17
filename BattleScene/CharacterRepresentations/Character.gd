@@ -13,7 +13,7 @@ var move_path : PackedVector2Array
 func _ready() -> void:
 	if stats:
 		_setStats(stats)
-
+ 
 
 #Start the movement code
 func start_move(path:PackedVector2Array):

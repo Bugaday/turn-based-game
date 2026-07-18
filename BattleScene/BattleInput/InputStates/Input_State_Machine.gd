@@ -26,7 +26,7 @@ func _ready() -> void:
 			state.drawing_2D = drawing_2D
 
 	EventBus.change_input_state.connect(state_change)
-	EventBus.char_path_finished.connect(character_finished_path)
+	#battle_manager.active_character.path_finished.connect(character_finished_path)
 
 
 func _process(_delta: float) -> void:

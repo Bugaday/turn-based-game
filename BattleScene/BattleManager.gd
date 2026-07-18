@@ -5,6 +5,7 @@ class_name BattleManager
 @onready var turn_manager : TurnManager = %TurnManager
 @onready var grid_controller : GridController = %BattleTileMapLayer
 @onready var drawing_2D : Drawing2D = %Drawing2D
+@onready var input_state_machine : InputStateMachine = %InputStateMachine
 
 @export var charScene : PackedScene
 var character_selected : Character
@@ -16,6 +17,7 @@ var active_factions : Array[String] = []
 var current_faction_index : int = 0
 var active_faction_units : Array[Character]
 var active_ai_char_index : int = 0
+var active_character : Character
 
 
 func _ready() -> void:
@@ -96,6 +98,7 @@ func select_character(from_position : Vector2):
 	var cell : GridCellData = grid_controller.get_cell_data(from_position)
 	if cell.UnitOccupying:
 		character_selected = cell.UnitOccupying
+		active_character = character_selected
 		grid_controller.cellSelected = cell
 		drawing_2D.on_select_unit(cell)
 
@@ -124,7 +127,8 @@ func faction_turn_finished():
 
 
 func start_ai_unit_turn():
-	ai_decision_maker.start_decisions(active_faction_units[active_ai_char_index])
+	active_character = active_faction_units[active_ai_char_index]
+	ai_decision_maker.start_decisions(active_character)
 
 
 func finish_ai_unit_turn():

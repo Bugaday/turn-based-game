@@ -16,12 +16,13 @@ func _execute_action(unit:Character):
 	
 	print("Action moving to enemy! by ",unit.name," - ",unit.stats.unit_name)
 	
-	if EventBus.char_path_finished.is_connected(finished_move):
+	if unit.path_finished.is_connected(finished_move):
 		return
-	EventBus.char_path_finished.connect(finished_move)
+	unit.path_finished.connect(finished_move)
 
 
 func finished_move(unit:Character):
+	print("Finished move on: ", unit, " with id: ", get_instance_id())
 	action_finished.emit()
 
 

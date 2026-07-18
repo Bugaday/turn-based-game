@@ -24,9 +24,7 @@ func _ready() -> void:
 	add_child(pathfinder)
 	Grid2D.GridData = Grid2DConstructor.CreateGrid()
 	set_tiles()
-	
-	EventBus.char_path_section_completed.connect(update_char_moved_data)
-	
+		
 	call_deferred("add_blocked_cells_for_pathfinder")
 
 
@@ -76,7 +74,6 @@ func grid_clamp(pos:Vector2)->Vector2i:
 	var pos_y_clamp = clamp(new_pos.y,0,GridProps2D.gridYCount-1)
 	var new_grid_pos = Vector2i(pos_x_clamp,pos_y_clamp)
 	return new_grid_pos
-	
 
 
 func get_astar2D_path(start:Vector2i,end:Vector2i) -> PackedVector2Array:

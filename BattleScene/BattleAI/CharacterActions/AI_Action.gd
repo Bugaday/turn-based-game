@@ -15,15 +15,16 @@ func _execute_action(unit:Character):
 	if !bm:
 		print("No BattleManager found!")
 		return
-	print("Action ", resource_path, "! by ", unit.name," - ",unit.stats.unit_name)
+	#print("Action ", resource_path, "! by ", unit.name," - ",unit.stats.unit_name)
 
 
 func _get_score(unit:Character) -> float:
 	if !bm:
 		print("No BattleManager found!")
 		return 0
-	print("Scoring Action ", resource_path, "! by ", unit.name," - ",unit.stats.unit_name)
+	#print("Scoring Action ", resource_path, "! by ", unit.name," - ",unit.stats.unit_name)
 	return 0
 	
 func print_name():
-	print("Loading resource: ", action_name)
+	#print("Loading resource: ", action_name)
+	pass

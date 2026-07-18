@@ -3,7 +3,7 @@ extends Node2D
 class_name Character
 
 signal start_move_on_path
-signal path_section_completed()
+signal char_path_section_completed(unit:Character)
 signal path_finished()
 
 var char_last_cell_pos : Vector2
@@ -40,14 +40,16 @@ func move_to_next_waypoint():
 		return
 	
 	var tween : Tween = create_tween()
-	tween.tween_property(self,"global_position",move_path[0],1.0)
+	var move_distance : float = position.distance_to(move_path[0])
+	var move_time = move_distance / GridProps2D.gridSizeX * stats.move_speed
+	tween.tween_property(self,"global_position",move_path[0],move_time)
 	tween.finished.connect(section_complete)
 
 
 #A section of path has just completed
 func section_complete():
-	EventBus.char_path_section_completed.emit(self)
-	move_to_next_waypoint()	
+	char_path_section_completed.emit(self)
+	move_to_next_waypoint()
 
 
 #The whole path is now complete	

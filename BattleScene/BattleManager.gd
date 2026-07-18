@@ -51,6 +51,7 @@ func init_player_team():
 		ai_registry.register_unit(newChar,"Player")
 		add_child(newChar)
 		newChar.position = grid_controller.GetRandomGridPosition()
+		newChar.char_path_section_completed.connect(grid_controller.update_char_moved_data)
 		grid_controller.set_char_moved_data(newChar)
 
 
@@ -73,6 +74,8 @@ func init_chars_ai():
 			ai_registry.register_unit(newChar,faction_blackboard_key)
 			add_child(newChar)
 			newChar.position = grid_controller.GetRandomGridPosition()
+			newChar.char_path_section_completed.connect(grid_controller.update_char_moved_data)
+			newChar.path_finished.connect(input_state_machine.character_finished_path)
 			grid_controller.set_char_moved_data(newChar)
 			
 			newChar.ai_actions_list = ai_actions

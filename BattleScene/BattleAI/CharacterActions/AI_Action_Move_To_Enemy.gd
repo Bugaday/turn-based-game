@@ -14,7 +14,7 @@ func _execute_action(unit:Character):
 		get_move_path(start,end)
 	unit.start_move(path)
 	
-	print("Action moving to enemy! by ",unit.name," - ",unit.stats.unit_name)
+	#print("Action moving to enemy! by ",unit.name," - ",unit.stats.unit_name)
 	
 	if unit.path_finished.is_connected(finished_move):
 		return
@@ -22,7 +22,7 @@ func _execute_action(unit:Character):
 
 
 func finished_move(unit:Character):
-	print("Finished move on: ", unit, " with id: ", get_instance_id())
+	#print("Finished move on: ", unit, " with id: ", get_instance_id())
 	action_finished.emit()
 
 

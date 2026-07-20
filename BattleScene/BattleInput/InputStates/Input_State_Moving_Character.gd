@@ -3,14 +3,15 @@ extends InputState
 class_name InputStateMovingCharacter
 
 func _enter_state():
-	print("Entering ",%InputStateMovingCharacter.name, " Input Mode")
+	super()
 	EventBus.char_start_move.emit()
 	pass
 
 
 func _exit_state():
-	print("Exiting ",%InputStateMovingCharacter.name, " Input Mode")
+	super()
 	battle_manager.free_all_characters()
+	print_rich()
 	pass
 
 

@@ -6,7 +6,7 @@ class_name CharacterData
 @export var faction_id : String
 @export var stamina : int = 10;
 @export var strength : int = 25;
-@export var agility : int = 20
+@export var agility : int = 70
 @export var sprite: AtlasTexture;
 
 var max_action_points : int = 100
@@ -27,4 +27,4 @@ var health : int:
 		
 var move_speed : float:
 	get:
-		return float(agility) / 10
+		return float(100-agility) / 10

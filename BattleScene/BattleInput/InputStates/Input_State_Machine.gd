@@ -13,7 +13,6 @@ var states : Dictionary[String,InputState] = {}
 @onready var cursor : DrawCursor = %Cursor
 
 var mouse_pos : Vector2
-var pause_mode
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

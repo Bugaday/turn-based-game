@@ -10,5 +10,6 @@ region = Rect2(256, 64, 64, 64)
 [resource]
 script = ExtResource("1_viq8k")
 unit_name = "Goblin"
+agility = 75
 sprite = SubResource("AtlasTexture_viq8k")
 metadata/_custom_type_script = "uid://cvrfh8dxox5u0"

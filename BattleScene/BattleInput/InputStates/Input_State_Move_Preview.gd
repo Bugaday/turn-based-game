@@ -3,13 +3,13 @@ extends InputState
 class_name InputStateMovePreview
 
 func _enter_state():
-	print("Entering ",%InputStateMovePreview.name, " Input Mode")
-	battle_manager.block_other_characters(battle_manager.character_selected)
+	super()
+	battle_manager.block_other_characters(battle_manager.active_character)
 	show_move_preview()
 	pass
 	
 func _exit_state():
-	print("Exiting ",%InputStateMovePreview.name, " Input Mode")
+	super()
 	battle_manager.free_all_characters()
 	drawing_2D.clear_path()
 	pass

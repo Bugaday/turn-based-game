@@ -4,7 +4,7 @@ class_name GridController
 
 var pathfinder : Pathfinder2D
 @export var Grid2D : GridBattleData
-var Grid2DN : Dictionary[Vector2i,GridCellData] = {}
+#var Grid2DN : Dictionary[Vector2i,GridCellData] = {}
 
 #Mouse Position on Grid
 var mouse_map_pos : Vector2i
@@ -66,8 +66,8 @@ func set_cell_data(unit:Character):
 func get_cell_data(pos:Vector2) -> GridCellData:
 	var gridPos = grid_clamp(pos)
 	return Grid2D.GridData[gridPos]
-	
-	
+
+
 func grid_clamp(pos:Vector2)->Vector2i:
 	var new_pos : Vector2i = local_to_map(pos)
 	var pos_x_clamp : int = clamp(new_pos.x,0,GridProps2D.gridXCount-1)
@@ -84,11 +84,14 @@ func get_astar2D_path(start:Vector2i,end:Vector2i) -> PackedVector2Array:
 func set_char_moved_data(unit:Character):
 	var grid_pos : Vector2i = local_to_map(unit.position)
 	Grid2D.GridData[grid_pos].UnitOccupying = unit
+	#print("Grid data at: ",grid_pos, " is ",Grid2D.GridData[grid_pos].UnitOccupying)
+	#Debug.log(String("Grid data: ",Grid2D.GridData[grid_pos].UnitOccupying))
 
 
 func update_char_moved_data(unit: Character):
 	var last_pos : Vector2i = local_to_map(unit.char_last_cell_pos)
 	Grid2D.GridData[last_pos].UnitOccupying = null
+	#print("Grid data at: ",last_pos, " is ",Grid2D.GridData[last_pos].UnitOccupying)
 	set_char_moved_data(unit)
 
 

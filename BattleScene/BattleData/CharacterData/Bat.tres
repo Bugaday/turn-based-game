@@ -12,5 +12,6 @@ script = ExtResource("1_31ej5")
 unit_name = "Bat"
 stamina = 5
 strength = 12
+agility = 75
 sprite = SubResource("AtlasTexture_vu45i")
 metadata/_custom_type_script = "uid://cvrfh8dxox5u0"

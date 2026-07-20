@@ -3,11 +3,11 @@ extends InputState
 class_name InputStateSelection
 
 func _enter_state():
-	print("Entering ",%InputStateSelection.name, " Input Mode")
+	super()
 
 
 func _exit_state():
-	print("Exiting ",%InputStateSelection.name, " Input Mode")
+	super()
 
 
 func handle_input(_event : InputEvent):

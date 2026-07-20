@@ -8,11 +8,11 @@ var battle_manager : BattleManager
 var drawing_2D : Drawing2D
 
 func _enter_state():
-	print("Entering ",state_machine.current_state.name, " Input Mode")
+	Debug.log("Entering %s Input Mode"%state_machine.current_state.name)
 	pass
 	
 func _exit_state():
-	print("Exiting ",state_machine.current_state.name, " Input Mode")
+	Debug.log("Exiting %s Input Mode"%state_machine.current_state.name,Color.RED)
 	pass
 	
 func handle_input(_event : InputEvent):

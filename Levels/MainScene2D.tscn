@@ -39,57 +39,57 @@ metadata/_edit_horizontal_guides_ = [1687.0]
 unique_name_in_owner = true
 script = ExtResource("6_dgxli")
 
-[node name="BattleTileMapLayer" type="TileMapLayer" parent="." unique_id=714402645]
-unique_name_in_owner = true
-tile_set = ExtResource("2_c1c5f")
-script = ExtResource("2_rxovs")
-Grid2D = ExtResource("4_knf04")
-
-[node name="InputStateMachine" type="Node2D" parent="." unique_id=1413144412]
-unique_name_in_owner = true
-process_mode = 3
-script = ExtResource("5_o4v6t")
-
-[node name="InputStateSelection" type="Node2D" parent="InputStateMachine" unique_id=1370929008]
-unique_name_in_owner = true
-script = ExtResource("5_tsaht")
-
-[node name="InputStateMovePreview" type="Node2D" parent="InputStateMachine" unique_id=1869952644]
-unique_name_in_owner = true
-script = ExtResource("7_epiq7")
-
-[node name="InputStateMovingCharacter" type="Node2D" parent="InputStateMachine" unique_id=1439265301]
-unique_name_in_owner = true
-script = ExtResource("9_e5q4x")
-
-[node name="InputStateAITurn" type="Node2D" parent="InputStateMachine" unique_id=1443591858]
-unique_name_in_owner = true
-script = ExtResource("9_gk37c")
-metadata/_custom_type_script = "uid://d2am65pu455n4"
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1743110368]
-unique_name_in_owner = true
-script = ExtResource("2_5kbai")
-
-[node name="BattleManager" type="Node" parent="." unique_id=1983058171]
+[node name="BattleManager" type="Node" parent="GameManager" unique_id=1983058171]
 unique_name_in_owner = true
 script = ExtResource("10_eipr8")
 charScene = ExtResource("11_fa610")
 battle_data = SubResource("Resource_iqyrx")
 metadata/_custom_type_script = "uid://gbheq3hw8qxv"
 
-[node name="TurnManager" type="Node" parent="BattleManager" unique_id=807104194]
+[node name="TurnManager" type="Node" parent="GameManager/BattleManager" unique_id=807104194]
 unique_name_in_owner = true
 script = ExtResource("10_limvo")
 metadata/_custom_type_script = "uid://buepukriypoxr"
 
-[node name="Cursor" type="Node2D" parent="." unique_id=542488809]
+[node name="BattleTileMapLayer" type="TileMapLayer" parent="GameManager/BattleManager" unique_id=714402645]
+unique_name_in_owner = true
+tile_set = ExtResource("2_c1c5f")
+script = ExtResource("2_rxovs")
+Grid2D = ExtResource("4_knf04")
+
+[node name="Cursor" type="Node2D" parent="GameManager/BattleManager" unique_id=542488809]
 unique_name_in_owner = true
 script = ExtResource("10_tsaht")
 
-[node name="Drawing2D" type="Node2D" parent="." unique_id=638765900]
+[node name="Drawing2D" type="Node2D" parent="GameManager/BattleManager" unique_id=638765900]
 unique_name_in_owner = true
 script = ExtResource("12_epiq7")
+
+[node name="InputStateMachine" type="Node2D" parent="GameManager" unique_id=1413144412]
+unique_name_in_owner = true
+process_mode = 3
+script = ExtResource("5_o4v6t")
+
+[node name="InputStateSelection" type="Node2D" parent="GameManager/InputStateMachine" unique_id=1370929008]
+unique_name_in_owner = true
+script = ExtResource("5_tsaht")
+
+[node name="InputStateMovePreview" type="Node2D" parent="GameManager/InputStateMachine" unique_id=1869952644]
+unique_name_in_owner = true
+script = ExtResource("7_epiq7")
+
+[node name="InputStateMovingCharacter" type="Node2D" parent="GameManager/InputStateMachine" unique_id=1439265301]
+unique_name_in_owner = true
+script = ExtResource("9_e5q4x")
+
+[node name="InputStateAITurn" type="Node2D" parent="GameManager/InputStateMachine" unique_id=1443591858]
+unique_name_in_owner = true
+script = ExtResource("9_gk37c")
+metadata/_custom_type_script = "uid://d2am65pu455n4"
+
+[node name="Camera2D" type="Camera2D" parent="GameManager" unique_id=1743110368]
+unique_name_in_owner = true
+script = ExtResource("2_5kbai")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1195542874]
 

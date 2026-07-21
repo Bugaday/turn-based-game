@@ -18,6 +18,7 @@ var current_faction_index : int = 0
 var active_faction_units : Array[Character]
 var active_ai_char_index : int = 0
 var active_character : Character
+var active_path : PackedVector2Array
 
 
 func _ready() -> void:
@@ -83,6 +84,12 @@ func init_chars_ai():
 			
 			for action:AIAction in newChar.ai_actions_list.ai_actions:
 				action.bm = self
+
+
+func get_new_path(start:Vector2i,end:Vector2i)->PackedVector2Array:
+	block_other_characters(active_character)
+	active_path = grid_controller.get_astar2D_path(start,end)
+	return active_path
 
 
 func block_other_characters(unit_moving:Character):

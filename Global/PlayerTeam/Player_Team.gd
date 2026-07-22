@@ -1,6 +1,6 @@
 extends Node
 
-var team_members : Array[Character] = []
+var team_members : Array[Character]
 
 func _ready() -> void:
 	if team_members.is_empty():

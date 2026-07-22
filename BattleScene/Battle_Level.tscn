@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://c1aksk05jk6dn"]
+
+[ext_resource type="TileSet" uid="uid://uf68vmgahhy8" path="res://BattleScene/BattleGrid/BattleEnvironment/BattleTileSets/new_tile_set.tres" id="1_0r1ij"]
+[ext_resource type="Script" uid="uid://b266d3rmygp2g" path="res://BattleScene/Battle.gd" id="2_saywf"]
+[ext_resource type="Script" uid="uid://8q86ld088lto" path="res://BattleScene/BattleCamera/Camera_2D.gd" id="3_1a458"]
+[ext_resource type="Resource" uid="uid://bq2cbaw0a1wav" path="res://BattleScene/Battle_Data_Default.tres" id="3_bketd"]
+[ext_resource type="Script" uid="uid://vb2lxqlfha75" path="res://BattleScene/BattleGrid/Drawing/Draw_Preview_Path.gd" id="3_saywf"]
+[ext_resource type="Script" uid="uid://fy46tn4iix5g" path="res://BattleScene/BattleGrid/Drawing/Draw_Cursor.gd" id="6_bketd"]
+
+[node name="BattleLevel" type="Node2D" unique_id=1879491861]
+
+[node name="BattleTileMap" type="TileMapLayer" parent="." unique_id=1483286854]
+unique_name_in_owner = true
+tile_set = ExtResource("1_0r1ij")
+
+[node name="BattleScript" type="Node2D" parent="." unique_id=1995566859]
+script = ExtResource("2_saywf")
+battle_data = ExtResource("3_bketd")
+
+[node name="DrawMovePath" type="Node2D" parent="." unique_id=1700517755]
+script = ExtResource("3_saywf")
+metadata/_custom_type_script = "uid://vb2lxqlfha75"
+
+[node name="Cursor" type="Node2D" parent="." unique_id=386798007]
+unique_name_in_owner = true
+script = ExtResource("6_bketd")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=775251628]
+script = ExtResource("3_1a458")

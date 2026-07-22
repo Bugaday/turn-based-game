@@ -22,7 +22,7 @@ func _ready() -> void:
 	
 	pathfinder = Pathfinder2D.new()
 	add_child(pathfinder)
-	Grid2D.GridData = Grid2DConstructor.CreateGrid()
+	Grid2D.GridData = GridService.CreateGrid()
 	set_tiles()
 		
 	call_deferred("add_blocked_cells_for_pathfinder")

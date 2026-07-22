@@ -7,6 +7,10 @@ var Filled : bool = false
 var BoxColour : Color = Color.YELLOW
 
 
+func _process(delta: float) -> void:
+	position = GridService.grid_world_clamp(get_global_mouse_position(),%BattleTileMap) 
+
+
 func _draw() -> void:
 	_drawBox()
 

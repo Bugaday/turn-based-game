@@ -12,6 +12,7 @@ var move_path : PackedVector2Array
 
 @export var stats : CharacterData
 @export var ai_actions_list : AIActionsData
+@export var class_list : Array[AIAction]
 
 
 

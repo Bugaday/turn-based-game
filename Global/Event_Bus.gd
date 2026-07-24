@@ -7,4 +7,9 @@ signal change_input_state(state:String)
 
 signal char_start_move()
 
-signal turn_finished()
+signal trigger_turn_finished()
+#@warning_ignore("unused_signal")
+signal try_select_character(pos:Vector2)
+
+#@warning_ignore("unused_signal")
+signal select_character(unit:Character)

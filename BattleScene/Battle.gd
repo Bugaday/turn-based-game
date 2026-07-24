@@ -2,29 +2,61 @@ extends Node2D
 
 @export var battle_data : BattleData
 
-var characters : Array[Character]
+@export var tile_map : TileMapLayer
+@export var draw_box : DrawBox
+@export var draw_move_path : DrawMovePath
+@export var path_finder : Pathfinder2D
+
+@export var player_team : Array[CharacterData]
+@export var enemy_team : Array[CharacterData]
+#var characters : Array[Character]
+
+var ai_blackboard_global : AIBlackboard = AIBlackboard.new()
+var ai_registry : AIRegistry = AIRegistry.new(ai_blackboard_global)
+var ai_decision_maker : AIDecisionMaker = AIDecisionMaker.new()
 var active_character : Character
+var selected_character : Character
+var active_faction_index : int = 0
+var active_ai_char_index : int = 0
+var active_factions : Array[String]
+var active_faction_units : Array[Character]
 
 var grid : Dictionary[Vector2i,GridCellData] = {}
 var current_path : PackedVector2Array
 
-@onready var tile_map : TileMapLayer = %BattleTileMap
-
 
 func _ready() -> void:
 	CreateGrid()
+	determine_active_factions()
 	spawn_characters()
+	
+	EventBus.try_select_character.connect(left_click_cell)
+	EventBus.trigger_turn_finished.connect(faction_turn_finished)
 
 
 func _draw() -> void:
 	#Draw Grid Lines
 	draw_grid_lines()
+	
+	#var pos = GridService.grid_to_world(Vector2i(1,1))
+	#var posi = GridService.world_to_grid(Vector2(64,64))
+	#var newpos = GridService.grid_to_world(posi)
+	#draw_circle(newpos,16.0,Color.RED)
+	#draw_circle(pos,16.0,Color.PURPLE)
 
 
 func CreateGrid():
 	#Create Grid
 	grid = GridService.CreateGrid()
 	GridService.set_tiles(grid,tile_map)
+	add_blocked_cells_for_pathfinder()
+
+	
+func add_blocked_cells_for_pathfinder():	
+	for i:Vector2i in grid.keys():
+		var tile : TileData = tile_map.get_cell_tile_data(i)
+		if tile.get_custom_data("Block"):
+			path_finder.set_blocked_cells(i)
 
 
 func draw_grid_lines():
@@ -45,7 +77,15 @@ func draw_grid_lines():
 		var endPosX : float = GridProps2D.gridXCount*cellSizeX
 		var startVector : Vector2 = Vector2(0.0,startPosY)
 		var endVector : Vector2 = Vector2(endPosX,startPosY)
-		draw_line(Vector2(0.0,startPosY),Vector2(endPosX,startPosY),line_colour,2.0)
+		draw_line(startVector,endVector,line_colour,2.0)
+
+
+func determine_active_factions() -> void:
+	active_factions.clear()
+	active_factions = battle_data.factions
+	active_factions.insert(0,"Player")
+	for faction in active_factions:
+		ai_registry.register_faction(faction)
 
 
 func spawn_characters():
@@ -55,26 +95,97 @@ func spawn_characters():
 
 
 func spawn_player_team(char_scene:PackedScene):
-	for c in PlayerTeam.team_members:
+	for c in player_team:
 		var newChar : Character = char_scene.instantiate()
+		newChar.stats = c
 		add_child(newChar)
-		characters.append(newChar)
-		
+		ai_registry.register_unit(newChar,"Player")
 		var grid_pos = GridService.GetRandomGridPosition(grid,tile_map)
 		newChar.position = grid_pos
+		GridService.set_cell_unit_data_at_pos(newChar,grid)
+		path_finder.set_blocked_cells(GridService.world_to_grid(newChar.position))
 
 
 func spawn_npcs(char_scene:PackedScene):
 	var num_units : int = randi_range(battle_data.min_num_units,battle_data.max_num_units)
-	for i in num_units:
+	for c in enemy_team:
 		var newChar : Character = char_scene.instantiate()
 		var class_int : int = randi_range(0,battle_data.allowed_classes.size()-1)
 		var unit_class : CharacterData = battle_data.allowed_classes[class_int]
 		
-		newChar.stats = unit_class
+		newChar.stats = c
 		add_child(newChar)
-		characters.append(newChar)
+		ai_registry.register_unit(newChar,"Bandits")
 		newChar.position = GridService.GetRandomGridPosition(grid,tile_map)
+		GridService.set_cell_unit_data_at_pos(newChar,grid)
+		path_finder.set_blocked_cells(GridService.world_to_grid(newChar.position))
 		#newChar.char_path_section_completed.connect(grid_controller.update_char_moved_data)
 		#newChar.path_finished.connect(input_state_machine.character_finished_path)
 		#grid_controller.set_char_moved_data(newChar)
+
+
+func left_click_cell(pos:Vector2):
+	var posi : Vector2i = GridService.world_to_grid(pos)
+	var cell_data : GridCellData = grid[posi]
+	if cell_data.UnitOccupying:
+		var unit : Character = cell_data.UnitOccupying
+		#if player_team.has(unit):
+		select_character(unit)
+	elif selected_character:
+		var starti : Vector2i = GridService.world_to_grid(selected_character.position)
+		var endi : Vector2i = GridService.world_to_grid(get_global_mouse_position())
+		current_path = path_finder._astar.get_point_path(starti,endi,true)
+		draw_move_path._drawPath(current_path)
+
+
+func try_select_character_at_cell(pos:Vector2):
+	var cell_pos : Vector2i = GridService.world_to_grid(pos)
+	var cell : GridCellData = GridService.get_cell_data_at_pos(cell_pos,grid)
+	if cell.UnitOccupying:
+		select_character(cell.UnitOccupying)
+
+
+func select_character(unit:Character):
+	selected_character = unit
+	active_character = unit
+	draw_box.position = unit.position
+	path_finder.set_cell_free(GridService.world_to_grid(selected_character.position))
+	for f:String in ai_registry.faction_unit_mappings:
+		for c:Character in ai_registry.faction_unit_mappings[f]:
+			if c != selected_character:
+				path_finder.set_blocked_cells(GridService.world_to_grid(c.position))
+
+
+func start_faction_turn():
+	if active_factions[active_faction_index] == "Player":
+		EventBus.ai_turn_finished.emit()
+		EventBus.change_input_state.emit(%InputStateSelect.name)
+		print("Player's turn!")
+	else:
+		print("AI's turn!")
+		EventBus.ai_turn_started.emit()
+		EventBus.change_input_state.emit(%InputStateInputDisabled.name)
+		active_faction_units = ai_registry.get_faction_units(active_factions[active_faction_index])
+		start_ai_unit_turn()
+
+
+func faction_turn_finished():
+	if active_factions.size() <= 0:
+		return
+	active_faction_index = (active_faction_index + 1) % active_factions.size()
+	%TurnText.text = active_factions[active_faction_index]
+	start_faction_turn()
+
+
+func start_ai_unit_turn():
+	active_character = active_faction_units[active_ai_char_index]
+	ai_decision_maker.start_decisions(active_character)
+
+
+func finish_ai_unit_turn():
+	if active_ai_char_index + 1 >= active_faction_units.size():
+		active_ai_char_index = 0
+		faction_turn_finished()
+		return
+	active_ai_char_index+=1
+	start_ai_unit_turn()

@@ -3,9 +3,9 @@ extends Node2D
 class_name InputState
 
 var state_machine : InputStateMachine
-var grid_controller : GridController
-var battle_manager : BattleManager
-var drawing_2D : Drawing2D
+#var grid_controller : GridController
+#var battle_manager : BattleManager
+#var drawing_2D : Drawing2D
 
 func _enter_state():
 	Debug.log("Entering %s Input Mode"%state_machine.current_state.name)

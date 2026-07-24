@@ -3,7 +3,7 @@ extends Node2D
 class_name GridService
 
 # Called when the node enters the scene tree for the first time.
-static func CreateGrid() -> Dictionary:
+static func CreateGrid() -> Dictionary[Vector2i,GridCellData]:
 	var Grid2D : Dictionary[Vector2i,GridCellData]
 	for x in GridProps2D.gridXCount:
 		for y in GridProps2D.gridYCount:
@@ -16,7 +16,7 @@ static func CreateGrid() -> Dictionary:
 	return Grid2D
 
 
-static func set_tiles(grid:Dictionary,tilemap:TileMapLayer):
+static func set_tiles(grid:Dictionary[Vector2i,GridCellData],tilemap:TileMapLayer):
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	var cells = [Vector2i(0,0),Vector2i(0,2)]
@@ -27,7 +27,22 @@ static func set_tiles(grid:Dictionary,tilemap:TileMapLayer):
 		tilemap.set_cell(i,0,pickedCell)
 
 
-static func GetRandomGridCell(grid:Dictionary,tilemap:TileMapLayer) -> Vector2i:
+static func get_cell_data_at_pos(pos:Vector2i,grid:Dictionary[Vector2i,GridCellData])->GridCellData:
+	var cell_data : GridCellData = grid[pos]
+	return cell_data
+
+	
+static func set_cell_unit_data_at_pos(unit:Character,grid:Dictionary[Vector2i,GridCellData]):
+	var grid_pos : Vector2i = world_to_grid(unit.position)
+	var cell_data : GridCellData = grid[grid_pos]
+	cell_data.UnitOccupying = unit
+
+
+#static func get_move_path(start:Vector2,end:Vector2,tilemap:TileMapLayer)->PackedVector2Array:
+	#tilemap.astar
+
+
+static func GetRandomGridCell(grid:Dictionary[Vector2i,GridCellData],tilemap:TileMapLayer) -> Vector2i:
 	var gridX : int = GridProps2D.gridXCount
 	var gridY : int = GridProps2D.gridYCount
 	var x : int = randi_range(0,gridX-1)
@@ -41,15 +56,32 @@ static func GetRandomGridCell(grid:Dictionary,tilemap:TileMapLayer) -> Vector2i:
 	return randCell
 
 
-static func GetRandomGridPosition(grid:Dictionary,tilemap:TileMapLayer) -> Vector2:
+static func GetRandomGridPosition(grid:Dictionary[Vector2i,GridCellData],tilemap:TileMapLayer) -> Vector2:
 	var cell : Vector2i = GetRandomGridCell(grid,tilemap)
 	return tilemap.map_to_local(cell)
 
 
-static func grid_world_clamp(pos:Vector2,tilemap:TileMapLayer)->Vector2:
+#Takes in a position (e.g. mouse) clamps that between 0 and the world float size of the grid
+#Gets the grid coordinate at clamped position
+#Returns the world position at grid coordinate to snap to grid
+static func grid_world_clamp(pos:Vector2)->Vector2:
 	var x_clamp = clamp(pos.x,0,GridProps2D.gridSizeX-GridProps2D.cellSize.x)
 	var y_clamp = clamp(pos.y,0,GridProps2D.gridSizeY-GridProps2D.cellSize.y)
-	var grid_cell_pos = tilemap.local_to_map(Vector2(x_clamp,y_clamp))
-	
-	var clamp_pos = grid_cell_pos*GridProps2D.cellSize
+	var clamp_pos = Vector2(x_clamp,y_clamp)
 	return clamp_pos
+
+
+static func snap_pos_to_grid(pos:Vector2)->Vector2:
+	var clamped_pos : Vector2 = grid_world_clamp(pos)
+	var grid_cell_pos = world_to_grid(clamped_pos)
+	var snap_pos = grid_cell_pos*GridProps2D.cellSize
+	return snap_pos
+
+
+static func world_to_grid(pos:Vector2)->Vector2i:
+	var clamped_pos : Vector2 = grid_world_clamp(pos)
+	return clamped_pos / Vector2(GridProps2D.cellSize)
+	
+
+static func grid_to_world(pos:Vector2i)->Vector2:
+	return pos * GridProps2D.cellSize + GridProps2D.cellSize / 2

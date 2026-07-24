@@ -16,7 +16,6 @@
 [ext_resource type="Resource" uid="uid://dk0l615q2vgai" path="res://BattleScene/BattleData/CharacterData/Bat.tres" id="8_8f7q6"]
 [ext_resource type="Script" uid="uid://dcdosyn8h6fjb" path="res://BattleScene/BattleInput/InputStates/Input_State_Machine.gd" id="8_84fj7"]
 [ext_resource type="Script" uid="uid://dpgmjhakkp81d" path="res://BattleScene/BattleInput/InputStates/Input_State_Select.gd" id="10_pgmky"]
-[ext_resource type="Script" uid="uid://clk4gjyojwb3l" path="res://BattleScene/BattleInput/InputStates/Input_State_Input_Disabled.gd" id="17_65vi3"]
 [ext_resource type="PackedScene" uid="uid://cidshhyphx7ky" path="res://BattleScene/BattleUI/UnitInfo/unit_card.tscn" id="17_winyt"]
 [ext_resource type="Script" uid="uid://c0sokovxqojy5" path="res://BattleScene/BattleUI/UI_Controller.gd" id="18_65vi3"]
 [ext_resource type="Script" uid="uid://dfi0ppbp0ouxo" path="res://BattleScene/BattleUI/Buttons/end_turn_button.gd" id="19_8f7q6"]
@@ -67,14 +66,8 @@ current_state = NodePath("InputStateSelect")
 metadata/_custom_type_script = "uid://dcdosyn8h6fjb"
 
 [node name="InputStateSelect" type="Node2D" parent="InputStateMachine" unique_id=1528720649]
-unique_name_in_owner = true
 script = ExtResource("10_pgmky")
 metadata/_custom_type_script = "uid://dpgmjhakkp81d"
-
-[node name="InputStateInputDisabled" type="Node2D" parent="InputStateMachine" unique_id=39196950]
-unique_name_in_owner = true
-script = ExtResource("17_65vi3")
-metadata/_custom_type_script = "uid://clk4gjyojwb3l"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=877403045]
 

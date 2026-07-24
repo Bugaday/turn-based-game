@@ -8,7 +8,7 @@ var BoxColour : Color = Color.YELLOW
 
 
 func _process(delta: float) -> void:
-	position = GridService.grid_world_clamp(get_global_mouse_position(),%BattleTileMap) 
+	position = GridService.snap_pos_to_grid(get_global_mouse_position()) 
 
 
 func _draw() -> void:
@@ -16,4 +16,4 @@ func _draw() -> void:
 
 
 func _drawBox():
-	draw_rect(HighlightBox,BoxColour,Filled,3.0)
+	draw_rect(HighlightBox,BoxColour,Filled,4.0)

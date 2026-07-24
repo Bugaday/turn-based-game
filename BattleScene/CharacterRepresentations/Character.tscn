@@ -2,7 +2,19 @@
 
 [ext_resource type="Script" uid="uid://dcpjy8i623v2x" path="res://BattleScene/CharacterRepresentations/Character.gd" id="1_3wwac"]
 [ext_resource type="Texture2D" uid="uid://byo6sw14dlhp2" path="res://BattleScene/BattleGrid/BattleEnvironment/BattleTileSets/IMG_5673.png" id="3_3wwac"]
+[ext_resource type="Resource" uid="uid://ch1etbkd8w2y4" path="res://BattleScene/BattleAI/CharacterActions/Collections/AI_Actions_Default.tres" id="3_rjkiw"]
+[ext_resource type="Script" uid="uid://c7nec1xn11u8a" path="res://BattleScene/BattleAI/CharacterActions/AI_Action.gd" id="4_kjxv8"]
+[ext_resource type="Script" uid="uid://c1gmj252y8xdh" path="res://BattleScene/BattleAI/CharacterActions/AI_Action_Move_To_Enemy.gd" id="5_5wxff"]
 [ext_resource type="Resource" uid="uid://64xnv0xhbdih" path="res://BattleScene/BattleData/CharacterData/Knight.tres" id="5_j8nnj"]
+[ext_resource type="Script" uid="uid://dtoxrqvw40km8" path="res://BattleScene/BattleAI/CharacterActions/AI_Action_Attack.gd" id="6_66iw3"]
+
+[sub_resource type="Resource" id="Resource_lbrrl"]
+script = ExtResource("5_5wxff")
+metadata/_custom_type_script = "uid://c1gmj252y8xdh"
+
+[sub_resource type="Resource" id="Resource_dt337"]
+script = ExtResource("6_66iw3")
+metadata/_custom_type_script = "uid://dtoxrqvw40km8"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3wwac"]
 atlas = ExtResource("3_3wwac")
@@ -11,6 +23,8 @@ region = Rect2(0, 0, 64, 64)
 [node name="Character" type="Node2D" unique_id=325950488]
 script = ExtResource("1_3wwac")
 stats = ExtResource("5_j8nnj")
+ai_actions_list = ExtResource("3_rjkiw")
+class_list = Array[ExtResource("4_kjxv8")]([SubResource("Resource_lbrrl"), SubResource("Resource_dt337")])
 
 [node name="CharSprite2D" type="Sprite2D" parent="." unique_id=236294916]
 unique_name_in_owner = true

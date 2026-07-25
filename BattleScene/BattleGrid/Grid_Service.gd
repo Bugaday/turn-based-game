@@ -57,8 +57,8 @@ static func GetRandomGridCell(grid:Dictionary[Vector2i,GridCellData],tilemap:Til
 
 
 static func GetRandomGridPosition(grid:Dictionary[Vector2i,GridCellData],tilemap:TileMapLayer) -> Vector2:
-	var cell : Vector2i = GetRandomGridCell(grid,tilemap)
-	return tilemap.map_to_local(cell)
+	var cell_pos : Vector2i = GetRandomGridCell(grid,tilemap)
+	return grid_to_world(cell_pos)
 
 
 #Takes in a position (e.g. mouse) clamps that between 0 and the world float size of the grid

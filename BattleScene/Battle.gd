@@ -32,6 +32,7 @@ func _ready() -> void:
 	
 	EventBus.try_select_character.connect(left_click_cell)
 	EventBus.trigger_turn_finished.connect(faction_turn_finished)
+	EventBus.action_move_to_enemy.connect(move_to_enemy)
 
 
 func _draw() -> void:
@@ -189,3 +190,11 @@ func finish_ai_unit_turn():
 		return
 	active_ai_char_index+=1
 	start_ai_unit_turn()
+
+
+func move_to_enemy():
+	var start_pos : Vector2i = GridService.world_to_grid(active_character.position)
+	var end_pos : Vector2i = GridService.GetRandomGridCell(grid,tile_map)
+	path_finder.set_cell_free(start_pos)
+	current_path = path_finder._astar.get_point_path(start_pos,end_pos,true)
+	active_character.start_move(current_path)

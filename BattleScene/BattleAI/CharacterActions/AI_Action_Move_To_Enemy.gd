@@ -7,18 +7,18 @@ var path : PackedVector2Array
 
 func _execute_action(unit:Character):
 	super(unit)
-
-	var start : Vector2i = GridService.world_to_grid(unit.position)
-	var end : Vector2i = Vector2i(3,4)
-	if !path:
-		get_move_path(start,end)
-	unit.start_move(path)
-	
-	print("Action moving to enemy! by ",unit.name," - ",unit.stats.unit_name)
-	
-	if unit.path_finished.is_connected(finished_move):
-		return
-	unit.path_finished.connect(finished_move)
+	EventBus.action_move_to_enemy.emit()
+	#var start : Vector2i = GridService.world_to_grid(unit.position)
+	#var end : Vector2i = Vector2i(3,4)
+	#if !path:
+		#get_move_path(start,end)
+	#unit.start_move(path)
+	#
+	#print("Action moving to enemy! by ",unit.name," - ",unit.stats.unit_name)
+	#
+	#if unit.path_finished.is_connected(finished_move):
+		#return
+	#unit.path_finished.connect(finished_move)
 
 
 func finished_move(unit:Character):

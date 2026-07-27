@@ -61,10 +61,21 @@ static func GetRandomGridPosition(grid:Dictionary[Vector2i,GridCellData],tilemap
 	return grid_to_world(cell_pos)
 
 
+static func set_char_moved_data(unit:Character,grid:Dictionary[Vector2i,GridCellData]):
+	var grid_pos : Vector2i = world_to_grid(unit.position)
+	grid[grid_pos].UnitOccupying = unit
+
+
+static func update_char_moved_data(unit: Character,grid:Dictionary[Vector2i,GridCellData]):
+	var last_pos : Vector2i = world_to_grid(unit.char_last_cell_pos)
+	grid[last_pos].UnitOccupying = null
+	set_char_moved_data(unit,grid)
+
+
+static func grid_world_clamp(pos:Vector2)->Vector2:
 #Takes in a position (e.g. mouse) clamps that between 0 and the world float size of the grid
 #Gets the grid coordinate at clamped position
 #Returns the world position at grid coordinate to snap to grid
-static func grid_world_clamp(pos:Vector2)->Vector2:
 	var x_clamp = clamp(pos.x,0,GridProps2D.gridSizeX-GridProps2D.cellSize.x)
 	var y_clamp = clamp(pos.y,0,GridProps2D.gridSizeY-GridProps2D.cellSize.y)
 	var clamp_pos = Vector2(x_clamp,y_clamp)

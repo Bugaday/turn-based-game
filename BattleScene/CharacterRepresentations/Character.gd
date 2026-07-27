@@ -3,7 +3,6 @@ extends Node2D
 class_name Character
 
 signal start_move_on_path
-signal char_path_section_completed(unit:Character)
 signal path_finished()
 
 var char_last_cell_pos : Vector2
@@ -49,7 +48,7 @@ func move_to_next_waypoint():
 
 #A section of path has just completed
 func section_complete():
-	char_path_section_completed.emit(self)
+	EventBus.char_path_section_completed.emit()
 	move_to_next_waypoint()
 
 

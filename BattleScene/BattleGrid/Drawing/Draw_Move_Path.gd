@@ -7,7 +7,7 @@ var points : PackedVector2Array
 
 
 func _drawPath(path_points : PackedVector2Array):
-	points = path_points.duplicate()
+	points = path_points
 	queue_redraw()
 
 

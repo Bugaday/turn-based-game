@@ -2,6 +2,7 @@ extends Node2D
 
 @export var battle_data : BattleData
 
+@export var input_state_machine : InputStateMachine
 @export var tile_map : TileMapLayer
 @export var draw_box : DrawBox
 @export var draw_move_path : DrawMovePath
@@ -9,7 +10,6 @@ extends Node2D
 
 @export var player_team : Array[CharacterData]
 @export var enemy_team : Array[CharacterData]
-#var characters : Array[Character]
 
 var ai_blackboard_global : AIBlackboard = AIBlackboard.new()
 var ai_registry : AIRegistry = AIRegistry.new(ai_blackboard_global)
@@ -33,6 +33,14 @@ func _ready() -> void:
 	EventBus.try_select_character.connect(left_click_cell)
 	EventBus.trigger_turn_finished.connect(faction_turn_finished)
 	EventBus.action_move_to_enemy.connect(move_to_enemy)
+	EventBus.update_draw_move_path.connect(draw_new_move_path)
+	EventBus.char_path_section_completed.connect(character_finish_move)
+	
+	ai_decision_maker.all_actions_finished.connect(finish_ai_unit_turn)
+
+
+#func _process(delta: float) -> void:
+	#draw_move_path._drawPath(current_path)
 
 
 func _draw() -> void:
@@ -50,10 +58,11 @@ func CreateGrid():
 	#Create Grid
 	grid = GridService.CreateGrid()
 	GridService.set_tiles(grid,tile_map)
-	add_blocked_cells_for_pathfinder()
+	add_blocked_tiles_for_pathfinder()
 
-	
-func add_blocked_cells_for_pathfinder():	
+
+func add_blocked_tiles_for_pathfinder():
+#Sets the tiles marked with 'Block' to disable points on the Path Finder	
 	for i:Vector2i in grid.keys():
 		var tile : TileData = tile_map.get_cell_tile_data(i)
 		if tile.get_custom_data("Block"):
@@ -120,9 +129,6 @@ func spawn_npcs(char_scene:PackedScene):
 		newChar.position = GridService.GetRandomGridPosition(grid,tile_map)
 		GridService.set_cell_unit_data_at_pos(newChar,grid)
 		path_finder.set_blocked_cells(GridService.world_to_grid(newChar.position))
-		#newChar.char_path_section_completed.connect(grid_controller.update_char_moved_data)
-		#newChar.path_finished.connect(input_state_machine.character_finished_path)
-		#grid_controller.set_char_moved_data(newChar)
 
 
 func left_click_cell(pos:Vector2):
@@ -133,28 +139,22 @@ func left_click_cell(pos:Vector2):
 		#if player_team.has(unit):
 		select_character(unit)
 	elif selected_character:
-		var starti : Vector2i = GridService.world_to_grid(selected_character.position)
-		var endi : Vector2i = GridService.world_to_grid(get_global_mouse_position())
-		current_path = path_finder._astar.get_point_path(starti,endi,true)
-		draw_move_path._drawPath(current_path)
-
-
-func try_select_character_at_cell(pos:Vector2):
-	var cell_pos : Vector2i = GridService.world_to_grid(pos)
-	var cell : GridCellData = GridService.get_cell_data_at_pos(cell_pos,grid)
-	if cell.UnitOccupying:
-		select_character(cell.UnitOccupying)
+		input_state_machine.state_change(%InputStateDrawMovePath.name)
+		#var starti : Vector2i = GridService.world_to_grid(selected_character.position)
+		#var endi : Vector2i = GridService.world_to_grid(get_global_mouse_position())
+		#current_path = path_finder.get_path_from_char(starti,endi,true)
+		#draw_move_path._drawPath(current_path)
 
 
 func select_character(unit:Character):
 	selected_character = unit
 	active_character = unit
 	draw_box.position = unit.position
-	path_finder.set_cell_free(GridService.world_to_grid(selected_character.position))
-	for f:String in ai_registry.faction_unit_mappings:
-		for c:Character in ai_registry.faction_unit_mappings[f]:
-			if c != selected_character:
-				path_finder.set_blocked_cells(GridService.world_to_grid(c.position))
+	#path_finder.set_cell_free(GridService.world_to_grid(selected_character.position))
+	#for f:String in ai_registry.faction_unit_mappings:
+		#for c:Character in ai_registry.faction_unit_mappings[f]:
+			#if c != selected_character:
+				#path_finder.set_blocked_cells(GridService.world_to_grid(c.position))
 
 
 func start_faction_turn():
@@ -193,8 +193,17 @@ func finish_ai_unit_turn():
 
 
 func move_to_enemy():
-	var start_pos : Vector2i = GridService.world_to_grid(active_character.position)
-	var end_pos : Vector2i = GridService.GetRandomGridCell(grid,tile_map)
-	path_finder.set_cell_free(start_pos)
-	current_path = path_finder._astar.get_point_path(start_pos,end_pos,true)
+	var end_pos:Vector2 = GridService.GetRandomGridPosition(grid,tile_map)
+	current_path = path_finder.get_path_from_char(active_character.position,end_pos,true)
 	active_character.start_move(current_path)
+
+
+func character_finish_move():
+	GridService.update_char_moved_data(active_character,grid)
+	path_finder.set_cell_free_from_vector2(active_character.char_last_cell_pos)
+	path_finder.set_blocked_cell_from_vector2(active_character.position)
+
+
+func draw_new_move_path():
+	current_path = path_finder.get_path_from_char(active_character.position,get_global_mouse_position(),true)
+	draw_move_path._drawPath(current_path)

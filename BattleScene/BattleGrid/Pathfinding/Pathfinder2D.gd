@@ -15,8 +15,25 @@ func _ready() -> void:
 	_astar.update()
 
 
+func get_path_from_char(start:Vector2,end:Vector2,partial:bool=false)->PackedVector2Array:
+	var start_pos : Vector2i = GridService.world_to_grid(start)
+	var end_pos : Vector2i = GridService.world_to_grid(end)
+	set_cell_free(start_pos)
+	var path:PackedVector2Array = _astar.get_point_path(start_pos,end_pos,partial)
+	set_blocked_cells(start_pos)
+	return path
+
 func set_blocked_cells(cell:Vector2i):
 	_astar.set_point_solid(cell,true)
 	
+func set_blocked_cell_from_vector2(pos:Vector2):
+	var posi : Vector2i = GridService.world_to_grid(pos)
+	set_blocked_cells(posi)
+	
 func set_cell_free(cell:Vector2i):
 	_astar.set_point_solid(cell,false)
+
+
+func set_cell_free_from_vector2(pos:Vector2):
+	var posi : Vector2i = GridService.world_to_grid(pos)
+	set_cell_free(posi)

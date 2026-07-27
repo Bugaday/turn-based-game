@@ -15,3 +15,7 @@ signal try_select_character(pos:Vector2)
 signal select_character(unit:Character)
 #@warning_ignore("unused_signal")
 signal action_move_to_enemy()
+
+signal char_path_section_completed()
+
+signal update_draw_move_path()

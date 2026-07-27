@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://b266d3rmygp2g" path="res://BattleScene/Battle.gd" id="2_saywf"]
 [ext_resource type="Script" uid="uid://8q86ld088lto" path="res://BattleScene/BattleCamera/Camera_2D.gd" id="3_1a458"]
 [ext_resource type="Resource" uid="uid://bq2cbaw0a1wav" path="res://BattleScene/Battle_Data_Default.tres" id="3_bketd"]
-[ext_resource type="Script" uid="uid://vb2lxqlfha75" path="res://BattleScene/BattleGrid/Drawing/Draw_Preview_Path.gd" id="3_saywf"]
+[ext_resource type="Script" uid="uid://vb2lxqlfha75" path="res://BattleScene/BattleGrid/Drawing/Draw_Move_Path.gd" id="3_saywf"]
 [ext_resource type="Script" uid="uid://cvrfh8dxox5u0" path="res://BattleScene/BattleData/CharacterData/Character_Data.gd" id="3_udycp"]
 [ext_resource type="Script" uid="uid://cpvkr5ihtw162" path="res://BattleScene/BattleGrid/Drawing/Draw_Box.gd" id="4_8dxr6"]
 [ext_resource type="Resource" uid="uid://64xnv0xhbdih" path="res://BattleScene/BattleData/CharacterData/Knight.tres" id="4_o2vke"]
@@ -18,14 +18,16 @@
 [ext_resource type="Script" uid="uid://dpgmjhakkp81d" path="res://BattleScene/BattleInput/InputStates/Input_State_Select.gd" id="10_pgmky"]
 [ext_resource type="Script" uid="uid://clk4gjyojwb3l" path="res://BattleScene/BattleInput/InputStates/Input_State_Input_Disabled.gd" id="17_65vi3"]
 [ext_resource type="PackedScene" uid="uid://cidshhyphx7ky" path="res://BattleScene/BattleUI/UnitInfo/unit_card.tscn" id="17_winyt"]
+[ext_resource type="Script" uid="uid://chjgqqwj5sykb" path="res://BattleScene/BattleInput/InputStates/Input_State_Draw_Move_Path.gd" id="18_8f7q6"]
 [ext_resource type="Script" uid="uid://c0sokovxqojy5" path="res://BattleScene/BattleUI/UI_Controller.gd" id="18_65vi3"]
 [ext_resource type="Script" uid="uid://dfi0ppbp0ouxo" path="res://BattleScene/BattleUI/Buttons/end_turn_button.gd" id="19_8f7q6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ri2no"]
 
-[node name="BattleLevel" type="Node2D" unique_id=1879491861 node_paths=PackedStringArray("tile_map", "draw_box", "draw_move_path", "path_finder")]
+[node name="BattleLevel" type="Node2D" unique_id=1879491861 node_paths=PackedStringArray("input_state_machine", "tile_map", "draw_box", "draw_move_path", "path_finder")]
 script = ExtResource("2_saywf")
 battle_data = ExtResource("3_bketd")
+input_state_machine = NodePath("InputStateMachine")
 tile_map = NodePath("BattleTileMap")
 draw_box = NodePath("DrawBox")
 draw_move_path = NodePath("DrawMovePath")
@@ -75,6 +77,11 @@ metadata/_custom_type_script = "uid://dpgmjhakkp81d"
 unique_name_in_owner = true
 script = ExtResource("17_65vi3")
 metadata/_custom_type_script = "uid://clk4gjyojwb3l"
+
+[node name="InputStateDrawMovePath" type="Node2D" parent="InputStateMachine" unique_id=1658865340]
+unique_name_in_owner = true
+script = ExtResource("18_8f7q6")
+metadata/_custom_type_script = "uid://chjgqqwj5sykb"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=877403045]
 

@@ -4,7 +4,7 @@ class_name InputStateInputDisabled
 
 func _enter_state():
 	super()
-	EventBus.char_start_move.emit()
+	#EventBus.char_start_move.emit()
 	pass
 
 

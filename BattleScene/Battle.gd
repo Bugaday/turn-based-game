@@ -14,7 +14,10 @@ extends Node2D
 var ai_blackboard_global : AIBlackboard = AIBlackboard.new()
 var ai_registry : AIRegistry = AIRegistry.new(ai_blackboard_global)
 var ai_decision_maker : AIDecisionMaker = AIDecisionMaker.new()
-var active_character : Character
+var active_character : Character:
+	set(value):
+		active_character = value
+		draw_move_path.active_char = value
 var selected_character : Character
 var active_faction_index : int = 0
 var active_ai_char_index : int = 0
@@ -32,15 +35,17 @@ func _ready() -> void:
 	
 	EventBus.try_select_character.connect(left_click_cell)
 	EventBus.trigger_turn_finished.connect(faction_turn_finished)
+	EventBus.start_move_on_path.connect(start_move_character)
 	EventBus.action_move_to_enemy.connect(move_to_enemy)
 	EventBus.update_draw_move_path.connect(draw_new_move_path)
+	EventBus.clear_draw_path.connect(erase_drawn_path)
 	EventBus.char_path_section_completed.connect(character_finish_move)
 	
 	ai_decision_maker.all_actions_finished.connect(finish_ai_unit_turn)
 
 
-#func _process(delta: float) -> void:
-	#draw_move_path._drawPath(current_path)
+func _process(delta: float) -> void:
+	draw_move_path._drawPath(current_path)
 
 
 func _draw() -> void:
@@ -139,22 +144,13 @@ func left_click_cell(pos:Vector2):
 		#if player_team.has(unit):
 		select_character(unit)
 	elif selected_character:
-		input_state_machine.state_change(%InputStateDrawMovePath.name)
-		#var starti : Vector2i = GridService.world_to_grid(selected_character.position)
-		#var endi : Vector2i = GridService.world_to_grid(get_global_mouse_position())
-		#current_path = path_finder.get_path_from_char(starti,endi,true)
-		#draw_move_path._drawPath(current_path)
+		input_state_machine.state_change(%InputStateSelectMovePoint.name)
 
 
 func select_character(unit:Character):
 	selected_character = unit
 	active_character = unit
 	draw_box.position = unit.position
-	#path_finder.set_cell_free(GridService.world_to_grid(selected_character.position))
-	#for f:String in ai_registry.faction_unit_mappings:
-		#for c:Character in ai_registry.faction_unit_mappings[f]:
-			#if c != selected_character:
-				#path_finder.set_blocked_cells(GridService.world_to_grid(c.position))
 
 
 func start_faction_turn():
@@ -192,6 +188,9 @@ func finish_ai_unit_turn():
 	start_ai_unit_turn()
 
 
+func start_move_character():
+	active_character.start_move(current_path)
+
 func move_to_enemy():
 	var end_pos:Vector2 = GridService.GetRandomGridPosition(grid,tile_map)
 	current_path = path_finder.get_path_from_char(active_character.position,end_pos,true)
@@ -207,3 +206,6 @@ func character_finish_move():
 func draw_new_move_path():
 	current_path = path_finder.get_path_from_char(active_character.position,get_global_mouse_position(),true)
 	draw_move_path._drawPath(current_path)
+	
+func erase_drawn_path():
+	draw_move_path.clear_path()

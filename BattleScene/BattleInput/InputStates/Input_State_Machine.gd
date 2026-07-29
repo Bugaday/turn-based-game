@@ -5,12 +5,6 @@ class_name InputStateMachine
 var states : Dictionary[String,InputState] = {}
 
 @export var current_state : InputState
-#@onready var grid_controller : GridController = %BattleTileMapLayer
-#@onready var battle_manager : BattleManager = %BattleManager
-#@onready var drawing_2D : Drawing2D = %Drawing2D
-#
-##Note, this is a node and not part of drawing as we just need to move the position of the node, not use queue_redraw()
-#@onready var cursor : DrawCursor = %Cursor
 
 var mouse_pos : Vector2
 
@@ -20,9 +14,7 @@ func _ready() -> void:
 		if state is InputState:
 			states[state.name] = state
 			state.state_machine = self
-			#state.grid_controller = grid_controller
-			#state.battle_manager = battle_manager
-			#state.drawing_2D = drawing_2D
+			state.change_state.connect(state_change)
 
 	EventBus.change_input_state.connect(state_change)
 

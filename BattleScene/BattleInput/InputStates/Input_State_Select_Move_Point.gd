@@ -1,22 +1,25 @@
 extends InputState
 
-class_name InputStateDrawMovePath
+class_name InputStateSelectMovePoint
 
 func _enter_state():
 	super()
-	show_move_preview()
-	pass
+	EventBus.update_draw_move_path.emit()
 	
 func _exit_state():
 	super()
+	EventBus.clear_draw_path.emit()
 	pass
 
 
 func handle_input(_event : InputEvent):
 	if _event is InputEventMouseMotion:
 		EventBus.update_draw_move_path.emit()
-	#elif _event.is_action_pressed("Escape") or _event.is_action_pressed("RightClick"):
-		#state_machine.state_change(%InputStateSelect.name)
+	elif _event.is_action_pressed("Escape") or _event.is_action_pressed("RightClick"):
+		change_state.emit("InputStateSelect")
+	if _event.is_action_pressed("Select"):
+		EventBus.start_move_on_path.emit()
+		change_state.emit(%InputStateInputDisabled.name)
 
 
 func check_movable_location() -> bool:
@@ -24,7 +27,3 @@ func check_movable_location() -> bool:
 	#if cell.UnitOccupying:
 		#return false
 	return true
-	
-func show_move_preview():
-	#drawing_2D.draw_path(grid_controller.cellSelected.cell_pos,grid_controller.cell_hovered.cell_pos)
-	pass

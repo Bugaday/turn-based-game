@@ -20,7 +20,7 @@ func start_decisions(unit:Character):
 	for action in available_actions:
 		if !action.action_finished.is_connected(current_action_finished):
 			action.action_finished.connect(current_action_finished)
-		
+	
 	#print("Starting decision on ",char_parent.name," - ",char_parent.stats.unit_name)
 	make_decision()._execute_action(char_parent)
 

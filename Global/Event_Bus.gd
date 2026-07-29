@@ -5,7 +5,7 @@ signal ai_turn_finished()
 
 signal change_input_state(state:String)
 
-signal char_start_move()
+signal start_move_on_path()
 
 signal trigger_turn_finished()
 #@warning_ignore("unused_signal")
@@ -19,3 +19,5 @@ signal action_move_to_enemy()
 signal char_path_section_completed()
 
 signal update_draw_move_path()
+
+signal clear_draw_path()

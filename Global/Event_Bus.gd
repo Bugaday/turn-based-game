@@ -20,4 +20,4 @@ signal char_path_section_completed()
 
 signal update_draw_move_path()
 
-signal clear_draw_path()
+signal cancel_path()

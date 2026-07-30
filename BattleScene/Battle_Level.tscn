@@ -96,17 +96,22 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Control" type="Control" parent="CanvasLayer" unique_id=729747533]
 layout_mode = 3
-anchors_preset = 0
-offset_left = 939.0
-offset_top = 987.0
-offset_right = 939.0
-offset_bottom = 987.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("18_65vi3")
 metadata/_edit_use_anchors_ = true
 
 [node name="EndTurnButton" type="Button" parent="CanvasLayer/Control" unique_id=350003113]
 unique_name_in_owner = true
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5015625
+anchor_top = 0.9305556
+anchor_right = 0.5015625
+anchor_bottom = 0.9305556
 offset_left = -797.0
 offset_top = -100.0
 offset_right = -719.0
@@ -115,9 +120,44 @@ text = "End Turn"
 script = ExtResource("19_8f7q6")
 metadata/_edit_use_anchors_ = true
 
+[node name="Move" type="Button" parent="CanvasLayer/Control" unique_id=966944050]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.2260417
+anchor_top = 0.31388888
+anchor_right = 1.2260417
+anchor_bottom = 0.31388888
+offset_left = -797.0
+offset_top = -100.0
+offset_right = -719.0
+offset_bottom = -69.0
+text = "Move"
+metadata/_edit_use_anchors_ = true
+
+[node name="Attack" type="Button" parent="CanvasLayer/Control" unique_id=907421818]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.2296875
+anchor_top = 0.6259259
+anchor_right = 1.2296875
+anchor_bottom = 0.6259259
+offset_left = -797.0
+offset_top = -100.0
+offset_right = -719.0
+offset_bottom = -69.0
+text = "Attack"
+metadata/_edit_use_anchors_ = true
+
 [node name="TurnText" type="Label" parent="CanvasLayer/Control" unique_id=1772271569]
 unique_name_in_owner = true
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5015625
+anchor_top = 0.9305556
+anchor_right = 0.5015625
+anchor_bottom = 0.9305556
 offset_left = -799.0
 offset_top = -381.0
 offset_right = -710.0
@@ -127,3 +167,5 @@ label_settings = SubResource("LabelSettings_ri2no")
 metadata/_edit_use_anchors_ = true
 
 [connection signal="button_up" from="CanvasLayer/Control/EndTurnButton" to="CanvasLayer/Control/EndTurnButton" method="_on_button_up"]
+[connection signal="button_up" from="CanvasLayer/Control/Move" to="CanvasLayer/Control/Move" method="_on_button_up"]
+[connection signal="button_up" from="CanvasLayer/Control/Attack" to="CanvasLayer/Control/Attack" method="_on_button_up"]

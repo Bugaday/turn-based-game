@@ -2,7 +2,9 @@ extends Node2D
 
 class_name Character
 
-signal start_move_on_path
+signal start_move_on_path()
+signal action_started()
+signal action_finished()
 signal path_finished()
 
 var char_last_cell_pos : Vector2
@@ -10,6 +12,8 @@ var faction : String
 var move_path : PackedVector2Array
 
 @export var stats : CharacterData
+@export var actions : Array[Action]
+var current_action : Action
 @export var ai_actions_list : AIActionsData
 @export var class_list : Array[AIAction]
 
@@ -55,6 +59,7 @@ func section_complete():
 #The whole path is now complete	
 func path_complete():
 	path_finished.emit(self)
+	action_finished.emit()
 
 
 func _setStats(statData: Resource) -> void:

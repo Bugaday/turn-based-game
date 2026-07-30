@@ -38,7 +38,7 @@ func _ready() -> void:
 	EventBus.start_move_on_path.connect(start_move_character)
 	EventBus.action_move_to_enemy.connect(move_to_enemy)
 	EventBus.update_draw_move_path.connect(draw_new_move_path)
-	EventBus.clear_draw_path.connect(erase_drawn_path)
+	EventBus.cancel_path.connect(cancel_path)
 	EventBus.char_path_section_completed.connect(character_finish_move)
 	
 	ai_decision_maker.all_actions_finished.connect(finish_ai_unit_turn)
@@ -113,8 +113,10 @@ func spawn_player_team(char_scene:PackedScene):
 	for c in player_team:
 		var newChar : Character = char_scene.instantiate()
 		newChar.stats = c
-		add_child(newChar)
 		ai_registry.register_unit(newChar,"Player")
+		newChar.action_finished.connect(handle_action_finished)
+		
+		add_child(newChar)
 		var grid_pos = GridService.GetRandomGridPosition(grid,tile_map)
 		newChar.position = grid_pos
 		GridService.set_cell_unit_data_at_pos(newChar,grid)
@@ -141,8 +143,8 @@ func left_click_cell(pos:Vector2):
 	var cell_data : GridCellData = grid[posi]
 	if cell_data.UnitOccupying:
 		var unit : Character = cell_data.UnitOccupying
-		#if player_team.has(unit):
-		select_character(unit)
+		if get_units_faction(unit) == "Player":
+			select_character(unit)
 	elif selected_character:
 		input_state_machine.state_change(%InputStateSelectMovePoint.name)
 
@@ -152,6 +154,14 @@ func select_character(unit:Character):
 	active_character = unit
 	draw_box.position = unit.position
 
+
+func get_units_faction(unit:Character)->String:
+	for key : String in ai_registry.faction_unit_mappings.keys():
+		var characters : Array[Character] = ai_registry.get_faction_units(key)
+		for c in characters:
+			if c == unit:
+				return key
+	return "No Faction Found!"
 
 func start_faction_turn():
 	if active_factions[active_faction_index] == "Player":
@@ -169,6 +179,7 @@ func start_faction_turn():
 func faction_turn_finished():
 	if active_factions.size() <= 0:
 		return
+	#Set the turn for the next faction
 	active_faction_index = (active_faction_index + 1) % active_factions.size()
 	%TurnText.text = active_factions[active_faction_index]
 	start_faction_turn()
@@ -186,6 +197,16 @@ func finish_ai_unit_turn():
 		return
 	active_ai_char_index+=1
 	start_ai_unit_turn()
+
+
+func handle_action_started():
+	if input_state_machine.current_state != %InputStateInputDisabled:
+		input_state_machine.state_change(%InputStateInputDisabled.name)
+	
+	
+func handle_action_finished():
+	if active_factions[active_faction_index] == "Player":
+		input_state_machine.state_change(%InputStateSelect.name)
 
 
 func start_move_character():
@@ -206,6 +227,10 @@ func character_finish_move():
 func draw_new_move_path():
 	current_path = path_finder.get_path_from_char(active_character.position,get_global_mouse_position(),true)
 	draw_move_path._drawPath(current_path)
+
+func cancel_path():
+	current_path.clear()
+	erase_drawn_path()
 	
 func erase_drawn_path():
 	draw_move_path.clear_path()

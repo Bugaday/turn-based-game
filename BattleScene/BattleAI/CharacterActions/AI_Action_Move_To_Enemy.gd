@@ -1,6 +1,6 @@
 extends AIAction
 
-class_name ActionMoveToEnemy
+class_name AIActionMoveToEnemy
 
 var path : PackedVector2Array
 

@@ -1,6 +1,6 @@
 extends AIAction
 
-class_name ActionTargetEnemy
+class_name AIActionTargetEnemy
 
 func _execute_action(unit:Character):
 	super(unit)

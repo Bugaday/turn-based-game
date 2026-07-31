@@ -1,6 +1,6 @@
 extends AIAction
 
-class_name ActionAttack
+class_name AIActionAttack
 
 
 func _execute_action(unit:Character):

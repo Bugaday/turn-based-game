@@ -12,6 +12,7 @@ class_name CharacterData
 var max_action_points : int = 100
 var current_action_points : int
 
+
 func _init() -> void:
 	current_action_points = max_action_points
 

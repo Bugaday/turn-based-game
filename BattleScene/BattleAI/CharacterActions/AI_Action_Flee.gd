@@ -1,6 +1,6 @@
 extends AIAction
 
-class_name ActionFlee
+class_name AIActionFlee
 
 func _execute_action(unit:Character):
 	super(unit)

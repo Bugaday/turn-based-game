@@ -21,6 +21,8 @@
 [ext_resource type="Script" uid="uid://chjgqqwj5sykb" path="res://BattleScene/BattleInput/InputStates/Input_State_Select_Move_Point.gd" id="18_8f7q6"]
 [ext_resource type="Script" uid="uid://c0sokovxqojy5" path="res://BattleScene/BattleUI/UI_Controller.gd" id="18_65vi3"]
 [ext_resource type="Script" uid="uid://dfi0ppbp0ouxo" path="res://BattleScene/BattleUI/Buttons/end_turn_button.gd" id="19_8f7q6"]
+[ext_resource type="Script" uid="uid://dmlu5o2x3kk26" path="res://BattleScene/BattleUI/action_button_controller.gd" id="22_nim85"]
+[ext_resource type="Script" uid="uid://cjxemdkryrvkj" path="res://BattleScene/ActionButton.gd" id="22_ri2no"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ri2no"]
 
@@ -101,6 +103,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("18_65vi3")
 metadata/_edit_use_anchors_ = true
 
@@ -120,36 +123,6 @@ text = "End Turn"
 script = ExtResource("19_8f7q6")
 metadata/_edit_use_anchors_ = true
 
-[node name="Move" type="Button" parent="CanvasLayer/Control" unique_id=966944050]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.2260417
-anchor_top = 0.31388888
-anchor_right = 1.2260417
-anchor_bottom = 0.31388888
-offset_left = -797.0
-offset_top = -100.0
-offset_right = -719.0
-offset_bottom = -69.0
-text = "Move"
-metadata/_edit_use_anchors_ = true
-
-[node name="Attack" type="Button" parent="CanvasLayer/Control" unique_id=907421818]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.2296875
-anchor_top = 0.6259259
-anchor_right = 1.2296875
-anchor_bottom = 0.6259259
-offset_left = -797.0
-offset_top = -100.0
-offset_right = -719.0
-offset_bottom = -69.0
-text = "Attack"
-metadata/_edit_use_anchors_ = true
-
 [node name="TurnText" type="Label" parent="CanvasLayer/Control" unique_id=1772271569]
 unique_name_in_owner = true
 layout_mode = 1
@@ -166,6 +139,27 @@ text = "Player Turn"
 label_settings = SubResource("LabelSettings_ri2no")
 metadata/_edit_use_anchors_ = true
 
+[node name="ButtonController" type="HBoxContainer" parent="CanvasLayer/Control" unique_id=883984726]
+layout_mode = 0
+offset_left = 576.0
+offset_top = 876.0
+offset_right = 620.0
+offset_bottom = 916.0
+script = ExtResource("22_nim85")
+
+[node name="ActionButton1" type="Button" parent="CanvasLayer/Control/ButtonController" unique_id=1971153224]
+layout_mode = 2
+script = ExtResource("22_ri2no")
+metadata/_custom_type_script = "uid://cjxemdkryrvkj"
+
+[node name="ActionButton2" type="Button" parent="CanvasLayer/Control/ButtonController" unique_id=460399775]
+layout_mode = 2
+script = ExtResource("22_ri2no")
+metadata/_custom_type_script = "uid://cjxemdkryrvkj"
+
+[node name="ActionButton3" type="Button" parent="CanvasLayer/Control/ButtonController" unique_id=1509437333]
+layout_mode = 2
+script = ExtResource("22_ri2no")
+metadata/_custom_type_script = "uid://cjxemdkryrvkj"
+
 [connection signal="button_up" from="CanvasLayer/Control/EndTurnButton" to="CanvasLayer/Control/EndTurnButton" method="_on_button_up"]
-[connection signal="button_up" from="CanvasLayer/Control/Move" to="CanvasLayer/Control/Move" method="_on_button_up"]
-[connection signal="button_up" from="CanvasLayer/Control/Attack" to="CanvasLayer/Control/Attack" method="_on_button_up"]

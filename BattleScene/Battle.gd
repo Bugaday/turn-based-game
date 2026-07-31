@@ -39,6 +39,7 @@ func _ready() -> void:
 	EventBus.action_move_to_enemy.connect(move_to_enemy)
 	EventBus.update_draw_move_path.connect(draw_new_move_path)
 	EventBus.cancel_path.connect(cancel_path)
+	EventBus.choose_move_position.connect(choose_move_location)
 	EventBus.char_path_section_completed.connect(character_finish_move)
 	
 	ai_decision_maker.all_actions_finished.connect(finish_ai_unit_turn)
@@ -146,7 +147,11 @@ func left_click_cell(pos:Vector2):
 		if get_units_faction(unit) == "Player":
 			select_character(unit)
 	elif selected_character:
-		input_state_machine.state_change(%InputStateSelectMovePoint.name)
+		choose_move_location()
+
+
+func choose_move_location():
+	input_state_machine.state_change(%InputStateSelectMovePoint.name)
 
 
 func select_character(unit:Character):
@@ -162,6 +167,7 @@ func get_units_faction(unit:Character)->String:
 			if c == unit:
 				return key
 	return "No Faction Found!"
+
 
 func start_faction_turn():
 	if active_factions[active_faction_index] == "Player":
@@ -211,6 +217,7 @@ func handle_action_finished():
 
 func start_move_character():
 	active_character.start_move(current_path)
+
 
 func move_to_enemy():
 	var end_pos:Vector2 = GridService.GetRandomGridPosition(grid,tile_map)

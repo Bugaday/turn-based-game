@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Action" format=3 uid="uid://bqvdjywptv7yj"]
+
+[ext_resource type="Script" uid="uid://vjpymfq5ayef" path="res://Actions/Action.gd" id="1_8wv80"]
+
+[resource]
+script = ExtResource("1_8wv80")
+action_name = "Move"
+method_name = "start_move"
+signal_name = "choose_move_position"
+metadata/_custom_type_script = "uid://vjpymfq5ayef"

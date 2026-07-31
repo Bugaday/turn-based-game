@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Action" format=3 uid="uid://cnvbi558nlm4s"]
+
+[ext_resource type="Script" uid="uid://vjpymfq5ayef" path="res://Actions/Action.gd" id="1_k3mhg"]
+
+[resource]
+script = ExtResource("1_k3mhg")
+action_name = "Face Direction"
+method_name = "face_direction"
+metadata/_custom_type_script = "uid://vjpymfq5ayef"

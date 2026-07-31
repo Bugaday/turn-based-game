@@ -11,6 +11,8 @@ signal trigger_turn_finished()
 #@warning_ignore("unused_signal")
 signal try_select_character(pos:Vector2)
 
+signal choose_move_position()
+
 #@warning_ignore("unused_signal")
 signal select_character(unit:Character)
 #@warning_ignore("unused_signal")

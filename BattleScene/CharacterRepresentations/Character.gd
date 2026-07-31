@@ -64,4 +64,6 @@ func path_complete():
 
 func _setStats(statData: Resource) -> void:
 	stats = statData
+	for action in stats.extra_actions:
+		actions.append(action)
 	%CharSprite2D.texture = stats.sprite

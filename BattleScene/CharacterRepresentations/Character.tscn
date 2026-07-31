@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://c7nec1xn11u8a" path="res://BattleScene/BattleAI/CharacterActions/AI_Action.gd" id="4_kjxv8"]
 [ext_resource type="Resource" uid="uid://bqvdjywptv7yj" path="res://Actions/Action_Move.tres" id="4_lbrrl"]
 [ext_resource type="Script" uid="uid://c1gmj252y8xdh" path="res://BattleScene/BattleAI/CharacterActions/AI_Action_Move_To_Enemy.gd" id="5_5wxff"]
+[ext_resource type="Resource" uid="uid://56k0hrnked7q" path="res://Actions/Action_Attack.tres" id="5_dt337"]
 [ext_resource type="Resource" uid="uid://64xnv0xhbdih" path="res://BattleScene/BattleData/CharacterData/Knight.tres" id="5_j8nnj"]
 [ext_resource type="Script" uid="uid://dtoxrqvw40km8" path="res://BattleScene/BattleAI/CharacterActions/AI_Action_Attack.gd" id="6_66iw3"]
 
@@ -25,7 +26,7 @@ region = Rect2(0, 0, 64, 64)
 [node name="Character" type="Node2D" unique_id=325950488]
 script = ExtResource("1_3wwac")
 stats = ExtResource("5_j8nnj")
-actions = Array[ExtResource("3_66iw3")]([ExtResource("4_lbrrl")])
+actions = Array[ExtResource("3_66iw3")]([ExtResource("4_lbrrl"), ExtResource("5_dt337")])
 ai_actions_list = ExtResource("3_rjkiw")
 class_list = Array[ExtResource("4_kjxv8")]([SubResource("Resource_lbrrl"), SubResource("Resource_dt337")])
 

@@ -1,5 +1,7 @@
 extends Node2D
 
+signal on_select_character(unit:Character)
+
 @export var battle_data : BattleData
 
 @export var input_state_machine : InputStateMachine
@@ -7,6 +9,7 @@ extends Node2D
 @export var draw_box : DrawBox
 @export var draw_move_path : DrawMovePath
 @export var path_finder : Pathfinder2D
+@export var ui_battle : UIBattleController
 
 @export var player_team : Array[CharacterData]
 @export var enemy_team : Array[CharacterData]
@@ -18,7 +21,10 @@ var active_character : Character:
 	set(value):
 		active_character = value
 		draw_move_path.active_char = value
-var selected_character : Character
+var selected_character : Character:
+	set(value):
+		selected_character = value
+		on_select_character.emit(selected_character)
 var active_faction_index : int = 0
 var active_ai_char_index : int = 0
 var active_factions : Array[String]
@@ -32,6 +38,8 @@ func _ready() -> void:
 	CreateGrid()
 	determine_active_factions()
 	spawn_characters()
+	
+	on_select_character.connect(ui_battle.on_character_selected)
 	
 	EventBus.try_select_character.connect(left_click_cell)
 	EventBus.trigger_turn_finished.connect(faction_turn_finished)
@@ -52,12 +60,6 @@ func _process(delta: float) -> void:
 func _draw() -> void:
 	#Draw Grid Lines
 	draw_grid_lines()
-	
-	#var pos = GridService.grid_to_world(Vector2i(1,1))
-	#var posi = GridService.world_to_grid(Vector2(64,64))
-	#var newpos = GridService.grid_to_world(posi)
-	#draw_circle(newpos,16.0,Color.RED)
-	#draw_circle(pos,16.0,Color.PURPLE)
 
 
 func CreateGrid():
@@ -208,8 +210,8 @@ func finish_ai_unit_turn():
 func handle_action_started():
 	if input_state_machine.current_state != %InputStateInputDisabled:
 		input_state_machine.state_change(%InputStateInputDisabled.name)
-	
-	
+
+
 func handle_action_finished():
 	if active_factions[active_faction_index] == "Player":
 		input_state_machine.state_change(%InputStateSelect.name)
@@ -235,9 +237,11 @@ func draw_new_move_path():
 	current_path = path_finder.get_path_from_char(active_character.position,get_global_mouse_position(),true)
 	draw_move_path._drawPath(current_path)
 
+
 func cancel_path():
 	current_path.clear()
 	erase_drawn_path()
-	
+
+
 func erase_drawn_path():
 	draw_move_path.clear_path()

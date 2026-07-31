@@ -17,16 +17,10 @@
 [ext_resource type="Script" uid="uid://dcdosyn8h6fjb" path="res://BattleScene/BattleInput/InputStates/Input_State_Machine.gd" id="8_84fj7"]
 [ext_resource type="Script" uid="uid://dpgmjhakkp81d" path="res://BattleScene/BattleInput/InputStates/Input_State_Select.gd" id="10_pgmky"]
 [ext_resource type="Script" uid="uid://clk4gjyojwb3l" path="res://BattleScene/BattleInput/InputStates/Input_State_Input_Disabled.gd" id="17_65vi3"]
-[ext_resource type="PackedScene" uid="uid://cidshhyphx7ky" path="res://BattleScene/BattleUI/UnitInfo/unit_card.tscn" id="17_winyt"]
 [ext_resource type="Script" uid="uid://chjgqqwj5sykb" path="res://BattleScene/BattleInput/InputStates/Input_State_Select_Move_Point.gd" id="18_8f7q6"]
-[ext_resource type="Script" uid="uid://c0sokovxqojy5" path="res://BattleScene/BattleUI/UI_Controller.gd" id="18_65vi3"]
-[ext_resource type="Script" uid="uid://dfi0ppbp0ouxo" path="res://BattleScene/BattleUI/Buttons/end_turn_button.gd" id="19_8f7q6"]
-[ext_resource type="Script" uid="uid://dmlu5o2x3kk26" path="res://BattleScene/BattleUI/action_button_controller.gd" id="22_nim85"]
-[ext_resource type="Script" uid="uid://cjxemdkryrvkj" path="res://BattleScene/ActionButton.gd" id="22_ri2no"]
+[ext_resource type="PackedScene" uid="uid://dnb7vlopx80d" path="res://BattleScene/BattleUI/UI_Battle.tscn" id="19_winyt"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_ri2no"]
-
-[node name="BattleLevel" type="Node2D" unique_id=1879491861 node_paths=PackedStringArray("input_state_machine", "tile_map", "draw_box", "draw_move_path", "path_finder")]
+[node name="BattleLevel" type="Node2D" unique_id=1879491861 node_paths=PackedStringArray("input_state_machine", "tile_map", "draw_box", "draw_move_path", "path_finder", "ui_battle")]
 script = ExtResource("2_saywf")
 battle_data = ExtResource("3_bketd")
 input_state_machine = NodePath("InputStateMachine")
@@ -34,6 +28,7 @@ tile_map = NodePath("BattleTileMap")
 draw_box = NodePath("DrawBox")
 draw_move_path = NodePath("DrawMovePath")
 path_finder = NodePath("Pathfinder2D")
+ui_battle = NodePath("CanvasLayer/UI_Battle")
 player_team = Array[ExtResource("3_udycp")]([ExtResource("4_o2vke"), ExtResource("5_xwcth")])
 enemy_team = Array[ExtResource("3_udycp")]([ExtResource("6_winyt"), ExtResource("7_65vi3"), ExtResource("8_8f7q6")])
 
@@ -88,78 +83,4 @@ metadata/_custom_type_script = "uid://chjgqqwj5sykb"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=877403045]
 
-[node name="UnitCard" parent="CanvasLayer" unique_id=1931889088 instance=ExtResource("17_winyt")]
-unique_name_in_owner = true
-offset_left = 2008.0
-offset_top = 128.0
-offset_right = 2008.0
-offset_bottom = 128.0
-metadata/_edit_use_anchors_ = true
-
-[node name="Control" type="Control" parent="CanvasLayer" unique_id=729747533]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-script = ExtResource("18_65vi3")
-metadata/_edit_use_anchors_ = true
-
-[node name="EndTurnButton" type="Button" parent="CanvasLayer/Control" unique_id=350003113]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5015625
-anchor_top = 0.9305556
-anchor_right = 0.5015625
-anchor_bottom = 0.9305556
-offset_left = -797.0
-offset_top = -100.0
-offset_right = -719.0
-offset_bottom = -69.0
-text = "End Turn"
-script = ExtResource("19_8f7q6")
-metadata/_edit_use_anchors_ = true
-
-[node name="TurnText" type="Label" parent="CanvasLayer/Control" unique_id=1772271569]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5015625
-anchor_top = 0.9305556
-anchor_right = 0.5015625
-anchor_bottom = 0.9305556
-offset_left = -799.0
-offset_top = -381.0
-offset_right = -710.0
-offset_bottom = -358.0
-text = "Player Turn"
-label_settings = SubResource("LabelSettings_ri2no")
-metadata/_edit_use_anchors_ = true
-
-[node name="ButtonController" type="HBoxContainer" parent="CanvasLayer/Control" unique_id=883984726]
-layout_mode = 0
-offset_left = 576.0
-offset_top = 876.0
-offset_right = 620.0
-offset_bottom = 916.0
-script = ExtResource("22_nim85")
-
-[node name="ActionButton1" type="Button" parent="CanvasLayer/Control/ButtonController" unique_id=1971153224]
-layout_mode = 2
-script = ExtResource("22_ri2no")
-metadata/_custom_type_script = "uid://cjxemdkryrvkj"
-
-[node name="ActionButton2" type="Button" parent="CanvasLayer/Control/ButtonController" unique_id=460399775]
-layout_mode = 2
-script = ExtResource("22_ri2no")
-metadata/_custom_type_script = "uid://cjxemdkryrvkj"
-
-[node name="ActionButton3" type="Button" parent="CanvasLayer/Control/ButtonController" unique_id=1509437333]
-layout_mode = 2
-script = ExtResource("22_ri2no")
-metadata/_custom_type_script = "uid://cjxemdkryrvkj"
-
-[connection signal="button_up" from="CanvasLayer/Control/EndTurnButton" to="CanvasLayer/Control/EndTurnButton" method="_on_button_up"]
+[node name="UI_Battle" parent="CanvasLayer" unique_id=2107946255 instance=ExtResource("19_winyt")]

@@ -1,0 +1,109 @@
+[gd_scene format=3 uid="uid://dnb7vlopx80d"]
+
+[ext_resource type="Script" uid="uid://c0sokovxqojy5" path="res://BattleScene/BattleUI/UI_Battle_Controller.gd" id="1_x3jtv"]
+[ext_resource type="Script" uid="uid://dfi0ppbp0ouxo" path="res://BattleScene/BattleUI/Buttons/end_turn_button.gd" id="2_coxye"]
+[ext_resource type="Script" uid="uid://dmlu5o2x3kk26" path="res://BattleScene/BattleUI/action_button_controller.gd" id="3_pmo2u"]
+[ext_resource type="Script" uid="uid://cjxemdkryrvkj" path="res://BattleScene/ActionButton.gd" id="4_pikk8"]
+[ext_resource type="PackedScene" uid="uid://b4n2s0t054y0r" path="res://BattleScene/BattleUI/UI_Unit_Card.tscn" id="5_rkfma"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ri2no"]
+
+[node name="UI_Battle" type="Control" unique_id=2107946255 node_paths=PackedStringArray("action_button_controller", "ui_unit_card")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_x3jtv")
+action_button_controller = NodePath("ButtonController")
+ui_unit_card = NodePath("UIUnitCard")
+metadata/_edit_use_anchors_ = true
+
+[node name="EndTurnButton" type="Button" parent="." unique_id=589864474]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5015625
+anchor_top = 0.9305556
+anchor_right = 0.5015625
+anchor_bottom = 0.9305556
+offset_left = -797.0
+offset_top = -100.0
+offset_right = -719.0
+offset_bottom = -69.0
+text = "End Turn"
+script = ExtResource("2_coxye")
+metadata/_edit_use_anchors_ = true
+
+[node name="TurnText" type="Label" parent="." unique_id=324188438]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5015625
+anchor_top = 0.9305556
+anchor_right = 0.5015625
+anchor_bottom = 0.9305556
+offset_left = -799.0
+offset_top = -381.0
+offset_right = -710.0
+offset_bottom = -358.0
+text = "Player Turn"
+label_settings = SubResource("LabelSettings_ri2no")
+metadata/_edit_use_anchors_ = true
+
+[node name="ButtonController" type="HBoxContainer" parent="." unique_id=1232441873]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -34.0
+offset_top = -145.0
+offset_right = 34.0
+offset_bottom = -105.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("3_pmo2u")
+
+[node name="ActionButton1" type="Button" parent="ButtonController" unique_id=652659541]
+layout_mode = 2
+script = ExtResource("4_pikk8")
+metadata/_custom_type_script = "uid://cjxemdkryrvkj"
+
+[node name="ActionButton2" type="Button" parent="ButtonController" unique_id=336375872]
+layout_mode = 2
+script = ExtResource("4_pikk8")
+metadata/_custom_type_script = "uid://cjxemdkryrvkj"
+
+[node name="ActionButton3" type="Button" parent="ButtonController" unique_id=912621361]
+layout_mode = 2
+script = ExtResource("4_pikk8")
+metadata/_custom_type_script = "uid://cjxemdkryrvkj"
+
+[node name="ActionButton4" type="Button" parent="ButtonController" unique_id=1098275206]
+layout_mode = 2
+script = ExtResource("4_pikk8")
+metadata/_custom_type_script = "uid://cjxemdkryrvkj"
+
+[node name="ActionButton5" type="Button" parent="ButtonController" unique_id=1447064518]
+layout_mode = 2
+script = ExtResource("4_pikk8")
+metadata/_custom_type_script = "uid://cjxemdkryrvkj"
+
+[node name="ActionButton6" type="Button" parent="ButtonController" unique_id=1636296783]
+layout_mode = 2
+script = ExtResource("4_pikk8")
+metadata/_custom_type_script = "uid://cjxemdkryrvkj"
+
+[node name="UIUnitCard" parent="." unique_id=1088169180 instance=ExtResource("5_rkfma")]
+layout_mode = 0
+offset_left = 1472.0
+offset_top = 439.0
+offset_right = 1664.0
+offset_bottom = 695.0
+
+[connection signal="button_up" from="EndTurnButton" to="EndTurnButton" method="_on_button_up"]

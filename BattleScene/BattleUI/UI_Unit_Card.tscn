@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://b4n2s0t054y0r"]
+
+[ext_resource type="Script" uid="uid://calemsjj4l4cl" path="res://BattleScene/BattleUI/UnitInfo/unit_card.gd" id="1_l16vv"]
+[ext_resource type="Texture2D" uid="uid://byo6sw14dlhp2" path="res://BattleScene/BattleGrid/BattleEnvironment/BattleTileSets/IMG_5673.png" id="2_in1wn"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ll3lt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yl1q2"]
+atlas = ExtResource("2_in1wn")
+region = Rect2(256, 0, 64, 64)
+
+[node name="UIUnitCard" type="Panel" unique_id=1088169180]
+material = SubResource("CanvasItemMaterial_ll3lt")
+offset_right = 192.0
+offset_bottom = 256.0
+script = ExtResource("1_l16vv")
+
+[node name="UnitCardPortrait" type="TextureRect" parent="." unique_id=1242808780]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -32.0
+offset_top = 8.0
+offset_right = 32.0
+offset_bottom = 72.0
+grow_horizontal = 2
+texture = SubResource("AtlasTexture_yl1q2")
+
+[node name="UnitCardName" type="Label" parent="." unique_id=1728393438]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 13.0
+offset_top = 94.0
+offset_right = 62.0
+offset_bottom = 117.0
+text = "Rogue"

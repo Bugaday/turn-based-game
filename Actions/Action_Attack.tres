@@ -2,8 +2,13 @@
 
 [ext_resource type="Script" uid="uid://vjpymfq5ayef" path="res://Actions/Action.gd" id="1_v0wwe"]
 
+[sub_resource type="InputEventAction" id="InputEventAction_v0wwe"]
+action = &"Select"
+
 [resource]
 script = ExtResource("1_v0wwe")
+callable_object = null
 action_name = "Attack"
 method_name = "attack"
+execute_input = SubResource("InputEventAction_v0wwe")
 metadata/_custom_type_script = "uid://vjpymfq5ayef"

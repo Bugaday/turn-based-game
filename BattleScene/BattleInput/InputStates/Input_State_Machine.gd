@@ -2,21 +2,28 @@ extends Node2D
 
 class_name InputStateMachine
 
+var battle_data : BattleData
 var states : Dictionary[String,InputState] = {}
 
+
 @export var current_state : InputState
+var _grid : Dictionary[Vector2i,GridCellData]
 
 var mouse_pos : Vector2
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
+func _setup():
 	for state:InputState in get_children():
-		if state is InputState:
-			states[state.name] = state
-			state.state_machine = self
-			state.change_state.connect(state_change)
+			if state is InputState:
+				states[state.name] = state
+				state.state_machine = self
+				state.battle_data = battle_data
+				state.change_state.connect(state_change)
 
 	EventBus.change_input_state.connect(state_change)
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass
 
 
 func _process(_delta: float) -> void:

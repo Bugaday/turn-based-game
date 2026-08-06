@@ -42,11 +42,11 @@ static func set_cell_unit_data_at_pos(unit:Character,grid:Dictionary[Vector2i,Gr
 	#tilemap.astar
 
 
-static func GetRandomGridCell(grid:Dictionary[Vector2i,GridCellData],tilemap:TileMapLayer) -> Vector2i:
-	var gridX : int = GridProps2D.gridXCount
-	var gridY : int = GridProps2D.gridYCount
-	var x : int = randi_range(0,gridX-1)
-	var y : int  = randi_range(0,gridY-1)
+static func GetRandomGridCell(grid:Dictionary[Vector2i,GridCellData],tilemap:TileMapLayer,restrict_start:Vector2i=Vector2i.ZERO,restrict_end:Vector2i=GridProps2D.gridExtents) -> Vector2i:
+	var start_vector = grid_cell_clamp(restrict_start)
+	var end_vector = grid_cell_clamp(restrict_end)
+	var x : int = randi_range(start_vector.x,end_vector.x)
+	var y : int  = randi_range(start_vector.y,end_vector.y)
 	var randCell : Vector2i = Vector2i(x,y)
 	var cell_data : TileData = tilemap.get_cell_tile_data(randCell)
 	var cell_is_blocked : bool = cell_data.get_custom_data("Block")
@@ -56,8 +56,8 @@ static func GetRandomGridCell(grid:Dictionary[Vector2i,GridCellData],tilemap:Til
 	return randCell
 
 
-static func GetRandomGridPosition(grid:Dictionary[Vector2i,GridCellData],tilemap:TileMapLayer) -> Vector2:
-	var cell_pos : Vector2i = GetRandomGridCell(grid,tilemap)
+static func GetRandomGridPosition(grid:Dictionary[Vector2i,GridCellData],tilemap:TileMapLayer,restrict_start:Vector2i=Vector2i.ZERO,restrict_end:Vector2i=GridProps2D.gridExtents) -> Vector2:
+	var cell_pos : Vector2i = GetRandomGridCell(grid,tilemap,restrict_start,restrict_end)
 	return grid_to_world(cell_pos)
 
 
@@ -80,6 +80,10 @@ static func grid_world_clamp(pos:Vector2)->Vector2:
 	var y_clamp = clamp(pos.y,0,GridProps2D.gridSizeY-GridProps2D.cellSize.y)
 	var clamp_pos = Vector2(x_clamp,y_clamp)
 	return clamp_pos
+	
+static func grid_cell_clamp(cell:Vector2i)->Vector2i:
+	var clamped_cell = cell.clamp(Vector2i.ZERO,GridProps2D.gridExtents)
+	return clamped_cell
 
 
 static func snap_pos_to_grid(pos:Vector2)->Vector2:

@@ -18,10 +18,11 @@ var current_action : Action
 @export var class_list : Array[AIAction]
 
 
-
 func _ready() -> void:
 	if stats:
 		_setStats(stats)
+		
+	
  
 
 #Start the movement code

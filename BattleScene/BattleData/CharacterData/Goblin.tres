@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="CharacterData" format=3 uid="uid://b5k0hqe1epc2p"]
 
+[ext_resource type="Script" uid="uid://vjpymfq5ayef" path="res://Actions/Action.gd" id="1_b8spg"]
 [ext_resource type="Script" uid="uid://cvrfh8dxox5u0" path="res://BattleScene/BattleData/CharacterData/Character_Data.gd" id="1_viq8k"]
 [ext_resource type="Texture2D" uid="uid://byo6sw14dlhp2" path="res://BattleScene/BattleGrid/BattleEnvironment/BattleTileSets/IMG_5673.png" id="2_viq8k"]
 

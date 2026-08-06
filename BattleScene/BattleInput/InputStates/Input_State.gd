@@ -5,6 +5,7 @@ class_name InputState
 signal change_state(state:String)
 
 var state_machine : InputStateMachine
+var battle_data : BattleData
 
 func _enter_state():
 	Debug.log("Entering %s Input Mode"%state_machine.current_state.name)

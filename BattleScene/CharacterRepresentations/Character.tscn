@@ -23,8 +23,9 @@ metadata/_custom_type_script = "uid://dtoxrqvw40km8"
 atlas = ExtResource("3_3wwac")
 region = Rect2(0, 0, 64, 64)
 
-[node name="Character" type="Node2D" unique_id=325950488]
+[node name="Character" type="Node2D" unique_id=325950488 node_paths=PackedStringArray("char_sprite")]
 script = ExtResource("1_3wwac")
+char_sprite = NodePath("CharSprite2D")
 stats = ExtResource("5_j8nnj")
 actions = Array[ExtResource("3_66iw3")]([ExtResource("4_lbrrl"), ExtResource("5_dt337")])
 ai_actions_list = ExtResource("3_rjkiw")

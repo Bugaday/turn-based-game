@@ -11,6 +11,8 @@ var char_last_cell_pos : Vector2
 var faction : String
 var move_path : PackedVector2Array
 
+@export var char_sprite : Sprite2D
+
 @export var stats : CharacterData
 @export var actions : Array[Action]
 var current_action : Action
@@ -20,9 +22,7 @@ var current_action : Action
 
 func _ready() -> void:
 	if stats:
-		_setStats(stats)
-		
-	
+		_setStats()
  
 
 #Start the movement code
@@ -63,8 +63,7 @@ func path_complete():
 	action_finished.emit()
 
 
-func _setStats(statData: Resource) -> void:
-	stats = statData
+func _setStats() -> void:
 	for action in stats.extra_actions:
 		actions.append(action)
-	%CharSprite2D.texture = stats.sprite
+	char_sprite.texture = stats.sprite

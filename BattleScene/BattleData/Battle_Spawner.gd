@@ -3,33 +3,41 @@ extends Resource
 class_name Spawner
 
 @export var factions : Array[String] = ["Player","Bandits"]
-@export var min_num_units : int = 3
-@export var max_num_units : int = 5
+@export var min_num_units : int = 4
+@export var max_num_units : int = 4
 @export var allowed_classes : Array[CharacterData]
 
-var parent_attach_node : Node
-var _grid : Dictionary[Vector2i,GridCellData]
-var _tilemap : TileMapLayer
-var _pathfinder : Pathfinder2D
 
+func spawn()->Array[Character]:
+	var char_scene : PackedScene = load("res://BattleScene/CharacterRepresentations/Character.tscn")
+	var char_array:Array[Character]
+	
+	for member in PlayerTeam.team_members:
+		var newChar:Character = char_scene.instantiate()
+		newChar.faction = "Player"
+		char_array.append(newChar)
+	
+	var num_units : int = randi_range(min_num_units,max_num_units)
+	for i in num_units:
+		var newChar : Character = char_scene.instantiate()
+		var class_int : int = randi_range(0,allowed_classes.size()-1)
+		var unit_class : CharacterData = allowed_classes[class_int]
+		newChar.stats = unit_class
+		newChar.faction = "Bandits"
+		char_array.append(newChar)
 
-
-
-
-func spawn():
-	var new_char_scene : PackedScene = load("res://BattleScene/CharacterRepresentations/Character.tscn")
-	for faction_name in factions:
-		var newChar : Character = new_char_scene.instantiate()
-		newChar.position = GridService.GetRandomGridPosition(_grid,_tilemap)
+	return char_array
 		
 
 
-#func spawn_player_team(char_scene:PackedScene):
-	#for c in player_team:
+#func spawn_player_team(char_scene:PackedScene)->Array[Character]:
+	#return PlayerTeam.team_members
+	#var player_team:Array[Character] = PlayerTeam.team_members
+	#for team_member in player_team:
 		#var newChar : Character = char_scene.instantiate()
-		#newChar.stats = c
+		#newChar.stats = team_member.stats
 		#newChar.faction = "Player"
-		#newChar.action_finished.connect(handle_action_finished)
+		##newChar.action_finished.connect(handle_action_finished)
 		#
 		#parent_attach_node.add_child(newChar)
 		#var grid_pos = GridService.GetRandomGridPosition(_grid,_tilemap)

@@ -5,7 +5,6 @@ class_name Battle
 #signal on_select_character(unit:Character)
 
 @export var battle_data : BattleData
-
 @export var input_state_machine : InputStateMachine
 @export var tile_map : TileMapLayer
 @export var cursor_box : DrawCursor
@@ -32,12 +31,11 @@ var current_path : PackedVector2Array
 func _ready() -> void:
 
 	CreateGrid()
-
-	spawn_characters()
 	
 	input_state_machine.battle_data = battle_data
 	input_state_machine._setup()
 	
+	battle_data.setup(self)
 	#battle_data.on_set_active_character.co
 	battle_data.on_select_character.connect(select_character)
 	battle_data.battle_blackboard.blackboard_key_set.connect(blackboard_set)

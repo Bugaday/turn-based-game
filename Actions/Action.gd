@@ -27,8 +27,8 @@ func _action_started():
 	#start_func.bindv(method_args)
 	#start_func.call()
 	#action_started.emit()
-	#if target.has_method(start_method_name):
-		#target.call(start_method_name)
+	if target.has_method(start_method_name):
+		target.call(start_method_name)
 	pass
 
 

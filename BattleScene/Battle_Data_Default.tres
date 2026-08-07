@@ -1,13 +1,9 @@
 [gd_resource type="Resource" script_class="BattleData" format=3 uid="uid://bq2cbaw0a1wav"]
 
-[ext_resource type="Script" uid="uid://cvrfh8dxox5u0" path="res://BattleScene/BattleData/CharacterData/Character_Data.gd" id="1_kek3x"]
+[ext_resource type="Resource" uid="uid://ctbpko7qk6t0s" path="res://BattleScene/BattleData/Battle_Spawner_Default.tres" id="1_ebw4i"]
 [ext_resource type="Script" uid="uid://u8abbnqnmas6" path="res://BattleScene/Battle_Data.gd" id="1_wqsrh"]
-[ext_resource type="Resource" uid="uid://b56icsqafvgar" path="res://BattleScene/BattleData/CharacterData/Zombie.tres" id="2_hutb1"]
-[ext_resource type="Resource" uid="uid://i0l4a0v0lm6a" path="res://BattleScene/BattleData/CharacterData/Skeleton.tres" id="3_kbmsw"]
-[ext_resource type="Resource" uid="uid://b5k0hqe1epc2p" path="res://BattleScene/BattleData/CharacterData/Goblin.tres" id="4_qh1bi"]
 
 [resource]
 script = ExtResource("1_wqsrh")
-factions = Array[String](["Bandits"])
-allowed_classes = Array[ExtResource("1_kek3x")]([ExtResource("2_hutb1"), ExtResource("3_kbmsw"), ExtResource("4_qh1bi")])
+battle_spawner = ExtResource("1_ebw4i")
 metadata/_custom_type_script = "uid://u8abbnqnmas6"

@@ -9,10 +9,13 @@ metadata/_custom_type_script = "uid://q5crdixh6b87"
 
 [resource]
 script = ExtResource("1_8wv80")
+callable_name = null
 callable_object = null
 command = SubResource("Resource_ijtfm")
 action_name = "Move"
+start_method_name = null
 method_name = "start_move"
 signal_name = "choose_move_position"
+start_method_args = null
 method_args = [Vector2(0, 0), Vector2(0, 0), null]
 metadata/_custom_type_script = "uid://vjpymfq5ayef"

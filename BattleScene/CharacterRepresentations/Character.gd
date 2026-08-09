@@ -15,6 +15,7 @@ var move_path : PackedVector2Array
 
 @export var stats : CharacterData
 @export var actions : Array[Action]
+var action_dictionary : Dictionary[String,Action]
 var current_action : Action
 @export var ai_actions_list : AIActionsData
 @export var class_list : Array[AIAction]
@@ -23,6 +24,12 @@ var current_action : Action
 func _ready() -> void:
 	if stats:
 		_setStats()
+	for action in actions:
+		action_dictionary.set(action.action_name,action)
+
+		
+func start_action(action_name:String,target:Object):
+	action_dictionary[action_name]._action_started(target)
  
 
 #Start the movement code

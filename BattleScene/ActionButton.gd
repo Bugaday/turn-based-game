@@ -25,5 +25,5 @@ func clear_action_button():
 
 func _pressed() -> void:
 	print(owner)
-	action._action_started()
+	#action._action_started()
 	pass

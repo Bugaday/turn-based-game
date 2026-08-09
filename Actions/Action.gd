@@ -22,11 +22,11 @@ signal action_ended()
 
 
 
-func _action_started():
+func _action_started(target:Object):
 	#start_method.callv(start_method_args)
 	#start_func.bindv(method_args)
 	#start_func.call()
-	#action_started.emit()
+	action_started.emit()
 	if target.has_method(start_method_name):
 		target.call(start_method_name)
 	pass

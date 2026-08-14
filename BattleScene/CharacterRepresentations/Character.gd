@@ -11,10 +11,12 @@ var char_last_cell_pos : Vector2
 var faction : String
 var move_path : PackedVector2Array
 
-@export var char_sprite : Sprite2D
+var battle_data : BattleData
 
+@export var char_sprite : Sprite2D
 @export var stats : CharacterData
 @export var actions : Array[Action]
+@export var draw_move_path : DrawMovePath
 var action_dictionary : Dictionary[String,Action]
 var current_action : Action
 @export var ai_actions_list : AIActionsData
@@ -25,12 +27,18 @@ func _ready() -> void:
 	if stats:
 		_setStats()
 	for action in actions:
+		action.character_owner = self
 		action_dictionary.set(action.action_name,action)
 
 		
 func start_action(action_name:String,target:Object):
 	action_dictionary[action_name]._action_started(target)
  
+
+func draw_path():
+	#move_path = ba
+	#draw_move_path._drawPath(position)
+	pass
 
 #Start the movement code
 func start_move(path:PackedVector2Array):

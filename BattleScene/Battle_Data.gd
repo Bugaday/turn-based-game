@@ -20,11 +20,18 @@ var selected_character : Character:
 	set(value):
 		selected_character = value
 		on_select_character.emit(selected_character)
+		
+var active_ai_char_index : int
 
 
 var all_characters : Array[Character]
 var factions_in_battle : Array[String]
+var active_factions_units : Dictionary[String,Array] = {}
 var active_faction : String = "Player"
+var active_faction_index : int:
+	set(value):
+		active_faction_index = value
+		active_faction = factions_in_battle[value]
 
 var unit_blackboards : Dictionary[int,AIBlackboard] = {}
 var battle_blackboard : BattleBlackboard = BattleBlackboard.new()
@@ -39,8 +46,11 @@ func setup(battle:Battle) -> void:
 	tilemap = battle.tile_map
 	
 	factions_in_battle = battle_spawner.factions
+	for faction in factions_in_battle:
+		active_factions_units[faction] = []
 	all_characters = battle_spawner.spawn()
 	for c in all_characters:
+		active_factions_units[c.faction].append(c)
 		c.position = GridService.GetRandomGridPosition(grid,tilemap)
 		GridService.set_cell_unit_data_at_pos(c,grid)
 		pathfinder.set_blocked_cells(GridService.world_to_grid(c.position))

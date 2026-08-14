@@ -12,6 +12,7 @@ script = ExtResource("1_8wv80")
 callable_object = null
 command = SubResource("Resource_ijtfm")
 action_name = "Move"
+start_method_name = "draw_new_move_path"
 method_name = "start_move"
 signal_name = "choose_move_position"
 method_args = [Vector2(0, 0), Vector2(0, 0), null]

@@ -19,10 +19,6 @@ class_name Battle
 var ai_blackboard_global : AIBlackboard = AIBlackboard.new()
 var ai_registry : AIRegistry = AIRegistry.new(ai_blackboard_global)
 var ai_decision_maker : AIDecisionMaker = AIDecisionMaker.new()
-var active_faction_index : int = 0
-var active_ai_char_index : int = 0
-var active_factions : Array[String]
-var active_faction_units : Array[Character]
 
 var grid : Dictionary[Vector2i,GridCellData] = {}
 var current_path : PackedVector2Array
@@ -53,7 +49,8 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	draw_move_path._drawPath(current_path)
+	if battle_data.active_character:
+		draw_move_path._drawPath(battle_data.active_character.position,battle_data.active_character.move_path)
 
 
 func _draw() -> void:
@@ -129,7 +126,7 @@ func select_character(unit:Character):
 
 
 func start_faction_turn():
-	if active_factions[active_faction_index] == "Player":
+	if battle_data.active_faction == "Player":
 		EventBus.ai_turn_finished.emit()
 		EventBus.change_input_state.emit(%InputStateSelect.name)
 		print("Player's turn!")
@@ -137,31 +134,31 @@ func start_faction_turn():
 		print("AI's turn!")
 		EventBus.ai_turn_started.emit()
 		EventBus.change_input_state.emit(%InputStateInputDisabled.name)
-		active_faction_units = ai_registry.get_faction_units(active_factions[active_faction_index])
+		#battle_data.active_factions_units[battle_data.active_faction] = ai_registry.get_faction_units(battle_data.factions_in_battle[battle_data.active_faction_index])
 		start_ai_unit_turn()
 
 
 func faction_turn_finished():
-	if active_factions.size() <= 0:
+	if battle_data.factions_in_battle.size() <= 0:
 		return
 	#Set the turn for the next faction
-	active_faction_index = (active_faction_index + 1) % active_factions.size()
-	#%TurnText.text = active_factions[active_faction_index]
+	battle_data.active_faction_index = (battle_data.active_faction_index + 1) % battle_data.factions_in_battle.size()
+	#%TurnText.text = factions_in_battle[active_faction_index]
 	start_faction_turn()
 
 
 func start_ai_unit_turn():
-	#active_character = active_faction_units[active_ai_char_index]
-	#ai_decision_maker.start_decisions(active_character)
+	battle_data.active_character = battle_data.active_factions_units[battle_data.active_faction][battle_data.active_ai_char_index]
+	ai_decision_maker.start_decisions(battle_data.active_character)
 	pass
 
 
 func finish_ai_unit_turn():
-	if active_ai_char_index + 1 >= active_faction_units.size():
-		active_ai_char_index = 0
+	if battle_data.active_ai_char_index + 1 >= battle_data.active_factions_units[battle_data.active_faction].size():
+		battle_data.active_ai_char_index = 0
 		faction_turn_finished()
 		return
-	active_ai_char_index+=1
+	battle_data.active_ai_char_index+=1
 	start_ai_unit_turn()
 
 
@@ -173,7 +170,7 @@ func handle_action_started():
 
 
 func handle_action_finished():
-	if active_factions[active_faction_index] == "Player":
+	if battle_data.factions_in_battle[battle_data.active_faction_index] == "Player":
 		input_state_machine.state_change(%InputStateSelect.name)
 		#draw_box.position = selected_character.position
 		draw_box._drawBox()
@@ -199,14 +196,13 @@ func character_finished_move_section():
 	pass
 
 
-func draw_new_move_path():
-	var unit : Character = battle_data.active_character
-	current_path = path_finder.get_path_from_char(unit.position,get_global_mouse_position(),true)
-	draw_move_path._drawPath(current_path)
+func draw_new_move_path(unit:Character):
+	unit.move_path = path_finder.get_path_from_char(unit.position,get_global_mouse_position(),true)
+	draw_move_path._drawPath(unit.position,unit.move_path)
 
 
-func cancel_path():
-	current_path.clear()
+func cancel_path(unit:Character):
+	unit.move_path.clear()
 	erase_drawn_path()
 
 

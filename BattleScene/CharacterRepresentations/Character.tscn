@@ -10,6 +10,7 @@
 [ext_resource type="Resource" uid="uid://56k0hrnked7q" path="res://Actions/Action_Attack.tres" id="5_dt337"]
 [ext_resource type="Resource" uid="uid://64xnv0xhbdih" path="res://BattleScene/BattleData/CharacterData/Knight.tres" id="5_j8nnj"]
 [ext_resource type="Script" uid="uid://dtoxrqvw40km8" path="res://BattleScene/BattleAI/CharacterActions/AI_Action_Attack.gd" id="6_66iw3"]
+[ext_resource type="Script" uid="uid://vb2lxqlfha75" path="res://BattleScene/BattleGrid/Drawing/Draw_Move_Path.gd" id="11_dt337"]
 
 [sub_resource type="Resource" id="Resource_lbrrl"]
 script = ExtResource("5_5wxff")
@@ -23,11 +24,12 @@ metadata/_custom_type_script = "uid://dtoxrqvw40km8"
 atlas = ExtResource("3_3wwac")
 region = Rect2(0, 0, 64, 64)
 
-[node name="Character" type="Node2D" unique_id=325950488 node_paths=PackedStringArray("char_sprite")]
+[node name="Character" type="Node2D" unique_id=325950488 node_paths=PackedStringArray("char_sprite", "draw_move_path")]
 script = ExtResource("1_3wwac")
 char_sprite = NodePath("CharSprite2D")
 stats = ExtResource("5_j8nnj")
 actions = Array[ExtResource("3_66iw3")]([ExtResource("4_lbrrl"), ExtResource("5_dt337")])
+draw_move_path = NodePath("DrawMovePath")
 ai_actions_list = ExtResource("3_rjkiw")
 class_list = Array[ExtResource("4_kjxv8")]([SubResource("Resource_lbrrl"), SubResource("Resource_dt337")])
 
@@ -38,3 +40,7 @@ texture = SubResource("AtlasTexture_3wwac")
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1077893553]
 z_index = 99
 gizmo_extents = 149.2
+
+[node name="DrawMovePath" type="Node2D" parent="." unique_id=183900114]
+script = ExtResource("11_dt337")
+metadata/_custom_type_script = "uid://vb2lxqlfha75"

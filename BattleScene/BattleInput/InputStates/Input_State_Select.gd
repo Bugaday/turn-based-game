@@ -27,5 +27,5 @@ func handle_input(_event : InputEvent):
 		elif battle_data.selected_character:
 			var selected_unit : Character = battle_data.selected_character
 			if selected_unit:
-				selected_unit.start_action("Move",selected_unit)
+				selected_unit.start_action("Move",battle_data.battle_script)
 				state_machine.state_change(%InputStateSelectMovePoint.name)

@@ -4,7 +4,7 @@ class_name InputStateSelectMovePoint
 
 func _enter_state():
 	super()
-	EventBus.update_draw_move_path.emit()
+	EventBus.update_draw_move_path.emit(battle_data.active_character)
 	
 func _exit_state():
 	super()
@@ -13,7 +13,7 @@ func _exit_state():
 
 func handle_input(_event : InputEvent):
 	if _event is InputEventMouseMotion:
-		EventBus.update_draw_move_path.emit()
+		EventBus.update_draw_move_path.emit(battle_data.active_character)
 	elif _event.is_action_pressed("Escape") or _event.is_action_pressed("RightClick"):
 		EventBus.cancel_path.emit()
 		change_state.emit("InputStateSelect")

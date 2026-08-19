@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c1aksk05jk6dn"]
 
 [ext_resource type="TileSet" uid="uid://uf68vmgahhy8" path="res://BattleScene/BattleGrid/BattleEnvironment/BattleTileSets/new_tile_set.tres" id="1_0r1ij"]
-[ext_resource type="Script" uid="uid://b266d3rmygp2g" path="res://BattleScene/Battle.gd" id="2_saywf"]
+[ext_resource type="Script" uid="uid://b266d3rmygp2g" path="res://BattleScene/Scene_Battle.gd" id="2_saywf"]
 [ext_resource type="Script" uid="uid://8q86ld088lto" path="res://BattleScene/BattleCamera/Camera_2D.gd" id="3_1a458"]
 [ext_resource type="Script" uid="uid://vb2lxqlfha75" path="res://BattleScene/BattleGrid/Drawing/Draw_Move_Path.gd" id="3_saywf"]
 [ext_resource type="Script" uid="uid://cvrfh8dxox5u0" path="res://BattleScene/BattleData/CharacterData/Character_Data.gd" id="3_udycp"]
@@ -16,29 +16,37 @@
 [ext_resource type="Script" uid="uid://u8abbnqnmas6" path="res://BattleScene/Battle_Data.gd" id="8_65vi3"]
 [ext_resource type="Script" uid="uid://dcdosyn8h6fjb" path="res://BattleScene/BattleInput/InputStates/Input_State_Machine.gd" id="8_84fj7"]
 [ext_resource type="Resource" uid="uid://ctbpko7qk6t0s" path="res://BattleScene/BattleData/Battle_Spawner_Default.tres" id="9_65vi3"]
+[ext_resource type="Script" uid="uid://btl37owvxbsmy" path="res://CommandProcessor.gd" id="10_j14wi"]
 [ext_resource type="Script" uid="uid://dpgmjhakkp81d" path="res://BattleScene/BattleInput/InputStates/Input_State_Select.gd" id="10_pgmky"]
+[ext_resource type="Script" uid="uid://c0i0ydk4s5hhw" path="res://Drawing.gd" id="12_ri2no"]
+[ext_resource type="Script" uid="uid://djp5p1ck3i5kc" path="res://Input_Battle.gd" id="17_8f7q6"]
 [ext_resource type="Script" uid="uid://clk4gjyojwb3l" path="res://BattleScene/BattleInput/InputStates/Input_State_Input_Disabled.gd" id="17_65vi3"]
 [ext_resource type="Script" uid="uid://chjgqqwj5sykb" path="res://BattleScene/BattleInput/InputStates/Input_State_Select_Move_Point.gd" id="18_8f7q6"]
 [ext_resource type="PackedScene" uid="uid://dnb7vlopx80d" path="res://BattleScene/BattleUI/UI_Battle.tscn" id="19_winyt"]
 
-[node name="BattleLevel" type="Node2D" unique_id=1879491861 node_paths=PackedStringArray("battle_data", "input_state_machine", "tile_map", "cursor_box", "draw_box", "draw_move_path", "path_finder", "ui_battle")]
+[node name="BattleLevel" type="Node2D" unique_id=1879491861 node_paths=PackedStringArray("battle_data", "input_state_machine", "tile_map", "cursor_box", "draw_box", "draw_move_path", "path_finder", "ui_battle", "command_processor") groups=["SceneGame"]]
 script = ExtResource("2_saywf")
 battle_data = NodePath("BattleData")
-input_state_machine = NodePath("InputStateMachine")
+input_state_machine = NodePath("InputBattle/InputStateMachine")
 tile_map = NodePath("BattleTileMap")
 cursor_box = NodePath("Cursor")
-draw_box = NodePath("DrawBox")
-draw_move_path = NodePath("DrawMovePath")
+draw_box = NodePath("Drawing/DrawBox")
+draw_move_path = NodePath("Drawing/DrawMovePath")
 path_finder = NodePath("Pathfinder2D")
 ui_battle = NodePath("CanvasLayer/UI_Battle")
 player_team = Array[ExtResource("3_udycp")]([ExtResource("4_o2vke"), ExtResource("5_xwcth")])
 enemy_team = Array[ExtResource("3_udycp")]([ExtResource("6_winyt"), ExtResource("7_65vi3"), ExtResource("8_8f7q6")])
+command_processor = NodePath("CommandProcessor")
 
 [node name="BattleData" type="Node" parent="." unique_id=304589]
 unique_name_in_owner = true
 script = ExtResource("8_65vi3")
 battle_spawner = ExtResource("9_65vi3")
 metadata/_custom_type_script = "uid://u8abbnqnmas6"
+
+[node name="CommandProcessor" type="Node" parent="." unique_id=2141573442]
+script = ExtResource("10_j14wi")
+metadata/_custom_type_script = "uid://btl37owvxbsmy"
 
 [node name="BattleTileMap" type="TileMapLayer" parent="." unique_id=1483286854]
 unique_name_in_owner = true
@@ -50,12 +58,16 @@ unique_name_in_owner = true
 script = ExtResource("4_pgmky")
 metadata/_custom_type_script = "uid://cnjmrmric06ny"
 
-[node name="DrawMovePath" type="Node2D" parent="." unique_id=1700517755]
+[node name="Drawing" type="Node2D" parent="." unique_id=2135203338]
+script = ExtResource("12_ri2no")
+metadata/_custom_type_script = "uid://c0i0ydk4s5hhw"
+
+[node name="DrawMovePath" type="Node2D" parent="Drawing" unique_id=1700517755]
 unique_name_in_owner = true
 script = ExtResource("3_saywf")
 metadata/_custom_type_script = "uid://vb2lxqlfha75"
 
-[node name="DrawBox" type="Node2D" parent="." unique_id=908109188]
+[node name="DrawBox" type="Node2D" parent="Drawing" unique_id=908109188]
 unique_name_in_owner = true
 position = Vector2(32, 32)
 script = ExtResource("4_8dxr6")
@@ -68,27 +80,32 @@ script = ExtResource("6_bketd")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=775251628]
 script = ExtResource("3_1a458")
 
-[node name="InputStateMachine" type="Node2D" parent="." unique_id=1903787329 node_paths=PackedStringArray("current_state")]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=877403045]
+
+[node name="UI_Battle" parent="CanvasLayer" unique_id=2107946255 instance=ExtResource("19_winyt")]
+
+[node name="InputBattle" type="Node2D" parent="." unique_id=1326896168]
+unique_name_in_owner = true
+script = ExtResource("17_8f7q6")
+metadata/_custom_type_script = "uid://djp5p1ck3i5kc"
+
+[node name="InputStateMachine" type="Node2D" parent="InputBattle" unique_id=1903787329 node_paths=PackedStringArray("current_state")]
 unique_name_in_owner = true
 script = ExtResource("8_84fj7")
 current_state = NodePath("InputStateSelect")
 metadata/_custom_type_script = "uid://dcdosyn8h6fjb"
 
-[node name="InputStateSelect" type="Node2D" parent="InputStateMachine" unique_id=1528720649]
+[node name="InputStateSelect" type="Node2D" parent="InputBattle/InputStateMachine" unique_id=1528720649]
 unique_name_in_owner = true
 script = ExtResource("10_pgmky")
 metadata/_custom_type_script = "uid://dpgmjhakkp81d"
 
-[node name="InputStateInputDisabled" type="Node2D" parent="InputStateMachine" unique_id=39196950]
+[node name="InputStateInputDisabled" type="Node2D" parent="InputBattle/InputStateMachine" unique_id=39196950]
 unique_name_in_owner = true
 script = ExtResource("17_65vi3")
 metadata/_custom_type_script = "uid://clk4gjyojwb3l"
 
-[node name="InputStateSelectMovePoint" type="Node2D" parent="InputStateMachine" unique_id=1658865340]
+[node name="InputStateSelectMovePoint" type="Node2D" parent="InputBattle/InputStateMachine" unique_id=1658865340]
 unique_name_in_owner = true
 script = ExtResource("18_8f7q6")
 metadata/_custom_type_script = "uid://chjgqqwj5sykb"
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=877403045]
-
-[node name="UI_Battle" parent="CanvasLayer" unique_id=2107946255 instance=ExtResource("19_winyt")]

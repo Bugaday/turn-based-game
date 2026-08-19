@@ -10,18 +10,18 @@ signal path_finished()
 var char_last_cell_pos : Vector2
 var faction : String
 var move_path : PackedVector2Array
+var moveTargets : Array[Vector2]
 
 var battle_data : BattleData
 
 @export var char_sprite : Sprite2D
 @export var stats : CharacterData
-@export var actions : Array[Action]
 @export var draw_move_path : DrawMovePath
-var action_dictionary : Dictionary[String,Action]
-var current_action : Action
 @export var ai_actions_list : AIActionsData
 @export var class_list : Array[AIAction]
 
+@export var action_dictionary : Dictionary[String,Action]
+var actions : Array[ActionCommand]
 
 func _ready() -> void:
 	if stats:

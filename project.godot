@@ -30,6 +30,7 @@ window/stretch/mode="canvas_items"
 
 Bandits="Hostile Bandit Group"
 PlayerTeam="The Player's Team Members"
+SceneGame=""
 
 [input]
 

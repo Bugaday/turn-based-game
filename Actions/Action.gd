@@ -7,7 +7,7 @@ var character_owner : Character
 
 @export var callable_name : String
 @export var callable_object : Variant
-@export var command : ActionCommand
+var command : ActionCommand
 @export var action_name : String
 @export var start_method_name : String
 @export var method_name : String
@@ -22,6 +22,7 @@ var character_owner : Character
 
 signal action_started()
 signal action_ended()
+
 
 
 func _action_started(target:Object):

@@ -21,5 +21,6 @@ func update_button_set(unit:Character):
 	for button in buttons:
 		button.clear_action_button()
 	for i in unit.actions.size():
-		buttons[i].action = unit.actions[i]
-		buttons[i].initialise_action_button()
+		#buttons[i].action = unit.actions[i]
+		#buttons[i].initialise_action_button()
+		pass

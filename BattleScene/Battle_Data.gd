@@ -1,11 +1,11 @@
-extends Node
+extends SceneData
 
 class_name BattleData
 
 signal on_set_active_character(unit:Character)
 signal on_select_character(unit:Character)
 
-var battle_script : Battle
+var battle_script : SceneBattle
 var grid : Dictionary[Vector2i,GridCellData]
 var pathfinder:Pathfinder2D
 var tilemap:TileMapLayer
@@ -39,7 +39,7 @@ var global_blackboard : AIBlackboard = AIBlackboard.new()
 var ai_registry : AIRegistry = AIRegistry.new(global_blackboard)
 
 
-func setup(battle:Battle) -> void:
+func setup(battle:SceneBattle) -> void:
 	battle_script = battle
 	grid = battle.grid
 	pathfinder = battle.path_finder

@@ -5,9 +5,7 @@
 [ext_resource type="Script" uid="uid://vjpymfq5ayef" path="res://Actions/Action.gd" id="3_66iw3"]
 [ext_resource type="Resource" uid="uid://ch1etbkd8w2y4" path="res://BattleScene/BattleAI/CharacterActions/Collections/AI_Actions_Default.tres" id="3_rjkiw"]
 [ext_resource type="Script" uid="uid://c7nec1xn11u8a" path="res://BattleScene/BattleAI/CharacterActions/AI_Action.gd" id="4_kjxv8"]
-[ext_resource type="Resource" uid="uid://bqvdjywptv7yj" path="res://Actions/Action_Move.tres" id="4_lbrrl"]
 [ext_resource type="Script" uid="uid://c1gmj252y8xdh" path="res://BattleScene/BattleAI/CharacterActions/AI_Action_Move_To_Enemy.gd" id="5_5wxff"]
-[ext_resource type="Resource" uid="uid://56k0hrnked7q" path="res://Actions/Action_Attack.tres" id="5_dt337"]
 [ext_resource type="Resource" uid="uid://64xnv0xhbdih" path="res://BattleScene/BattleData/CharacterData/Knight.tres" id="5_j8nnj"]
 [ext_resource type="Script" uid="uid://dtoxrqvw40km8" path="res://BattleScene/BattleAI/CharacterActions/AI_Action_Attack.gd" id="6_66iw3"]
 [ext_resource type="Script" uid="uid://vb2lxqlfha75" path="res://BattleScene/BattleGrid/Drawing/Draw_Move_Path.gd" id="11_dt337"]
@@ -28,10 +26,12 @@ region = Rect2(0, 0, 64, 64)
 script = ExtResource("1_3wwac")
 char_sprite = NodePath("CharSprite2D")
 stats = ExtResource("5_j8nnj")
-actions = Array[ExtResource("3_66iw3")]([ExtResource("4_lbrrl"), ExtResource("5_dt337")])
 draw_move_path = NodePath("DrawMovePath")
 ai_actions_list = ExtResource("3_rjkiw")
 class_list = Array[ExtResource("4_kjxv8")]([SubResource("Resource_lbrrl"), SubResource("Resource_dt337")])
+action_dictionary = Dictionary[String, ExtResource("3_66iw3")]({
+"": null
+})
 
 [node name="CharSprite2D" type="Sprite2D" parent="." unique_id=236294916]
 unique_name_in_owner = true

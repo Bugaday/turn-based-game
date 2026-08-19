@@ -3,9 +3,10 @@ extends Node2D
 class_name InputState
 
 signal change_state(state:String)
+signal call_action(action:ActionCommand)
 
 var state_machine : InputStateMachine
-var battle_data : BattleData
+var battle_data : SceneData
 
 func _enter_state():
 	Debug.log("Entering %s Input Mode"%state_machine.current_state.name)

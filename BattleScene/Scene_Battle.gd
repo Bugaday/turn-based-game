@@ -1,6 +1,6 @@
-extends Node2D
+extends SceneGame
 
-class_name Battle
+class_name SceneBattle
 
 #signal on_select_character(unit:Character)
 
@@ -28,8 +28,8 @@ func _ready() -> void:
 
 	CreateGrid()
 	
-	input_state_machine.battle_data = battle_data
-	input_state_machine._setup()
+	input_state_machine.scene_data = battle_data
+	#input_state_machine._setup()
 	
 	battle_data.setup(self)
 	#battle_data.on_set_active_character.co
@@ -63,7 +63,7 @@ func CreateGrid():
 	grid = GridService.CreateGrid()
 	GridService.set_tiles(grid,tile_map)
 	add_blocked_tiles_for_pathfinder()
-	input_state_machine._grid = grid
+	#input_state_machine._grid = grid
 
 
 func add_blocked_tiles_for_pathfinder():

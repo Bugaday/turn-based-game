@@ -15,17 +15,16 @@ func handle_input(_event : InputEvent):
 		state_machine.quit_game()
 	elif _event.is_action_pressed("Select"):
 		var posi : Vector2i = GridService.world_to_grid(get_global_mouse_position())
-		var cell_data : GridCellData = state_machine._grid[posi]
+		var cell_data : GridCellData = battle_data.grid[posi]
 		if cell_data.UnitOccupying:
 			var unit : Character = cell_data.UnitOccupying
 			if unit.faction == "Player":
 				battle_data.selected_character = unit
 				battle_data.active_character = unit
-				#battle_data.battle_blackboard.set_value("selected_character",unit)
-				#battle_data.battle_blackboard.set_value("active_character",unit)
-				#battle_blackboard.battle_script.select_character(unit)
 		elif battle_data.selected_character:
 			var selected_unit : Character = battle_data.selected_character
 			if selected_unit:
-				selected_unit.start_action("Move",battle_data.battle_script)
+				var new_move = ActionCommandMove.new(selected_unit,get_global_mouse_position())
+				call_action.emit(new_move)
+				#selected_unit.start_action("Move",battle_data.battle_script)
 				state_machine.state_change(%InputStateSelectMovePoint.name)

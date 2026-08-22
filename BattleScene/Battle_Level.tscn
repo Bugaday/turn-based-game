@@ -19,23 +19,23 @@
 [ext_resource type="Script" uid="uid://btl37owvxbsmy" path="res://CommandProcessor.gd" id="10_j14wi"]
 [ext_resource type="Script" uid="uid://dpgmjhakkp81d" path="res://BattleScene/BattleInput/InputStates/Input_State_Select.gd" id="10_pgmky"]
 [ext_resource type="Script" uid="uid://c0i0ydk4s5hhw" path="res://Drawing.gd" id="12_ri2no"]
-[ext_resource type="Script" uid="uid://djp5p1ck3i5kc" path="res://Input_Battle.gd" id="17_8f7q6"]
 [ext_resource type="Script" uid="uid://clk4gjyojwb3l" path="res://BattleScene/BattleInput/InputStates/Input_State_Input_Disabled.gd" id="17_65vi3"]
-[ext_resource type="Script" uid="uid://chjgqqwj5sykb" path="res://BattleScene/BattleInput/InputStates/Input_State_Select_Move_Point.gd" id="18_8f7q6"]
+[ext_resource type="Script" uid="uid://chjgqqwj5sykb" path="res://BattleScene/BattleInput/InputStates/Input_State_Choose_Move_Location.gd" id="18_8f7q6"]
+[ext_resource type="Script" uid="uid://dmrv46e0g282s" path="res://BattleScene/Game_Log.gd" id="19_ll3lt"]
 [ext_resource type="PackedScene" uid="uid://dnb7vlopx80d" path="res://BattleScene/BattleUI/UI_Battle.tscn" id="19_winyt"]
 
 [node name="BattleLevel" type="Node2D" unique_id=1879491861 node_paths=PackedStringArray("battle_data", "input_state_machine", "tile_map", "cursor_box", "draw_box", "draw_move_path", "path_finder", "ui_battle", "command_processor") groups=["SceneGame"]]
 script = ExtResource("2_saywf")
+player_team = Array[ExtResource("3_udycp")]([ExtResource("4_o2vke"), ExtResource("5_xwcth")])
+enemy_team = Array[ExtResource("3_udycp")]([ExtResource("6_winyt"), ExtResource("7_65vi3"), ExtResource("8_8f7q6")])
 battle_data = NodePath("BattleData")
-input_state_machine = NodePath("InputBattle/InputStateMachine")
+input_state_machine = NodePath("CanvasLayer/InputStateMachine")
 tile_map = NodePath("BattleTileMap")
 cursor_box = NodePath("Cursor")
 draw_box = NodePath("Drawing/DrawBox")
 draw_move_path = NodePath("Drawing/DrawMovePath")
 path_finder = NodePath("Pathfinder2D")
 ui_battle = NodePath("CanvasLayer/UI_Battle")
-player_team = Array[ExtResource("3_udycp")]([ExtResource("4_o2vke"), ExtResource("5_xwcth")])
-enemy_team = Array[ExtResource("3_udycp")]([ExtResource("6_winyt"), ExtResource("7_65vi3"), ExtResource("8_8f7q6")])
 command_processor = NodePath("CommandProcessor")
 
 [node name="BattleData" type="Node" parent="." unique_id=304589]
@@ -84,28 +84,33 @@ script = ExtResource("3_1a458")
 
 [node name="UI_Battle" parent="CanvasLayer" unique_id=2107946255 instance=ExtResource("19_winyt")]
 
-[node name="InputBattle" type="Node2D" parent="." unique_id=1326896168]
+[node name="GameLog" type="VBoxContainer" parent="CanvasLayer" unique_id=1155089636]
 unique_name_in_owner = true
-script = ExtResource("17_8f7q6")
-metadata/_custom_type_script = "uid://djp5p1ck3i5kc"
+custom_minimum_size = Vector2(300, 200)
+offset_left = 1518.0
+offset_top = 820.0
+offset_right = 1818.0
+offset_bottom = 1020.0
+script = ExtResource("19_ll3lt")
 
-[node name="InputStateMachine" type="Node2D" parent="InputBattle" unique_id=1903787329 node_paths=PackedStringArray("current_state")]
+[node name="InputStateMachine" type="Node2D" parent="CanvasLayer" unique_id=1903787329 node_paths=PackedStringArray("current_state", "scene_data")]
 unique_name_in_owner = true
 script = ExtResource("8_84fj7")
 current_state = NodePath("InputStateSelect")
+scene_data = NodePath("../../BattleData")
 metadata/_custom_type_script = "uid://dcdosyn8h6fjb"
 
-[node name="InputStateSelect" type="Node2D" parent="InputBattle/InputStateMachine" unique_id=1528720649]
+[node name="InputStateSelect" type="Node2D" parent="CanvasLayer/InputStateMachine" unique_id=1528720649]
 unique_name_in_owner = true
 script = ExtResource("10_pgmky")
 metadata/_custom_type_script = "uid://dpgmjhakkp81d"
 
-[node name="InputStateInputDisabled" type="Node2D" parent="InputBattle/InputStateMachine" unique_id=39196950]
+[node name="InputStateInputDisabled" type="Node2D" parent="CanvasLayer/InputStateMachine" unique_id=39196950]
 unique_name_in_owner = true
 script = ExtResource("17_65vi3")
 metadata/_custom_type_script = "uid://clk4gjyojwb3l"
 
-[node name="InputStateSelectMovePoint" type="Node2D" parent="InputBattle/InputStateMachine" unique_id=1658865340]
+[node name="InputStateChooseMoveLocation" type="Node2D" parent="CanvasLayer/InputStateMachine" unique_id=1658865340]
 unique_name_in_owner = true
 script = ExtResource("18_8f7q6")
 metadata/_custom_type_script = "uid://chjgqqwj5sykb"

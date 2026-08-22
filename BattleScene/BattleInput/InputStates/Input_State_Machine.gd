@@ -2,25 +2,21 @@ extends Node2D
 
 class_name InputStateMachine
 
-@onready var scene_data : SceneData = %BattleData
+
 var states : Dictionary[String,InputState] = {}
 @export var current_state : InputState
+@export var scene_data : SceneData
 
 var mouse_pos : Vector2
+
 
 func _setup():
 	for state:InputState in get_children():
 			if state is InputState:
 				states[state.name] = state
 				state.state_machine = self
-				state.battle_data = scene_data
+				state.scene_data = scene_data
 				state.change_state.connect(state_change)
-
-	EventBus.change_input_state.connect(state_change)
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass
 
 
 func _process(_delta: float) -> void:
@@ -48,6 +44,10 @@ func state_change(newState : String):
 func character_finished_path(unit:Character):
 	if current_state.has_method("handle_path_finished"):
 		current_state.handle_path_finished(unit)
+
+
+func enable_input():
+	state_change(%InputStateSelect.name)
 
 
 func pause_toggle():

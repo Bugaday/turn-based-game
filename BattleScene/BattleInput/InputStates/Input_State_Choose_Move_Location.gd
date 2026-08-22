@@ -1,10 +1,10 @@
 extends InputState
 
-class_name InputStateSelectMovePoint
+class_name InputStateChooseMoveLocation
 
 func _enter_state():
 	super()
-	EventBus.update_draw_move_path.emit(battle_data.active_character)
+	#EventBus.update_draw_move_path.emit(battle_data.active_character)
 	
 func _exit_state():
 	super()
@@ -13,12 +13,16 @@ func _exit_state():
 
 func handle_input(_event : InputEvent):
 	if _event is InputEventMouseMotion:
-		EventBus.update_draw_move_path.emit(battle_data.active_character)
+		EventBus.update_draw_move_path.emit(scene_data.active_character)
+		pass
 	elif _event.is_action_pressed("Escape") or _event.is_action_pressed("RightClick"):
-		EventBus.cancel_path.emit()
+		#EventBus.cancel_path.emit()
 		change_state.emit("InputStateSelect")
 	if _event.is_action_pressed("Select"):
-		EventBus.start_move_on_path.emit()
+		var data : BattleData = scene_data as BattleData
+		var path : PackedVector2Array = data.pathfinder.get_path_from_char(data.selected_character.position,get_global_mouse_position(),true)
+		var new_move = ActionCommandMove.new(scene_data.selected_character,path)
+		call_action.emit(new_move)
 		change_state.emit(%InputStateInputDisabled.name)
 
 

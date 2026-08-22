@@ -8,7 +8,6 @@ signal execute_finished()
 signal action_finished()
 
 var source_char : Character
-
 var target
 
 func _init(src:Character=null,tar=null) -> void:
@@ -20,7 +19,8 @@ func _init(src:Character=null,tar=null) -> void:
 
 func start_action():
 	var className:String = get_script().get_global_name()
-	print("Starting action: ",className)
+	var log_string : String = "Starting action: " + className
+	print(log_string)
 
 
 func update_action():
@@ -29,7 +29,8 @@ func update_action():
 
 func execute_action():
 	var className:String = get_script().get_global_name()
-	print("Executing action: ",className)
+	var log_string : String = "Executing action: " + className
+	print(log_string)
 	#await action_finished
 	#end_action()
 
@@ -39,5 +40,6 @@ func end_action():
 	#Util.delay_function(end_action,1.0,unit)
 	
 	var className:String = get_script().get_global_name()
-	print("Finishing action: ",className)
+	var log_string : String = "Finishing action: " + className
+	print(log_string)
 	action_finished.emit()

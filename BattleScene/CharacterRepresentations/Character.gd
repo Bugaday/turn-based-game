@@ -10,7 +10,6 @@ signal path_finished()
 var char_last_cell_pos : Vector2
 var faction : String
 var move_path : PackedVector2Array
-var moveTargets : Array[Vector2]
 
 var battle_data : BattleData
 
@@ -40,42 +39,6 @@ func draw_path():
 	#draw_move_path._drawPath(position)
 	pass
 
-#Start the movement code
-func start_move(path:PackedVector2Array):
-	move_path = path
-	if move_path.is_empty():
-		return
-	move_to_next_waypoint()
-
-
-#Progress to next waypoint
-func move_to_next_waypoint():
-	char_last_cell_pos = move_path[0]
-	#Remove the first waypoint that we're standing on, pushing the next into index 0 to move towards
-	move_path.remove_at(0)
-
-	#If there are no more waypoints, finish the path
-	if move_path.is_empty():
-		path_complete()
-		return
-	
-	var tween : Tween = create_tween()
-	var move_distance : float = position.distance_to(move_path[0])
-	var move_time = move_distance / GridProps2D.gridSizeX * stats.move_speed
-	tween.tween_property(self,"global_position",move_path[0],move_time)
-	tween.finished.connect(section_complete)
-
-
-#A section of path has just completed
-func section_complete():
-	EventBus.char_path_section_completed.emit()
-	move_to_next_waypoint()
-
-
-#The whole path is now complete	
-func path_complete():
-	path_finished.emit(self)
-	action_finished.emit()
 
 
 func _setStats() -> void:

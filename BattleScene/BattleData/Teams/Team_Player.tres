@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Team" format=3 uid="uid://b1kav1edpjaa4"]
+
+[ext_resource type="Script" uid="uid://b7jf7ce86qwkj" path="res://BattleScene/BattleData/Teams/Team.gd" id="1_6qnt5"]
+[ext_resource type="Script" uid="uid://cvrfh8dxox5u0" path="res://BattleScene/BattleData/CharacterData/Character_Data.gd" id="2_8pqww"]
+[ext_resource type="Resource" uid="uid://64xnv0xhbdih" path="res://BattleScene/BattleData/CharacterData/Knight.tres" id="3_kfi3v"]
+[ext_resource type="Resource" uid="uid://cb3a7pug7dtk4" path="res://BattleScene/BattleData/CharacterData/Dwarf.tres" id="4_lnhnx"]
+[ext_resource type="Resource" uid="uid://bpwxllkia0gkr" path="res://BattleScene/BattleData/CharacterData/Wizard.tres" id="5_kih1k"]
+
+[resource]
+script = ExtResource("1_6qnt5")
+teamMembers = Array[ExtResource("2_8pqww")]([ExtResource("3_kfi3v"), ExtResource("4_lnhnx"), ExtResource("5_kih1k")])
+metadata/_custom_type_script = "uid://b7jf7ce86qwkj"

@@ -2,6 +2,7 @@ extends Node2D
 
 class_name SceneGame
 
+@export var scene_data : SceneData
 var drawing : Drawing
 @export var command_processor : CommandProcessor
 

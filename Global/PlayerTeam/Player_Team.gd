@@ -1,10 +1,11 @@
 extends Node
 
-var team_members : Array[Character]
+var team_members : Team = load("res://BattleScene/BattleData/Teams/Team_Player.tres")
 
-func _init() -> void:
-	if team_members.is_empty():
-		add_default_members()
+func _ready() -> void:
+	if team_members:
+		if team_members.teamMembers.is_empty():
+			add_default_members()
 
 
 func add_default_members():

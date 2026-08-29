@@ -19,29 +19,15 @@ var battle_data : BattleData
 @export var ai_actions_list : AIActionsData
 @export var class_list : Array[AIAction]
 
-@export var action_dictionary : Dictionary[String,Action]
-var actions : Array[ActionCommand]
+enum ACTION_NAMES {MOVE,ATTACK,USE}
+
+var actions : Array[ACTION_NAMES] = [ACTION_NAMES.MOVE]
+@export var test_action : ActionCommand
 
 func _ready() -> void:
 	if stats:
 		_setStats()
-	for action in actions:
-		action.character_owner = self
-		action_dictionary.set(action.action_name,action)
-
-		
-func start_action(action_name:String,target:Object):
-	action_dictionary[action_name]._action_started(target)
- 
-
-func draw_path():
-	#move_path = ba
-	#draw_move_path._drawPath(position)
-	pass
-
 
 
 func _setStats() -> void:
-	for action in stats.extra_actions:
-		actions.append(action)
 	char_sprite.texture = stats.sprite

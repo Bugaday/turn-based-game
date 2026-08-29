@@ -3,27 +3,35 @@
 [ext_resource type="TileSet" uid="uid://uf68vmgahhy8" path="res://BattleScene/BattleGrid/BattleEnvironment/BattleTileSets/new_tile_set.tres" id="1_0r1ij"]
 [ext_resource type="Script" uid="uid://b266d3rmygp2g" path="res://BattleScene/Scene_Battle.gd" id="2_saywf"]
 [ext_resource type="Script" uid="uid://8q86ld088lto" path="res://BattleScene/BattleCamera/Camera_2D.gd" id="3_1a458"]
+[ext_resource type="Script" uid="uid://vb2lxqlfha75" path="res://BattleScene/BattleGrid/Drawing/Draw_Move_Path.gd" id="3_saywf"]
+[ext_resource type="Script" uid="uid://cvrfh8dxox5u0" path="res://BattleScene/BattleData/CharacterData/Character_Data.gd" id="3_udycp"]
+[ext_resource type="Script" uid="uid://cpvkr5ihtw162" path="res://BattleScene/BattleGrid/Drawing/Draw_Box.gd" id="4_8dxr6"]
+[ext_resource type="Resource" uid="uid://64xnv0xhbdih" path="res://BattleScene/BattleData/CharacterData/Knight.tres" id="4_o2vke"]
 [ext_resource type="Script" uid="uid://cnjmrmric06ny" path="res://BattleScene/BattleGrid/Pathfinding/Pathfinder2D.gd" id="4_pgmky"]
-[ext_resource type="PackedScene" uid="uid://h52sgpw0xgx3" path="res://BattleScene/Drawing_Battle.tscn" id="7_p58h3"]
+[ext_resource type="Resource" uid="uid://bpwxllkia0gkr" path="res://BattleScene/BattleData/CharacterData/Wizard.tres" id="5_xwcth"]
+[ext_resource type="Script" uid="uid://fy46tn4iix5g" path="res://BattleScene/BattleGrid/Drawing/Draw_Cursor.gd" id="6_bketd"]
+[ext_resource type="Resource" uid="uid://b56icsqafvgar" path="res://BattleScene/BattleData/CharacterData/Zombie.tres" id="6_winyt"]
+[ext_resource type="Resource" uid="uid://i0l4a0v0lm6a" path="res://BattleScene/BattleData/CharacterData/Skeleton.tres" id="7_65vi3"]
+[ext_resource type="Resource" uid="uid://dk0l615q2vgai" path="res://BattleScene/BattleData/CharacterData/Bat.tres" id="8_8f7q6"]
 [ext_resource type="Script" uid="uid://u8abbnqnmas6" path="res://BattleScene/Battle_Data.gd" id="8_65vi3"]
 [ext_resource type="Resource" uid="uid://ctbpko7qk6t0s" path="res://BattleScene/BattleData/Battle_Spawner_Default.tres" id="9_65vi3"]
 [ext_resource type="Script" uid="uid://btl37owvxbsmy" path="res://CommandProcessor.gd" id="10_j14wi"]
+[ext_resource type="Script" uid="uid://c0i0ydk4s5hhw" path="res://Drawing.gd" id="12_ri2no"]
 [ext_resource type="Script" uid="uid://dmrv46e0g282s" path="res://BattleScene/Game_Log.gd" id="19_ll3lt"]
 [ext_resource type="PackedScene" uid="uid://dnb7vlopx80d" path="res://BattleScene/BattleUI/UI_Battle.tscn" id="19_winyt"]
 [ext_resource type="Script" uid="uid://dulbfwuva74yp" path="res://GameStateMachine/Game_State_Machine.gd" id="20_65vi3"]
 
-[node name="BattleLevel" type="Node2D" unique_id=1879491861 node_paths=PackedStringArray("battle_data", "path_finder", "drawing_battle", "ui_battle", "command_processor") groups=["SceneGame"]]
+[node name="BattleLevel" type="Node2D" unique_id=1879491861 node_paths=PackedStringArray("battle_data", "tile_map", "path_finder") groups=["SceneGame"]]
 script = ExtResource("2_saywf")
 battle_data = NodePath("BattleData")
+tile_map = NodePath("BattleTileMap")
 path_finder = NodePath("Pathfinder2D")
-drawing_battle = NodePath("Drawing")
-ui_battle = NodePath("CanvasLayer/UI_Battle")
-command_processor = NodePath("CommandProcessor")
+player_team = Array[ExtResource("3_udycp")]([ExtResource("4_o2vke"), ExtResource("5_xwcth")])
+enemy_team = Array[ExtResource("3_udycp")]([ExtResource("6_winyt"), ExtResource("7_65vi3"), ExtResource("8_8f7q6")])
 
-[node name="BattleData" type="Node" parent="." unique_id=304589 node_paths=PackedStringArray("tilemap")]
+[node name="BattleData" type="Node" parent="." unique_id=304589]
 unique_name_in_owner = true
 script = ExtResource("8_65vi3")
-tilemap = NodePath("../BattleTileMap")
 battle_spawner = ExtResource("9_65vi3")
 metadata/_custom_type_script = "uid://u8abbnqnmas6"
 
@@ -41,7 +49,24 @@ unique_name_in_owner = true
 script = ExtResource("4_pgmky")
 metadata/_custom_type_script = "uid://cnjmrmric06ny"
 
-[node name="Drawing" parent="." unique_id=781264123 instance=ExtResource("7_p58h3")]
+[node name="Drawing" type="Node2D" parent="." unique_id=2135203338]
+script = ExtResource("12_ri2no")
+metadata/_custom_type_script = "uid://c0i0ydk4s5hhw"
+
+[node name="DrawMovePath" type="Node2D" parent="Drawing" unique_id=1700517755]
+unique_name_in_owner = true
+script = ExtResource("3_saywf")
+metadata/_custom_type_script = "uid://vb2lxqlfha75"
+
+[node name="DrawBox" type="Node2D" parent="Drawing" unique_id=908109188]
+unique_name_in_owner = true
+position = Vector2(32, 32)
+script = ExtResource("4_8dxr6")
+metadata/_custom_type_script = "uid://cpvkr5ihtw162"
+
+[node name="Cursor" type="Node2D" parent="." unique_id=386798007]
+unique_name_in_owner = true
+script = ExtResource("6_bketd")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=775251628]
 script = ExtResource("3_1a458")
@@ -59,8 +84,8 @@ offset_right = 1818.0
 offset_bottom = 1020.0
 script = ExtResource("19_ll3lt")
 
-[node name="GameStateMachine" type="Node2D" parent="." unique_id=1903787329 node_paths=PackedStringArray("scene_battle")]
+[node name="GameStateMachine" type="Node2D" parent="." unique_id=1903787329 node_paths=PackedStringArray("scene_game")]
 unique_name_in_owner = true
 script = ExtResource("20_65vi3")
-scene_battle = NodePath("..")
+scene_game = NodePath("..")
 metadata/_custom_type_script = "uid://dcdosyn8h6fjb"

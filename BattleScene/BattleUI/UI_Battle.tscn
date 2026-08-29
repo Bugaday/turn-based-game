@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dnb7vlopx80d"]
 
-[ext_resource type="Script" uid="uid://c0sokovxqojy5" path="res://BattleScene/BattleUI/UI_Battle_Controller.gd" id="1_x3jtv"]
+[ext_resource type="Script" uid="uid://c0sokovxqojy5" path="res://BattleScene/BattleUI/UI_Battle.gd" id="1_x3jtv"]
 [ext_resource type="Script" uid="uid://dfi0ppbp0ouxo" path="res://BattleScene/BattleUI/Buttons/end_turn_button.gd" id="2_coxye"]
 [ext_resource type="Script" uid="uid://dmlu5o2x3kk26" path="res://BattleScene/BattleUI/action_button_controller.gd" id="3_pmo2u"]
 [ext_resource type="Script" uid="uid://cjxemdkryrvkj" path="res://BattleScene/ActionButton.gd" id="4_pikk8"]
@@ -100,6 +100,7 @@ script = ExtResource("4_pikk8")
 metadata/_custom_type_script = "uid://cjxemdkryrvkj"
 
 [node name="UIUnitCard" parent="." unique_id=1088169180 instance=ExtResource("5_rkfma")]
+visible = false
 layout_mode = 0
 offset_left = 1472.0
 offset_top = 439.0

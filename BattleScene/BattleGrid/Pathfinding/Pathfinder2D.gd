@@ -5,6 +5,7 @@ class_name Pathfinder2D
 var _astar : AStarGrid2D = AStarGrid2D.new()
 var drawn_path : PackedVector2Array
 
+
 func _ready() -> void:
 	_astar.region = Rect2i(0, 0, GridProps2D.gridXCount, GridProps2D.gridYCount)
 	_astar.cell_size = Vector2(64, 64)
@@ -20,15 +21,16 @@ func get_path_from_char(start:Vector2,end:Vector2,partial:bool=false)->PackedVec
 	var end_pos : Vector2i = GridService.world_to_grid(end)
 	set_cell_free(start_pos)
 	var path:PackedVector2Array = _astar.get_point_path(start_pos,end_pos,partial)
-	set_blocked_cells(start_pos)
+	set_blocked_cell(start_pos)
 	return path
 
-func set_blocked_cells(cell:Vector2i):
+
+func set_blocked_cell(cell:Vector2i):
 	_astar.set_point_solid(cell,true)
 	
 func set_blocked_cell_from_vector2(pos:Vector2):
 	var posi : Vector2i = GridService.world_to_grid(pos)
-	set_blocked_cells(posi)
+	set_blocked_cell(posi)
 	
 func set_cell_free(cell:Vector2i):
 	_astar.set_point_solid(cell,false)

@@ -9,11 +9,13 @@
 atlas = ExtResource("2_in1wn")
 region = Rect2(256, 0, 64, 64)
 
-[node name="UIUnitCard" type="Panel" unique_id=1088169180]
+[node name="UIUnitCard" type="Panel" unique_id=1088169180 node_paths=PackedStringArray("unit_card_portrait", "unit_card_name")]
 material = SubResource("CanvasItemMaterial_ll3lt")
 offset_right = 192.0
 offset_bottom = 256.0
 script = ExtResource("1_l16vv")
+unit_card_portrait = NodePath("UnitCardPortrait")
+unit_card_name = NodePath("UnitCardName")
 
 [node name="UnitCardPortrait" type="TextureRect" parent="." unique_id=1242808780]
 unique_name_in_owner = true

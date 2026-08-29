@@ -9,7 +9,7 @@ class_name CharacterData
 @export var agility : int = 70
 @export var sprite: AtlasTexture;
 
-@export var extra_actions : Array[Action]
+var extra_actions : Array[ActionCommand]
 
 var max_action_points : int = 100
 var current_action_points : int

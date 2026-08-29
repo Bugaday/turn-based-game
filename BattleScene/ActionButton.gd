@@ -2,7 +2,7 @@ extends Button
 
 class_name ActionButton
 
-var action : Action
+var action : ActionCommand
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -24,6 +24,5 @@ func clear_action_button():
 
 
 func _pressed() -> void:
-	print(owner)
-	#action._action_started()
-	pass
+	print(text)
+	action.start_action()

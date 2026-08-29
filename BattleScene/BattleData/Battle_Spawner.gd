@@ -12,8 +12,10 @@ func spawn()->Array[Character]:
 	var char_scene : PackedScene = load("res://BattleScene/CharacterRepresentations/Character.tscn")
 	var char_array:Array[Character]
 	
-	for member in PlayerTeam.team_members:
+	for member : CharacterData in PlayerTeam.team_members.teamMembers:
 		var newChar:Character = char_scene.instantiate()
+		newChar.stats = member
+		#newChar._setStats()
 		newChar.faction = "Player"
 		char_array.append(newChar)
 	
@@ -43,7 +45,7 @@ func spawn()->Array[Character]:
 		#var grid_pos = GridService.GetRandomGridPosition(_grid,_tilemap)
 		#newChar.position = grid_pos
 		#GridService.set_cell_unit_data_at_pos(newChar,_grid)
-		#path_finder.set_blocked_cells(GridService.world_to_grid(newChar.position))
+		#path_finder.set_blocked_cell(GridService.world_to_grid(newChar.position))
 #
 #
 #func spawn_npcs(char_scene:PackedScene):
@@ -58,4 +60,4 @@ func spawn()->Array[Character]:
 		#newChar.faction = "Bandits"
 		#newChar.position = GridService.GetRandomGridPosition(_grid,_tile_map)
 		#GridService.set_cell_unit_data_at_pos(newChar,grid)
-		#path_finder.set_blocked_cells(GridService.world_to_grid(newChar.position))
+		#path_finder.set_blocked_cell(GridService.world_to_grid(newChar.position))

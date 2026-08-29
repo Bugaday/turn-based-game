@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://b266d3rmygp2g" path="res://BattleScene/Scene_Battle.gd" id="2_saywf"]
 [ext_resource type="Script" uid="uid://8q86ld088lto" path="res://BattleScene/BattleCamera/Camera_2D.gd" id="3_1a458"]
 [ext_resource type="Script" uid="uid://cnjmrmric06ny" path="res://BattleScene/BattleGrid/Pathfinding/Pathfinder2D.gd" id="4_pgmky"]
+[ext_resource type="Script" uid="uid://fy46tn4iix5g" path="res://BattleScene/BattleGrid/Drawing/Draw_Cursor.gd" id="6_bketd"]
 [ext_resource type="PackedScene" uid="uid://h52sgpw0xgx3" path="res://BattleScene/Drawing_Battle.tscn" id="7_p58h3"]
 [ext_resource type="Script" uid="uid://u8abbnqnmas6" path="res://BattleScene/Battle_Data.gd" id="8_65vi3"]
 [ext_resource type="Resource" uid="uid://ctbpko7qk6t0s" path="res://BattleScene/BattleData/Battle_Spawner_Default.tres" id="9_65vi3"]
@@ -42,6 +43,10 @@ script = ExtResource("4_pgmky")
 metadata/_custom_type_script = "uid://cnjmrmric06ny"
 
 [node name="Drawing" parent="." unique_id=781264123 instance=ExtResource("7_p58h3")]
+
+[node name="Cursor" type="Node2D" parent="." unique_id=386798007]
+unique_name_in_owner = true
+script = ExtResource("6_bketd")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=775251628]
 script = ExtResource("3_1a458")

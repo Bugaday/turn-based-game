@@ -1,6 +1,6 @@
 extends Node
 
-class_name UIBattleController
+class_name UIBattle
 
 
 @export var action_button_controller : ActionButtonController

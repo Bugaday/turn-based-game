@@ -1,5 +1,4 @@
-@abstract
-extends RefCounted
+extends Node
 
 class_name ActionCommand
 
@@ -7,10 +6,12 @@ signal start_finished()
 signal execute_finished()
 signal action_finished()
 
+var action_name : String
 var source_char : Character
 var target
 
 func _init(src:Character=null,tar=null) -> void:
+	action_name = get_script().get_global_name()
 	source_char = src
 	target = tar
 	start_finished.connect(execute_action)

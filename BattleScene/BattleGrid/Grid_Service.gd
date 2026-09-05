@@ -28,8 +28,12 @@ static func set_tiles(grid:Dictionary[Vector2i,GridCellData],tilemap:TileMapLaye
 
 
 static func get_cell_data_at_pos(pos:Vector2i,grid:Dictionary[Vector2i,GridCellData])->GridCellData:
-	var cell_data : GridCellData = grid[pos]
-	return cell_data
+	if grid.keys().has(pos):
+		var cell_data : GridCellData = grid[pos]
+		return cell_data
+	else:
+		print("No grid cell at: ",pos,"!")
+		return null
 
 	
 static func set_cell_unit_data_at_pos(unit:Character,grid:Dictionary[Vector2i,GridCellData]):

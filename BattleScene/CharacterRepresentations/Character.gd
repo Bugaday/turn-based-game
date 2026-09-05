@@ -18,11 +18,9 @@ var battle_data : BattleData
 @export var draw_move_path : DrawMovePath
 @export var ai_actions_list : AIActionsData
 @export var class_list : Array[AIAction]
-@export var class_list_actions : Dictionary[String,GDScript]
-
-
-@export var actions : Dictionary[String,ActionData]
-#@export var test_action : ActionCommand
+enum ACTION {MOVE,ATTACK}
+@export var actions : Array[ACTION]
+@export var action_list : Dictionary[ACTION,ActionData]
 
 func _ready() -> void:
 	if stats:

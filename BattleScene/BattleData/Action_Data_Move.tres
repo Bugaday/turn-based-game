@@ -1,10 +1,8 @@
-[gd_resource type="Resource" script_class="ActionData" format=3 uid="uid://dfojq5iio1gvd"]
+[gd_resource type="Resource" script_class="ActionDataMove" format=3 uid="uid://dfojq5iio1gvd"]
 
-[ext_resource type="Script" uid="uid://q5crdixh6b87" path="res://BattleScene/BattleData/Action_Command_Move.gd" id="1_b3w4u"]
-[ext_resource type="Script" uid="uid://c0m08tcmh7bjx" path="res://BattleScene/BattleData/Action_Data.gd" id="1_p7f8a"]
+[ext_resource type="Script" uid="uid://dqicq528dr27" path="res://BattleScene/BattleData/Action_Data_Move.gd" id="1_p7f8a"]
 
 [resource]
 script = ExtResource("1_p7f8a")
 action_name = "Move"
-action_command = ExtResource("1_b3w4u")
-metadata/_custom_type_script = "uid://c0m08tcmh7bjx"
+metadata/_custom_type_script = "uid://dqicq528dr27"

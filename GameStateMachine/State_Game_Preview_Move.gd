@@ -20,11 +20,11 @@ func handle_input(_event : InputEvent,battle_scene_script:SceneBattle)->StateGam
 		elif battle_scene_script.battle_data.selected_character:
 			var unit : Character = battle_scene_script.battle_data.selected_character
 			var path = battle_scene_script.path_finder.get_path_from_char(unit.position,mousePos,true)
-			var move_action = unit.class_list_actions.get("Move")
+			#var move_action = unit.class_list_actions.get("Move")
 			#var move_action : ActionCommand = ActionCommandMove.new(battle_scene_script.battle_data.selected_character,path,battle_scene_script)
-			battle_scene_script.command_processor.add_action(move_action)
+			#battle_scene_script.command_processor.add_action(move_action)
 			var busy_state : StateGameBusy =  StateGameBusy.new()
-			move_action.action_finished.connect(busy_state.end_busy,CONNECT_ONE_SHOT)
+			#move_action.action_finished.connect(busy_state.end_busy,CONNECT_ONE_SHOT)
 			return busy_state
 	elif _event.is_action_pressed("Cancel"):
 		battle_scene_script.drawing_battle.draw_move_path.clear_path()

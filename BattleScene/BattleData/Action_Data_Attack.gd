@@ -1,8 +1,6 @@
-extends Resource
+extends ActionData
 
-class_name ActionData 
-
-@export var action_name : String
+class_name ActionDataAttack
 
 func create_command(src_char:Character,battle_data:SceneBattle,action_data:ActionData,b_is_player:bool)->ActionCommand:
-	return null
+	return ActionCommandAttack.new(src_char,battle_data,self,b_is_player)

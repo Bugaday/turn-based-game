@@ -1,8 +1,8 @@
-[gd_resource type="Resource" script_class="ActionData" format=3 uid="uid://l0vql1d174q2"]
+[gd_resource type="Resource" script_class="ActionDataAttack" format=3 uid="uid://l0vql1d174q2"]
 
-[ext_resource type="Script" uid="uid://c0m08tcmh7bjx" path="res://BattleScene/BattleData/Action_Data.gd" id="1_oxna5"]
+[ext_resource type="Script" uid="uid://ciyfpt0s0i1q7" path="res://BattleScene/BattleData/Action_Data_Attack.gd" id="1_oxna5"]
 
 [resource]
 script = ExtResource("1_oxna5")
 action_name = "Attack"
-metadata/_custom_type_script = "uid://c0m08tcmh7bjx"
+metadata/_custom_type_script = "uid://ciyfpt0s0i1q7"

@@ -1,6 +1,17 @@
 extends StateGame
 
-class_name StateGameSelect
+class_name StateGameAction
+
+var action_ : ActionCommand
+
+func _init(action:ActionCommand) -> void:
+	action_ = action
+	if action_:
+		action_.action_finished.connect(end_state)
+
+func end_state():
+	state_finished.emit(StateGameSelect.new())
+	
 
 func handle_input(_event : InputEvent,battle_scene_script:SceneBattle)->StateGame:
 	if _event.is_action_released("Select"):
@@ -15,6 +26,5 @@ func handle_input(_event : InputEvent,battle_scene_script:SceneBattle)->StateGam
 			var move_action : ActionData = unit.action_list[unit.ACTION.MOVE]
 			var command : ActionCommand = move_action.create_command(unit,battle_scene_script,move_action,true)
 			battle_scene_script.command_processor.add_action(command)
-			return StateGameAction.new(command)
 
 	return null

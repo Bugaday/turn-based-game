@@ -48,7 +48,8 @@ script = ExtResource("3_1a458")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=877403045]
 
-[node name="UI_Battle" parent="CanvasLayer" unique_id=2107946255 instance=ExtResource("19_winyt")]
+[node name="UI_Battle" parent="CanvasLayer" unique_id=2107946255 node_paths=PackedStringArray("battle_scene") instance=ExtResource("19_winyt")]
+battle_scene = NodePath("../..")
 
 [node name="GameLog" type="VBoxContainer" parent="CanvasLayer" unique_id=1155089636]
 unique_name_in_owner = true
@@ -63,4 +64,3 @@ script = ExtResource("19_ll3lt")
 unique_name_in_owner = true
 script = ExtResource("20_65vi3")
 scene_battle = NodePath("..")
-metadata/_custom_type_script = "uid://dcdosyn8h6fjb"

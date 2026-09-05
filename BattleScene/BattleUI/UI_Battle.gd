@@ -2,7 +2,7 @@ extends Node
 
 class_name UIBattle
 
-
+@export var battle_scene : SceneBattle
 @export var action_button_controller : ActionButtonController
 @export var ui_unit_card : UIUnitCard
 
@@ -18,7 +18,7 @@ func _ready() -> void:
 	pass
 	
 func on_character_selected(unit:Character):
-	action_button_controller.update_button_set(unit)
+	action_button_controller.update_button_set(unit,battle_scene)
 	ui_unit_card._setInfo(unit.stats)
 	
 func trigger_new_turn():

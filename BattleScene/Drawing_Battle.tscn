@@ -4,12 +4,14 @@
 [ext_resource type="Script" uid="uid://vb2lxqlfha75" path="res://BattleScene/BattleGrid/Drawing/Draw_Move_Path.gd" id="2_r1ss0"]
 [ext_resource type="Script" uid="uid://cpvkr5ihtw162" path="res://BattleScene/BattleGrid/Drawing/Draw_Box.gd" id="3_ur2n1"]
 [ext_resource type="Script" uid="uid://fy46tn4iix5g" path="res://BattleScene/BattleGrid/Drawing/Draw_Cursor.gd" id="4_r1ss0"]
+[ext_resource type="Script" uid="uid://cf44fvkokbkdv" path="res://BattleScene/BattleGrid/Drawing/Draw_Action.gd" id="5_ur2n1"]
 
-[node name="Drawing" type="Node2D" unique_id=781264123 node_paths=PackedStringArray("draw_box", "cursor", "draw_move_path")]
+[node name="Drawing" type="Node2D" unique_id=781264123 node_paths=PackedStringArray("draw_box", "cursor", "draw_move_path", "draw_action")]
 script = ExtResource("1_qxmsi")
 draw_box = NodePath("DrawBox")
 cursor = NodePath("Cursor")
 draw_move_path = NodePath("DrawMovePath")
+draw_action = NodePath("DrawAction")
 metadata/_custom_type_script = "uid://c0i0ydk4s5hhw"
 
 [node name="DrawMovePath" type="Node2D" parent="." unique_id=1314292230]
@@ -26,3 +28,7 @@ metadata/_custom_type_script = "uid://cpvkr5ihtw162"
 [node name="Cursor" type="Node2D" parent="." unique_id=1939075308]
 unique_name_in_owner = true
 script = ExtResource("4_r1ss0")
+
+[node name="DrawAction" type="Node2D" parent="." unique_id=961851872]
+script = ExtResource("5_ur2n1")
+metadata/_custom_type_script = "uid://cf44fvkokbkdv"

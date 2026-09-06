@@ -4,6 +4,7 @@ class_name ActionCommandAttack
 
 var game_battle : SceneBattle
 var potential_target_list : Array[Character]
+var cells_in_range : Array[Vector2i]
 
 
 func start_action():
@@ -25,15 +26,13 @@ func end_action():
 	super()
 
 
-func _draw() -> void:
-	for i in potential_target_list:
-		draw_circle(i.position,24,Color.RED,true,4.0,true)
-
-
 func get_viable_targets():
+	potential_target_list.clear()
+	cells_in_range.clear()
 	var char_cell : Vector2i = GridService.world_to_grid(source_char.position)
 	for i:int in range(-1,1):
 		for j:int in range(-1,1):
+			cells_in_range.append(Vector2(i,j))
 			var cell_to_check : GridCellData = GridService.get_cell_data_at_pos(char_cell+Vector2i(i,j),battle_scene_.battle_data.grid)
 			if not cell_to_check:
 				continue
@@ -42,4 +41,4 @@ func get_viable_targets():
 				if unit.faction != source_char.faction:
 					potential_target_list.append(unit)
 	print(potential_target_list)
-	queue_redraw()
+	battle_scene_.drawing_battle.draw_action.draw_items(cells_in_range,potential_target_list )

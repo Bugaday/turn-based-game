@@ -5,6 +5,7 @@ class_name Drawing
 @export var draw_box : DrawBox
 @export var cursor : DrawCursor
 @export var draw_move_path : DrawMovePath
+@export var draw_action : DrawAction
 
 
 func _draw() -> void:

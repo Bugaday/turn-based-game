@@ -8,6 +8,8 @@ class_name SceneBattle
 @export var ui_battle : UIBattle
 @export var command_processor : CommandProcessor
 
+var current_state : StateGame
+
 
 func _ready() -> void:
 	
@@ -51,14 +53,14 @@ func blackboard_set(key:String):
 func select_character(unit:Character):
 	battle_data.selected_character = unit
 	battle_data.active_character = unit
-	ui_battle.on_character_selected(unit)
+	ui_battle.on_character_selected(unit,self)
 	drawing_battle.draw_box.position = unit.position
 
 
 func start_faction_turn():
 	if battle_data.active_faction == "Player":
-		EventBus.ai_turn_finished.emit()
-		EventBus.change_input_state.emit(%InputStateSelect.name)
+		#EventBus.ai_turn_finished.emit()
+		#EventBus.change_input_state.emit(%InputStateSelect.name)
 		print("Player's turn!")
 	else:
 		print("AI's turn!")

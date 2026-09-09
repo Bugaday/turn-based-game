@@ -2,6 +2,7 @@ extends Node
 
 class_name CommandProcessor
 
+signal on_command_queue_started(StateGame)
 signal on_queue_finish()
 
 var command_queue : Array[ActionCommand]
@@ -24,13 +25,15 @@ func start_queue():
 	if queue_running:
 		return
 	else:
+		current_command = command_queue[0]
+		var action_state = StateGameAction.new(current_command)
+		on_command_queue_started.emit(StateGameAction.new(current_command))
 		execute_queue()
 
 
 func execute_queue():
 	if command_queue.size() > 0:
 		queue_running = true
-		current_command = command_queue[0]
 		current_command.action_finished.connect(execute_queue)
 		current_command.start_action()
 	else:

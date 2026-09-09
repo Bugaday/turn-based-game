@@ -6,7 +6,7 @@ signal state_finished(action:ActionCommand)
 
 
 func _enter_state(battle_scene_script:SceneBattle):
-	Debug.log("Entering new state")
+	#Debug.log("Entering new state")
 	pass
 
 

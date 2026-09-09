@@ -14,6 +14,10 @@ draw_move_path = NodePath("DrawMovePath")
 draw_action = NodePath("DrawAction")
 metadata/_custom_type_script = "uid://c0i0ydk4s5hhw"
 
+[node name="DrawAction" type="Node2D" parent="." unique_id=961851872]
+script = ExtResource("5_ur2n1")
+metadata/_custom_type_script = "uid://cf44fvkokbkdv"
+
 [node name="DrawMovePath" type="Node2D" parent="." unique_id=1314292230]
 unique_name_in_owner = true
 script = ExtResource("2_r1ss0")
@@ -28,7 +32,3 @@ metadata/_custom_type_script = "uid://cpvkr5ihtw162"
 [node name="Cursor" type="Node2D" parent="." unique_id=1939075308]
 unique_name_in_owner = true
 script = ExtResource("4_r1ss0")
-
-[node name="DrawAction" type="Node2D" parent="." unique_id=961851872]
-script = ExtResource("5_ur2n1")
-metadata/_custom_type_script = "uid://cf44fvkokbkdv"

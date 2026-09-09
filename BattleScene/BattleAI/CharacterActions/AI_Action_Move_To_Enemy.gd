@@ -7,7 +7,7 @@ var path : PackedVector2Array
 
 func _execute_action(unit:Character):
 	super(unit)
-	EventBus.action_move_to_enemy.emit()
+	#EventBus.action_move_to_enemy.emit()
 	#var start : Vector2i = GridService.world_to_grid(unit.position)
 	#var end : Vector2i = Vector2i(3,4)
 	#if !path:

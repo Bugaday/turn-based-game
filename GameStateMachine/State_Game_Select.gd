@@ -15,6 +15,6 @@ func handle_input(_event : InputEvent,battle_scene_script:SceneBattle)->StateGam
 			var move_action : ActionData = unit.action_list[unit.ACTION.MOVE]
 			var command : ActionCommand = move_action.create_command(unit,battle_scene_script,move_action,true)
 			battle_scene_script.command_processor.add_action(command)
-			return StateGameAction.new(command)
+			#return StateGameAction.new(command)
 
 	return null

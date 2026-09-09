@@ -4,6 +4,7 @@ class_name ActionCommand
 
 signal start_finished()
 signal execute_finished()
+#signal cancel_action()
 signal action_finished()
 
 var action_name : String

@@ -6,7 +6,9 @@ var current_state : StateGame
 @export var scene_battle : SceneBattle
 
 func _ready() -> void:
+	scene_battle.command_processor.on_command_queue_started.connect(change_state)
 	change_state(StateGameSelect.new())
+
 
 func _process(_delta: float) -> void:
 	if current_state:

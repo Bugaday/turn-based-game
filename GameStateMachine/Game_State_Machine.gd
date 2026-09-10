@@ -29,6 +29,6 @@ func change_state(newState : StateGame):
 	if current_state:
 		current_state._exit_state(scene_battle)
 	current_state = newState
-	current_state.state_finished.connect(change_state,CONNECT_ONE_SHOT)
-	print("Changing to state: ", newState)
+	newState.on_state_finished.connect(change_state,CONNECT_ONE_SHOT)
+	print("Changing to state: ", newState.get_script().get_global_name())
 	current_state._enter_state(scene_battle)

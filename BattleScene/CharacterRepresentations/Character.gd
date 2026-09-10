@@ -2,11 +2,6 @@ extends Node2D
 
 class_name Character
 
-signal start_move_on_path()
-signal action_started()
-signal action_finished()
-signal path_finished()
-
 var char_last_cell_pos : Vector2
 var faction : String
 var move_path : PackedVector2Array

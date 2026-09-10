@@ -3,7 +3,6 @@ extends Node
 class_name CommandProcessor
 
 signal on_command_queue_started(StateGame)
-signal on_queue_finish()
 
 var command_queue : Array[ActionCommand]
 var current_command : ActionCommand
@@ -17,7 +16,7 @@ func _process(_delta: float) -> void:
 
 func add_action(action:ActionCommand):
 	command_queue.append(action)
-	action.action_finished.connect(action_finished)
+	action.action_finished.connect(action_complete)
 	start_queue()
 
 
@@ -26,7 +25,6 @@ func start_queue():
 		return
 	else:
 		current_command = command_queue[0]
-		var action_state = StateGameAction.new(current_command)
 		on_command_queue_started.emit(StateGameAction.new(current_command))
 		execute_queue()
 
@@ -40,7 +38,7 @@ func execute_queue():
 		queue_finished()
 
 
-func action_finished():
+func action_complete():
 	command_queue.remove_at(0)
 	print("Action finished!")
 
@@ -49,4 +47,3 @@ func queue_finished():
 	queue_running = false
 	current_command = null
 	print("Command queue finished!")
-	on_queue_finish.emit()

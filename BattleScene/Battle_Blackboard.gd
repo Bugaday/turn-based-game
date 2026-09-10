@@ -2,8 +2,6 @@ extends RefCounted
 
 class_name BattleBlackboard
 
-signal blackboard_key_set(key:String)
-
 var local_data: Dictionary = {}
 var parent_blackboard: BattleBlackboard = null # Points to Faction or Global
 
@@ -30,4 +28,3 @@ func get_value(key: String, default = null):
 # or 'Set Blackboard Value as Object' which is strictly typed
 func set_value(key: String, value) -> void:
 	local_data[key] = value
-	blackboard_key_set.emit(key)

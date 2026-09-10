@@ -30,14 +30,14 @@ func update_blocked_positions() -> void:
 func _draw() -> void:
 	if draw_debug:
 		for pos:Vector2i in blocked_boxes:
-			var position : Vector2 = GridService.grid_to_world(pos)
-			position -= Vector2(GridProps2D.cellSize.x/2,GridProps2D.cellSize.y/2)
-			var block_box : Rect2 = Rect2(position+Vector2(2.0,2.0),Vector2(GridProps2D.cellSize.x-4.0,GridProps2D.cellSize.y-4.0))
-			draw_rect(block_box,box_colour,filled,line_width)
+			var box_pos : Vector2 = GridService.grid_to_world(pos)
+			box_pos -= Vector2(GridProps2D.cellSize.x/2.0,GridProps2D.cellSize.y/2.0)
+			var block_box : Rect2 = Rect2(box_pos+Vector2(2.0,2.0),Vector2(GridProps2D.cellSize.x-4.0,GridProps2D.cellSize.y-4.0))
+			draw_rect(block_box,box_colour,filled)
 		for pos:Vector2i in occupied_boxes:
-			var position : Vector2 = GridService.grid_to_world(pos)
+			var occupied_pos : Vector2 = GridService.grid_to_world(pos)
 			#position -= Vector2(32,32)
-			draw_circle(position,12.0,Color.YELLOW,false,2.0,true)
+			draw_circle(occupied_pos,12.0,Color.YELLOW,false,2.0,true)
 
 
 func toggle():

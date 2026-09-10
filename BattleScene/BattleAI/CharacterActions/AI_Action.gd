@@ -3,17 +3,14 @@ extends Resource
 
 class_name AIAction
 
-signal action_finished()
-
 @export var action_name : String = "Generic Action"
-#var bm : BattleManager
 
 
 func _init() -> void:
 	call_deferred("print_name")
 
 
-func _execute_action(unit:Character):
+func _execute_action(_unit:Character):
 	#if !bm:
 		#push_error("No BattleManager found!")
 		#return
@@ -21,7 +18,7 @@ func _execute_action(unit:Character):
 	pass
 
 
-func _get_score(unit:Character) -> float:
+func _get_score(_unit:Character) -> float:
 	#if !bm:
 		#push_error("No BattleManager found!")
 		#return 0

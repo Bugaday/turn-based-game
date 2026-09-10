@@ -20,15 +20,6 @@ func _ready() -> void:
 	battle_data.setup(path_finder)
 	
 	DebugVis.update_blocked_positions()
-	#battle_data.on_select_character.connect(select_character)
-	#battle_data.battle_blackboard.blackboard_key_set.connect(blackboard_set)
-	
-	#ai_decision_maker.all_actions_finished.connect(finish_ai_unit_turn)
-
-
-#func _process(delta: float) -> void:
-	#if battle_data.active_character:
-		#draw_move_path._drawPath(battle_data.active_character.position,battle_data.active_character.move_path)
 
 
 func CreateGrid():
@@ -59,13 +50,9 @@ func select_character(unit:Character):
 
 func start_faction_turn():
 	if battle_data.active_faction == "Player":
-		#EventBus.ai_turn_finished.emit()
-		#EventBus.change_input_state.emit(%InputStateSelect.name)
 		print("Player's turn!")
 	else:
 		print("AI's turn!")
-		#EventBus.ai_turn_started.emit()
-		#EventBus.change_input_state.emit(%InputStateInputDisabled.name)
 		#battle_data.active_factions_units[battle_data.active_faction] = ai_registry.get_faction_units(battle_data.factions_in_battle[battle_data.active_faction_index])
 		start_ai_unit_turn()
 
@@ -75,7 +62,6 @@ func faction_turn_finished():
 		return
 	#Set the turn for the next faction
 	battle_data.active_faction_index = (battle_data.active_faction_index + 1) % battle_data.factions_in_battle.size()
-	#%TurnText.text = factions_in_battle[active_faction_index]
 	start_faction_turn()
 
 
@@ -94,35 +80,6 @@ func finish_ai_unit_turn():
 	start_ai_unit_turn()
 
 
-func handle_action_started():
-	#if input_state_machine.current_state != %InputStateInputDisabled:
-		#input_state_machine.state_change(%InputStateInputDisabled.name)
-	#draw_box._drawBox(0.0)
-	#cursor_box._drawBox(0.0)
-	pass
-
-
-func handle_action_finished():
-	#if battle_data.factions_in_battle[battle_data.active_faction_index] == "Player":
-		#input_state_machine.state_change(%InputStateSelect.name)
-		##draw_box.position = selected_character.position
-		#draw_box._drawBox()
-		#cursor_box._drawBox(4.0)
-	pass
-
-
-#func start_move_character():
-	##active_character.start_move(current_path)
-	#draw_box._drawBox(0.0)
-
-
-func move_to_enemy():
-	#var end_pos:Vector2 = GridService.GetRandomGridPosition(grid,tile_map)
-	#current_path = path_finder.get_path_from_char(active_character.position,end_pos,true)
-	#active_character.start_move(current_path)
-	pass
-
-
 func character_finished_move_section(unit:Character):
 	GridService.update_char_moved_data(unit,battle_data.grid)
 	path_finder.set_cell_free_from_vector2(unit.char_last_cell_pos)
@@ -131,14 +88,7 @@ func character_finished_move_section(unit:Character):
 
 func draw_new_move_path(unit:Character):
 	unit.move_path = path_finder.get_path_from_char(unit.position,get_global_mouse_position(),true)
-	#draw_move_path._drawPath(unit.position,unit.move_path)
 
 
 func cancel_path(unit:Character):
 	unit.move_path.clear()
-	erase_drawn_path()
-
-
-func erase_drawn_path():
-	#draw_move_path.clear_path()
-	pass

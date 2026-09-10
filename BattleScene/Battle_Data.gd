@@ -2,8 +2,6 @@ extends Node
 
 class_name BattleData
 
-signal on_set_active_character(unit:Character)
-
 #var battle_script : SceneBattle
 var grid : Dictionary[Vector2i,GridCellData]
 #var pathfinder:Pathfinder2D
@@ -13,7 +11,6 @@ var grid : Dictionary[Vector2i,GridCellData]
 var active_character : Character:
 	set(value):
 		active_character = value
-		on_set_active_character.emit(active_character)
 var selected_character : Character
 	#set(value):
 		#selected_character = value

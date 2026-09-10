@@ -12,24 +12,25 @@ func _init(src_char:Character,battle_scene:SceneBattle,data:ActionData,b_is_play
 		move_path = battle_scene_.path_finder.get_path_from_char(source_char.position,battle_scene_.get_global_mouse_position(),true)
 	else:
 		var random_cell : Vector2i = GridService.GetRandomGridCell(battle_scene_.battle_data.grid,battle_scene_.battle_data.tilemap)
-		move_path = battle_scene_.path_finder.get_path_from_char(source_char.position,battle_scene_.get_global_mouse_position(),true)
+		move_path = battle_scene_.path_finder.get_path_from_char(source_char.position,random_cell,true)
 	#scene_data.drawing.draw_move_line(current_char,target)
 
 
 func start_action():
 	if move_path.is_empty():
-		action_finished.emit()
+		end_action()
 		return
 	if not b_is_player_:
-		start_finished.emit()
+		execute_action()
 	elif Input.is_action_pressed("Select"):
 		choosing_destination = true
 		if choosing_destination:
-			start_finished.emit()
+			execute_action()
 
 
 func execute_action():
 	super()
+	battle_scene_.drawing_battle.draw_box.visible = false
 	choosing_destination = false
 	#move_path = battle_scene_.path_finder.get_path_from_char(source_char.position,battle_scene_.get_global_mouse_position(),true)
 	move_to_next_waypoint()
@@ -41,10 +42,7 @@ func update_action():
 		move_path = battle_scene_.path_finder.get_path_from_char(source_char.position,battle_scene_.get_global_mouse_position(),true)
 		battle_scene_.drawing_battle.draw_move_path._drawPath(source_char.position,move_path)
 		if Input.is_action_pressed("Select"):
-			battle_scene_.drawing_battle.draw_box.visible = false
-			start_finished.emit()
-		elif Input.is_action_pressed("Cancel"):
-			end_action()
+			execute_action()
 
 
 func end_action():

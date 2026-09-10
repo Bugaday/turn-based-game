@@ -8,7 +8,7 @@ var line_width : float = 4.0
 var BoxColour : Color = Color.YELLOW
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	position = GridService.snap_pos_to_grid(get_global_mouse_position()) 
 
 

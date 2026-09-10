@@ -103,4 +103,4 @@ static func world_to_grid(pos:Vector2)->Vector2i:
 	
 
 static func grid_to_world(pos:Vector2i)->Vector2:
-	return pos * GridProps2D.cellSize + GridProps2D.cellSize / 2
+	return Vector2(pos) * Vector2(GridProps2D.cellSize) + Vector2(GridProps2D.cellSize) / 2.0

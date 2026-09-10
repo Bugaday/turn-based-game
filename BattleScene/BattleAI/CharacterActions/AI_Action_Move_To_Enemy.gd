@@ -23,7 +23,6 @@ func _execute_action(unit:Character):
 
 func finished_move(unit:Character):
 	print("Finished move on: ", unit, " with id: ", get_instance_id())
-	action_finished.emit()
 
 
 func get_move_path(start:Vector2,end:Vector2):

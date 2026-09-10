@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="BattleData" format=3 uid="uid://bq2cbaw0a1wav"]
-
-[ext_resource type="Resource" uid="uid://ctbpko7qk6t0s" path="res://BattleScene/BattleData/Battle_Spawner_Default.tres" id="1_ebw4i"]
-[ext_resource type="Script" uid="uid://u8abbnqnmas6" path="res://BattleScene/Battle_Data.gd" id="1_wqsrh"]
-
-[resource]
-script = ExtResource("1_wqsrh")
-battle_spawner = ExtResource("1_ebw4i")
-metadata/_custom_type_script = "uid://u8abbnqnmas6"

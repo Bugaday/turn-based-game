@@ -14,12 +14,12 @@ func start_decisions(unit:Character):
 	char_parent = unit
 	available_actions = char_parent.ai_actions_list.ai_actions
 	if available_actions.size() <= 0:
-		all_actions_finished.emit()
+		all_actions_done()
 		return
 		
 	for action in available_actions:
-		if !action.action_finished.is_connected(current_action_finished):
-			action.action_finished.connect(current_action_finished)
+		if !action.action_finished.is_connected(current_action_done):
+			action.action_finished.connect(current_action_done)
 	
 	#print("Starting decision on ",char_parent.name," - ",char_parent.stats.unit_name)
 	make_decision()._execute_action(char_parent)
@@ -48,12 +48,15 @@ func get_highest_scoring_action() -> AIAction:
 	return highest_scoring_action
 	
 	
-func current_action_finished():
+func current_action_done():
 	if can_make_more_decisions():
 		make_decision()._execute_action(char_parent)
 	else:
-		all_actions_finished.emit()
+		all_actions_done()
 
 
 func can_make_more_decisions()->bool:
 	return false
+	
+func all_actions_done():
+	all_actions_finished.emit()

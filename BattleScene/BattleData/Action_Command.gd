@@ -27,6 +27,10 @@ func update_action():
 	pass
 
 
+func action_input_confirm():
+	execute_action()
+
+
 func execute_action():
 	var className:String = get_script().get_global_name()
 	var log_string : String = "Executing action: " + className

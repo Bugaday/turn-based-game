@@ -22,11 +22,15 @@ func start_action():
 		return
 	if not b_is_player_:
 		execute_action()
-	elif Input.is_action_pressed("Select"):
-		choosing_destination = true
-		if choosing_destination:
-			execute_action()
+	#elif Input.is_action_pressed("Select"):
+		#choosing_destination = true
+		#if choosing_destination:
+			#execute_action()
 
+
+func action_input_confirm():
+	if choosing_destination:
+		super()
 
 func execute_action():
 	super()
@@ -41,8 +45,8 @@ func update_action():
 	if choosing_destination:
 		move_path = battle_scene_.path_finder.get_path_from_char(source_char.position,battle_scene_.get_global_mouse_position(),true)
 		battle_scene_.drawing_battle.draw_move_path._drawPath(source_char.position,move_path)
-		if Input.is_action_pressed("Select"):
-			execute_action()
+		#if Input.is_action_pressed("Select"):
+			#execute_action()
 
 
 func end_action():

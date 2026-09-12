@@ -18,6 +18,8 @@ func _ready() -> void:
 	CreateGrid()
 	
 	battle_data.setup(path_finder)
+	ui_battle.hook_char_signals(battle_data.all_characters)
+	
 	
 	DebugVis.update_blocked_positions()
 

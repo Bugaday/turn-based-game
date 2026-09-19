@@ -47,6 +47,7 @@ func select_character(unit:Character):
 	battle_data.selected_character = unit
 	battle_data.active_character = unit
 	ui_battle.on_character_selected(unit,self)
+	drawing_battle.draw_box.visible = true
 	drawing_battle.draw_box.position = unit.position
 
 

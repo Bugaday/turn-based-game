@@ -11,21 +11,25 @@ var text_floating : FloatingText
 #
 #@export var turn_finished_button : EndTurnButton
 
-
 func hook_char_signals(all_units:Array[Character]) -> void:
 	for unit in all_units:
-		unit.on_current_stats_changed.connect(spawn_floating_text)
+		unit.character_blackboard.on_blackboard_value_set.connect(ui_unit_card._setInfo)
+		unit.on_stat_changed.connect(ui_unit_card._update_info)
+		#unit.on_current_stats_changed.connect(spawn_floating_text)
+		pass
 
 
-func spawn_floating_text(unit:Character,health:int):
-	var string_health : String = str(abs(health))
-	text_floating = FloatingText.new(string_health,Vector2(0.0,-32.0))
-	unit.add_child(text_floating)
+func spawn_floating_text(text,pos:Vector2,parent:Node2D):
+	var string_ : String = str(text)
+	text_floating = FloatingText.new(string_,pos)
+	parent.add_child(text_floating)
 
 
 func on_character_selected(unit:Character,battle_scene : SceneBattle):
 	action_button_controller.update_button_set(unit,battle_scene)
-	ui_unit_card._setInfo(unit.stats)
+	ui_unit_card._setInfo(unit)
+	#ui_unit_card.add_label("Health : 100")
+	#ui_unit_card.add_label("Action Points : 80")
 
 
 

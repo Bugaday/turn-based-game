@@ -11,12 +11,12 @@ class_name CharacterData
 
 var extra_actions : Array[ActionCommand]
 
-var max_action_points : int = 100
-var current_action_points : int
-
+var action_points_max : int:
+	get:
+		return agility
 
 func _init() -> void:
-	current_action_points = max_action_points
+	action_points_max = agility
 
 #Offensive stats
 var attackPower:

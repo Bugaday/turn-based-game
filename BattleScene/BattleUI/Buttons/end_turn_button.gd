@@ -17,4 +17,4 @@ func disable_button():
 
 func _on_button_up() -> void:
 	#EventBus.trigger_turn_finished.emit()
-	print("Button pressed")
+	print("End Turn Button pressed")

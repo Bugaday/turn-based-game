@@ -32,7 +32,7 @@ func start_queue():
 func execute_queue():
 	if command_queue.size() > 0:
 		queue_running = true
-		current_command.action_finished.connect(execute_queue)
+		current_command.action_finished.connect(execute_queue,CONNECT_ONE_SHOT)
 		current_command.start_action()
 	else:
 		queue_finished()

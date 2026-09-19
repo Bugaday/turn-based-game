@@ -12,5 +12,6 @@ script = ExtResource("1_icafy")
 unit_name = "Knight"
 stamina = 12
 strength = 50
+agility = 75
 sprite = SubResource("AtlasTexture_e2usl")
 metadata/_custom_type_script = "uid://cvrfh8dxox5u0"

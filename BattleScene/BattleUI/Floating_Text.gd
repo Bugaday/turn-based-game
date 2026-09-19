@@ -6,6 +6,7 @@ extends Label
 
 func _init(text_to_display:String,pos:Vector2) -> void:
 	#add_theme_font_override("normal_font", custom_font)
+	z_index = 99
 	text = text_to_display
 	position = get_global_transform_with_canvas() * pos
 	label_settings = load("res://Floating_Text_Settings.tres")

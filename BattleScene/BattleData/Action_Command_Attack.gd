@@ -2,7 +2,7 @@ extends ActionCommand
 
 class_name ActionCommandAttack
 
-var game_battle : SceneBattle
+#var game_battle : SceneBattle
 var potential_target_list : Array[Character]
 var cells_in_range : Array[Vector2i]
 var target : Character
@@ -23,6 +23,12 @@ func action_input_confirm():
 
 func execute_action():
 	target.health_.apply_health_change(-10)
+	print(target.position)
+	print(target.get_viewport().get_screen_transform())
+	print(get_global_transform_with_canvas().origin)
+	var offset : Vector2 = Vector2(0.0,-32.0)
+	battle_scene_.ui_battle.spawn_floating_text("10",target.position+offset,battle_scene_)
+	super()
 
 
 func update_action():
@@ -44,7 +50,7 @@ func get_viable_targets():
 	for i:int in range(-1,2):
 		for j:int in range(-1,2):
 			var cell : Vector2i = Vector2i(char_cell.x+i,char_cell.y+j)
-			if cell == char_cell or !GridService.is_cell_inside_grid(cell):
+			if cell == char_cell or !battle_scene_.battle_data.grid.has(cell):
 				continue
 			cells_in_range.append(Vector2(cell))
 			

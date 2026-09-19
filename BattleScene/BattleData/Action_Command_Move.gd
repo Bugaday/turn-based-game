@@ -13,7 +13,6 @@ func _init(src_char:Character,battle_scene:SceneBattle,data:ActionData,b_is_play
 	else:
 		var random_cell : Vector2i = GridService.GetRandomGridCell(battle_scene_.battle_data.grid,battle_scene_.battle_data.tilemap)
 		move_path = battle_scene_.path_finder.get_path_from_char(source_char.position,random_cell,true)
-	#scene_data.drawing.draw_move_line(current_char,target)
 
 
 func start_action():
@@ -22,10 +21,6 @@ func start_action():
 		return
 	if not b_is_player_:
 		execute_action()
-	#elif Input.is_action_pressed("Select"):
-		#choosing_destination = true
-		#if choosing_destination:
-			#execute_action()
 
 
 func action_input_confirm():
@@ -33,20 +28,17 @@ func action_input_confirm():
 		super()
 
 func execute_action():
-	super()
 	battle_scene_.drawing_battle.draw_box.visible = false
 	choosing_destination = false
-	#move_path = battle_scene_.path_finder.get_path_from_char(source_char.position,battle_scene_.get_global_mouse_position(),true)
 	move_to_next_waypoint()
+	super()
 
 
 func update_action():
 	mousePos = battle_scene_.get_global_mouse_position()
 	if choosing_destination:
 		move_path = battle_scene_.path_finder.get_path_from_char(source_char.position,battle_scene_.get_global_mouse_position(),true)
-		battle_scene_.drawing_battle.draw_move_path._drawPath(source_char.position,move_path)
-		#if Input.is_action_pressed("Select"):
-			#execute_action()
+	battle_scene_.drawing_battle.draw_move_path._drawPath(source_char.position,move_path)
 
 
 func end_action():
@@ -83,3 +75,6 @@ func section_complete():
 	battle_scene_.battle_data.grid[current_cell].UnitOccupying = source_char
 	DebugVis.update_blocked_positions()
 	move_to_next_waypoint()
+	
+func calc_action_point_cost()->int:
+	return move_path.size() * 10

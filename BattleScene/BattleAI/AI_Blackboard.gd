@@ -13,6 +13,7 @@ func _init(_parent: AIBlackboard = null) -> void:
 
 func get_value(key: String, default = null):
 	#Check if key exists here first
+
 	if local_data.has(key):
 		return local_data[key]
 
@@ -21,6 +22,12 @@ func get_value(key: String, default = null):
 		return parent_blackboard.get_value(key, default)
 
 	return default
+	
+	#Shorter version:
+	#if !local_data.has(key) or parent_blackboard != null:
+		#return parent_blackboard.get_value(key,default)
+	#
+	#return local_data[key]
 
 
 #Sets value using Generic/Template/Untyped value allowing any type to be set

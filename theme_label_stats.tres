@@ -1,0 +1,8 @@
+[gd_resource type="Theme" format=3 uid="uid://chr0cdf634aiw"]
+
+[sub_resource type="SystemFont" id="SystemFont_fba3m"]
+font_names = PackedStringArray("Arial")
+
+[resource]
+default_font = SubResource("SystemFont_fba3m")
+default_font_size = 14

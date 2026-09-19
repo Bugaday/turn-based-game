@@ -9,7 +9,11 @@ var BoxColour : Color = Color.YELLOW
 
 
 func _process(_delta: float) -> void:
-	position = GridService.snap_pos_to_grid(get_global_mouse_position()) 
+	if GridService.is_in_grid(get_global_mouse_position()):
+		visible = true
+	else:
+		visible = false
+	position = GridService.snap_pos_to_grid(get_global_mouse_position())
 
 
 func _draw() -> void:

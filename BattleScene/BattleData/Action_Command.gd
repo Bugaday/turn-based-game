@@ -8,7 +8,7 @@ var action_name : String
 var source_char : Character
 var b_is_player_ : bool = false
 var battle_scene_ : SceneBattle
-#var target_
+
 
 func _init(src_char:Character,battle_scene:SceneBattle,_data:ActionData,b_is_player:bool) -> void:
 	action_name = get_script().get_global_name()
@@ -35,6 +35,7 @@ func execute_action():
 	var className:String = get_script().get_global_name()
 	var log_string : String = "Executing action: " + className
 	print(log_string)
+	source_char.action_points_current -= calc_action_point_cost()
 
 
 func end_action():
@@ -42,3 +43,7 @@ func end_action():
 	var log_string : String = "Finishing action: " + className
 	print(log_string)
 	action_finished.emit()
+	
+	
+func calc_action_point_cost()->int:
+	return 10

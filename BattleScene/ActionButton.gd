@@ -27,6 +27,5 @@ func clear_action_button():
 
 
 func _pressed() -> void:
-	print(text)
 	var action_ : ActionCommand = action_data.create_command(char_linked,battle_scene,action_data,true)
 	battle_scene.command_processor.add_action(action_)

@@ -8,7 +8,7 @@ var targets : Array[Character]
 var filled : bool = true
 var line_width : float = 2.0
 var inner_cell_margin : float = 6.0
-var cell_colour : Color = Color(Color.RED,0.2)
+var cell_colour : Color = Color(Color.RED,0.15)
 
 func _draw() -> void:
 	for i in valid_cells:

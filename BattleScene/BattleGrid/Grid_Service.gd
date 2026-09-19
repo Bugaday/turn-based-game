@@ -84,14 +84,8 @@ static func grid_world_clamp(pos:Vector2)->Vector2:
 	var y_clamp = clamp(pos.y,0,GridProps2D.gridSizeY-GridProps2D.cellSize.y)
 	var clamp_pos = Vector2(x_clamp,y_clamp)
 	return clamp_pos
-	
-static func is_cell_inside_grid(cell_grid_pos:Vector2i)->bool:
-	var cell_grid_pos_x : int = cell_grid_pos.x
-	var cell_grid_pos_y : int = cell_grid_pos.y
-	if cell_grid_pos < Vector2i.ZERO or cell_grid_pos > GridProps2D.gridExtents:
-		return false
-	return true
-	
+
+
 static func grid_cell_clamp(cell:Vector2i)->Vector2i:
 	var clamped_cell = cell.clamp(Vector2i.ZERO,GridProps2D.gridExtents)
 	return clamped_cell
@@ -111,3 +105,8 @@ static func world_to_grid(pos:Vector2)->Vector2i:
 
 static func grid_to_world(pos:Vector2i)->Vector2:
 	return Vector2(pos) * Vector2(GridProps2D.cellSize) + Vector2(GridProps2D.cellSize) / 2.0
+	
+static func is_in_grid(pos:Vector2)->bool:
+	if pos.x > GridProps2D.gridSizeX or pos.x < 0.0 or pos.y > GridProps2D.gridSizeY or pos.y < 0.0:
+		return false
+	return true

@@ -4,8 +4,7 @@ extends Node
 @export var action_button_controller : ActionButtonController
 @export var ui_unit_cards : UIUnitCard
 #@export var ui_unit_hover_card : UIUnitCard
-@export var mini_cards_player : Control
-@export var mini_cards_enemies : Control
+@export var ui_mini_cards_player : UIUnitCardSelectionGroup
 var text_floating : FloatingText
 
 

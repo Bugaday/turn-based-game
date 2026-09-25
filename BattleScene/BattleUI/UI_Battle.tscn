@@ -12,7 +12,7 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_ri2no"]
 
-[node name="UI_Battle" type="Control" unique_id=2107946255 node_paths=PackedStringArray("action_button_controller", "ui_unit_cards", "mini_cards_player", "mini_cards_enemies")]
+[node name="UI_Battle" type="Control" unique_id=2107946255 node_paths=PackedStringArray("action_button_controller", "ui_unit_cards", "ui_mini_cards_player")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,8 +23,7 @@ mouse_filter = 1
 script = ExtResource("1_x3jtv")
 action_button_controller = NodePath("ButtonController")
 ui_unit_cards = NodePath("UI_Unit_Cards")
-mini_cards_player = NodePath("")
-mini_cards_enemies = NodePath("")
+ui_mini_cards_player = NodePath("UI_Unit_Cards/UI_Unit_Mini_Cards")
 metadata/_edit_use_anchors_ = true
 
 [node name="EndTurnButton" type="Button" parent="." unique_id=589864474]
@@ -106,15 +105,13 @@ layout_mode = 2
 script = ExtResource("4_pikk8")
 metadata/_custom_type_script = "uid://cjxemdkryrvkj"
 
-[node name="UI_Unit_Cards" type="Control" parent="." unique_id=1023238940 node_paths=PackedStringArray("ui_unit_card_main", "ui_unit_hover_card", "ui_unit_mini_cards_player", "ui_unit_mini_cards_enemy")]
+[node name="UI_Unit_Cards" type="Control" parent="." unique_id=1023238940 node_paths=PackedStringArray("ui_unit_card_main", "ui_unit_hover_card")]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("5_pmo2u")
 ui_unit_card_main = NodePath("UIUnitCardMain")
 ui_unit_hover_card = NodePath("UIUnitHoverCard")
-ui_unit_mini_cards_player = NodePath("")
-ui_unit_mini_cards_enemy = NodePath("")
 
 [node name="UIUnitCardMain" parent="UI_Unit_Cards" unique_id=1088169180 instance=ExtResource("5_rkfma")]
 layout_mode = 1
@@ -129,6 +126,7 @@ offset_right = 1420.0
 offset_bottom = 1024.0
 grow_horizontal = 2
 grow_vertical = 0
+label_dict = Dictionary[String, String]({})
 
 [node name="UIUnitHoverCard" parent="UI_Unit_Cards" unique_id=785059671 instance=ExtResource("6_coxye")]
 layout_mode = 0
@@ -137,12 +135,6 @@ offset_top = 320.0
 offset_right = 1602.0
 offset_bottom = 659.0
 script = ExtResource("8_pikk8")
-theme_label_stats = null
-style_label_stats = null
-player_panel_theme = null
-player_panel_stylebox = null
-enemy_panel_stylebox = null
-enemy_panel_theme = null
 
 [node name="UI_Unit_Mini_Cards" parent="UI_Unit_Cards" unique_id=1788615898 instance=ExtResource("9_rkfma")]
 layout_mode = 0

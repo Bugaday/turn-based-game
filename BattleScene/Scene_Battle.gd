@@ -18,8 +18,8 @@ func _ready() -> void:
 	battle_data.setup(path_finder)
 
 	ui_battle.hook_char_signals(battle_data.all_characters)
-	ui_battle.ui_unit_cards.update_mini_cards(battle_data.active_factions_units)
-	for card :  UIUnitCardSelectionCard in ui_battle.mini_cards_player.get_children():
+	ui_battle.ui_mini_cards_player.update_mini_cards(battle_data.active_factions_units)
+	for card :  UIUnitCardSelectionCard in ui_battle.ui_mini_cards_player.get_children():
 		card.on_mini_portrait_pressed.connect(mini_card_selected)
 	DebugVis.update_blocked_positions()
 

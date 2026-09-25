@@ -21,12 +21,10 @@ func start_decisions(unit:Character):
 		if !action.action_finished.is_connected(current_action_done):
 			action.action_finished.connect(current_action_done)
 	
-	#print("Starting decision on ",char_parent.name," - ",char_parent.stats.unit_name)
 	make_decision()._execute_action(char_parent)
 
 
 func make_decision() -> AIAction:
-	#print("Making decision on ",char_parent.name," - ",char_parent.stats.unit_name)
 	#Reset the actions dictionary
 	action_scores.clear()
 	#Set scores in dictionary

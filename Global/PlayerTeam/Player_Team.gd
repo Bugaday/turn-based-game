@@ -11,6 +11,6 @@ func _ready() -> void:
 func add_default_members():
 	var default_stats : CharacterData = load("res://BattleScene/BattleData/CharacterData/Knight.tres")
 	var unit : Character = Character.new()
-	unit.stats = default_stats
+	unit.base_stats = default_stats
 	unit.faction = "Player"
 	team_members.append(unit)

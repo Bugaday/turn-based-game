@@ -10,17 +10,17 @@ class_name SceneBattle
 
 var current_state : StateGame
 
-
 func _ready() -> void:
 	
-	DebugVis.battle = self
+	DebugVis.battle = self 
 	
 	CreateGrid()
-	
 	battle_data.setup(path_finder)
+
 	ui_battle.hook_char_signals(battle_data.all_characters)
-	
-	
+	ui_battle.ui_unit_cards.update_mini_cards(battle_data.active_factions_units)
+	for card :  UIUnitCardSelectionCard in ui_battle.mini_cards_player.get_children():
+		card.on_mini_portrait_pressed.connect(mini_card_selected)
 	DebugVis.update_blocked_positions()
 
 
@@ -36,19 +36,30 @@ func add_blocked_tiles_for_pathfinder():
 		var tile : TileData = battle_data.tilemap.get_cell_tile_data(i)
 		if tile.get_custom_data("Block"):
 			path_finder.set_blocked_cell(i)
-
-
-func blackboard_set(key:String):
-	Callable(self,key).call()
-	#var new_call : Callable = Callable(self,key).call()
+			
+			
+func mini_card_selected(unit:Character,card:UIUnitCardSelectionCard):
+	select_character(unit)
+	ui_battle.mini_card_select(card)
 
 
 func select_character(unit:Character):
+	#Disconnect main unit card signal from a Selected Character if there is one
+	if battle_data.selected_character:
+		if battle_data.selected_character.on_stat_changed.is_connected(ui_battle.ui_unit_card._update_label):
+			battle_data.selected_character.on_stat_changed.disconnect(ui_battle.ui_unit_card._update_label)
+	
+	#Select Character and Make Active
 	battle_data.selected_character = unit
 	battle_data.active_character = unit
+	
+	battle_data.selected_character.on_stat_changed.connect(ui_battle.ui_unit_card._update_label)
 	ui_battle.on_character_selected(unit,self)
 	drawing_battle.draw_box.visible = true
 	drawing_battle.draw_box.position = unit.position
+	
+func update_unit_ui(value_name:String,value):
+	ui_battle.ui_unit_card._update_info(value_name,value)
 
 
 func start_faction_turn():
@@ -87,11 +98,3 @@ func character_finished_move_section(unit:Character):
 	GridService.update_char_moved_data(unit,battle_data.grid)
 	path_finder.set_cell_free_from_vector2(unit.char_last_cell_pos)
 	path_finder.set_blocked_cell_from_vector2(unit.position)
-
-
-func draw_new_move_path(unit:Character):
-	unit.move_path = path_finder.get_path_from_char(unit.position,get_global_mouse_position(),true)
-
-
-func cancel_path(unit:Character):
-	unit.move_path.clear()

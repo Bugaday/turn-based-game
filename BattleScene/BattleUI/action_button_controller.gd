@@ -23,4 +23,3 @@ func update_button_set(unit:Character,battle_scene:SceneBattle):
 		buttons[i].battle_scene = battle_scene
 		buttons[i].char_linked = unit
 		buttons[i].initialise_action_button()
-		pass

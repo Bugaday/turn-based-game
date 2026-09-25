@@ -46,4 +46,4 @@ func end_action():
 	
 	
 func calc_action_point_cost()->int:
-	return 10
+	return 5

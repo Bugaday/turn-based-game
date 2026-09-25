@@ -1,0 +1,109 @@
+[gd_scene format=3 uid="uid://bjw687538nifi"]
+
+[ext_resource type="Theme" uid="uid://cynxpx2spm4yf" path="res://theme_hover_panel_enemy.tres" id="1_kwmrs"]
+[ext_resource type="Script" uid="uid://cj22xpt8o22q4" path="res://BattleScene/BattleUI/UnitInfo/UI_Unit_Card.gd" id="2_m5vk3"]
+[ext_resource type="Texture2D" uid="uid://byo6sw14dlhp2" path="res://BattleScene/BattleGrid/BattleEnvironment/BattleTileSets/IMG_5673.png" id="4_kwmrs"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ll3lt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yl1q2"]
+atlas = ExtResource("4_kwmrs")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_in1wn"]
+bg_color = Color(0.6498001, 0.5737744, 0.19683567, 1)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yl1q2"]
+
+[sub_resource type="SystemFont" id="SystemFont_3ccj3"]
+font_names = PackedStringArray("Arial")
+subpixel_positioning = 0
+
+[sub_resource type="SystemFont" id="SystemFont_dufxc"]
+subpixel_positioning = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_g4ibn"]
+font = SubResource("SystemFont_dufxc")
+
+[node name="UIUnitHoverCard" type="Control" unique_id=851388624]
+material = SubResource("CanvasItemMaterial_ll3lt")
+layout_mode = 3
+anchors_preset = 0
+offset_right = 239.0
+offset_bottom = 339.0
+theme = ExtResource("1_kwmrs")
+script = ExtResource("2_m5vk3")
+metadata/_custom_type_script = "uid://cj22xpt8o22q4"
+
+[node name="UnitCardPortrait" type="TextureRect" parent="." unique_id=1242808780]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 67.0
+offset_top = 46.0
+offset_right = 163.0
+offset_bottom = 142.0
+texture = SubResource("AtlasTexture_yl1q2")
+
+[node name="UnitCardName" type="Label" parent="." unique_id=1728393438]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 88.0
+offset_top = 13.0
+offset_right = 137.0
+offset_bottom = 36.0
+text = "Rogue"
+
+[node name="PanelStatsCurrent" type="Panel" parent="." unique_id=91201132]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.5
+offset_top = -9.5
+offset_right = 94.5
+offset_bottom = 150.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_in1wn")
+
+[node name="StatsCurrent" type="VBoxContainer" parent="PanelStatsCurrent" unique_id=2065819989]
+material = SubResource("CanvasItemMaterial_yl1q2")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = -1
+
+[node name="HBoxStatsHealth" type="HBoxContainer" parent="PanelStatsCurrent/StatsCurrent" unique_id=634694203]
+layout_mode = 2
+
+[node name="StatNameHealth" type="Label" parent="PanelStatsCurrent/StatsCurrent/HBoxStatsHealth" unique_id=939262942]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_3ccj3")
+text = "Health: "
+label_settings = SubResource("LabelSettings_g4ibn")
+
+[node name="StatValueHealth" type="Label" parent="PanelStatsCurrent/StatsCurrent/HBoxStatsHealth" unique_id=546021722]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "100"
+
+[node name="HBoxStatsActionPoints" type="HBoxContainer" parent="PanelStatsCurrent/StatsCurrent" unique_id=337215232]
+layout_mode = 2
+
+[node name="StatNameActionPoints" type="Label" parent="PanelStatsCurrent/StatsCurrent/HBoxStatsActionPoints" unique_id=1397147122]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+text = "Action Points: "
+
+[node name="StatValueActionPoints" type="Label" parent="PanelStatsCurrent/StatsCurrent/HBoxStatsActionPoints" unique_id=1757710521]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "85"

@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://cyfp6b4h7t3uy"]
+
+[ext_resource type="Script" uid="uid://y0bxyo4vn53r" path="res://BattleScene/BattleUI/UnitInfo/UI_Unit_Card_SelectionGroup.gd" id="1_k64cl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_coxye"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[node name="UI_Unit_Mini_Cards" type="Control" unique_id=1788615898]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_k64cl")
+
+[node name="PlayerSelectionCardsPanel" type="PanelContainer" parent="." unique_id=2146853318]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 0
+offset_left = 100.0
+offset_top = 240.0
+offset_right = 230.0
+offset_bottom = 370.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_coxye")
+
+[node name="PlayerPartyVBox" type="VBoxContainer" parent="PlayerSelectionCardsPanel" unique_id=728590879]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="EnemySelectionCardsPanel" type="PanelContainer" parent="." unique_id=566700636]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 1714.0
+offset_top = 240.0
+offset_right = 1844.0
+offset_bottom = 370.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_coxye")
+
+[node name="EnemyPartyVBox" type="VBoxContainer" parent="EnemySelectionCardsPanel" unique_id=1294442858]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_vertical = 0

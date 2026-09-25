@@ -60,7 +60,7 @@ func move_to_next_waypoint():
 	
 	var tween : Tween = source_char.create_tween()
 	var move_distance : float = source_char.position.distance_to(move_path[0])
-	var move_time = move_distance / GridProps2D.gridSizeX * source_char.stats.move_speed
+	var move_time = move_distance / GridProps2D.gridSizeX * source_char.base_stats.move_speed
 	tween.tween_property(source_char,"global_position",move_path[0],move_time)
 	tween.finished.connect(section_complete)
 

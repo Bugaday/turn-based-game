@@ -14,8 +14,6 @@ func _execute_action(unit:Character):
 		#get_move_path(start,end)
 	#unit.start_move(path)
 	#
-	#print("Action moving to enemy! by ",unit.name," - ",unit.stats.unit_name)
-	#
 	if unit.path_finished.is_connected(finished_move):
 		return
 	unit.path_finished.connect(finished_move)

@@ -14,8 +14,7 @@ func spawn()->Array[Character]:
 	
 	for member : CharacterData in PlayerTeam.team_members.teamMembers:
 		var newChar:Character = char_scene.instantiate()
-		newChar.stats = member
-		#newChar._setStats()
+		newChar.base_stats = member
 		newChar.faction = "Player"
 		char_array.append(newChar)
 	
@@ -24,7 +23,7 @@ func spawn()->Array[Character]:
 		var newChar : Character = char_scene.instantiate()
 		var class_int : int = randi_range(0,allowed_classes.size()-1)
 		var unit_class : CharacterData = allowed_classes[class_int]
-		newChar.stats = unit_class
+		newChar.base_stats = unit_class
 		newChar.faction = "Bandits"
 		char_array.append(newChar)
 

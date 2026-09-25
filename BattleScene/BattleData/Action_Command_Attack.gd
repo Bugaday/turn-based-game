@@ -2,7 +2,6 @@ extends ActionCommand
 
 class_name ActionCommandAttack
 
-#var game_battle : SceneBattle
 var potential_target_list : Array[Character]
 var cells_in_range : Array[Vector2i]
 var target : Character
@@ -23,9 +22,6 @@ func action_input_confirm():
 
 func execute_action():
 	target.health_.apply_health_change(-10)
-	print(target.position)
-	print(target.get_viewport().get_screen_transform())
-	print(get_global_transform_with_canvas().origin)
 	var offset : Vector2 = Vector2(0.0,-32.0)
 	battle_scene_.ui_battle.spawn_floating_text("10",target.position+offset,battle_scene_)
 	super()
@@ -40,6 +36,7 @@ func end_action():
 	potential_target_list.clear()
 	cells_in_range.clear()
 	battle_scene_.drawing_battle.draw_action.draw_items(cells_in_range,potential_target_list)
+
 
 func get_viable_targets():
 	potential_target_list.clear()
@@ -62,5 +59,4 @@ func get_viable_targets():
 			if unit:
 				if unit.faction != source_char.faction:
 					potential_target_list.append(unit)
-	print(potential_target_list)
 	battle_scene_.drawing_battle.draw_action.draw_items(cells_in_range,potential_target_list)

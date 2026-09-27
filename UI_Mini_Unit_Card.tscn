@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://5podgorq563x" path="res://BattleScene/BattleUI/UnitInfo/UI_Unit_Card_Selection_Card.gd" id="1_5widg"]
 [ext_resource type="Texture2D" uid="uid://byo6sw14dlhp2" path="res://BattleScene/BattleGrid/BattleEnvironment/BattleTileSets/IMG_5673.png" id="1_6lm8p"]
-[ext_resource type="Resource" uid="uid://bpwxllkia0gkr" path="res://BattleScene/BattleData/CharacterData/Wizard.tres" id="2_bcx42"]
 [ext_resource type="StyleBox" uid="uid://dj48bagkuj3ut" path="res://ui_card_select_stylebox.tres" id="3_1dyaw"]
 [ext_resource type="StyleBox" uid="uid://bfbypmrtbe683" path="res://ui_card_select_pressed_stylebox.tres" id="4_5chio"]
 [ext_resource type="StyleBox" uid="uid://bbgx8600ynmcs" path="res://ui_card_select_hover_stylebox.tres" id="5_m5se2"]
@@ -19,7 +18,7 @@ bg_color = Color(2.2140146e-06, 0.6694269, 0.79451644, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bcx42"]
 
-[node name="UI_Mini_Unit_Card" type="Control" unique_id=909320864 node_paths=PackedStringArray("values", "unit_name", "char_texture", "health_progress", "resource_progress")]
+[node name="UI_Mini_Unit_Card" type="Control" unique_id=909320864 node_paths=PackedStringArray("label_dict", "image_dict")]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 3
 anchors_preset = 0
@@ -28,16 +27,13 @@ offset_bottom = 128.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_5widg")
-values = {
+label_dict = {
 "Action Points": NodePath("ProgressBarResource/ResourceValueLabel"),
-"Health": NodePath("ProgressBarHealth/HealthValueLabel"),
-"Name": NodePath("CharacterName")
+"Health": NodePath("ProgressBarHealth/HealthValueLabel")
 }
-unit_name = NodePath("CharacterName")
-char_texture = NodePath("Portrait")
-health_progress = NodePath("ProgressBarHealth")
-resource_progress = NodePath("ProgressBarResource")
-char_stat = ExtResource("2_bcx42")
+image_dict = {
+"Portrait": NodePath("Portrait")
+}
 metadata/_custom_type_script = "uid://cj22xpt8o22q4"
 
 [node name="Button" type="Button" parent="." unique_id=364278551]

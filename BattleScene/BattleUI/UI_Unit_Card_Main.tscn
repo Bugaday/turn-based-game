@@ -2,12 +2,6 @@
 
 [ext_resource type="Script" uid="uid://calemsjj4l4cl" path="res://BattleScene/BattleUI/UnitInfo/UI_Unit_Card_Main.gd" id="1_l16vv"]
 [ext_resource type="Texture2D" uid="uid://byo6sw14dlhp2" path="res://BattleScene/BattleGrid/BattleEnvironment/BattleTileSets/IMG_5673.png" id="2_in1wn"]
-[ext_resource type="StyleBox" uid="uid://ddb4p8a22ukmx" path="res://style_label_stats.tres" id="3_3ccj3"]
-[ext_resource type="Theme" uid="uid://chr0cdf634aiw" path="res://theme_label_stats.tres" id="3_yl1q2"]
-[ext_resource type="Theme" uid="uid://dsiaghe0p3r3k" path="res://theme_hover_panel_player.tres" id="4_g4ibn"]
-[ext_resource type="StyleBox" uid="uid://yfr7nfq3qk1c" path="res://style_player_hover_panel.tres" id="5_4thct"]
-[ext_resource type="StyleBox" uid="uid://8wmfmtoc4lnl" path="res://style_enemy_hover_panel.tres" id="5_4w7q0"]
-[ext_resource type="Theme" uid="uid://cynxpx2spm4yf" path="res://theme_hover_panel_enemy.tres" id="7_vaup0"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ll3lt"]
 
@@ -33,25 +27,19 @@ subpixel_positioning = 0
 [sub_resource type="LabelSettings" id="LabelSettings_g4ibn"]
 font = SubResource("SystemFont_dufxc")
 
-[node name="UIUnitCardMain" type="Panel" unique_id=1088169180 node_paths=PackedStringArray("unit_card_portrait", "unit_card_name", "label_dict", "stats_current_box")]
+[node name="UIUnitCardMain" type="Panel" unique_id=1088169180 node_paths=PackedStringArray("label_dict", "image_dict")]
 material = SubResource("CanvasItemMaterial_ll3lt")
 offset_right = 960.0
 offset_bottom = 128.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_3ccj3")
 script = ExtResource("1_l16vv")
-unit_card_portrait = NodePath("UnitCardPortrait")
-unit_card_name = NodePath("UnitCardName")
 label_dict = {
-"Action Points": NodePath("PanelStatsCurrent/StatsCurrent/HBoxStatsActionPoints/StatValueActionPoints"),
-"Health": NodePath("PanelStatsCurrent/StatsCurrent/HBoxStatsHealth/StatValueHealth")
+"Action Points": "PanelStatsCurrent/StatsCurrent/HBoxStatsActionPoints/StatValueActionPoints",
+"Health": "PanelStatsCurrent/StatsCurrent/HBoxStatsHealth/StatValueHealth"
 }
-stats_current_box = NodePath("PanelStatsCurrent/StatsCurrent")
-theme_label_stats = ExtResource("3_yl1q2")
-style_label_stats = ExtResource("3_3ccj3")
-player_panel_theme = ExtResource("4_g4ibn")
-player_panel_stylebox = ExtResource("5_4thct")
-enemy_panel_stylebox = ExtResource("5_4w7q0")
-enemy_panel_theme = ExtResource("7_vaup0")
+image_dict = {
+"Portrait": NodePath("UnitCardPortrait")
+}
 
 [node name="UnitCardPortrait" type="TextureRect" parent="." unique_id=1242808780]
 unique_name_in_owner = true

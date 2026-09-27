@@ -2,7 +2,7 @@ class_name UIBattle
 extends Node
 
 @export var action_button_controller : ActionButtonController
-@export var ui_unit_cards : UIUnitCard
+@export var ui_unit_cards : UIUnitCardControl
 var text_floating : FloatingText
 
 

@@ -25,7 +25,7 @@ subpixel_positioning = 0
 [sub_resource type="LabelSettings" id="LabelSettings_g4ibn"]
 font = SubResource("SystemFont_dufxc")
 
-[node name="UIUnitHoverCard" type="Control" unique_id=851388624]
+[node name="UIUnitHoverCard" type="Control" unique_id=851388624 node_paths=PackedStringArray("label_dict", "image_dict")]
 material = SubResource("CanvasItemMaterial_ll3lt")
 layout_mode = 3
 anchors_preset = 0
@@ -33,6 +33,13 @@ offset_right = 239.0
 offset_bottom = 339.0
 theme = ExtResource("1_kwmrs")
 script = ExtResource("2_m5vk3")
+label_dict = {
+"Action Points": NodePath("PanelStatsCurrent/StatsCurrent/HBoxStatsActionPoints/StatValueActionPoints"),
+"Health": NodePath("PanelStatsCurrent/StatsCurrent/HBoxStatsHealth/StatValueHealth")
+}
+image_dict = {
+"Portrait": NodePath("UnitCardPortrait")
+}
 metadata/_custom_type_script = "uid://cj22xpt8o22q4"
 
 [node name="UnitCardPortrait" type="TextureRect" parent="." unique_id=1242808780]

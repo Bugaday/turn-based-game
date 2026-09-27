@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://dkq5brytl8xq6" path="res://BattleScene/BattleUI/UnitInfo/UI_Unit_Card_Control.gd" id="5_oxarm"]
 [ext_resource type="PackedScene" uid="uid://b4n2s0t054y0r" path="res://BattleScene/BattleUI/UI_Unit_Card_Main.tscn" id="5_rkfma"]
 [ext_resource type="PackedScene" uid="uid://bjw687538nifi" path="res://BattleScene/BattleUI/UI_Unit_Hover_Card.tscn" id="6_coxye"]
-[ext_resource type="Script" uid="uid://calemsjj4l4cl" path="res://BattleScene/BattleUI/UnitInfo/UI_Unit_Card_Main.gd" id="8_pikk8"]
+[ext_resource type="Script" uid="uid://c6mxqavrylui6" path="res://BattleScene/BattleUI/UnitInfo/UI_Unit_Card_Hover.gd" id="8_rkfma"]
 [ext_resource type="PackedScene" uid="uid://cyfp6b4h7t3uy" path="res://BattleScene/BattleUI/UI_Unit_Card_Selection.tscn" id="9_rkfma"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ri2no"]
@@ -134,11 +134,9 @@ offset_left = 1363.0
 offset_top = 320.0
 offset_right = 1602.0
 offset_bottom = 659.0
-script = ExtResource("8_pikk8")
+script = ExtResource("8_rkfma")
 
 [node name="UI_Unit_Mini_Cards" parent="UI_Unit_Cards" unique_id=1788615898 instance=ExtResource("9_rkfma")]
 layout_mode = 0
-label_dict = null
-image_dict = null
 
 [connection signal="button_up" from="EndTurnButton" to="EndTurnButton" method="_on_button_up"]

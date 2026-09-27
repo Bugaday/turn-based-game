@@ -9,14 +9,14 @@ border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 
-[node name="UI_Unit_Mini_Cards" type="Control" unique_id=1788615898 node_paths=PackedStringArray("ui_unit_mini_cards_player", "ui_unit_mini_cards_enemy")]
+[node name="UI_Unit_Mini_Cards" type="Control" unique_id=1788615898 node_paths=PackedStringArray("ui_unit_mini_cards_group_player", "ui_unit_mini_cards_group_enemy")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_k64cl")
-ui_unit_mini_cards_player = NodePath("PlayerSelectionCardsPanel/PlayerPartyVBox")
-ui_unit_mini_cards_enemy = NodePath("EnemySelectionCardsPanel/EnemyPartyVBox")
+ui_unit_mini_cards_group_player = NodePath("PlayerSelectionCardsPanel/PlayerPartyVBox")
+ui_unit_mini_cards_group_enemy = NodePath("EnemySelectionCardsPanel/EnemyPartyVBox")
 
 [node name="PlayerSelectionCardsPanel" type="PanelContainer" parent="." unique_id=2146853318]
 custom_minimum_size = Vector2(128, 128)

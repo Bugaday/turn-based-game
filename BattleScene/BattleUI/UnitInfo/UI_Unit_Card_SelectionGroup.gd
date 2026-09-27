@@ -13,7 +13,8 @@ func update_mini_cards(faction_units:Dictionary[String,Array]):
 			var enemy_team : Array = faction_units[faction]
 			populate_mini_cards_group(enemy_team,ui_unit_mini_cards_enemy)
 
-					
+
+
 func populate_mini_cards_group(team:Array,group:Control):
 	if team.size() != group.get_child_count():
 		var mini_card_scene : PackedScene = load("res://UI_Mini_Unit_Card.tscn")

@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dfi0ppbp0ouxo" path="res://BattleScene/BattleUI/Buttons/end_turn_button.gd" id="2_coxye"]
 [ext_resource type="Script" uid="uid://dmlu5o2x3kk26" path="res://BattleScene/BattleUI/action_button_controller.gd" id="3_pmo2u"]
 [ext_resource type="Script" uid="uid://cjxemdkryrvkj" path="res://BattleScene/ActionButton.gd" id="4_pikk8"]
-[ext_resource type="Script" uid="uid://cj22xpt8o22q4" path="res://BattleScene/BattleUI/UnitInfo/UI_Unit_Card.gd" id="5_pmo2u"]
+[ext_resource type="Script" uid="uid://dkq5brytl8xq6" path="res://BattleScene/BattleUI/UnitInfo/UI_Unit_Card_Control.gd" id="5_oxarm"]
 [ext_resource type="PackedScene" uid="uid://b4n2s0t054y0r" path="res://BattleScene/BattleUI/UI_Unit_Card_Main.tscn" id="5_rkfma"]
 [ext_resource type="PackedScene" uid="uid://bjw687538nifi" path="res://BattleScene/BattleUI/UI_Unit_Hover_Card.tscn" id="6_coxye"]
 [ext_resource type="Script" uid="uid://calemsjj4l4cl" path="res://BattleScene/BattleUI/UnitInfo/UI_Unit_Card_Main.gd" id="8_pikk8"]
@@ -12,7 +12,7 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_ri2no"]
 
-[node name="UI_Battle" type="Control" unique_id=2107946255 node_paths=PackedStringArray("action_button_controller", "ui_unit_cards", "ui_mini_cards_player")]
+[node name="UI_Battle" type="Control" unique_id=2107946255 node_paths=PackedStringArray("action_button_controller", "ui_unit_cards")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,7 +23,6 @@ mouse_filter = 1
 script = ExtResource("1_x3jtv")
 action_button_controller = NodePath("ButtonController")
 ui_unit_cards = NodePath("UI_Unit_Cards")
-ui_mini_cards_player = NodePath("UI_Unit_Cards/UI_Unit_Mini_Cards")
 metadata/_edit_use_anchors_ = true
 
 [node name="EndTurnButton" type="Button" parent="." unique_id=589864474]
@@ -105,13 +104,14 @@ layout_mode = 2
 script = ExtResource("4_pikk8")
 metadata/_custom_type_script = "uid://cjxemdkryrvkj"
 
-[node name="UI_Unit_Cards" type="Control" parent="." unique_id=1023238940 node_paths=PackedStringArray("ui_unit_card_main", "ui_unit_hover_card")]
+[node name="UI_Unit_Cards" type="Control" parent="." unique_id=1023238940 node_paths=PackedStringArray("ui_unit_card_main", "ui_unit_hover_card", "ui_unit_mini_cards_group")]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("5_pmo2u")
+script = ExtResource("5_oxarm")
 ui_unit_card_main = NodePath("UIUnitCardMain")
 ui_unit_hover_card = NodePath("UIUnitHoverCard")
+ui_unit_mini_cards_group = NodePath("UI_Unit_Mini_Cards")
 
 [node name="UIUnitCardMain" parent="UI_Unit_Cards" unique_id=1088169180 instance=ExtResource("5_rkfma")]
 layout_mode = 1
@@ -138,5 +138,7 @@ script = ExtResource("8_pikk8")
 
 [node name="UI_Unit_Mini_Cards" parent="UI_Unit_Cards" unique_id=1788615898 instance=ExtResource("9_rkfma")]
 layout_mode = 0
+label_dict = null
+image_dict = null
 
 [connection signal="button_up" from="EndTurnButton" to="EndTurnButton" method="_on_button_up"]

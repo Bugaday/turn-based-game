@@ -8,6 +8,8 @@ var grid : Dictionary[Vector2i,GridCellData]
 @export var tilemap:TileMapLayer
 @export var battle_spawner : Spawner = Spawner.new()
 
+signal on_character_hovered(unit:Character,bIsHovered:bool)
+
 var active_character : Character:
 	set(value):
 		active_character = value
@@ -15,6 +17,16 @@ var selected_character : Character
 	#set(value):
 		#selected_character = value
 		#on_select_character.emit(selected_character)
+
+
+var hovered_character : Character:
+	set(value):
+		hovered_character = value
+		if value != null:
+			on_character_hovered.emit(value,true)
+		else:
+			on_character_hovered.emit(value,false)
+		
 		
 var active_ai_char_index : int
 

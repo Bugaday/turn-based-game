@@ -10,6 +10,8 @@ var stylebox_panel_enemy : StyleBoxFlat = load("res://stylebox_panel_enemy.tres"
 
 
 func update_all_values(unit:Character):
+	label_dict["Name"].text = str(unit.base_stats.unit_name)
 	label_dict["Health"].text = str(unit.health_.current_health)
 	label_dict["Action Points"].text = str(unit.action_points_current)
 	image_dict["Portrait"].texture = unit.base_stats.sprite
+	pass

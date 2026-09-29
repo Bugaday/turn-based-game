@@ -1,23 +1,22 @@
 class_name UIUnitCardSelectionGroup
-extends UIUnitCard
+extends Control
 
 @export var ui_unit_mini_cards_group_player : Control
 @export var ui_unit_mini_cards_group_enemy : Control
+var mini_card_scene : PackedScene = load("res://UI_Mini_Unit_Card.tscn")
 
-func update_mini_cards(faction_units:Dictionary[String,Array]):
+func update_mini_cards(faction_units:Dictionary[String,Array],battle_scene:SceneBattle):
 	for faction in faction_units.keys():
 		if faction == "Player":
 			var player_team : Array = faction_units["Player"]
-			populate_mini_cards_group(player_team,ui_unit_mini_cards_group_player)
+			populate_mini_cards_group(player_team,ui_unit_mini_cards_group_player,battle_scene)
 		else:
 			var enemy_team : Array = faction_units[faction]
-			populate_mini_cards_group(enemy_team,ui_unit_mini_cards_group_enemy)
+			populate_mini_cards_group(enemy_team,ui_unit_mini_cards_group_enemy,battle_scene)
 
 
-
-func populate_mini_cards_group(team:Array,group:Control):
+func populate_mini_cards_group(team:Array,group:Control,battle_scene:SceneBattle):
 	if team.size() != group.get_child_count():
-		var mini_card_scene : PackedScene = load("res://UI_Mini_Unit_Card.tscn")
 		if group.get_child_count() > 0:
 			for card in group.get_children():
 				card.queue_free()
@@ -25,11 +24,7 @@ func populate_mini_cards_group(team:Array,group:Control):
 			var new_mini_card : UIUnitCardSelectionCard = mini_card_scene.instantiate()
 			group.add_child(new_mini_card)
 			new_mini_card.character_linked = member
-			#member.on_stat_changed.connect(new_mini_card.update_all_values(member))
-			#new_mini_card.health_progress.max_value = member.base_stats.health
-			#new_mini_card.resource_progress.max_value = member.base_stats.action_points_max
-			#new_mini_card.update_values(member.get_stats_dictionary())
-			#new_mini_card.char_texture.texture = member.base_stats.sprite
+			new_mini_card.on_mini_portrait_pressed.connect(battle_scene.select_character)
 
 
 func mini_card_select(card_selected:UIUnitCardSelectionCard):

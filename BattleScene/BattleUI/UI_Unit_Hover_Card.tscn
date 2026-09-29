@@ -35,7 +35,8 @@ theme = ExtResource("1_kwmrs")
 script = ExtResource("2_m5vk3")
 label_dict = {
 "Action Points": NodePath("PanelStatsCurrent/StatsCurrent/HBoxStatsActionPoints/StatValueActionPoints"),
-"Health": NodePath("PanelStatsCurrent/StatsCurrent/HBoxStatsHealth/StatValueHealth")
+"Health": NodePath("PanelStatsCurrent/StatsCurrent/HBoxStatsHealth/StatValueHealth"),
+"Name": NodePath("UnitCardName")
 }
 image_dict = {
 "Portrait": NodePath("UnitCardPortrait")

@@ -16,11 +16,10 @@ func _ready() -> void:
 	
 	CreateGrid()
 	battle_data.setup(path_finder)
-
-	ui_battle.hook_char_signals(battle_data.all_characters)
-	ui_battle.ui_unit_cards.ui_unit_mini_cards_group.update_mini_cards(battle_data.active_factions_units)
-	for card :  UIUnitCardSelectionCard in ui_battle.ui_unit_cards.ui_unit_mini_cards_group.ui_unit_mini_cards_player.get_children():
-		card.on_mini_portrait_pressed.connect(mini_card_selected)
+	battle_data.on_character_hovered.connect(ui_battle.on_character_hovered)
+	ui_battle.ui_unit_cards.ui_unit_mini_cards_group.update_mini_cards(battle_data.active_factions_units,self)
+	#for card :  UIUnitCardSelectionCard in ui_battle.ui_unit_cards.ui_unit_mini_cards_group.ui_unit_mini_cards_player.get_children():
+		#card.on_mini_portrait_pressed.connect(mini_card_selected)
 	DebugVis.update_blocked_positions()
 
 
@@ -53,7 +52,7 @@ func select_character(unit:Character):
 	battle_data.selected_character = unit
 	battle_data.active_character = unit
 	
-	battle_data.selected_character.on_stat_changed.connect(ui_battle.ui_unit_card._update_label)
+	battle_data.selected_character.on_stat_changed.connect(ui_battle.ui_unit_cards.update_all_unit_cards)
 	ui_battle.on_character_selected(unit,self)
 	drawing_battle.draw_box.visible = true
 	drawing_battle.draw_box.position = unit.position

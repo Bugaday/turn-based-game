@@ -7,10 +7,11 @@ class_name UIUnitCardControl
 @export var ui_unit_mini_cards_group : UIUnitCardSelectionGroup
 
 
-func update_all_unit_cards(unit:Character):
-	ui_unit_card_main.update_all_values(unit)
-	ui_unit_hover_card.update_all_values(unit)
-	ui_unit_mini_cards_group.update_all_values(unit)
+func update_all_unit_cards(battle_scene:SceneBattle):
+	ui_unit_card_main.update_all_values(battle_scene.battle_data.selected_character)
+	#ui_unit_hover_card.update_all_values(unit)
+	#ui_unit_mini_cards_group.update_mini_cards()
+	pass
 
 
 func activate_unit_hover_card(b_isActive:bool,unit:Character):

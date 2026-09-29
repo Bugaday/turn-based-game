@@ -6,23 +6,22 @@ extends Node
 var text_floating : FloatingText
 
 
-func hook_char_signals(all_units:Array[Character]) -> void:
-	for unit in all_units:
-		#unit.character_blackboard.on_blackboard_value_set.connect(ui_unit_card._update_all_labels)
-		#unit.on_stat_changed.connect(update_unit_stats)
-		#unit.on_current_stats_changed.connect(spawn_floating_text)
-		pass
+func on_character_selected(unit:Character,battle_scene : SceneBattle):
+	action_button_controller.update_button_set(unit,battle_scene)
+	ui_unit_cards._update_all_labels(unit)
+	
+func on_character_hovered(unit:Character,bIsHovered:bool):
+	ui_unit_cards.activate_unit_hover_card(bIsHovered,unit)
 
 
 func spawn_floating_text(text,pos:Vector2,parent:Node2D):
 	var string_ : String = str(text)
 	text_floating = FloatingText.new(string_,pos)
 	parent.add_child(text_floating)
-
-
-func on_character_selected(unit:Character,battle_scene : SceneBattle):
-	action_button_controller.update_button_set(unit,battle_scene)
-	ui_unit_cards._update_all_labels(unit)
+	
+	
+func update_all_character_ui(battle_scene:SceneBattle):
+	ui_unit_cards.update_all_unit_cards(battle_scene)
 
 
 func trigger_new_turn():

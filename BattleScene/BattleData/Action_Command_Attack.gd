@@ -21,7 +21,7 @@ func action_input_confirm():
 
 
 func execute_action():
-	target.health_.apply_health_change(-10)
+	target.apply_health_change(-10)
 	var offset : Vector2 = Vector2(0.0,-32.0)
 	battle_scene_.ui_battle.spawn_floating_text("10",target.position+offset,battle_scene_)
 	super()

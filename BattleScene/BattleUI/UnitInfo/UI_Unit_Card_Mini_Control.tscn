@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cyfp6b4h7t3uy"]
 
-[ext_resource type="Script" uid="uid://y0bxyo4vn53r" path="res://BattleScene/BattleUI/UnitInfo/UI_Unit_Card_SelectionGroup.gd" id="1_k64cl"]
+[ext_resource type="Script" uid="uid://y0bxyo4vn53r" path="res://BattleScene/BattleUI/UnitInfo/UI_Unit_Card_Mini_Control.gd" id="1_c1v7g"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_coxye"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -14,7 +14,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("1_k64cl")
+script = ExtResource("1_c1v7g")
 ui_unit_mini_cards_group_player = NodePath("PlayerSelectionCardsPanel/PlayerPartyVBox")
 ui_unit_mini_cards_group_enemy = NodePath("EnemySelectionCardsPanel/EnemyPartyVBox")
 

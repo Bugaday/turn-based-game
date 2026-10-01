@@ -11,15 +11,13 @@ class_name SceneBattle
 var current_state : StateGame
 
 func _ready() -> void:
-	
 	DebugVis.battle = self 
 	
 	CreateGrid()
-	battle_data.setup(path_finder)
+	battle_data.battle_spawner.new_character_spawned.connect(ui_battle.on_character_spawned)
+	battle_data.setup(path_finder,ui_battle)
 	battle_data.on_character_hovered.connect(ui_battle.on_character_hovered)
-	ui_battle.ui_unit_cards.ui_unit_mini_cards_group.update_mini_cards(battle_data.active_factions_units,self)
-	#for card :  UIUnitCardSelectionCard in ui_battle.ui_unit_cards.ui_unit_mini_cards_group.ui_unit_mini_cards_player.get_children():
-		#card.on_mini_portrait_pressed.connect(mini_card_selected)
+	
 	DebugVis.update_blocked_positions()
 
 
@@ -37,22 +35,20 @@ func add_blocked_tiles_for_pathfinder():
 			path_finder.set_blocked_cell(i)
 			
 			
-func mini_card_selected(unit:Character,card:UIUnitCardSelectionCard):
+func mini_card_selected(unit:Character,card:UIUnitCardMini):
 	select_character(unit)
 	ui_battle.mini_card_select(card)
 
 
 func select_character(unit:Character):
-	#Disconnect main unit card signal from a Selected Character if there is one
 	if battle_data.selected_character:
-		if battle_data.selected_character.on_stat_changed.is_connected(ui_battle.ui_unit_card._update_label):
-			battle_data.selected_character.on_stat_changed.disconnect(ui_battle.ui_unit_card._update_label)
-	
+		var old_char : Character = battle_data.selected_character
+		if old_char.on_stat_changed.is_connected(ui_battle.ui_unit_cards.ui_unit_card_main.update_all_values):
+			old_char.on_stat_changed.disconnect(ui_battle.ui_unit_cards.ui_unit_card_main.update_all_values)
 	#Select Character and Make Active
 	battle_data.selected_character = unit
+	battle_data.selected_character.on_stat_changed.connect(ui_battle.ui_unit_cards.ui_unit_card_main.update_all_values)
 	battle_data.active_character = unit
-	
-	battle_data.selected_character.on_stat_changed.connect(ui_battle.ui_unit_cards.update_all_unit_cards)
 	ui_battle.on_character_selected(unit,self)
 	drawing_battle.draw_box.visible = true
 	drawing_battle.draw_box.position = unit.position

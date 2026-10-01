@@ -7,7 +7,6 @@
 [ext_resource type="Script" uid="uid://dqicq528dr27" path="res://BattleScene/BattleData/Action_Data_Move.gd" id="8_dt337"]
 [ext_resource type="Script" uid="uid://ciyfpt0s0i1q7" path="res://BattleScene/BattleData/Action_Data_Attack.gd" id="9_dt337"]
 [ext_resource type="Script" uid="uid://vb2lxqlfha75" path="res://BattleScene/BattleGrid/Drawing/Draw_Move_Path.gd" id="11_dt337"]
-[ext_resource type="Script" uid="uid://dxxk4vvgeqeuc" path="res://BattleScene/CharacterRepresentations/Health_CP.gd" id="12_4c001"]
 
 [sub_resource type="Resource" id="Resource_4c001"]
 script = ExtResource("8_dt337")
@@ -23,10 +22,9 @@ metadata/_custom_type_script = "uid://ciyfpt0s0i1q7"
 atlas = ExtResource("3_3wwac")
 region = Rect2(0, 0, 64, 64)
 
-[node name="Character" type="Node2D" unique_id=325950488 node_paths=PackedStringArray("char_sprite", "health_")]
+[node name="Character" type="Node2D" unique_id=325950488 node_paths=PackedStringArray("char_sprite")]
 script = ExtResource("1_3wwac")
 char_sprite = NodePath("CharSprite2D")
-health_ = NodePath("Health_CP")
 ai_actions_list = ExtResource("3_rjkiw")
 actions = Array[int]([0, 1])
 action_list = Dictionary[int, ExtResource("7_lbrrl")]({
@@ -45,6 +43,3 @@ gizmo_extents = 149.2
 [node name="DrawMovePath" type="Node2D" parent="." unique_id=183900114]
 script = ExtResource("11_dt337")
 metadata/_custom_type_script = "uid://vb2lxqlfha75"
-
-[node name="Health_CP" type="Node" parent="." unique_id=305513733]
-script = ExtResource("12_4c001")

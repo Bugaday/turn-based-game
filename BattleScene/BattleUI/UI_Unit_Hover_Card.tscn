@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bjw687538nifi"]
 
 [ext_resource type="Theme" uid="uid://cynxpx2spm4yf" path="res://theme_hover_panel_enemy.tres" id="1_kwmrs"]
-[ext_resource type="Script" uid="uid://cj22xpt8o22q4" path="res://BattleScene/BattleUI/UnitInfo/UI_Unit_Card.gd" id="2_m5vk3"]
+[ext_resource type="Script" uid="uid://c6mxqavrylui6" path="res://BattleScene/BattleUI/UnitInfo/UI_Unit_Card_Hover.gd" id="2_m5vk3"]
 [ext_resource type="Texture2D" uid="uid://byo6sw14dlhp2" path="res://BattleScene/BattleGrid/BattleEnvironment/BattleTileSets/IMG_5673.png" id="4_kwmrs"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ll3lt"]
@@ -25,7 +25,7 @@ subpixel_positioning = 0
 [sub_resource type="LabelSettings" id="LabelSettings_g4ibn"]
 font = SubResource("SystemFont_dufxc")
 
-[node name="UIUnitHoverCard" type="Control" unique_id=851388624 node_paths=PackedStringArray("label_dict", "image_dict")]
+[node name="UIUnitHoverCard" type="Control" unique_id=851388624 node_paths=PackedStringArray("label_name", "label_health", "label_action_points", "image_portrait")]
 material = SubResource("CanvasItemMaterial_ll3lt")
 layout_mode = 3
 anchors_preset = 0
@@ -33,14 +33,10 @@ offset_right = 239.0
 offset_bottom = 339.0
 theme = ExtResource("1_kwmrs")
 script = ExtResource("2_m5vk3")
-label_dict = {
-"Action Points": NodePath("PanelStatsCurrent/StatsCurrent/HBoxStatsActionPoints/StatValueActionPoints"),
-"Health": NodePath("PanelStatsCurrent/StatsCurrent/HBoxStatsHealth/StatValueHealth"),
-"Name": NodePath("UnitCardName")
-}
-image_dict = {
-"Portrait": NodePath("UnitCardPortrait")
-}
+label_name = NodePath("UnitCardName")
+label_health = NodePath("PanelStatsCurrent/StatsCurrent/HBoxStatsHealth/StatValueHealth")
+label_action_points = NodePath("PanelStatsCurrent/StatsCurrent/HBoxStatsActionPoints/StatValueActionPoints")
+image_portrait = NodePath("UnitCardPortrait")
 metadata/_custom_type_script = "uid://cj22xpt8o22q4"
 
 [node name="UnitCardPortrait" type="TextureRect" parent="." unique_id=1242808780]

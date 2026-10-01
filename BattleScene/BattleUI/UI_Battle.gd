@@ -6,12 +6,17 @@ extends Node
 var text_floating : FloatingText
 
 
-func on_character_selected(unit:Character,battle_scene : SceneBattle):
+func on_character_selected(unit:Character,battle_scene:SceneBattle):
+	ui_unit_cards.update_selected_character(unit)
 	action_button_controller.update_button_set(unit,battle_scene)
-	ui_unit_cards._update_all_labels(unit)
+	#ui_unit_cards._update_all_labels(unit)
 	
 func on_character_hovered(unit:Character,bIsHovered:bool):
 	ui_unit_cards.activate_unit_hover_card(bIsHovered,unit)
+	
+	
+func on_character_spawned(unit:Character):
+	ui_unit_cards.add_new_character(unit)
 
 
 func spawn_floating_text(text,pos:Vector2,parent:Node2D):

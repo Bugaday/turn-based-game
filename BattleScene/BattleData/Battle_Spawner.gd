@@ -7,8 +7,10 @@ class_name Spawner
 @export var max_num_units : int = 4
 @export var allowed_classes : Array[CharacterData]
 
+signal new_character_spawned(unit:Character)
 
-func spawn()->Array[Character]:
+
+func spawn_all()->Array[Character]:
 	var char_scene : PackedScene = load("res://BattleScene/CharacterRepresentations/Character.tscn")
 	var char_array:Array[Character]
 	
@@ -17,6 +19,7 @@ func spawn()->Array[Character]:
 		newChar.base_stats = member
 		newChar.faction = "Player"
 		char_array.append(newChar)
+		new_character_spawned.emit(newChar)
 	
 	var num_units : int = randi_range(min_num_units,max_num_units)
 	for i in num_units:
@@ -26,5 +29,8 @@ func spawn()->Array[Character]:
 		newChar.base_stats = unit_class
 		newChar.faction = "Bandits"
 		char_array.append(newChar)
+		new_character_spawned.emit(newChar)
 
 	return char_array
+	
+	

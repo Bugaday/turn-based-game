@@ -4,9 +4,9 @@ extends Node
 var current_health : int = 100:
 	set(value):
 		current_health = value
-		on_health_changed.emit("Health",value)
+		on_health_changed.emit(value)
 
-signal on_health_changed(name:String,amount:int)
+signal on_health_changed(amount:int)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

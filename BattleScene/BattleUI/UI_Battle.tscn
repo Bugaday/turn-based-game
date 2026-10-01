@@ -7,8 +7,7 @@
 [ext_resource type="Script" uid="uid://dkq5brytl8xq6" path="res://BattleScene/BattleUI/UnitInfo/UI_Unit_Card_Control.gd" id="5_oxarm"]
 [ext_resource type="PackedScene" uid="uid://b4n2s0t054y0r" path="res://BattleScene/BattleUI/UI_Unit_Card_Main.tscn" id="5_rkfma"]
 [ext_resource type="PackedScene" uid="uid://bjw687538nifi" path="res://BattleScene/BattleUI/UI_Unit_Hover_Card.tscn" id="6_coxye"]
-[ext_resource type="Script" uid="uid://c6mxqavrylui6" path="res://BattleScene/BattleUI/UnitInfo/UI_Unit_Card_Hover.gd" id="8_rkfma"]
-[ext_resource type="PackedScene" uid="uid://cyfp6b4h7t3uy" path="res://BattleScene/BattleUI/UI_Unit_Card_Selection.tscn" id="9_rkfma"]
+[ext_resource type="PackedScene" uid="uid://cyfp6b4h7t3uy" path="res://BattleScene/BattleUI/UnitInfo/UI_Unit_Card_Mini_Control.tscn" id="9_rkfma"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ri2no"]
 
@@ -113,7 +112,7 @@ ui_unit_card_main = NodePath("UIUnitCardMain")
 ui_unit_hover_card = NodePath("UIUnitHoverCard")
 ui_unit_mini_cards_group = NodePath("UI_Unit_Mini_Cards")
 
-[node name="UIUnitCardMain" parent="UI_Unit_Cards" unique_id=1088169180 node_paths=PackedStringArray("label_dict", "image_dict") instance=ExtResource("5_rkfma")]
+[node name="UIUnitCardMain" parent="UI_Unit_Cards" unique_id=1088169180 instance=ExtResource("5_rkfma")]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -126,25 +125,13 @@ offset_right = 1420.0
 offset_bottom = 1024.0
 grow_horizontal = 2
 grow_vertical = 0
-label_dict = {}
-image_dict = {
-"Portrait": NodePath("UnitCardPortrait")
-}
 
-[node name="UIUnitHoverCard" parent="UI_Unit_Cards" unique_id=785059671 node_paths=PackedStringArray("label_dict", "image_dict") instance=ExtResource("6_coxye")]
+[node name="UIUnitHoverCard" parent="UI_Unit_Cards" unique_id=785059671 instance=ExtResource("6_coxye")]
 layout_mode = 0
 offset_left = 1363.0
 offset_top = 320.0
 offset_right = 1602.0
 offset_bottom = 659.0
-script = ExtResource("8_rkfma")
-label_dict = {
-"Action Points": NodePath("PanelStatsCurrent/StatsCurrent/HBoxStatsActionPoints/StatValueActionPoints"),
-"Health": NodePath("PanelStatsCurrent/StatsCurrent/HBoxStatsHealth/StatValueHealth")
-}
-image_dict = {
-"Portrait": NodePath("UnitCardPortrait")
-}
 
 [node name="UI_Unit_Mini_Cards" parent="UI_Unit_Cards" unique_id=1788615898 instance=ExtResource("9_rkfma")]
 layout_mode = 0

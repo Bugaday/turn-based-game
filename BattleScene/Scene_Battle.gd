@@ -18,8 +18,16 @@ func _ready() -> void:
 	battle_data.setup(path_finder,ui_battle)
 	battle_data.on_character_hovered.connect(ui_battle.on_character_hovered)
 	battle_data.on_character_unhovered.connect(ui_battle.on_character_unhovered)
-	
+	for c in battle_data.all_characters:
+		var card : UIUnitCardMini = ui_battle.ui_unit_cards.ui_unit_mini_cards_group.get_card_by_character(c)
+		card.card_character_hovered.connect(mini_card_hovered)
 	DebugVis.update_blocked_positions()
+
+
+func mini_card_hovered(unit:Character):
+	drawing_battle.cursor.visible = true
+	#drawing_battle.cursor.position = unit.position
+	print("card hovered")
 
 
 func CreateGrid():
@@ -34,8 +42,8 @@ func add_blocked_tiles_for_pathfinder():
 		var tile : TileData = battle_data.tilemap.get_cell_tile_data(i)
 		if tile.get_custom_data("Block"):
 			path_finder.set_blocked_cell(i)
-			
-			
+
+
 func mini_card_selected(unit:Character,card:UIUnitCardMini):
 	select_character(unit)
 	ui_battle.mini_card_select(card)
@@ -53,7 +61,8 @@ func select_character(unit:Character):
 	ui_battle.on_character_selected(unit,self)
 	drawing_battle.draw_box.visible = true
 	drawing_battle.draw_box.position = unit.position
-	
+
+
 func update_unit_ui(value_name:String,value):
 	ui_battle.ui_unit_card._update_info(value_name,value)
 

@@ -7,6 +7,7 @@ extends UIUnitCard
 var character_linked : Character
 
 signal on_mini_portrait_pressed(unit:Character,card:UIUnitCardMini)
+signal card_character_hovered(unit:Character)
 
 func _ready() -> void:
 	mini_card_button.pressed.connect(_pressed)
@@ -33,6 +34,8 @@ func character_hovered_in_world():
 
 func card_hovered():
 	%Panel.visible = true
+	card_character_hovered.emit(character_linked)
+	
 
 
 func card_unhovered():

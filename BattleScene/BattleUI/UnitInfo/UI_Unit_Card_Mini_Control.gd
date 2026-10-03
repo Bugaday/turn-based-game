@@ -16,6 +16,7 @@ func add_card(unit:Character):
 	update_single_card(unit,new_mini_card)
 	new_mini_card.character_linked = unit
 	unit.on_stat_changed.connect(new_mini_card.update_all_values)
+	#new_mini_card.mini_card_button.mouse_entered.connect()
 
 
 func get_card_by_character(unit:Character)->UIUnitCardMini:

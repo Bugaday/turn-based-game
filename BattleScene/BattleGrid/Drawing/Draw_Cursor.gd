@@ -14,6 +14,7 @@ func _process(_delta: float) -> void:
 	else:
 		visible = false
 	position = GridService.snap_pos_to_grid(get_global_mouse_position())
+	pass
 
 
 func _draw() -> void:

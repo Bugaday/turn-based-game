@@ -17,6 +17,7 @@ func _ready() -> void:
 	battle_data.battle_spawner.new_character_spawned.connect(ui_battle.on_character_spawned)
 	battle_data.setup(path_finder,ui_battle)
 	battle_data.on_character_hovered.connect(ui_battle.on_character_hovered)
+	battle_data.on_character_unhovered.connect(ui_battle.on_character_unhovered)
 	
 	DebugVis.update_blocked_positions()
 

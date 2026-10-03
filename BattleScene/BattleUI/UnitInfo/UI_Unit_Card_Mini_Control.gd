@@ -12,13 +12,24 @@ func add_card(unit:Character):
 		ui_unit_mini_cards_group_player.add_child(new_mini_card)
 	else:
 		ui_unit_mini_cards_group_enemy.add_child(new_mini_card)
+	unit_selection_cards.set(unit,new_mini_card)
 	update_single_card(unit,new_mini_card)
+	new_mini_card.character_linked = unit
 	unit.on_stat_changed.connect(new_mini_card.update_all_values)
+
+
+func get_card_by_character(unit:Character)->UIUnitCardMini:
+	return unit_selection_cards[unit]
 
 
 func update_single_card(unit:Character,card:UIUnitCardMini):
 	card.update_all_values(unit)
 	pass
+	
+	
+func unhover_all_mini_cards():
+	for character_key : Character in unit_selection_cards.keys():
+		unit_selection_cards[character_key].card_unhovered()
 
 
 #func update_mini_cards(faction_units:Dictionary[String,Array],battle_scene:SceneBattle):

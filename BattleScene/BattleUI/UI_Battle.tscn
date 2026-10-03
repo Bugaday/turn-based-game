@@ -21,7 +21,7 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_x3jtv")
 action_button_controller = NodePath("ButtonController")
-ui_unit_cards = NodePath("UI_Unit_Cards")
+ui_unit_cards = NodePath("UI_Unit_Card_Control")
 metadata/_edit_use_anchors_ = true
 
 [node name="EndTurnButton" type="Button" parent="." unique_id=589864474]
@@ -103,7 +103,7 @@ layout_mode = 2
 script = ExtResource("4_pikk8")
 metadata/_custom_type_script = "uid://cjxemdkryrvkj"
 
-[node name="UI_Unit_Cards" type="Control" parent="." unique_id=1023238940 node_paths=PackedStringArray("ui_unit_card_main", "ui_unit_hover_card", "ui_unit_mini_cards_group")]
+[node name="UI_Unit_Card_Control" type="Control" parent="." unique_id=1023238940 node_paths=PackedStringArray("ui_unit_card_main", "ui_unit_hover_card", "ui_unit_mini_cards_group")]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -112,7 +112,7 @@ ui_unit_card_main = NodePath("UIUnitCardMain")
 ui_unit_hover_card = NodePath("UIUnitHoverCard")
 ui_unit_mini_cards_group = NodePath("UI_Unit_Mini_Cards")
 
-[node name="UIUnitCardMain" parent="UI_Unit_Cards" unique_id=1088169180 instance=ExtResource("5_rkfma")]
+[node name="UIUnitCardMain" parent="UI_Unit_Card_Control" unique_id=1088169180 instance=ExtResource("5_rkfma")]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -126,14 +126,14 @@ offset_bottom = 1024.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="UIUnitHoverCard" parent="UI_Unit_Cards" unique_id=785059671 instance=ExtResource("6_coxye")]
+[node name="UIUnitHoverCard" parent="UI_Unit_Card_Control" unique_id=785059671 instance=ExtResource("6_coxye")]
 layout_mode = 0
 offset_left = 1363.0
 offset_top = 320.0
 offset_right = 1602.0
 offset_bottom = 659.0
 
-[node name="UI_Unit_Mini_Cards" parent="UI_Unit_Cards" unique_id=1788615898 instance=ExtResource("9_rkfma")]
+[node name="UI_Unit_Mini_Cards" parent="UI_Unit_Card_Control" unique_id=1788615898 instance=ExtResource("9_rkfma")]
 layout_mode = 0
 
 [connection signal="button_up" from="EndTurnButton" to="EndTurnButton" method="_on_button_up"]

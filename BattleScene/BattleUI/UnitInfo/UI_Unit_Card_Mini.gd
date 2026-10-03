@@ -13,6 +13,7 @@ func _ready() -> void:
 	mini_card_button.mouse_entered.connect(card_hovered)
 	mini_card_button.mouse_exited.connect(card_unhovered)
 
+
 func update_all_values(unit:Character):
 	super(unit)
 	progress_bar_health.max_value = unit.base_stats.health
@@ -31,8 +32,8 @@ func character_hovered_in_world():
 
 
 func card_hovered():
-	print("Hovering card")
+	%Panel.visible = true
 
 
 func card_unhovered():
-	print("Unhovering card")
+	%Panel.visible = false

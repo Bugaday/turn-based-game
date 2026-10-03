@@ -7,6 +7,7 @@ var grid : Dictionary[Vector2i,GridCellData]
 @export var battle_spawner : Spawner = Spawner.new()
 
 signal on_character_hovered(unit:Character,bIsHovered:bool)
+signal on_character_unhovered()
 
 var active_character : Character:
 	set(value):
@@ -14,11 +15,13 @@ var active_character : Character:
 var selected_character : Character
 var hovered_character : Character:
 	set(value):
-		hovered_character = value
-		if value != null:
+		if value == null:
+			on_character_unhovered.emit()
+		elif value != null and value != hovered_character:
+			on_character_unhovered.emit()
 			on_character_hovered.emit(value,true)
-		else:
-			on_character_hovered.emit(value,false)
+		hovered_character = value
+
 var active_ai_char_index : int
 var all_characters : Array[Character]
 var factions_in_battle : Array[String]

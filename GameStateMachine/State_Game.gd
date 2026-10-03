@@ -15,10 +15,13 @@ func handle_input(_event : InputEvent,_battle_scene_script:SceneBattle)->StateGa
 
 
 func Update(_delta: float,_battle_scene_script:SceneBattle) -> void:
-	var mouseGridPos : Vector2i = GridService.world_to_grid(_battle_scene_script.get_global_mouse_position())
-	var cell_data : GridCellData = GridService.get_cell_data_at_pos(mouseGridPos,_battle_scene_script.battle_data.grid)
-	if cell_data.UnitOccupying:
-		_battle_scene_script.battle_data.hovered_character = cell_data.UnitOccupying
+	if GridService.is_in_grid(_battle_scene_script.get_global_mouse_position()):
+		var mouseGridPos : Vector2i = GridService.world_to_grid(_battle_scene_script.get_global_mouse_position())
+		var cell_data : GridCellData = GridService.get_cell_data_at_pos(mouseGridPos,_battle_scene_script.battle_data.grid)
+		if cell_data.UnitOccupying:
+			_battle_scene_script.battle_data.hovered_character = cell_data.UnitOccupying
+		else:
+			_battle_scene_script.battle_data.hovered_character = null
 	else:
 		_battle_scene_script.battle_data.hovered_character = null
 

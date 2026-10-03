@@ -6,6 +6,14 @@
 [ext_resource type="StyleBox" uid="uid://bbgx8600ynmcs" path="res://ui_card_select_hover_stylebox.tres" id="4_5qyxv"]
 [ext_resource type="Texture2D" uid="uid://byo6sw14dlhp2" path="res://BattleScene/BattleGrid/BattleEnvironment/BattleTileSets/IMG_5673.png" id="5_hisog"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_davv2"]
+bg_color = Color(0.2231029, 0.2231029, 0.22310278, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.78039217, 1, 0, 1)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_5widg"]
 atlas = ExtResource("5_hisog")
 region = Rect2(0, 0, 64, 64)
@@ -35,6 +43,14 @@ label_health = NodePath("ProgressBarHealth/HealthValueLabel")
 label_action_points = NodePath("ProgressBarResource/ResourceValueLabel")
 image_portrait = NodePath("Portrait")
 metadata/_custom_type_script = "uid://cj22xpt8o22q4"
+
+[node name="Panel" type="Panel" parent="." unique_id=1726857716]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 128.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_davv2")
 
 [node name="Portrait" type="TextureRect" parent="." unique_id=36691018]
 layout_mode = 1

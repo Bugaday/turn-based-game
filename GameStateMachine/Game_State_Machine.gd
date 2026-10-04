@@ -24,6 +24,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		DebugVis.toggle()
 
 
+
 func change_state(newState : StateGame):
 	#Check if state name exists
 	if current_state:

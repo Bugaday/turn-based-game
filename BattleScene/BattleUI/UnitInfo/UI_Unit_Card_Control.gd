@@ -7,8 +7,8 @@ class_name UIUnitCardControl
 @export var ui_unit_mini_cards_group : UIUnitCardMiniControl
 
 
-func add_new_character(unit:Character):
-	ui_unit_mini_cards_group.add_card(unit)
+func add_new_character(unit:Character,battle_scene:SceneBattle):
+	ui_unit_mini_cards_group.add_card(unit,battle_scene)
 
 
 func update_selected_character(unit:Character):

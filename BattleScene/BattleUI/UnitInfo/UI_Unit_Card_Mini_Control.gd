@@ -6,7 +6,7 @@ extends Control
 var unit_selection_cards : Dictionary[Character,UIUnitCardMini] = {}
 var mini_card_scene : PackedScene = load("res://BattleScene/BattleUI/UnitInfo/UI_Unit_Card_Mini.tscn")
 
-func add_card(unit:Character):
+func add_card(unit:Character,battle_scene:SceneBattle):
 	var new_mini_card : UIUnitCardMini = mini_card_scene.instantiate()
 	if unit.faction == "Player":
 		ui_unit_mini_cards_group_player.add_child(new_mini_card)
@@ -15,6 +15,7 @@ func add_card(unit:Character):
 	unit_selection_cards.set(unit,new_mini_card)
 	update_single_card(unit,new_mini_card)
 	new_mini_card.character_linked = unit
+	new_mini_card.on_card_hovered.connect(battle_scene.mini_card_hovered)
 	unit.on_stat_changed.connect(new_mini_card.update_all_values)
 	#new_mini_card.mini_card_button.mouse_entered.connect()
 

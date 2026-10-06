@@ -2,23 +2,35 @@ extends Node2D
 
 class_name StateMachineHover
 
-var current_hover_state : StateHover
-@export var scene_battle : SceneBattle
-@export var drawing : Drawing
+static var current_hover_state : StateHover
+static var scene_battle : SceneBattle
+static var drawing : Drawing
+static var ui_battle : UIBattle
+
+static var possible_states : Array[StateHover]
+
+static var HoverStateNone : StateHoverNone
+static var HoverStateGrid : StateHoverGrid
+static var HoverStateCharacter : StateHoverCharacter
+static var HoverStateMiniCard : StateHoverMiniCard
 
 func _ready() -> void:
-	change_state(StateHoverNone.new())
+	HoverStateNone = StateHoverNone.new()
+	HoverStateGrid = StateHoverGrid.new()
+	HoverStateCharacter = StateHoverCharacter.new()
+	HoverStateMiniCard  = StateHoverMiniCard.new()
+	change_state_hover(HoverStateNone)
 
 
 func _process(_delta: float) -> void:
 	if current_hover_state:
-		current_hover_state.Update(_delta,scene_battle,drawing)
+		current_hover_state.Update(_delta,scene_battle,drawing,ui_battle)
 
 
-func change_state(newStateHover : StateHover):
+static func change_state_hover(newStateHover : StateHover):
 	#Check if state name exists
 	if current_hover_state:
-		current_hover_state._exit_state(scene_battle,drawing)
+		current_hover_state._exit_state(scene_battle,drawing,ui_battle)
 	current_hover_state = newStateHover
-	newStateHover.on_hover_state_finished.connect(change_state,CONNECT_ONE_SHOT)
-	current_hover_state._enter_state(scene_battle,drawing)
+	newStateHover.on_hover_state_change.connect(change_state_hover,CONNECT_ONE_SHOT)
+	current_hover_state._enter_state(scene_battle,drawing,ui_battle)

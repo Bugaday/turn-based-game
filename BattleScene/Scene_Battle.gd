@@ -11,10 +11,17 @@ class_name SceneBattle
 var current_state : StateGame
 
 func _ready() -> void:
-	DebugVis.battle = self 
+	
+	#Autoload
+	DebugVis.battle = self
+	
+	#Initialise Static Variables
+	StateMachineHover.scene_battle = self
+	StateMachineHover.drawing = drawing_battle
+	StateMachineHover.ui_battle = ui_battle
 	
 	CreateGrid()
-	battle_data.battle_spawner.new_character_spawned.connect(ui_battle.on_character_spawned)
+	battle_data.battle_spawner.new_character_spawned.connect(character_spawned)
 	battle_data.setup(path_finder,ui_battle)
 	battle_data.on_character_hovered.connect(ui_battle.on_character_hovered)
 	battle_data.on_character_unhovered.connect(ui_battle.on_character_unhovered)
@@ -23,11 +30,16 @@ func _ready() -> void:
 		card.card_character_hovered.connect(mini_card_hovered)
 	DebugVis.update_blocked_positions()
 
+	
+func character_spawned(unit:Character):
+	ui_battle.on_character_spawned(unit,self)
+
 
 func mini_card_hovered(unit:Character):
+	
 	drawing_battle.cursor.visible = true
-	#drawing_battle.cursor.position = unit.position
-	print("card hovered")
+	drawing_battle.cursor.position = GridService.snap_pos_to_grid(unit.position)
+	print("Card hovered")
 
 
 func CreateGrid():
@@ -61,6 +73,7 @@ func select_character(unit:Character):
 	ui_battle.on_character_selected(unit,self)
 	drawing_battle.draw_box.visible = true
 	drawing_battle.draw_box.position = unit.position
+	StaticTest.do_static_things(battle_data.selected_character)
 
 
 func update_unit_ui(value_name:String,value):

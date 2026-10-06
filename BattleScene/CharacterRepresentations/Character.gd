@@ -1,6 +1,7 @@
 class_name Character
 extends Node2D
 
+var test_int : int = randi()
 var char_last_cell_pos : Vector2
 var faction : String
 

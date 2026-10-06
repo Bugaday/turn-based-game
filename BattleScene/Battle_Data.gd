@@ -13,14 +13,14 @@ var active_character : Character:
 	set(value):
 		active_character = value
 var selected_character : Character
-var hovered_character : Character
-	#set(value):
-		#if value == null:
-			#on_character_unhovered.emit()
-		#elif value != null and value != hovered_character:
-			#on_character_unhovered.emit()
-			#on_character_hovered.emit(value,true)
-		#hovered_character = value
+var hovered_character : Character:
+	set(value):
+		if value == null:
+			on_character_unhovered.emit()
+		elif value != null and value != hovered_character:
+			on_character_unhovered.emit()
+			on_character_hovered.emit(value,true)
+		hovered_character = value
 
 var active_ai_char_index : int
 var all_characters : Array[Character]

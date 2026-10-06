@@ -9,7 +9,6 @@
 [ext_resource type="Resource" uid="uid://ctbpko7qk6t0s" path="res://BattleScene/BattleData/Battle_Spawner_Default.tres" id="9_65vi3"]
 [ext_resource type="Script" uid="uid://btl37owvxbsmy" path="res://CommandProcessor.gd" id="10_j14wi"]
 [ext_resource type="Script" uid="uid://b5hux2v7pxvpx" path="res://GameStateMachine/State_Machine_Hover.gd" id="12_p58h3"]
-[ext_resource type="Script" uid="uid://bxd7pf7u4hqrd" path="res://static_test.gd" id="13_hjj05"]
 [ext_resource type="Script" uid="uid://dmrv46e0g282s" path="res://BattleScene/Game_Log.gd" id="19_ll3lt"]
 [ext_resource type="PackedScene" uid="uid://dnb7vlopx80d" path="res://BattleScene/BattleUI/UI_Battle.tscn" id="19_winyt"]
 [ext_resource type="Script" uid="uid://dulbfwuva74yp" path="res://GameStateMachine/Game_State_Machine.gd" id="20_65vi3"]
@@ -66,10 +65,7 @@ unique_name_in_owner = true
 script = ExtResource("20_65vi3")
 scene_battle = NodePath("..")
 
-[node name="StateMachineHover" type="Node2D" parent="." unique_id=126928282]
+[node name="StateMachineHover" type="Node2D" parent="." unique_id=126928282 node_paths=PackedStringArray("scene_battle")]
 script = ExtResource("12_p58h3")
+scene_battle = NodePath("..")
 metadata/_custom_type_script = "uid://b5hux2v7pxvpx"
-
-[node name="StaticTest" type="Node" parent="." unique_id=664336605]
-script = ExtResource("13_hjj05")
-metadata/_custom_type_script = "uid://bxd7pf7u4hqrd"

@@ -127,6 +127,7 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="UIUnitHoverCard" parent="UI_Unit_Card_Control" unique_id=785059671 instance=ExtResource("6_coxye")]
+visible = false
 layout_mode = 0
 offset_left = 1363.0
 offset_top = 320.0

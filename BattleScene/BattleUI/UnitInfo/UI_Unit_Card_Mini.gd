@@ -9,6 +9,9 @@ var character_linked : Character
 signal on_mini_portrait_pressed(unit:Character,card:UIUnitCardMini)
 signal card_character_hovered(unit:Character)
 
+signal on_card_hovered(unit:Character)
+signal on_card_unhovered(unit:Character)
+
 func _ready() -> void:
 	mini_card_button.pressed.connect(_pressed)
 	mini_card_button.mouse_entered.connect(card_hovered)

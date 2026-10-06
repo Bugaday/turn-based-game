@@ -25,7 +25,6 @@ metadata/_custom_type_script = "uid://vb2lxqlfha75"
 
 [node name="DrawBox" type="Node2D" parent="." unique_id=635901793]
 unique_name_in_owner = true
-visible = false
 position = Vector2(32, 32)
 script = ExtResource("3_ur2n1")
 metadata/_custom_type_script = "uid://cpvkr5ihtw162"

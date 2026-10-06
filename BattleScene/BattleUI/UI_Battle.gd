@@ -25,8 +25,8 @@ func on_character_unhovered():
 	#mini_card.card_unhovered()
 
 
-func on_character_spawned(unit:Character):
-	ui_unit_cards.add_new_character(unit)
+func on_character_spawned(unit:Character,battle_scene:SceneBattle):
+	ui_unit_cards.add_new_character(unit,battle_scene)
 
 
 func spawn_floating_text(text,pos:Vector2,parent:Node2D):

@@ -36,9 +36,8 @@ func character_spawned(unit:Character):
 
 
 func mini_card_hovered(unit:Character):
-	
-	drawing_battle.cursor.visible = true
-	drawing_battle.cursor.position = GridService.snap_pos_to_grid(unit.position)
+	#drawing_battle.cursor.visible = true
+	#drawing_battle.cursor.position = GridService.snap_pos_to_grid(unit.position)
 	print("Card hovered")
 
 
@@ -96,6 +95,10 @@ func faction_turn_finished():
 	battle_data.active_faction_index = (battle_data.active_faction_index + 1) % battle_data.factions_in_battle.size()
 	start_faction_turn()
 
+
+static func end_turn():
+	
+	pass
 
 func start_ai_unit_turn():
 	battle_data.active_character = battle_data.active_factions_units[battle_data.active_faction][battle_data.active_ai_char_index]

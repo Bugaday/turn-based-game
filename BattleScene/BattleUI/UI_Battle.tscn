@@ -24,24 +24,6 @@ action_button_controller = NodePath("ButtonController")
 ui_unit_cards = NodePath("UI_Unit_Card_Control")
 metadata/_edit_use_anchors_ = true
 
-[node name="EndTurnButton" type="Button" parent="." unique_id=589864474]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -320.0
-offset_top = -180.0
-offset_right = -160.0
-offset_bottom = -59.999695
-grow_horizontal = 0
-grow_vertical = 0
-text = "End Turn"
-script = ExtResource("2_coxye")
-metadata/_edit_use_anchors_ = true
-
 [node name="TurnText" type="Label" parent="." unique_id=324188438]
 unique_name_in_owner = true
 layout_mode = 1
@@ -137,4 +119,12 @@ offset_bottom = 659.0
 [node name="UI_Unit_Mini_Cards" parent="UI_Unit_Card_Control" unique_id=1788615898 instance=ExtResource("9_rkfma")]
 layout_mode = 0
 
-[connection signal="button_up" from="EndTurnButton" to="EndTurnButton" method="_on_button_up"]
+[node name="EndTurnButton" type="Button" parent="." unique_id=903509478]
+layout_mode = 0
+offset_left = 484.0
+offset_top = 803.0
+offset_right = 614.0
+offset_bottom = 899.0
+text = "End Turn"
+script = ExtResource("2_coxye")
+metadata/_custom_type_script = "uid://dfi0ppbp0ouxo"

@@ -32,5 +32,6 @@ static func change_state_hover(newStateHover : StateHover):
 	if current_hover_state:
 		current_hover_state._exit_state(scene_battle,drawing,ui_battle)
 	current_hover_state = newStateHover
-	newStateHover.on_hover_state_change.connect(change_state_hover,CONNECT_ONE_SHOT)
+	print("New state is: ",newStateHover.get_script().get_global_name())
+	#newStateHover.on_hover_state_change.connect(change_state_hover,CONNECT_ONE_SHOT)
 	current_hover_state._enter_state(scene_battle,drawing,ui_battle)

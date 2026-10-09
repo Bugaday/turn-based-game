@@ -28,7 +28,7 @@ func update_all_values(unit:Character):
 
 func _pressed() -> void:
 	print("Mini card pressed!")
-	on_mini_portrait_pressed.emit(character_linked,self)
+	#on_mini_portrait_pressed.emit(character_linked,self)
 
 
 func character_hovered_in_world():
@@ -37,9 +37,12 @@ func character_hovered_in_world():
 
 func card_hovered():
 	%Panel.visible = true
+	StateMachineHover.HoverStateMiniCard.unit_hovered = character_linked
+	StateMachineHover.change_state_hover(StateMachineHover.HoverStateMiniCard)
 	card_character_hovered.emit(character_linked)
 	
 
 
 func card_unhovered():
 	%Panel.visible = false
+	StateMachineHover.change_state_hover(StateMachineHover.HoverStateNone)

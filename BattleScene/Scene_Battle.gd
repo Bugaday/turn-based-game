@@ -2,11 +2,13 @@ extends Node2D
 
 class_name SceneBattle
 
-@export var battle_data : BattleData
+static var battle_data : BattleData
 @export var path_finder : Pathfinder2D
 @export var drawing_battle : Drawing
 @export var ui_battle : UIBattle
 @export var command_processor : CommandProcessor
+
+var ai_decision_maker : AIDecisionMaker = AIDecisionMaker.new()
 
 var current_state : StateGame
 
@@ -79,7 +81,7 @@ func update_unit_ui(value_name:String,value):
 	ui_battle.ui_unit_card._update_info(value_name,value)
 
 
-func start_faction_turn():
+static func start_faction_turn():
 	if battle_data.active_faction == "Player":
 		print("Player's turn!")
 	else:
@@ -88,7 +90,7 @@ func start_faction_turn():
 		start_ai_unit_turn()
 
 
-func faction_turn_finished():
+static func faction_turn_finished():
 	if battle_data.factions_in_battle.size() <= 0:
 		return
 	#Set the turn for the next faction
@@ -97,12 +99,15 @@ func faction_turn_finished():
 
 
 static func end_turn():
-	
+	print("Turn ended")
+	faction_turn_finished()
 	pass
 
-func start_ai_unit_turn():
+
+static func start_ai_unit_turn():
 	battle_data.active_character = battle_data.active_factions_units[battle_data.active_faction][battle_data.active_ai_char_index]
-	#ai_decision_maker.start_decisions(battle_data.active_character)
+	print("Starting AI unit's turn")
+	ai_decision_maker.start_decisions(battle_data.active_character)
 	pass
 
 

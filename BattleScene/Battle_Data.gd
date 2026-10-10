@@ -26,7 +26,7 @@ var active_ai_char_index : int
 var all_characters : Array[Character]
 var factions_in_battle : Array[String]
 var active_factions_units : Dictionary[String,Array] = {}
-var active_faction : String = "Player"
+static var active_faction : String = "Player"
 var active_faction_index : int:
 	set(value):
 		active_faction_index = value

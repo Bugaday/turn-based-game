@@ -19,5 +19,6 @@ func disable_button():
 
 
 func on_button_up() -> void:
-	#EventBus.trigger_turn_finished.emit()
 	print("End Turn Button pressed")
+	SceneBattle.end_turn()
+	#EventBus.trigger_turn_finished.emit()

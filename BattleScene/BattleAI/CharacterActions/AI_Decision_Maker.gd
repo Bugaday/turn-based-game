@@ -1,13 +1,26 @@
-extends RefCounted
+extends Node
 
 class_name AIDecisionMaker
 
 signal all_actions_finished()
 
 var char_parent : Character
-
+var battle_scene : SceneBattle
 var available_actions : Array[AIAction] = []
+static var available_decisions : Array[AIDecision]
 var action_scores : Dictionary[AIAction,float] = {}
+
+
+func _init(_battle_scene:SceneBattle) -> void:
+	battle_scene = _battle_scene
+	var move_decision : Resource = load("res://BattleScene/BattleAI/CharacterActions/AI_Decision_Move_To_Enemy.gd")
+	var attack_decision : Resource = load("res://BattleScene/BattleAI/CharacterActions/AI_Decision_Attack.gd")
+	available_decisions.append(move_decision)
+	available_decisions.append(attack_decision)
+	
+	
+#static func chosen_action(unit:Character)->ActionCommand
+	
 
 
 func start_decisions(unit:Character):
@@ -18,24 +31,27 @@ func start_decisions(unit:Character):
 		return
 		
 	for action in available_actions:
-		if !action.action_finished.is_connected(current_action_done):
-			action.action_finished.connect(current_action_done)
-	
-	make_decision()._execute_action(char_parent)
+		if !action.action_done.is_connected(current_action_done):
+			action.action_done.connect(current_action_done)
+	var best_action : AIAction = make_decision(available_actions,unit,battle_scene)
+	#if !best_action.action_done.is_connected(current_action_done):
+		#best_action.action_done.connect(current_action_done,CONNECT_ONE_SHOT)
+	#else:
+		#TODO: Should check out these signal connections later!!
+	best_action._execute_action(char_parent,battle_scene)
 
 
-func make_decision() -> AIAction:
+static func make_decision(all_actions:Array[AIAction],unit:Character,battle_scene:SceneBattle) -> AIAction:
 	#Reset the actions dictionary
-	action_scores.clear()
+	var action_scores
 	#Set scores in dictionary
-	for action in available_actions:
+	for action in all_actions:
 		if action:
-			action_scores[action] = action._get_score(char_parent)
-			#print("Score is ",action_scores[action])
-	return get_highest_scoring_action()
+			action_scores[action] = action._get_score(unit,battle_scene)
+	return get_highest_scoring_action(action_scores)
 
 
-func get_highest_scoring_action() -> AIAction:
+static func get_highest_scoring_action(action_scores : Dictionary[AIAction,float]) -> AIAction:
 	var highest_scoring_action : AIAction
 	var highest_value : float = -INF
 	for action in action_scores:
@@ -44,17 +60,18 @@ func get_highest_scoring_action() -> AIAction:
 			highest_value = current_score
 			highest_scoring_action = action
 	return highest_scoring_action
-	
-	
+
+
 func current_action_done():
 	if can_make_more_decisions():
-		make_decision()._execute_action(char_parent)
+		make_decision(available_actions,char_parent,battle_scene)._execute_action(char_parent,battle_scene)
 	else:
 		all_actions_done()
 
 
-func can_make_more_decisions()->bool:
+static func can_make_more_decisions()->bool:
 	return false
-	
+
+
 func all_actions_done():
 	all_actions_finished.emit()

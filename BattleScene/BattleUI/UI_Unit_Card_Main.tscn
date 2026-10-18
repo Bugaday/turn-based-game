@@ -27,7 +27,7 @@ subpixel_positioning = 0
 [sub_resource type="LabelSettings" id="LabelSettings_g4ibn"]
 font = SubResource("SystemFont_dufxc")
 
-[node name="UIUnitCardMain" type="Panel" unique_id=1088169180 node_paths=PackedStringArray("label_name", "label_health", "label_action_points", "image_portrait")]
+[node name="UIUnitCardMain" type="Panel" unique_id=1088169180 node_paths=PackedStringArray("label_name", "label_health", "label_weapon", "label_action_points", "image_portrait")]
 material = SubResource("CanvasItemMaterial_ll3lt")
 offset_right = 960.0
 offset_bottom = 128.0
@@ -35,6 +35,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_3ccj3")
 script = ExtResource("1_l16vv")
 label_name = NodePath("UnitCardName")
 label_health = NodePath("PanelStatsCurrent/StatsCurrent/HBoxStatsHealth/StatValueHealth")
+label_weapon = NodePath("UnitCardWeapon")
 label_action_points = NodePath("PanelStatsCurrent/StatsCurrent/HBoxStatsActionPoints/StatValueActionPoints")
 image_portrait = NodePath("UnitCardPortrait")
 
@@ -56,6 +57,15 @@ offset_right = 189.0
 offset_bottom = 44.0
 text = "Rogue"
 
+[node name="UnitCardWeapon" type="Label" parent="." unique_id=1667441655]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 140.0
+offset_top = 56.0
+offset_right = 189.0
+offset_bottom = 79.0
+text = "Unarmed"
+
 [node name="PanelStatsCurrent" type="Panel" parent="." unique_id=91201132]
 layout_mode = 1
 anchors_preset = 8
@@ -63,9 +73,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -256.0
+offset_left = -55.0
 offset_top = -48.0
-offset_right = 256.0
+offset_right = 456.99988
 offset_bottom = 48.0
 grow_horizontal = 2
 grow_vertical = 2

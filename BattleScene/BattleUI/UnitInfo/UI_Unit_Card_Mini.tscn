@@ -26,11 +26,11 @@ bg_color = Color(2.2140146e-06, 0.6694269, 0.79451644, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bcx42"]
 
-[node name="UI_Mini_Unit_Card" type="Control" unique_id=909320864 node_paths=PackedStringArray("progress_bar_health", "progress_bar_resource", "mini_card_button", "label_name", "label_health", "label_action_points", "image_portrait")]
+[node name="UI_Mini_Unit_Card" type="Control" unique_id=909320864 node_paths=PackedStringArray("progress_bar_health", "progress_bar_resource", "mini_card_button", "label_name", "label_health", "label_weapon", "label_action_points", "image_portrait")]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 128.0
+offset_right = 145.0
 offset_bottom = 128.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -38,8 +38,9 @@ script = ExtResource("1_davv2")
 progress_bar_health = NodePath("ProgressBarHealth")
 progress_bar_resource = NodePath("ProgressBarResource")
 mini_card_button = NodePath("Button")
-label_name = NodePath("CharacterName")
+label_name = NodePath("VBoxContainer/CharacterName")
 label_health = NodePath("ProgressBarHealth/HealthValueLabel")
+label_weapon = NodePath("VBoxContainer/Weapon")
 label_action_points = NodePath("ProgressBarResource/ResourceValueLabel")
 image_portrait = NodePath("Portrait")
 metadata/_custom_type_script = "uid://cj22xpt8o22q4"
@@ -47,9 +48,12 @@ metadata/_custom_type_script = "uid://cj22xpt8o22q4"
 [node name="Panel" type="Panel" parent="." unique_id=1726857716]
 unique_name_in_owner = true
 visible = false
-layout_mode = 0
-offset_right = 128.0
-offset_bottom = 128.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_davv2")
 
 [node name="Portrait" type="TextureRect" parent="." unique_id=36691018]
@@ -100,19 +104,6 @@ theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = SubResource("StyleBoxEmpty_bcx42")
 text = "100"
 
-[node name="CharacterName" type="Label" parent="." unique_id=482294126]
-custom_minimum_size = Vector2(64, 0)
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -72.0
-offset_top = 7.0
-offset_right = -8.0
-offset_bottom = 30.0
-grow_horizontal = 0
-text = "Dwarf"
-
 [node name="Button" type="Button" parent="." unique_id=364278551]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 0
@@ -121,3 +112,20 @@ offset_bottom = 128.0
 theme_override_styles/normal = ExtResource("2_pu8ul")
 theme_override_styles/pressed = ExtResource("3_abom8")
 theme_override_styles/hover = ExtResource("4_5qyxv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1317031664]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 1.0
+offset_right = 130.0
+offset_bottom = 65.0
+
+[node name="CharacterName" type="Label" parent="VBoxContainer" unique_id=482294126]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+text = "Dwarf"
+
+[node name="Weapon" type="Label" parent="VBoxContainer" unique_id=1351701001]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+text = "Unarmed"

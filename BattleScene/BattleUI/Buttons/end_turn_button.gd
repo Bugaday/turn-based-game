@@ -2,11 +2,15 @@ extends Button
 
 class_name EndTurnButton
 
+var battle_scene : SceneBattle
+
 func _ready() -> void:
+	if get_tree().current_scene is SceneBattle:
+		battle_scene = get_tree().current_scene
+	else:
+		push_error("Scene parent is not Battle Scene!")
+	print(get_tree().current_scene)
 	button_up.connect(on_button_up)
-	#EventBus.ai_turn_started.connect(disable_button)
-	#EventBus.ai_turn_finished.connect(enable_button)
-	pass
 
 
 func enable_button():
@@ -14,11 +18,9 @@ func enable_button():
 
 
 func disable_button():
-	#disabled = true
-	pass
+	disabled = true
 
 
 func on_button_up() -> void:
 	print("End Turn Button pressed")
-	SceneBattle.end_turn()
-	#EventBus.trigger_turn_finished.emit()
+	battle_scene.end_turn()

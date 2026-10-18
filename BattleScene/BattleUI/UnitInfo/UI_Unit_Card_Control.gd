@@ -18,11 +18,9 @@ func update_selected_character(unit:Character):
 func activate_unit_hover_card(unit:Character):
 	ui_unit_hover_card.visible = true
 	if unit.faction == "Player":
-		#ui_unit_hover_card.theme = ui_unit_hover_card.player_panel_theme
-		ui_unit_hover_card.add_theme_stylebox_override("panel",ui_unit_hover_card.stylebox_panel_player)
+		ui_unit_hover_card.faction_panel.add_theme_stylebox_override("panel",ui_unit_hover_card.stylebox_panel_player)
 	else:
-		#ui_unit_hover_card.theme = ui_unit_hover_card.enemy_panel_theme
-		ui_unit_hover_card.add_theme_stylebox_override("panel",ui_unit_hover_card.stylebox_panel_enemy)
+		ui_unit_hover_card.faction_panel.add_theme_stylebox_override("panel",ui_unit_hover_card.stylebox_panel_enemy)
 	ui_unit_hover_card.update_all_values(unit)
 
 

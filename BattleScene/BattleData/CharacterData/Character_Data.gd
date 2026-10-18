@@ -4,10 +4,11 @@ class_name CharacterData
 
 @export var unit_name : String = "Generic Unit";
 #@export var faction_id : String
-@export var stamina : int = 10;
-@export var strength : int = 25;
+@export var stamina : int = 10
+@export var strength : int = 25
 @export var agility : int = 70
-@export var sprite: AtlasTexture;
+@export var sprite: AtlasTexture
+@export var class_weapon : Weapon = preload("res://Weapons/Weapon_Unarmed.tres")
 
 var extra_actions : Array[ActionCommand]
 

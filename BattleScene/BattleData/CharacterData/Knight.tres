@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="CharacterData" format=3 uid="uid://64xnv0xhbdih"]
 
 [ext_resource type="Script" uid="uid://cvrfh8dxox5u0" path="res://BattleScene/BattleData/CharacterData/Character_Data.gd" id="1_icafy"]
+[ext_resource type="Resource" uid="uid://chykk6khwxkbq" path="res://Weapons/Weapon_Sword.tres" id="1_p54c2"]
 [ext_resource type="Texture2D" uid="uid://byo6sw14dlhp2" path="res://BattleScene/BattleGrid/BattleEnvironment/BattleTileSets/IMG_5673.png" id="2_icafy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e2usl"]
@@ -14,4 +15,5 @@ stamina = 12
 strength = 50
 agility = 75
 sprite = SubResource("AtlasTexture_e2usl")
+class_weapon = ExtResource("1_p54c2")
 metadata/_custom_type_script = "uid://cvrfh8dxox5u0"

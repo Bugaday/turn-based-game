@@ -2,13 +2,12 @@ extends Node2D
 
 class_name SceneBattle
 
-static var battle_data : BattleData
+@export var battle_data : BattleData
 @export var path_finder : Pathfinder2D
 @export var drawing_battle : Drawing
 @export var ui_battle : UIBattle
 @export var command_processor : CommandProcessor
-
-var ai_decision_maker : AIDecisionMaker = AIDecisionMaker.new()
+@export var ai_decision_maker : AIDecisionMaker
 
 var current_state : StateGame
 
@@ -22,6 +21,9 @@ func _ready() -> void:
 	StateMachineHover.drawing = drawing_battle
 	StateMachineHover.ui_battle = ui_battle
 	
+	#Signal connections
+	ai_decision_maker.all_actions_finished.connect(finish_ai_unit_turn)
+	
 	CreateGrid()
 	battle_data.battle_spawner.new_character_spawned.connect(character_spawned)
 	battle_data.setup(path_finder,ui_battle)
@@ -30,6 +32,10 @@ func _ready() -> void:
 	for c in battle_data.all_characters:
 		var card : UIUnitCardMini = ui_battle.ui_unit_cards.ui_unit_mini_cards_group.get_card_by_character(c)
 		card.card_character_hovered.connect(mini_card_hovered)
+		
+	#Dependency injection
+	#ui_battle.button
+	
 	DebugVis.update_blocked_positions()
 
 	
@@ -81,7 +87,21 @@ func update_unit_ui(value_name:String,value):
 	ui_battle.ui_unit_card._update_info(value_name,value)
 
 
-static func start_faction_turn():
+func end_turn():
+	print("Turn ended")
+	faction_turn_finished()
+
+
+func faction_turn_finished():
+	if battle_data.factions_in_battle.size() <= 0:
+		return
+	#Set the turn for the next faction
+	battle_data.active_faction_index = (battle_data.active_faction_index + 1) % battle_data.factions_in_battle.size()
+	print("New Faction's turn: ",battle_data.active_faction)
+	start_faction_turn()
+
+
+func start_faction_turn():
 	if battle_data.active_faction == "Player":
 		print("Player's turn!")
 	else:
@@ -90,25 +110,16 @@ static func start_faction_turn():
 		start_ai_unit_turn()
 
 
-static func faction_turn_finished():
-	if battle_data.factions_in_battle.size() <= 0:
-		return
-	#Set the turn for the next faction
-	battle_data.active_faction_index = (battle_data.active_faction_index + 1) % battle_data.factions_in_battle.size()
-	start_faction_turn()
-
-
-static func end_turn():
-	print("Turn ended")
-	faction_turn_finished()
-	pass
-
-
-static func start_ai_unit_turn():
-	battle_data.active_character = battle_data.active_factions_units[battle_data.active_faction][battle_data.active_ai_char_index]
+func start_ai_unit_turn():
 	print("Starting AI unit's turn")
+	#Set the Active AI Character
+	battle_data.active_character = battle_data.active_factions_units[battle_data.active_faction][battle_data.active_ai_char_index]
+	print("Active AI NPC is: ",battle_data.active_character.base_stats.unit_name,": ",battle_data.active_character)
+	#Start the AI Decision Maker
 	ai_decision_maker.start_decisions(battle_data.active_character)
-	pass
+	
+func start_new_ai_action():
+	var action_chosen : ActionCommand
 
 
 func finish_ai_unit_turn():

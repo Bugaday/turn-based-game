@@ -6,13 +6,12 @@ var move_path : PackedVector2Array
 var mousePos : Vector2
 var choosing_destination : bool = true
 
-func _init(src_char:Character,battle_scene:SceneBattle,data:ActionData,b_is_player:bool) -> void:
+func _init(src_char:Character,battle_scene:SceneBattle,data:ActionData,b_is_player:bool,destination:Vector2i=Vector2.ZERO) -> void:
 	super(src_char,battle_scene,data,b_is_player)
 	if b_is_player_:
 		move_path = battle_scene_.path_finder.get_path_from_char(source_char.position,battle_scene_.get_global_mouse_position(),true)
 	else:
-		var random_cell : Vector2i = GridService.GetRandomGridCell(battle_scene_.battle_data.grid,battle_scene_.battle_data.tilemap)
-		move_path = battle_scene_.path_finder.get_path_from_char(source_char.position,random_cell,true)
+		move_path = battle_scene_.path_finder.get_path_from_char(source_char.position,GridService.grid_to_world(destination),true)
 
 
 func start_action():

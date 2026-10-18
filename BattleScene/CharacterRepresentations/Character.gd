@@ -4,6 +4,8 @@ extends Node2D
 var test_int : int = randi()
 var char_last_cell_pos : Vector2
 var faction : String
+var weapons_available : Array[Weapon]
+var weapon_current : Weapon
 
 @export var char_sprite : Sprite2D
 @export var base_stats : CharacterData
@@ -16,9 +18,7 @@ var faction : String
 	set(value):
 		action_points_current = value
 		on_stat_changed.emit(self)
-
 @export var ai_actions_list : AIActionsData
-#@export var class_list : Array[AIAction]
 enum ACTION {MOVE,ATTACK}
 @export var actions : Array[ACTION]
 @export var action_list : Dictionary[ACTION,ActionData]
@@ -28,7 +28,11 @@ signal on_stat_changed(unit:Character)
 
 func _ready() -> void:
 	if base_stats:
+		weapons_available.append(preload("res://Weapons/Weapon_Unarmed.tres"))
+		weapons_available.append(base_stats.class_weapon)
+		weapon_current = base_stats.class_weapon
 		_setStats()
+
 
 
 func _setStats() -> void:

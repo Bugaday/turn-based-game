@@ -9,7 +9,10 @@ var target : Character
 
 func start_action():
 	super()
-	get_viable_targets()
+	if b_is_player_:
+		get_viable_targets()
+	else:
+		execute_action()
 	
 	
 func action_input_confirm():
@@ -25,6 +28,7 @@ func execute_action():
 	var offset : Vector2 = Vector2(0.0,-32.0)
 	battle_scene_.ui_battle.spawn_floating_text("10",target.position+offset,battle_scene_)
 	super()
+	end_action()
 
 
 func update_action():
@@ -32,6 +36,7 @@ func update_action():
 
 
 func end_action():
+	print("Ending attack action")
 	super()
 	potential_target_list.clear()
 	cells_in_range.clear()

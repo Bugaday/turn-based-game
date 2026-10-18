@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Weapon" format=3 uid="uid://c71ygnvowy7yf"]
+
+[ext_resource type="Script" uid="uid://d4gdbq0jokxsk" path="res://Weapons/Weapon.gd" id="1_33b0j"]
+
+[resource]
+script = ExtResource("1_33b0j")
+weapon_name = "Bow"
+range = 4
+damage = 15
+action_point_cost = 25
+metadata/_custom_type_script = "uid://d4gdbq0jokxsk"

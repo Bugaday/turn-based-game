@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Weapon" format=3 uid="uid://ckfjejnnkpr6t"]
+
+[ext_resource type="Script" uid="uid://d4gdbq0jokxsk" path="res://Weapons/Weapon.gd" id="1_4pkic"]
+
+[resource]
+script = ExtResource("1_4pkic")
+weapon_name = "Staff"
+range = 3
+damage = 20
+action_point_cost = 30
+metadata/_custom_type_script = "uid://d4gdbq0jokxsk"

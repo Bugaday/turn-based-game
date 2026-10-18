@@ -3,6 +3,7 @@
 [ext_resource type="TileSet" uid="uid://uf68vmgahhy8" path="res://BattleScene/BattleGrid/BattleEnvironment/BattleTileSets/new_tile_set.tres" id="1_0r1ij"]
 [ext_resource type="Script" uid="uid://b266d3rmygp2g" path="res://BattleScene/Scene_Battle.gd" id="2_saywf"]
 [ext_resource type="Script" uid="uid://8q86ld088lto" path="res://BattleScene/BattleCamera/Camera_2D.gd" id="3_1a458"]
+[ext_resource type="Script" uid="uid://coh5p3imqmxic" path="res://BattleScene/BattleAI/CharacterActions/AI_Decision_Maker.gd" id="4_5tsxv"]
 [ext_resource type="Script" uid="uid://cnjmrmric06ny" path="res://BattleScene/BattleGrid/Pathfinding/Pathfinder2D.gd" id="4_pgmky"]
 [ext_resource type="PackedScene" uid="uid://h52sgpw0xgx3" path="res://BattleScene/Drawing_Battle.tscn" id="7_p58h3"]
 [ext_resource type="Script" uid="uid://u8abbnqnmas6" path="res://BattleScene/Battle_Data.gd" id="8_65vi3"]
@@ -14,13 +15,14 @@
 [ext_resource type="PackedScene" uid="uid://dnb7vlopx80d" path="res://BattleScene/BattleUI/UI_Battle.tscn" id="19_winyt"]
 [ext_resource type="Script" uid="uid://dulbfwuva74yp" path="res://GameStateMachine/Game_State_Machine.gd" id="20_65vi3"]
 
-[node name="BattleLevel" type="Node2D" unique_id=1879491861 node_paths=PackedStringArray("battle_data", "path_finder", "drawing_battle", "ui_battle", "command_processor") groups=["SceneGame"]]
+[node name="BattleLevel" type="Node2D" unique_id=1879491861 node_paths=PackedStringArray("battle_data", "path_finder", "drawing_battle", "ui_battle", "command_processor", "ai_decision_maker") groups=["SceneGame"]]
 script = ExtResource("2_saywf")
 battle_data = NodePath("BattleData")
 path_finder = NodePath("Pathfinder2D")
 drawing_battle = NodePath("Drawing")
 ui_battle = NodePath("CanvasLayer/UI_Battle")
 command_processor = NodePath("CommandProcessor")
+ai_decision_maker = NodePath("AIDecisionMaker")
 
 [node name="BattleData" type="Node" parent="." unique_id=304589 node_paths=PackedStringArray("tilemap")]
 unique_name_in_owner = true
@@ -28,6 +30,10 @@ script = ExtResource("8_65vi3")
 tilemap = NodePath("../BattleTileMap")
 battle_spawner = ExtResource("9_65vi3")
 metadata/_custom_type_script = "uid://u8abbnqnmas6"
+
+[node name="AIDecisionMaker" type="Node" parent="." unique_id=515601775]
+script = ExtResource("4_5tsxv")
+metadata/_custom_type_script = "uid://coh5p3imqmxic"
 
 [node name="CommandProcessor" type="Node" parent="." unique_id=2141573442]
 script = ExtResource("10_j14wi")

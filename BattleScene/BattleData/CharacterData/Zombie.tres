@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="CharacterData" format=3 uid="uid://b56icsqafvgar"]
 
+[ext_resource type="Resource" uid="uid://km4t27ht6d4n" path="res://Weapons/Weapon_Unarmed.tres" id="1_lqbjx"]
 [ext_resource type="Script" uid="uid://cvrfh8dxox5u0" path="res://BattleScene/BattleData/CharacterData/Character_Data.gd" id="1_n7ndi"]
 [ext_resource type="Texture2D" uid="uid://byo6sw14dlhp2" path="res://BattleScene/BattleGrid/BattleEnvironment/BattleTileSets/IMG_5673.png" id="2_tnwjq"]
 
@@ -14,4 +15,5 @@ stamina = 2
 strength = 5
 agility = 60
 sprite = SubResource("AtlasTexture_vu45i")
+class_weapon = ExtResource("1_lqbjx")
 metadata/_custom_type_script = "uid://cvrfh8dxox5u0"

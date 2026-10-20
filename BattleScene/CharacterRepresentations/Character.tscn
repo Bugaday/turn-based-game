@@ -3,7 +3,10 @@
 [ext_resource type="Script" uid="uid://dcpjy8i623v2x" path="res://BattleScene/CharacterRepresentations/Character.gd" id="1_3wwac"]
 [ext_resource type="Texture2D" uid="uid://byo6sw14dlhp2" path="res://BattleScene/BattleGrid/BattleEnvironment/BattleTileSets/IMG_5673.png" id="3_3wwac"]
 [ext_resource type="Resource" uid="uid://ch1etbkd8w2y4" path="res://BattleScene/BattleAI/CharacterActions/Collections/AI_Actions_Default.tres" id="3_rjkiw"]
+[ext_resource type="Script" uid="uid://cuplyb8ye8qqc" path="res://BattleScene/BattleAI/CharacterActions/AI_Decision.gd" id="6_lbrrl"]
+[ext_resource type="Script" uid="uid://8r34bikrhwig" path="res://BattleScene/BattleAI/CharacterActions/AI_Decision_Move_To_Enemy.gd" id="7_dt337"]
 [ext_resource type="Script" uid="uid://c0m08tcmh7bjx" path="res://BattleScene/BattleData/Action_Data.gd" id="7_lbrrl"]
+[ext_resource type="Script" uid="uid://4rwiwf8sumv8" path="res://BattleScene/BattleAI/CharacterActions/AI_Decision_Attack.gd" id="8_4c001"]
 [ext_resource type="Script" uid="uid://dqicq528dr27" path="res://BattleScene/BattleData/Action_Data_Move.gd" id="8_dt337"]
 [ext_resource type="Script" uid="uid://ciyfpt0s0i1q7" path="res://BattleScene/BattleData/Action_Data_Attack.gd" id="9_dt337"]
 [ext_resource type="Script" uid="uid://vb2lxqlfha75" path="res://BattleScene/BattleGrid/Drawing/Draw_Move_Path.gd" id="11_dt337"]
@@ -18,6 +21,14 @@ script = ExtResource("9_dt337")
 action_name = "Attack"
 metadata/_custom_type_script = "uid://ciyfpt0s0i1q7"
 
+[sub_resource type="Resource" id="Resource_lbrrl"]
+script = ExtResource("7_dt337")
+metadata/_custom_type_script = "uid://8r34bikrhwig"
+
+[sub_resource type="Resource" id="Resource_dt337"]
+script = ExtResource("8_4c001")
+metadata/_custom_type_script = "uid://4rwiwf8sumv8"
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_3wwac"]
 atlas = ExtResource("3_3wwac")
 region = Rect2(0, 0, 64, 64)
@@ -31,6 +42,7 @@ action_list = Dictionary[int, ExtResource("7_lbrrl")]({
 0: SubResource("Resource_4c001"),
 1: SubResource("Resource_01np6")
 })
+available_decisions = Array[ExtResource("6_lbrrl")]([SubResource("Resource_lbrrl"), SubResource("Resource_dt337")])
 
 [node name="CharSprite2D" type="Sprite2D" parent="." unique_id=236294916]
 unique_name_in_owner = true

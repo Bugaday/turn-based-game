@@ -3,6 +3,10 @@ extends Node
 class_name BattleData
 
 var grid : Dictionary[Vector2i,GridCellData]
+
+enum ACTION_KEY {MOVE,ATTACK}
+@export var all_character_actions : Dictionary[ACTION_KEY,ActionCommand]
+
 @export var tilemap:TileMapLayer
 @export var battle_spawner : Spawner = Spawner.new()
 

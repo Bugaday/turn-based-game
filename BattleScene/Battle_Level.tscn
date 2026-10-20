@@ -15,14 +15,13 @@
 [ext_resource type="PackedScene" uid="uid://dnb7vlopx80d" path="res://BattleScene/BattleUI/UI_Battle.tscn" id="19_winyt"]
 [ext_resource type="Script" uid="uid://dulbfwuva74yp" path="res://GameStateMachine/Game_State_Machine.gd" id="20_65vi3"]
 
-[node name="BattleLevel" type="Node2D" unique_id=1879491861 node_paths=PackedStringArray("battle_data", "path_finder", "drawing_battle", "ui_battle", "command_processor", "ai_decision_maker") groups=["SceneGame"]]
+[node name="BattleLevel" type="Node2D" unique_id=1879491861 node_paths=PackedStringArray("battle_data", "path_finder", "drawing_battle", "ui_battle", "command_processor") groups=["SceneGame"]]
 script = ExtResource("2_saywf")
 battle_data = NodePath("BattleData")
 path_finder = NodePath("Pathfinder2D")
 drawing_battle = NodePath("Drawing")
 ui_battle = NodePath("CanvasLayer/UI_Battle")
 command_processor = NodePath("CommandProcessor")
-ai_decision_maker = NodePath("AIDecisionMaker")
 
 [node name="BattleData" type="Node" parent="." unique_id=304589 node_paths=PackedStringArray("tilemap")]
 unique_name_in_owner = true

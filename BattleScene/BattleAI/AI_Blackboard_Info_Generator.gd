@@ -23,7 +23,7 @@ static func enemies_in_range(unit:Character,ai_registry:AIRegistry)->Array[Chara
 	for enemy : Character in ai_registry.unit_blackboards[unit].get_value("Enemies"):
 		var unit_grid_pos : Vector2i = GridService.world_to_grid(unit.position)
 		var enemy_grid_pos : Vector2i = GridService.world_to_grid(enemy.position)
-		if enemy_grid_pos.distance_to(unit_grid_pos) <= float(unit.base_stats.class_weapon.range):
+		if enemy_grid_pos.distance_to(unit_grid_pos) <= float(unit.base_stats.class_weapon.weapon_range):
 			enemiesInRange.append(enemy)
 	return enemiesInRange
 

@@ -7,7 +7,7 @@ class_name SceneBattle
 @export var drawing_battle : Drawing
 @export var ui_battle : UIBattle
 @export var command_processor : CommandProcessor
-@export var ai_decision_maker : AIDecisionMaker
+#@export var ai_decision_maker : AIDecisionMaker
 
 var current_state : StateGame
 
@@ -22,7 +22,7 @@ func _ready() -> void:
 	StateMachineHover.ui_battle = ui_battle
 	
 	#Signal connections
-	ai_decision_maker.all_actions_finished.connect(finish_ai_unit_turn)
+	#ai_decision_maker.all_actions_finished.connect(finish_ai_unit_turn)
 	
 	CreateGrid()
 	battle_data.battle_spawner.new_character_spawned.connect(character_spawned)
@@ -110,16 +110,27 @@ func start_faction_turn():
 		start_ai_unit_turn()
 
 
+#Starts an AI Character from the beginning of their turn
 func start_ai_unit_turn():
 	print("Starting AI unit's turn")
 	#Set the Active AI Character
 	battle_data.active_character = battle_data.active_factions_units[battle_data.active_faction][battle_data.active_ai_char_index]
 	print("Active AI NPC is: ",battle_data.active_character.base_stats.unit_name,": ",battle_data.active_character)
-	#Start the AI Decision Maker
-	ai_decision_maker.start_decisions(battle_data.active_character)
-	
+	start_new_ai_action()
+
+
+#Starts an AI Character's action during their turn
 func start_new_ai_action():
-	var action_chosen : ActionCommand
+	var decision_chosen : AIDecision = AIDecisionMaker.make_decision(battle_data.active_character,self)
+	if decision_chosen == null:
+		finish_ai_unit_turn()
+	else:
+		var action_chosen = decision_chosen._get_action(battle_data.active_character,self)
+		command_processor.add_action(action_chosen)
+
+
+func on_ai_action_end():
+	pass
 
 
 func finish_ai_unit_turn():

@@ -6,6 +6,8 @@ class_name AIDecision
 signal action_done()
 
 
+@abstract func _get_action(unit:Character,battle_scene:SceneBattle)->ActionCommand
+
 func _execute_action(_unit:Character,battle_scene:SceneBattle):
 	if !battle_scene:
 		push_error("No BattleManager found!")
@@ -13,7 +15,7 @@ func _execute_action(_unit:Character,battle_scene:SceneBattle):
 	pass
 
 
-static func _get_score(_unit:Character,battle_scene:SceneBattle) -> float:
+func _get_score(_unit:Character,battle_scene:SceneBattle) -> float:
 	if !battle_scene:
 		push_error("No BattleManager found!")
 		return 0

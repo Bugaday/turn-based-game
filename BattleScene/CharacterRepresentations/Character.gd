@@ -22,6 +22,7 @@ var weapon_current : Weapon
 enum ACTION {MOVE,ATTACK}
 @export var actions : Array[ACTION]
 @export var action_list : Dictionary[ACTION,ActionData]
+@export var available_decisions : Array[AIDecision]
 
 
 signal on_stat_changed(unit:Character)

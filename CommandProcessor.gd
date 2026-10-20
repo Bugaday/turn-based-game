@@ -16,7 +16,7 @@ func _process(_delta: float) -> void:
 
 func add_action(action:ActionCommand):
 	command_queue.append(action)
-	action.action_finished.connect(action_complete)
+	action.action_finished.connect(action_complete,CONNECT_ONE_SHOT)
 	start_queue()
 
 

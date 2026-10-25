@@ -2,19 +2,25 @@ extends ActionCommand
 
 class_name ActionCommandMove
 
+
 var move_path : PackedVector2Array
+var destination_cell : Vector2i
 var mousePos : Vector2
 var choosing_destination : bool = true
 
 func _init(src_char:Character,battle_scene:SceneBattle,data:ActionData,b_is_player:bool,destination:Vector2i=Vector2.ZERO) -> void:
 	super(src_char,battle_scene,data,b_is_player)
+	action_name = "Move"
+	action_verb = "Moving"
 	if b_is_player_:
 		move_path = battle_scene_.path_finder.get_path_from_char(source_char.position,battle_scene_.get_global_mouse_position(),true)
 	else:
 		move_path = battle_scene_.path_finder.get_path_from_char(source_char.position,GridService.grid_to_world(destination),true)
+		destination_cell = GridService.world_to_grid(move_path.get(move_path.size()-1))
 
 
 func start_action():
+	super()
 	if move_path.is_empty():
 		end_action()
 		return
@@ -41,6 +47,7 @@ func update_action():
 
 
 func end_action():
+	battle_scene_.ui_battle.game_log.log(source_char.character_name  + " moved to " + str(destination_cell))
 	battle_scene_.drawing_battle.draw_move_path.clear_path()
 	battle_scene_.drawing_battle.draw_box.position = source_char.position
 	battle_scene_.drawing_battle.draw_box.visible = true
@@ -74,6 +81,7 @@ func section_complete():
 	battle_scene_.battle_data.grid[current_cell].UnitOccupying = source_char
 	DebugVis.update_blocked_positions()
 	move_to_next_waypoint()
-	
+
+
 func calc_action_point_cost()->int:
 	return move_path.size() * 10

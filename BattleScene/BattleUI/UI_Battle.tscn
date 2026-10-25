@@ -7,11 +7,20 @@
 [ext_resource type="Script" uid="uid://dkq5brytl8xq6" path="res://BattleScene/BattleUI/UnitInfo/UI_Unit_Card_Control.gd" id="5_oxarm"]
 [ext_resource type="PackedScene" uid="uid://b4n2s0t054y0r" path="res://BattleScene/BattleUI/UI_Unit_Card_Main.tscn" id="5_rkfma"]
 [ext_resource type="PackedScene" uid="uid://bjw687538nifi" path="res://BattleScene/BattleUI/UI_Unit_Hover_Card.tscn" id="6_coxye"]
+[ext_resource type="Script" uid="uid://budxrmt8ldond" path="res://BattleScene/Game_Log.gd" id="9_oxarm"]
 [ext_resource type="PackedScene" uid="uid://cyfp6b4h7t3uy" path="res://BattleScene/BattleUI/UnitInfo/UI_Unit_Card_Mini_Control.tscn" id="9_rkfma"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ri2no"]
 
-[node name="UI_Battle" type="Control" unique_id=2107946255 node_paths=PackedStringArray("action_button_controller", "ui_unit_cards")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pikk8"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.08536718, 0.08976246, 0.088689916, 1)
+
+[node name="UI_Battle" type="Control" unique_id=2107946255 node_paths=PackedStringArray("action_button_controller", "ui_unit_cards", "game_log", "turn_text", "active_unit_name")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,6 +31,9 @@ mouse_filter = 1
 script = ExtResource("1_x3jtv")
 action_button_controller = NodePath("ButtonController")
 ui_unit_cards = NodePath("UI_Unit_Card_Control")
+game_log = NodePath("ScrollContainer/GameLog")
+turn_text = NodePath("TurnText")
+active_unit_name = NodePath("ActiveUnitName")
 metadata/_edit_use_anchors_ = true
 
 [node name="TurnText" type="Label" parent="." unique_id=324188438]
@@ -36,6 +48,23 @@ offset_right = 44.0
 offset_bottom = 55.0
 grow_horizontal = 2
 text = "Player Turn"
+label_settings = SubResource("LabelSettings_ri2no")
+metadata/_edit_use_anchors_ = true
+
+[node name="ActiveUnitName" type="Label" parent="." unique_id=1754892384]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.049074072
+anchor_right = 0.5
+anchor_bottom = 0.049074072
+offset_left = -45.0
+offset_top = 32.0
+offset_right = 44.0
+offset_bottom = 55.0
+grow_horizontal = 2
+text = "Unit's Turn"
 label_settings = SubResource("LabelSettings_ri2no")
 metadata/_edit_use_anchors_ = true
 
@@ -121,10 +150,23 @@ layout_mode = 0
 
 [node name="EndTurnButton" type="Button" parent="." unique_id=903509478]
 layout_mode = 0
-offset_left = 484.0
-offset_top = 803.0
-offset_right = 614.0
-offset_bottom = 899.0
+offset_left = 1478.0
+offset_top = 950.0
+offset_right = 1608.0
+offset_bottom = 1046.0
 text = "End Turn"
 script = ExtResource("2_coxye")
 metadata/_custom_type_script = "uid://dfi0ppbp0ouxo"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1120017543]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 902.0
+offset_right = 472.0
+offset_bottom = 1072.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pikk8")
+
+[node name="GameLog" type="VBoxContainer" parent="ScrollContainer" unique_id=806349574]
+layout_mode = 2
+script = ExtResource("9_oxarm")
+metadata/_custom_type_script = "uid://budxrmt8ldond"

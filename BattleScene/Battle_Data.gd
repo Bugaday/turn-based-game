@@ -12,10 +12,12 @@ enum ACTION_KEY {MOVE,ATTACK}
 
 signal on_character_hovered(unit:Character,bIsHovered:bool)
 signal on_character_unhovered()
+signal on_active_character_changed(unit:Character)
 
 var active_character : Character:
 	set(value):
 		active_character = value
+		on_active_character_changed.emit(active_character)
 var selected_character : Character
 var hovered_character : Character:
 	set(value):

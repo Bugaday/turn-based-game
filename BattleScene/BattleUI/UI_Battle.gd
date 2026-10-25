@@ -3,6 +3,9 @@ extends Node
 
 @export var action_button_controller : ActionButtonController
 @export var ui_unit_cards : UIUnitCardControl
+@export var game_log : GameLog
+@export var turn_text : Label
+@export var active_unit_name : Label
 var text_floating : FloatingText
 
 
@@ -23,6 +26,10 @@ func on_character_unhovered():
 	ui_unit_cards.ui_unit_mini_cards_group.unhover_all_mini_cards()
 	#var mini_card : UIUnitCardMini = ui_unit_cards.ui_unit_mini_cards_group.get_card_by_character(unit)
 	#mini_card.card_unhovered()
+	
+	
+func on_active_character_changed(unit:Character):
+	active_unit_name.text = unit.character_name
 
 
 func on_character_spawned(unit:Character,battle_scene:SceneBattle):

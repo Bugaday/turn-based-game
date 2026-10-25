@@ -6,6 +6,11 @@ var potential_target_list : Array[Character]
 var cells_in_range : Array[Vector2i]
 var target : Character
 
+func _init(src_char:Character,battle_scene:SceneBattle,_data:ActionData,b_is_player:bool) -> void:
+	super(src_char,battle_scene,_data,b_is_player)
+	action_name = "Attack"
+	action_verb = "Attacking"
+
 
 func start_action():
 	super()
@@ -28,6 +33,7 @@ func execute_action():
 	var offset : Vector2 = Vector2(0.0,-32.0)
 	battle_scene_.ui_battle.spawn_floating_text("10",target.position+offset,battle_scene_)
 	super()
+	battle_scene_.ui_battle.game_log.log(source_char.character_name  + " attacked " + target.character_name)
 	end_action()
 
 

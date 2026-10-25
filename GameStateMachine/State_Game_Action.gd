@@ -6,7 +6,7 @@ var action_ : ActionCommand
 
 func _enter_state(battle_scene_script:SceneBattle):
 	super(battle_scene_script)
-	print("ENTERING ACTION STATE!")
+	#print("ENTERING ACTION STATE!")
 
 
 func _init(action:ActionCommand) -> void:
@@ -16,7 +16,7 @@ func _init(action:ActionCommand) -> void:
 
 
 func end_state():
-	print("EXITING ACTION STATE!")
+	#print("EXITING ACTION STATE!")
 	on_state_finished.emit(StateGameSelect.new())
 
 

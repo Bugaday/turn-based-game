@@ -11,7 +11,7 @@
 [ext_resource type="Script" uid="uid://btl37owvxbsmy" path="res://CommandProcessor.gd" id="10_j14wi"]
 [ext_resource type="Script" uid="uid://b5hux2v7pxvpx" path="res://GameStateMachine/State_Machine_Hover.gd" id="12_p58h3"]
 [ext_resource type="Script" uid="uid://bxd7pf7u4hqrd" path="res://static_test.gd" id="13_hjj05"]
-[ext_resource type="Script" uid="uid://dmrv46e0g282s" path="res://BattleScene/Game_Log.gd" id="19_ll3lt"]
+[ext_resource type="Script" uid="uid://dmrv46e0g282s" path="res://BattleScene/Game_Log_Old.gd" id="19_ll3lt"]
 [ext_resource type="PackedScene" uid="uid://dnb7vlopx80d" path="res://BattleScene/BattleUI/UI_Battle.tscn" id="19_winyt"]
 [ext_resource type="Script" uid="uid://dulbfwuva74yp" path="res://GameStateMachine/Game_State_Machine.gd" id="20_65vi3"]
 

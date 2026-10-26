@@ -36,7 +36,7 @@ func execute_action():
 	battle_scene_.drawing_battle.draw_box.visible = false
 	choosing_destination = false
 	move_to_next_waypoint()
-	super()
+	#super()
 
 
 func update_action():
@@ -73,6 +73,7 @@ func move_to_next_waypoint():
 
 #A section of path has just completed
 func section_complete():
+	source_char.action_points_current -= calc_action_point_cost()
 	battle_scene_.path_finder.set_cell_free_from_vector2(source_char.char_last_cell_pos)
 	var last_cell : Vector2i = GridService.world_to_grid(source_char.char_last_cell_pos)
 	battle_scene_.battle_data.grid[last_cell].UnitOccupying = null
@@ -80,8 +81,12 @@ func section_complete():
 	var current_cell : Vector2i = GridService.world_to_grid(source_char.position)
 	battle_scene_.battle_data.grid[current_cell].UnitOccupying = source_char
 	DebugVis.update_blocked_positions()
+	if calc_action_point_cost() > source_char.action_points_current:
+		end_action()
+		return
 	move_to_next_waypoint()
 
 
 func calc_action_point_cost()->int:
-	return move_path.size() * 10
+	#return move_path.size() * 10
+	return 10

@@ -2,6 +2,8 @@ extends RefCounted
 
 class_name StateGame
 
+var state_name : String
+
 signal on_state_finished(new_state:StateGame)
 
 func _enter_state(_battle_scene_script:SceneBattle):

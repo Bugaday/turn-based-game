@@ -2,6 +2,9 @@ extends StateGame
 
 class_name StateGameSelect
 
+func _init() -> void:
+	state_name = "Select State"
+
 func handle_input(_event : InputEvent,battle_scene_script:SceneBattle)->StateGame:
 	if _event.is_action_released("Select"):
 		var mousePos : Vector2 = battle_scene_script.get_global_mouse_position()

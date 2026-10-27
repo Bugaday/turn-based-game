@@ -12,15 +12,15 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_ri2no"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pikk8"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.08536718, 0.08976246, 0.088689916, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rkfma"]
+bg_color = Color(0.22052988, 0.22052991, 0.22052976, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.24943641, 0.24943626, 0.24943608, 1)
 
-[node name="UI_Battle" type="Control" unique_id=2107946255 node_paths=PackedStringArray("action_button_controller", "ui_unit_cards", "game_log", "turn_text", "active_unit_name")]
+[node name="UI_Battle" type="Control" unique_id=2107946255 node_paths=PackedStringArray("action_button_controller", "ui_unit_cards", "turn_text", "active_unit_name")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -31,7 +31,6 @@ mouse_filter = 1
 script = ExtResource("1_x3jtv")
 action_button_controller = NodePath("ButtonController")
 ui_unit_cards = NodePath("UI_Unit_Card_Control")
-game_log = NodePath("ScrollContainer/GameLog")
 turn_text = NodePath("TurnText")
 active_unit_name = NodePath("ActiveUnitName")
 metadata/_edit_use_anchors_ = true
@@ -158,15 +157,14 @@ text = "End Turn"
 script = ExtResource("2_coxye")
 metadata/_custom_type_script = "uid://dfi0ppbp0ouxo"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1120017543]
+[node name="GameLog" type="RichTextLabel" parent="." unique_id=1149922344]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
-offset_left = 4.0
-offset_top = 902.0
-offset_right = 472.0
-offset_bottom = 1072.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_pikk8")
-
-[node name="GameLog" type="VBoxContainer" parent="ScrollContainer" unique_id=806349574]
-layout_mode = 2
+offset_left = 6.0
+offset_top = 904.0
+offset_right = 474.0
+offset_bottom = 1065.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_rkfma")
+scroll_following = true
 script = ExtResource("9_oxarm")
-metadata/_custom_type_script = "uid://budxrmt8ldond"

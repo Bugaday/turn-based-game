@@ -10,6 +10,7 @@ func _enter_state(battle_scene_script:SceneBattle):
 
 
 func _init(action:ActionCommand) -> void:
+	state_name = "Action State"
 	action_ = action 
 	if action_:
 		action_.action_finished.connect(end_state)

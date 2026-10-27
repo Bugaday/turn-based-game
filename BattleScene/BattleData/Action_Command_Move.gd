@@ -47,7 +47,8 @@ func update_action():
 
 
 func end_action():
-	battle_scene_.ui_battle.game_log.log(source_char.character_name  + " moved to " + str(destination_cell))
+	UIBattle.game_log.log(source_char.character_name  + " [color=#4aff44]moved[/color] to " + str(destination_cell))
+	#battle_scene_.ui_battle.game_log.log(source_char.character_name  + " [color=#4aff44]moved[/color] to " + str(destination_cell))
 	battle_scene_.drawing_battle.draw_move_path.clear_path()
 	battle_scene_.drawing_battle.draw_box.position = source_char.position
 	battle_scene_.drawing_battle.draw_box.visible = true

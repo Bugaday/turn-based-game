@@ -95,7 +95,8 @@ func end_turn():
 
 
 func faction_turn_finished():
-	ui_battle.game_log.log(battle_data.active_faction + "'s turn over!")
+	UIBattle.game_log.log(battle_data.active_faction + "'s turn over!")
+	#ui_battle.game_log.log(battle_data.active_faction + "'s turn over!")
 	for unit : Character in battle_data.active_factions_units[battle_data.active_faction]:
 		unit.action_points_current = 100
 	if battle_data.factions_in_battle.size() <= 0:

@@ -3,10 +3,16 @@ extends Node
 
 @export var action_button_controller : ActionButtonController
 @export var ui_unit_cards : UIUnitCardControl
-@export var game_log : GameLog
 @export var turn_text : Label
 @export var active_unit_name : Label
+
+static var game_log : GameLog
+
 var text_floating : FloatingText
+
+
+func _ready() -> void:
+	game_log = %GameLog
 
 
 func on_character_selected(unit:Character,battle_scene:SceneBattle):

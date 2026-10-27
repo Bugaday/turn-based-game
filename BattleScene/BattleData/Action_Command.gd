@@ -36,12 +36,10 @@ func execute_action():
 	var log_string : String = source_char.character_name  + " is executing action: " + className + " with " + str(source_char.action_points_current) + " action points left."
 	print(log_string)
 	source_char.action_points_current -= calc_action_point_cost()
-	#battle_scene_.ui_battle.game_log.log(source_char.base_stats.unit_name  + ": " + action_name + " - (" + str(source_char.action_points_current) + " action points left.)")
+
 
 func end_action():
 	var className:String = get_script().get_global_name()
-	#var log_string : String = "Finishing action: " + className
-	#print(log_string)
 	action_finished.emit()
 	
 	

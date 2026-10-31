@@ -7,7 +7,6 @@ class_name SceneBattle
 @export var drawing_battle : Drawing
 @export var ui_battle : UIBattle
 @export var command_processor : CommandProcessor
-#@export var ai_decision_maker : AIDecisionMaker
 
 var current_state : StateGame
 
@@ -95,7 +94,7 @@ func end_turn():
 
 
 func faction_turn_finished():
-	UIBattle.game_log.log(battle_data.active_faction + "'s turn over!")
+	UIBattle.game_log.log("[color=#00ffff]" + battle_data.active_faction + "'s turn over![/color]")
 	#ui_battle.game_log.log(battle_data.active_faction + "'s turn over!")
 	for unit : Character in battle_data.active_factions_units[battle_data.active_faction]:
 		unit.action_points_current = 100
@@ -129,6 +128,7 @@ func start_ai_unit_turn():
 
 #Starts an AI Character's action during their turn
 func start_new_ai_action():
+	await get_tree().create_timer(1.0).timeout
 	battle_data.ai_registry.update_unit_blackboards()
 	var decision_chosen : AIDecision = AIDecisionMaker.make_decision(battle_data.active_character,self)
 	if decision_chosen == null:
@@ -143,12 +143,6 @@ func command_queue_finished():
 	if battle_data.active_faction != "Player":
 		print("Command queue finished!")
 		start_new_ai_action()
-		pass
-		
-
-
-func on_ai_action_end():
-	pass
 
 
 func finish_ai_unit_turn():

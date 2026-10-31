@@ -6,6 +6,8 @@ extends Node
 @export var turn_text : Label
 @export var active_unit_name : Label
 
+@onready var clear_log_button : Button
+
 static var game_log : GameLog
 
 var text_floating : FloatingText
@@ -13,6 +15,12 @@ var text_floating : FloatingText
 
 func _ready() -> void:
 	game_log = %GameLog
+	clear_log_button = %ClearLogButton
+	clear_log_button.pressed.connect(clear_log)
+	
+	
+func clear_log():
+	game_log.clear()
 
 
 func on_character_selected(unit:Character,battle_scene:SceneBattle):

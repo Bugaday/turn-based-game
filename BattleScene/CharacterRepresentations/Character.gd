@@ -19,7 +19,6 @@ var weapon_current : Weapon
 	set(value):
 		action_points_current = value
 		on_stat_changed.emit(self)
-@export var ai_actions_list : AIActionsData
 enum ACTION {MOVE,ATTACK}
 @export var actions : Array[ACTION]
 @export var action_list : Dictionary[ACTION,ActionData]

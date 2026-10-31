@@ -33,7 +33,7 @@ func execute_action():
 	var offset : Vector2 = Vector2(0.0,-32.0)
 	battle_scene_.ui_battle.spawn_floating_text("10",target.position+offset,battle_scene_)
 	super()
-	UIBattle.game_log.log(source_char.character_name  + " [color=#ff4444]attacked[/color] " + target.character_name)
+	UIBattle.game_log.log("[color=#ff4444]" + source_char.character_name  + " attacked " + target.character_name + "[/color]")
 	#battle_scene_.ui_battle.game_log.log(source_char.character_name  + " [color=#ff4444]attacked[/color] " + target.character_name)
 	end_action()
 

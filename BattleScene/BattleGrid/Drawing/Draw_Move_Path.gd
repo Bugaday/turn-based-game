@@ -5,9 +5,11 @@ class_name DrawMovePath
 #Movement Path
 var points : PackedVector2Array
 var path_source : Vector2
+var point_limit : int = 1
 
 
-func _drawPath(start_source:Vector2,path_points : PackedVector2Array):
+func _drawPath(start_source:Vector2,path_points : PackedVector2Array,path_action_point_limit : int = 1):
+	point_limit = path_action_point_limit
 	if path_points.size() > 0:
 		path_source = start_source
 		points = path_points.duplicate()
@@ -22,13 +24,26 @@ func clear_path():
 func _draw() -> void:
 	if points.size() > 0:
 		var point_colour : Color = Color.WHITE_SMOKE
+		
 		for i in len(points)-1:
 			var point = points[i]
 			var nextPoint = points[i+1]
+			if i+1 > point_limit:
+				point_colour = Color.RED
 			draw_line(point,nextPoint,point_colour,2.0)
-			draw_circle(nextPoint,6.0,Color.WHITE_SMOKE)
-			
+			#draw_circle(nextPoint,6.0,point_colour)
+		
+		point_colour = Color.WHITE_SMOKE
+	
+		for i in len(points)-1:
+			var point = points[i]
+			var nextPoint = points[i+1]
+			if i+1 > point_limit:
+				point_colour = Color.RED
+			#draw_line(point,nextPoint,point_colour,2.0)
+			draw_circle(nextPoint,6.0,point_colour)
+
+		if 0 >= point_limit:
+			point_colour = Color.RED
 		draw_line(path_source,points[0],point_colour,2.0)
-		draw_circle(points[0],6.0,Color.WHITE_SMOKE)
-			#var f = SystemFont.new()
-			#draw_string(f,point+Vector2(0,-10.0),str(i))
+		draw_circle(points[0],6.0,point_colour)

@@ -12,6 +12,12 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_ri2no"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oxarm"]
+bg_color = Color(0.6509804, 0.57254905, 0.19607843, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bwbsp"]
+bg_color = Color(0.2141189, 0.6429273, 0.8709397, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rkfma"]
 bg_color = Color(0.22052988, 0.22052991, 0.22052976, 1)
 border_width_left = 4
@@ -22,20 +28,12 @@ border_color = Color(0.24943641, 0.24943626, 0.24943608, 1)
 
 [node name="UI_Battle" type="Control" unique_id=2107946255 node_paths=PackedStringArray("action_button_controller", "ui_unit_cards", "turn_text", "active_unit_name")]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -1.0
-offset_right = -1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
+anchors_preset = 0
 script = ExtResource("1_x3jtv")
 action_button_controller = NodePath("ButtonController")
 ui_unit_cards = NodePath("UI_Unit_Card_Control")
 turn_text = NodePath("TurnText")
 active_unit_name = NodePath("ActiveUnitName")
-metadata/_edit_use_anchors_ = true
 
 [node name="TurnText" type="Label" parent="." unique_id=324188438]
 unique_name_in_owner = true
@@ -43,14 +41,13 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -45.0
+offset_left = 942.0
 offset_top = 32.0
-offset_right = 44.0
+offset_right = 1031.0
 offset_bottom = 55.0
 grow_horizontal = 2
 text = "Player Turn"
 label_settings = SubResource("LabelSettings_ri2no")
-metadata/_edit_use_anchors_ = true
 
 [node name="ActiveUnitName" type="Label" parent="." unique_id=1754892384]
 unique_name_in_owner = true
@@ -60,14 +57,13 @@ anchor_left = 0.5
 anchor_top = 0.049074072
 anchor_right = 0.5
 anchor_bottom = 0.049074072
-offset_left = -45.0
-offset_top = 32.0
-offset_right = 44.0
-offset_bottom = 55.0
+offset_left = 942.0
+offset_top = 74.0
+offset_right = 1031.0
+offset_bottom = 97.0
 grow_horizontal = 2
 text = "Unit's Turn"
 label_settings = SubResource("LabelSettings_ri2no")
-metadata/_edit_use_anchors_ = true
 
 [node name="ButtonController" type="HBoxContainer" parent="." unique_id=1232441873]
 unique_name_in_owner = true
@@ -151,10 +147,13 @@ layout_mode = 0
 
 [node name="EndTurnButton" type="Button" parent="." unique_id=903509478]
 layout_mode = 0
-offset_left = 1478.0
-offset_top = 950.0
-offset_right = 1608.0
-offset_bottom = 1046.0
+offset_left = 1494.0
+offset_top = 972.0
+offset_right = 1644.0
+offset_bottom = 1028.0
+tooltip_text = "End the Current Turn"
+theme_override_styles/hover = SubResource("StyleBoxFlat_oxarm")
+theme_override_styles/focus = SubResource("StyleBoxFlat_bwbsp")
 text = "End Turn"
 script = ExtResource("2_coxye")
 metadata/_custom_type_script = "uid://dfi0ppbp0ouxo"

@@ -43,7 +43,8 @@ func update_action():
 	mousePos = battle_scene_.get_global_mouse_position()
 	if choosing_destination:
 		move_path = battle_scene_.path_finder.get_path_from_char(source_char.position,battle_scene_.get_global_mouse_position(),true)
-	battle_scene_.drawing_battle.draw_move_path._drawPath(source_char.position,move_path)
+	battle_scene_.drawing_battle.draw_move_path._drawPath(source_char.position,move_path,source_char.action_points_current/calc_action_point_cost())
+	battle_scene_.drawing_battle.draw_text.draw_text_on_screen(str(calc_action_point_cost()*(move_path.size()-1)),move_path[move_path.size()-1] + Vector2(5,-5))
 
 
 func end_action():
@@ -52,6 +53,7 @@ func end_action():
 	battle_scene_.drawing_battle.draw_move_path.clear_path()
 	battle_scene_.drawing_battle.draw_box.position = source_char.position
 	battle_scene_.drawing_battle.draw_box.visible = true
+	battle_scene_.drawing_battle.draw_text.clear_text()
 	super()
 
 

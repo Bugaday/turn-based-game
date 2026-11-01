@@ -110,3 +110,11 @@ static func is_in_grid(pos:Vector2)->bool:
 	if pos.x > GridProps2D.gridSizeX or pos.x < 0.0 or pos.y > GridProps2D.gridSizeY or pos.y < 0.0:
 		return false
 	return true
+	
+static func is_free_pos(pos:Vector2,path_finder:Pathfinder2D)->bool:
+	if !is_in_grid(pos):
+		return false
+	var grid_pos : Vector2i = world_to_grid(pos)
+	if path_finder._astar.is_point_solid(grid_pos):
+		return false
+	return true

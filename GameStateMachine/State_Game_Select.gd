@@ -12,7 +12,7 @@ func handle_input(_event : InputEvent,battle_scene_script:SceneBattle)->StateGam
 		var cell : GridCellData = GridService.get_cell_data_at_pos(gridPos,battle_scene_script.battle_data.grid)
 		if cell.UnitOccupying and cell.UnitOccupying.faction == "Player":
 			battle_scene_script.select_character(cell.UnitOccupying)
-		elif battle_scene_script.battle_data.selected_character and GridService.is_in_grid(mousePos):
+		elif battle_scene_script.battle_data.selected_character and GridService.is_free_pos(mousePos,battle_scene_script.path_finder):
 			move_command(battle_scene_script)
 	elif _event.is_action_pressed("Move") and battle_scene_script.battle_data.selected_character:
 		move_command(battle_scene_script)

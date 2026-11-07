@@ -6,6 +6,7 @@ signal action_finished()
 
 var action_name : String = "Unnamed Action"
 var action_verb : String
+var action_location : Vector2
 var source_char : Character
 var b_is_player_ : bool = false
 var battle_scene_ : SceneBattle
@@ -24,7 +25,7 @@ func start_action():
 
 
 func update_action():
-	pass
+	battle_scene_.drawing_battle.draw_text.draw_text_on_screen(str(calc_action_point_cost()),action_location+Vector2(5,-5))
 
 
 func action_input_confirm():
@@ -40,11 +41,13 @@ func execute_action():
 
 func end_action():
 	var className:String = get_script().get_global_name()
+	battle_scene_.drawing_battle.draw_text.clear_text()
 	action_finished.emit()
-	
-	
+
+
 func calc_action_point_cost()->int:
 	return 40
-	
+
+
 func log_action_verb():
 	battle_scene_.ui_battle.active_unit_name.text = source_char.character_name + " " + action_verb

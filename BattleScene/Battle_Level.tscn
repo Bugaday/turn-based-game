@@ -37,8 +37,6 @@ metadata/_custom_type_script = "uid://coh5p3imqmxic"
 script = ExtResource("10_j14wi")
 metadata/_custom_type_script = "uid://btl37owvxbsmy"
 
-[node name="Drawing" parent="." unique_id=781264123 instance=ExtResource("7_p58h3")]
-
 [node name="BattleTileMap" type="TileMapLayer" parent="." unique_id=1483286854]
 unique_name_in_owner = true
 show_behind_parent = true
@@ -68,3 +66,5 @@ metadata/_custom_type_script = "uid://b5hux2v7pxvpx"
 [node name="StaticTest" type="Node" parent="." unique_id=664336605]
 script = ExtResource("13_hjj05")
 metadata/_custom_type_script = "uid://bxd7pf7u4hqrd"
+
+[node name="Drawing" parent="." unique_id=781264123 instance=ExtResource("7_p58h3")]

@@ -39,7 +39,13 @@ func execute_action():
 
 
 func update_action():
-	pass
+	var mouseCellPos = GridService.world_to_grid(battle_scene_.get_global_mouse_position())
+	var cellData : GridCellData = GridService.get_cell_data_at_pos(mouseCellPos,battle_scene_.battle_data.grid)
+	if potential_target_list.has(cellData.UnitOccupying):
+		target = cellData.UnitOccupying
+	if target:
+		action_location = target.position
+		super()
 
 
 func end_action():

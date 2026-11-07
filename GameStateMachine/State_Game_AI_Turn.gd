@@ -8,5 +8,8 @@ func _init() -> void:
 func _enter_state(_battle_scene_script:SceneBattle):
 	pass
 	
+func handle_input(_event : InputEvent,_battle_scene_script:SceneBattle)->StateGame:
+	return null
+	
 func _exit_state(_battle_scene_script:SceneBattle):
 	pass

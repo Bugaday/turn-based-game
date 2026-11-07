@@ -64,7 +64,7 @@ func move_to_next_waypoint():
 	#Remove the first waypoint that we're standing on, pushing the next into index 0 to move towards
 	move_path.remove_at(0)
 	#If there are no more waypoints, finish the path
-	if move_path.is_empty():
+	if move_path.is_empty() or calc_action_point_cost() > source_char.action_points_current:
 		end_action()
 		return
 	
@@ -85,9 +85,9 @@ func section_complete():
 	var current_cell : Vector2i = GridService.world_to_grid(source_char.position)
 	battle_scene_.battle_data.grid[current_cell].UnitOccupying = source_char
 	DebugVis.update_blocked_positions()
-	if calc_action_point_cost() > source_char.action_points_current:
-		end_action()
-		return
+	#if calc_action_point_cost() > source_char.action_points_current:
+		#end_action()
+		#return
 	move_to_next_waypoint()
 
 

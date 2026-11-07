@@ -29,6 +29,9 @@ func action_input_confirm():
 
 
 func execute_action():
+	if calc_action_point_cost() > source_char.action_points_current:
+		end_action()
+		return
 	target.apply_health_change(-10)
 	var offset : Vector2 = Vector2(0.0,-32.0)
 	battle_scene_.ui_battle.spawn_floating_text("10",target.position+offset,battle_scene_)

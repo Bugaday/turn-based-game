@@ -8,6 +8,7 @@ var destination_cell : Vector2i
 var mousePos : Vector2
 var choosing_destination : bool = true
 
+
 func _init(src_char:Character,battle_scene:SceneBattle,data:ActionData,b_is_player:bool,destination:Vector2i=Vector2.ZERO) -> void:
 	super(src_char,battle_scene,data,b_is_player)
 	action_name = "Move"
@@ -46,12 +47,10 @@ func update_action():
 	action_location = move_path[move_path.size()-1]
 	battle_scene_.drawing_battle.draw_move_path._drawPath(source_char.position,move_path,source_char.action_points_current/calc_action_point_cost())
 	super()
-	#battle_scene_.drawing_battle.draw_text.draw_text_on_screen(str(calc_action_point_cost()*(move_path.size()-1)),move_path[move_path.size()-1] + Vector2(5,-5))
 
 
 func end_action():
 	UIBattle.game_log.log(source_char.character_name  + " [color=#4aff44]moved[/color] to " + str(destination_cell))
-	#battle_scene_.ui_battle.game_log.log(source_char.character_name  + " [color=#4aff44]moved[/color] to " + str(destination_cell))
 	battle_scene_.drawing_battle.draw_move_path.clear_path()
 	battle_scene_.drawing_battle.draw_box.position = source_char.position
 	battle_scene_.drawing_battle.draw_box.visible = true
@@ -85,9 +84,6 @@ func section_complete():
 	var current_cell : Vector2i = GridService.world_to_grid(source_char.position)
 	battle_scene_.battle_data.grid[current_cell].UnitOccupying = source_char
 	DebugVis.update_blocked_positions()
-	#if calc_action_point_cost() > source_char.action_points_current:
-		#end_action()
-		#return
 	move_to_next_waypoint()
 
 

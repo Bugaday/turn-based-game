@@ -22,7 +22,7 @@ func end_state():
 func handle_input(_event : InputEvent,_battle_scene_script:SceneBattle)->StateGame:
 	if _event.is_action_released("Select"):
 		action_.action_input_confirm()
-		_battle_scene_script.ui_battle.game_log.log("Confirming Action")
+		UIBattle.game_log.log("Confirming Action")
 	elif _event.is_action_released("Cancel"):
 		action_.end_action()
 		#return StateGameSelect.new()

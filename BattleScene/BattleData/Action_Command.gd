@@ -25,7 +25,7 @@ func start_action():
 
 
 func update_action():
-	battle_scene_.drawing_battle.draw_text.draw_text_on_screen(str(calc_action_point_cost()),action_location+Vector2(5,-5))
+	pass
 
 
 func action_input_confirm():
@@ -47,6 +47,10 @@ func end_action():
 
 func calc_action_point_cost()->int:
 	return 40
+
+
+func visualise_action_point_cost(text_colour:Color=Color.WHITE,action_point_scalar:int=1):
+	battle_scene_.drawing_battle.draw_text.draw_text_on_screen(str(calc_action_point_cost()*action_point_scalar),action_location+Vector2(5,-5),text_colour)
 
 
 func log_action_verb():

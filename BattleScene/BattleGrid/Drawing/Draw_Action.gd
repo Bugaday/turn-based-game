@@ -15,8 +15,8 @@ func _draw() -> void:
 		var cell_to_vector2 : Vector2 = GridService.grid_to_world(i)-Vector2(GridProps2D.cellSize)/2+Vector2(inner_cell_margin/2.0,inner_cell_margin/2.0)
 		var highlightCell : Rect2 = Rect2(cell_to_vector2,Vector2(GridProps2D.cellSize.x-inner_cell_margin,GridProps2D.cellSize.y-inner_cell_margin))
 		draw_rect(highlightCell,cell_colour,filled)
-	for i in targets:
-		draw_circle(i.position,16.0,Color.YELLOW,false,4.0,true)
+	#for i in targets:
+		#draw_circle(i.position,16.0,Color.YELLOW,false,4.0,true)
 	
 func draw_items(validCells:PackedVector2Array,tgts:Array[Character],width:float = 2.0):
 	valid_cells.clear()

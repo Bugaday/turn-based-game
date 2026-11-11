@@ -45,9 +45,10 @@ func update_action():
 	var cellData : GridCellData = GridService.get_cell_data_at_pos(mouseCellPos,battle_scene_.battle_data.grid)
 	if potential_target_list.has(cellData.UnitOccupying):
 		target = cellData.UnitOccupying
-	if target:
 		action_location = target.position
-		super()
+		visualise_action_point_cost(Color.RED)
+	else:
+		battle_scene_.drawing_battle.draw_text.clear_text()
 
 
 func end_action():

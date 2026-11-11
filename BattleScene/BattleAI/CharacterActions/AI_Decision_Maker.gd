@@ -32,6 +32,6 @@ static func get_highest_scoring_action(decision_scores : Dictionary[AIDecision,f
 
 
 static func can_make_more_decisions(unit:Character)->bool:
-	if unit.action_points_current > 15:
-		return true
-	return false
+	if unit.action_points_current <= 0:
+		return false
+	return true

@@ -37,7 +37,6 @@ func execute_action():
 	battle_scene_.drawing_battle.draw_box.visible = false
 	choosing_destination = false
 	move_to_next_waypoint()
-	#super()
 
 
 func update_action():
@@ -46,7 +45,7 @@ func update_action():
 		move_path = battle_scene_.path_finder.get_path_from_char(source_char.position,battle_scene_.get_global_mouse_position(),true)
 	action_location = move_path[move_path.size()-1]
 	battle_scene_.drawing_battle.draw_move_path._drawPath(source_char.position,move_path,source_char.action_points_current/calc_action_point_cost())
-	super()
+	visualise_action_point_cost(Color.WHITE,move_path.size())
 
 
 func end_action():
@@ -88,5 +87,6 @@ func section_complete():
 
 
 func calc_action_point_cost()->int:
-	#return move_path.size() * 10
-	return 10
+	#This should probably be cost per unit (distance of 1) moved but also based on agility stat?
+	#return move_path.size() * 20
+	return 20

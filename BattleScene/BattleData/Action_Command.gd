@@ -47,10 +47,14 @@ func end_action():
 
 func calc_action_point_cost()->int:
 	return 40
+	
+
+func calc_total_action_point_cost()->int:
+	return calc_action_point_cost()
 
 
 func visualise_action_point_cost(text_colour:Color=Color.WHITE,action_point_scalar:int=1):
-	battle_scene_.drawing_battle.draw_text.draw_text_on_screen(str(calc_action_point_cost()*action_point_scalar),action_location+Vector2(5,-5),text_colour)
+	battle_scene_.drawing_battle.draw_text.draw_text_on_screen(str(calc_action_point_cost()),action_location+Vector2(5,-5),text_colour)
 
 
 func log_action_verb():

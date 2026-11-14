@@ -33,6 +33,7 @@ func action_input_confirm():
 	if choosing_destination:
 		super()
 
+
 func execute_action():
 	battle_scene_.drawing_battle.draw_box.visible = false
 	choosing_destination = false
@@ -44,8 +45,10 @@ func update_action():
 	if choosing_destination:
 		move_path = battle_scene_.path_finder.get_path_from_char(source_char.position,battle_scene_.get_global_mouse_position(),true)
 	action_location = move_path[move_path.size()-1]
-	battle_scene_.drawing_battle.draw_move_path._drawPath(source_char.position,move_path,source_char.action_points_current/calc_action_point_cost())
+	battle_scene_.drawing_battle.draw_move_path._drawPath(source_char.position,move_path,source_char.action_points_current/max(calc_action_point_cost(),1))
+	#visualise_action_point_cost(Color.WHITE,move_path.size())
 	visualise_action_point_cost(Color.WHITE,move_path.size())
+	#print(calc_total_action_point_cost())
 
 
 func end_action():
@@ -86,7 +89,37 @@ func section_complete():
 	move_to_next_waypoint()
 
 
+func calc_total_action_point_cost()->int:
+	var total_cost : int
+	if move_path.size() >= 1:
+		for point:int in move_path.size():
+			var cost = calc_single_cell_cost(move_path[point],move_path[point+1])
+			total_cost += cost
+		return total_cost
+	return calc_action_point_cost()
+
+
+func calc_single_cell_cost(start:Vector2,end:Vector2)->float:
+	var dist : float = start.distance_to(end)
+	var dist_in_cell_size : float = dist / float(GridProps2D.cellSize.x)
+	var cost : int = dist_in_cell_size * source_char.base_stats.move_speed
+	return cost
+
+
 func calc_action_point_cost()->int:
-	#This should probably be cost per unit (distance of 1) moved but also based on agility stat?
-	#return move_path.size() * 20
-	return 20
+	var total_cost : int
+	if move_path.size() >= 1:
+		for point:int in move_path.size()-1:
+			var cost = calc_single_cell_cost(move_path[point],move_path[point+1])
+			total_cost += cost
+		return total_cost
+	return calc_action_point_cost()
+	
+	##This should probably be cost per unit (distance of 1) moved but also based on agility stat?
+	#if move_path.size() >= 1:
+		#var dist : float = source_char.position.distance_to(move_path[0])
+		#var dist_in_cell_size : float = dist / float(GridProps2D.cellSize.x)
+		#var cost : int = dist_in_cell_size * source_char.base_stats.move_speed
+		#print("Dist: ", dist, " Dist Cell: ", dist_in_cell_size, " Cost: ", cost)
+		#return cost
+	#return 99

@@ -21,7 +21,9 @@ func _init(src_char:Character,battle_scene:SceneBattle,data:ActionData,b_is_play
 
 
 func start_action():
+	#Super currently just prints the action name
 	super()
+	#Why is this here? For AI?
 	if move_path.is_empty():
 		end_action()
 		return
@@ -43,12 +45,14 @@ func execute_action():
 func update_action():
 	mousePos = battle_scene_.get_global_mouse_position()
 	if choosing_destination:
+		#At this point, and as the player we just have a path from the char to the mouse position.
 		move_path = battle_scene_.path_finder.get_path_from_char(source_char.position,battle_scene_.get_global_mouse_position(),true)
+	#Need to check if we have a path here?
 	action_location = move_path[move_path.size()-1]
 	battle_scene_.drawing_battle.draw_move_path._drawPath(source_char.position,move_path,source_char.action_points_current/max(calc_action_point_cost(),1))
-	#visualise_action_point_cost(Color.WHITE,move_path.size())
+	
+	#This is the super version that uses calc_action_point_cost
 	visualise_action_point_cost(Color.WHITE,move_path.size())
-	#print(calc_total_action_point_cost())
 
 
 func end_action():
@@ -65,7 +69,7 @@ func move_to_next_waypoint():
 	#Remove the first waypoint that we're standing on, pushing the next into index 0 to move towards
 	move_path.remove_at(0)
 	#If there are no more waypoints, finish the path
-	if move_path.is_empty() or calc_action_point_cost() > source_char.action_points_current:
+	if move_path.is_empty() or calc_single_cell_cost(source_char.position,move_path[0]) > source_char.action_points_current:
 		end_action()
 		return
 	
@@ -78,7 +82,7 @@ func move_to_next_waypoint():
 
 #A section of path has just completed
 func section_complete():
-	source_char.action_points_current -= calc_action_point_cost()
+	source_char.action_points_current -= calc_single_cell_cost(source_char.char_last_cell_pos,source_char.position)
 	battle_scene_.path_finder.set_cell_free_from_vector2(source_char.char_last_cell_pos)
 	var last_cell : Vector2i = GridService.world_to_grid(source_char.char_last_cell_pos)
 	battle_scene_.battle_data.grid[last_cell].UnitOccupying = null
@@ -89,17 +93,8 @@ func section_complete():
 	move_to_next_waypoint()
 
 
-func calc_total_action_point_cost()->int:
-	var total_cost : int
-	if move_path.size() >= 1:
-		for point:int in move_path.size():
-			var cost = calc_single_cell_cost(move_path[point],move_path[point+1])
-			total_cost += cost
-		return total_cost
-	return calc_action_point_cost()
-
-
 func calc_single_cell_cost(start:Vector2,end:Vector2)->float:
+	#This is cost per unit (distance of 1) moved based on move_speed of Character
 	var dist : float = start.distance_to(end)
 	var dist_in_cell_size : float = dist / float(GridProps2D.cellSize.x)
 	var cost : int = dist_in_cell_size * source_char.base_stats.move_speed
@@ -108,14 +103,13 @@ func calc_single_cell_cost(start:Vector2,end:Vector2)->float:
 
 func calc_action_point_cost()->int:
 	var total_cost : int
-	if move_path.size() >= 1:
+	if move_path.size() > 0:
 		for point:int in move_path.size()-1:
 			var cost = calc_single_cell_cost(move_path[point],move_path[point+1])
 			total_cost += cost
 		return total_cost
-	return calc_action_point_cost()
+	return 10
 	
-	##This should probably be cost per unit (distance of 1) moved but also based on agility stat?
 	#if move_path.size() >= 1:
 		#var dist : float = source_char.position.distance_to(move_path[0])
 		#var dist_in_cell_size : float = dist / float(GridProps2D.cellSize.x)

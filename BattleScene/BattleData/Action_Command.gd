@@ -47,10 +47,6 @@ func end_action():
 
 func calc_action_point_cost()->int:
 	return 40
-	
-
-func calc_total_action_point_cost()->int:
-	return calc_action_point_cost()
 
 
 func visualise_action_point_cost(text_colour:Color=Color.WHITE,action_point_scalar:int=1):

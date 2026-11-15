@@ -4,7 +4,13 @@ class_name ActionCommandMove
 
 
 var move_path : PackedVector2Array
+
+#This is the desired destination, regardless of action points available
 var destination_cell : Vector2i
+#This is the actual destination index of the path reached ..
+#.. before we run out of action points
+var last_valid_path_point : int
+
 var mousePos : Vector2
 var choosing_destination : bool = true
 
@@ -47,9 +53,10 @@ func update_action():
 	if choosing_destination:
 		#At this point, and as the player we just have a path from the char to the mouse position.
 		move_path = battle_scene_.path_finder.get_path_from_char(source_char.position,battle_scene_.get_global_mouse_position(),true)
+		calc_action_point_cost()
 	#Need to check if we have a path here?
 	action_location = move_path[move_path.size()-1]
-	battle_scene_.drawing_battle.draw_move_path._drawPath(source_char.position,move_path,source_char.action_points_current/max(calc_action_point_cost(),1))
+	battle_scene_.drawing_battle.draw_move_path._drawPath(source_char.position,move_path,last_valid_path_point)
 	
 	#This is the super version that uses calc_action_point_cost
 	visualise_action_point_cost(Color.WHITE,move_path.size())
@@ -107,6 +114,8 @@ func calc_action_point_cost()->int:
 		for point:int in move_path.size()-1:
 			var cost = calc_single_cell_cost(move_path[point],move_path[point+1])
 			total_cost += cost
+			if total_cost > source_char.action_points_current:
+				last_valid_path_point = point
 		return total_cost
 	return 10
 	

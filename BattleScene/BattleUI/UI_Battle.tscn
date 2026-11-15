@@ -12,12 +12,6 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_ri2no"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oxarm"]
-bg_color = Color(0.6509804, 0.57254905, 0.19607843, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bwbsp"]
-bg_color = Color(0.2141189, 0.6429273, 0.8709397, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rkfma"]
 bg_color = Color(0.22052988, 0.22052991, 0.22052976, 1)
 border_width_left = 4
@@ -25,6 +19,12 @@ border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
 border_color = Color(0.24943641, 0.24943626, 0.24943608, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oxarm"]
+bg_color = Color(0.6509804, 0.57254905, 0.19607843, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bwbsp"]
+bg_color = Color(0.2141189, 0.6429273, 0.8709397, 1)
 
 [node name="UI_Battle" type="Control" unique_id=2107946255 node_paths=PackedStringArray("action_button_controller", "ui_unit_cards", "turn_text", "active_unit_name")]
 layout_mode = 3
@@ -111,6 +111,14 @@ layout_mode = 2
 script = ExtResource("4_pikk8")
 metadata/_custom_type_script = "uid://cjxemdkryrvkj"
 
+[node name="GameLog" type="RichTextLabel" parent="ButtonController" unique_id=1149922344]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_rkfma")
+scroll_following = true
+script = ExtResource("9_oxarm")
+
 [node name="UI_Unit_Card_Control" type="Control" parent="." unique_id=1023238940 node_paths=PackedStringArray("ui_unit_card_main", "ui_unit_hover_card", "ui_unit_mini_cards_group")]
 anchors_preset = 0
 offset_right = 40.0
@@ -157,18 +165,6 @@ theme_override_styles/focus = SubResource("StyleBoxFlat_bwbsp")
 text = "End Turn"
 script = ExtResource("2_coxye")
 metadata/_custom_type_script = "uid://dfi0ppbp0ouxo"
-
-[node name="GameLog" type="RichTextLabel" parent="." unique_id=1149922344]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 0
-offset_left = 6.0
-offset_top = 904.0
-offset_right = 474.0
-offset_bottom = 1065.0
-theme_override_styles/normal = SubResource("StyleBoxFlat_rkfma")
-scroll_following = true
-script = ExtResource("9_oxarm")
 
 [node name="ClearLogButton" type="Button" parent="." unique_id=377849428]
 unique_name_in_owner = true

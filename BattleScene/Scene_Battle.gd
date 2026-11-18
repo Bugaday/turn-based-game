@@ -11,20 +11,19 @@ class_name SceneBattle
 var current_state : StateGame
 
 func _ready() -> void:
-	
 	#Autoload
 	DebugVis.battle = self
-	
+
 	#Initialise Static Variables
 	StateMachineHover.scene_battle = self
 	StateMachineHover.drawing = drawing_battle
 	StateMachineHover.ui_battle = ui_battle
-	
+
 	#Signal connections
 	command_processor.on_command_queue_finished.connect(command_queue_finished)
 	battle_data.on_active_character_changed.connect(ui_battle.on_active_character_changed)
 	#ai_decision_maker.all_actions_finished.connect(finish_ai_unit_turn)
-	
+
 	CreateGrid()
 	battle_data.battle_spawner.new_character_spawned.connect(character_spawned)
 	battle_data.setup(path_finder,ui_battle)
@@ -33,10 +32,10 @@ func _ready() -> void:
 	for c in battle_data.all_characters:
 		var card : UIUnitCardMini = ui_battle.ui_unit_cards.ui_unit_mini_cards_group.get_card_by_character(c)
 		card.card_character_hovered.connect(mini_card_hovered)
-		
+
 	#Dependency injection
 	#ui_battle.button
-	
+
 	DebugVis.update_blocked_positions()
 
 	

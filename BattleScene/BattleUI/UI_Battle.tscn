@@ -111,14 +111,6 @@ layout_mode = 2
 script = ExtResource("4_pikk8")
 metadata/_custom_type_script = "uid://cjxemdkryrvkj"
 
-[node name="GameLog" type="RichTextLabel" parent="ButtonController" unique_id=1149922344]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_rkfma")
-scroll_following = true
-script = ExtResource("9_oxarm")
-
 [node name="UI_Unit_Card_Control" type="Control" parent="." unique_id=1023238940 node_paths=PackedStringArray("ui_unit_card_main", "ui_unit_hover_card", "ui_unit_mini_cards_group")]
 anchors_preset = 0
 offset_right = 40.0
@@ -152,6 +144,18 @@ offset_bottom = 659.0
 
 [node name="UI_Unit_Mini_Cards" parent="UI_Unit_Card_Control" unique_id=1788615898 instance=ExtResource("9_rkfma")]
 layout_mode = 0
+
+[node name="GameLog" type="RichTextLabel" parent="." unique_id=1149922344]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 0
+offset_left = 2.0
+offset_top = 904.0
+offset_right = 473.0
+offset_bottom = 1077.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_rkfma")
+scroll_following = true
+script = ExtResource("9_oxarm")
 
 [node name="EndTurnButton" type="Button" parent="." unique_id=903509478]
 layout_mode = 0

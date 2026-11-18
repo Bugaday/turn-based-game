@@ -2,14 +2,16 @@ extends ActionCommand
 
 class_name ActionCommandMove
 
-
 var move_path : PackedVector2Array
+var valid_path : PackedVector2Array
+var invalid_path : PackedVector2Array
+
 
 #This is the desired destination, regardless of action points available
 var destination_cell : Vector2i
 #This is the actual destination index of the path reached ..
 #.. before we run out of action points
-var last_valid_path_point : int
+var valid_cell_number : int = 0
 
 var mousePos : Vector2
 var choosing_destination : bool = true
@@ -56,8 +58,8 @@ func update_action():
 		calc_action_point_cost()
 	#Need to check if we have a path here?
 	action_location = move_path[move_path.size()-1]
-	battle_scene_.drawing_battle.draw_move_path._drawPath(source_char.position,move_path,last_valid_path_point)
-	
+	battle_scene_.drawing_battle.draw_move_path._drawPath(move_path,valid_cell_number,source_char)
+
 	#This is the super version that uses calc_action_point_cost
 	visualise_action_point_cost(Color.WHITE,move_path.size())
 
@@ -101,7 +103,7 @@ func section_complete():
 
 
 func calc_single_cell_cost(start:Vector2,end:Vector2)->float:
-	#This is cost per unit (distance of 1) moved based on move_speed of Character
+	#This is cost per unit (distance of 1) moved based on move_speed of Character, distance for diagonals, and any other terrain modifiers
 	var dist : float = start.distance_to(end)
 	var dist_in_cell_size : float = dist / float(GridProps2D.cellSize.x)
 	var cost : int = dist_in_cell_size * source_char.base_stats.move_speed
@@ -109,20 +111,24 @@ func calc_single_cell_cost(start:Vector2,end:Vector2)->float:
 
 
 func calc_action_point_cost()->int:
-	var total_cost : int
-	if move_path.size() > 0:
-		for point:int in move_path.size()-1:
-			var cost = calc_single_cell_cost(move_path[point],move_path[point+1])
-			total_cost += cost
-			if total_cost > source_char.action_points_current:
-				last_valid_path_point = point
-		return total_cost
-	return 10
-	
-	#if move_path.size() >= 1:
-		#var dist : float = source_char.position.distance_to(move_path[0])
-		#var dist_in_cell_size : float = dist / float(GridProps2D.cellSize.x)
-		#var cost : int = dist_in_cell_size * source_char.base_stats.move_speed
-		#print("Dist: ", dist, " Dist Cell: ", dist_in_cell_size, " Cost: ", cost)
-		#return cost
-	#return 99
+	valid_path.clear()
+	invalid_path.clear()
+	var total_cost : int = 0
+	valid_cell_number = 0
+
+	if move_path.size() < 2:
+		return 0
+		
+	valid_path.append(source_char.position)
+
+	for i in range(move_path.size() - 1):
+		var dest : Vector2 = move_path[i+1]
+		total_cost += calc_single_cell_cost(move_path[i],dest)
+		if total_cost <= source_char.action_points_current:
+			valid_cell_number += 1
+			valid_path.append(dest)
+		else:
+			invalid_path.append(dest)
+	return total_cost
+
+	return 0

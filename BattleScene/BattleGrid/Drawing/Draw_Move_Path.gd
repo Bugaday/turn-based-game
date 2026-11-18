@@ -3,47 +3,41 @@ extends Node2D
 class_name DrawMovePath
 
 #Movement Path
-var points : PackedVector2Array
-var path_source : Vector2
-var point_limit : int = 1
+var draw_points : PackedVector2Array
+var valid_cell_count : int = 0
+var invalid_points : PackedVector2Array
+var moving_char : Character = null
 
 
-func _drawPath(start_source:Vector2,path_points : PackedVector2Array,path_action_point_limit : int = 1):
-	point_limit = path_action_point_limit
-	if path_points.size() > 0:
-		path_source = start_source
-		points = path_points.duplicate()
-		queue_redraw()
+func _drawPath(path:PackedVector2Array,valid_cells:int,unit:Character):
+	valid_cell_count = valid_cells
+	moving_char = unit
+	if path.size() > 0:
+		draw_points = path.duplicate()
+	queue_redraw()
 
 
 func clear_path():
-	points.clear()
+	draw_points.clear()
 	queue_redraw()
 
 
 func _draw() -> void:
-	if points.size() > 0:
-		var point_colour : Color = Color.WHITE_SMOKE
-		
-		for i in len(points)-1:
-			var point = points[i]
-			var nextPoint = points[i+1]
-			if i+1 > point_limit:
+	var point_colour : Color = Color.WHITE_SMOKE
+	if draw_points.size() > 0:
+		for i in range(draw_points.size()-1):
+			if i < valid_cell_count:
+				point_colour = Color.WHITE_SMOKE
+			else:
 				point_colour = Color.RED
-			draw_line(point,nextPoint,point_colour,2.0)
-			#draw_circle(nextPoint,6.0,point_colour)
-		
-		point_colour = Color.WHITE_SMOKE
-	
-		for i in len(points)-1:
-			var point = points[i]
-			var nextPoint = points[i+1]
-			if i+1 > point_limit:
-				point_colour = Color.RED
-			#draw_line(point,nextPoint,point_colour,2.0)
-			draw_circle(nextPoint,6.0,point_colour)
+			draw_line(draw_points[i],draw_points[i+1],point_colour,2.0)
 
-		if 0 >= point_limit:
-			point_colour = Color.RED
-		draw_line(path_source,points[0],point_colour,2.0)
-		draw_circle(points[0],6.0,point_colour)
+		for i in range(draw_points.size()-1):
+			if i < valid_cell_count:
+				point_colour = Color.WHITE_SMOKE
+			else:
+				point_colour = Color.RED
+			draw_circle(draw_points[i+1],6.0,point_colour)
+		
+		draw_line(moving_char.position,draw_points[0],Color.WHITE_SMOKE,2.0)
+		draw_circle(draw_points[0],6.0,Color.WHITE_SMOKE)

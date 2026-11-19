@@ -17,8 +17,8 @@ var mousePos : Vector2
 var choosing_destination : bool = true
 
 
-func _init(src_char:Character,battle_scene:SceneBattle,data:ActionData,b_is_player:bool,destination:Vector2i=Vector2.ZERO) -> void:
-	super(src_char,battle_scene,data,b_is_player)
+func _init(src_char:Character,battle_scene:SceneBattle,_data:ActionData,b_is_player:bool,destination:Vector2i=Vector2.ZERO) -> void:
+	super(src_char,battle_scene,_data,b_is_player)
 	action_name = "Move"
 	action_verb = "Moving"
 	if b_is_player_:
@@ -26,6 +26,7 @@ func _init(src_char:Character,battle_scene:SceneBattle,data:ActionData,b_is_play
 	else:
 		move_path = battle_scene_.path_finder.get_path_from_char(source_char.position,GridService.grid_to_world(destination),true)
 		destination_cell = GridService.world_to_grid(move_path.get(move_path.size()-1))
+	pass
 
 
 func start_action():
@@ -39,8 +40,27 @@ func start_action():
 		execute_action()
 
 
+func _get_score()->float:
+	var enemies_in_range : Array[Character] = battle_scene_.battle_data.ai_registry.unit_blackboards[source_char].get_value("Enemies_in_Range")
+	if enemies_in_range.size() <= 0:
+		var closest_enemy : Character = battle_scene_.battle_data.ai_registry.unit_blackboards[source_char].get_value("Closest_Enemy")
+		var move_pos : Vector2i = GridService.world_to_grid(closest_enemy.position)
+		var move_path : PackedVector2Array = battle_scene_.path_finder.get_path_from_char(source_char.position,closest_enemy.position,true)
+		if move_path.size() > 1:
+			var action_cost : int = ActionCommandMove.calc_single_cell_cost(move_path[0],move_path[1],source_char)
+			if action_cost > source_char.action_points_current:
+				return 0.0
+			else:
+				return 1.0
+		else:
+			return 0.0
+	else:  
+		return 0.0
+
+
 func action_input_confirm():
 	if choosing_destination:
+		#Executes action
 		super()
 
 
@@ -61,11 +81,10 @@ func update_action():
 	battle_scene_.drawing_battle.draw_move_path._drawPath(move_path,valid_cell_number,source_char)
 
 	#This is the super version that uses calc_action_point_cost
-	visualise_action_point_cost(Color.WHITE,move_path.size())
+	show_action_point_cost_text()
 
 
 func end_action():
-	UIBattle.game_log.log(source_char.character_name  + " [color=#4aff44]moved[/color] to " + str(destination_cell))
 	battle_scene_.drawing_battle.draw_move_path.clear_path()
 	battle_scene_.drawing_battle.draw_box.position = source_char.position
 	battle_scene_.drawing_battle.draw_box.visible = true
@@ -74,39 +93,42 @@ func end_action():
 
 #Progress to next waypoint
 func move_to_next_waypoint():
-	source_char.char_last_cell_pos = move_path[0]
-	#Remove the first waypoint that we're standing on, pushing the next into index 0 to move towards
-	move_path.remove_at(0)
 	#If there are no more waypoints, finish the path
-	if move_path.is_empty() or calc_single_cell_cost(source_char.position,move_path[0]) > source_char.action_points_current:
+	if move_path.size() < 2 or calc_single_cell_cost(source_char.position,move_path[1],source_char) > source_char.action_points_current:
 		end_action()
 		return
 	
 	var tween : Tween = source_char.create_tween()
-	var move_distance : float = source_char.position.distance_to(move_path[0])
+	var move_distance : float = move_path[0].distance_to(move_path[1])
 	var move_time = move_distance / GridProps2D.gridSizeX * source_char.base_stats.move_speed
-	tween.tween_property(source_char,"global_position",move_path[0],move_time)
+	tween.tween_property(source_char,"global_position",move_path[1],move_time)
 	tween.finished.connect(section_complete)
 
 
 #A section of path has just completed
 func section_complete():
-	source_char.action_points_current -= calc_single_cell_cost(source_char.char_last_cell_pos,source_char.position)
-	battle_scene_.path_finder.set_cell_free_from_vector2(source_char.char_last_cell_pos)
-	var last_cell : Vector2i = GridService.world_to_grid(source_char.char_last_cell_pos)
+
+	source_char.action_points_current -= calc_single_cell_cost(move_path[0],source_char.position,source_char)
+	battle_scene_.path_finder.set_cell_free_from_vector2(move_path[0])
+	var last_cell : Vector2i = GridService.world_to_grid(move_path[0])
 	battle_scene_.battle_data.grid[last_cell].UnitOccupying = null
 	battle_scene_.path_finder.set_blocked_cell_from_vector2(source_char.position)
 	var current_cell : Vector2i = GridService.world_to_grid(source_char.position)
 	battle_scene_.battle_data.grid[current_cell].UnitOccupying = source_char
+	source_char.char_last_cell_pos = move_path[0]
+	#Remove the waypoint we just came from, pushing the next into index 0 that we're standing on
+	move_path.remove_at(0)
+	if move_path.size() < 2 or calc_single_cell_cost(source_char.position,move_path[1],source_char) > source_char.action_points_current:
+		UIBattle.game_log.log(source_char.character_name  + " [color=#4aff44]moved[/color] to " + str(GridService.world_to_grid(move_path[0])))
 	DebugVis.update_blocked_positions()
 	move_to_next_waypoint()
 
 
-func calc_single_cell_cost(start:Vector2,end:Vector2)->float:
+static func calc_single_cell_cost(start:Vector2,end:Vector2,unit:Character)->float:
 	#This is cost per unit (distance of 1) moved based on move_speed of Character, distance for diagonals, and any other terrain modifiers
 	var dist : float = start.distance_to(end)
 	var dist_in_cell_size : float = dist / float(GridProps2D.cellSize.x)
-	var cost : int = dist_in_cell_size * source_char.base_stats.move_speed
+	var cost : int = dist_in_cell_size * unit.base_stats.move_speed
 	return cost
 
 
@@ -123,7 +145,7 @@ func calc_action_point_cost()->int:
 
 	for i in range(move_path.size() - 1):
 		var dest : Vector2 = move_path[i+1]
-		total_cost += calc_single_cell_cost(move_path[i],dest)
+		total_cost += calc_single_cell_cost(move_path[i],dest,source_char)
 		if total_cost <= source_char.action_points_current:
 			valid_cell_number += 1
 			valid_path.append(dest)

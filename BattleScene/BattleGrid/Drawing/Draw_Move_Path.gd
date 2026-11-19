@@ -30,7 +30,10 @@ func _draw() -> void:
 				point_colour = Color.WHITE_SMOKE
 			else:
 				point_colour = Color.RED
-			draw_line(draw_points[i],draw_points[i+1],point_colour,2.0)
+			var dest : Vector2 = draw_points[i]
+			if i == 0:
+				dest = moving_char.position
+			draw_line(dest,draw_points[i+1],point_colour,2.0)
 
 		for i in range(draw_points.size()-1):
 			if i < valid_cell_count:
@@ -39,5 +42,5 @@ func _draw() -> void:
 				point_colour = Color.RED
 			draw_circle(draw_points[i+1],6.0,point_colour)
 		
-		draw_line(moving_char.position,draw_points[0],Color.WHITE_SMOKE,2.0)
-		draw_circle(draw_points[0],6.0,Color.WHITE_SMOKE)
+		#draw_line(moving_char.position,draw_points[0],Color.WHITE_SMOKE,2.0)
+		#draw_circle(draw_points[0],6.0,Color.WHITE_SMOKE)

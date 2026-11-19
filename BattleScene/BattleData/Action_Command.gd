@@ -49,7 +49,9 @@ func calc_action_point_cost()->int:
 	return 40
 
 
-func visualise_action_point_cost(text_colour:Color=Color.WHITE,action_point_scalar:int=1):
+func show_action_point_cost_text(text_colour:Color=Color.WHITE,action_point_scalar:int=1):
+	if calc_action_point_cost() > source_char.action_points_current:
+		text_colour = Color.RED
 	battle_scene_.drawing_battle.draw_text.draw_text_on_screen(str(calc_action_point_cost()),action_location+Vector2(5,-5),text_colour)
 
 

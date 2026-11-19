@@ -46,7 +46,7 @@ func update_action():
 	if potential_target_list.has(cellData.UnitOccupying):
 		target = cellData.UnitOccupying
 		action_location = target.position
-		visualise_action_point_cost(Color.RED)
+		show_action_point_cost_text(Color.RED)
 	else:
 		battle_scene_.drawing_battle.draw_text.clear_text()
 

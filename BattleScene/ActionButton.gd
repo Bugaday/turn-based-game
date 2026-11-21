@@ -3,7 +3,7 @@ extends Button
 class_name ActionButton
 
 var battle_scene : SceneBattle
-var action_data : ActionData
+var action_ : ActionCommand
 var char_linked : Character
 
 # Called when the node enters the scene tree for the first time.
@@ -13,12 +13,12 @@ func _ready() -> void:
 
 
 func initialise_action_button():
-	if !action_data:
+	if !action_:
 		disabled = true
 		return
 	else:
 		disabled = false
-		text = action_data.action_name
+		text = action_.action_name
 
 
 func clear_action_button():
@@ -27,5 +27,6 @@ func clear_action_button():
 
 
 func _pressed() -> void:
-	var action_ : ActionCommand = action_data.create_command(char_linked,battle_scene,action_data,true)
+	#var action_ : ActionCommand = action_data.create_command(char_linked,battle_scene,action_data,true)
+	action_.on_action_activated(char_linked)
 	battle_scene.command_processor.add_action(action_)

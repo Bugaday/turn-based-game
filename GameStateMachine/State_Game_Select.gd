@@ -24,13 +24,18 @@ func handle_input(_event : InputEvent,battle_scene_script:SceneBattle)->StateGam
 
 func move_command(battle_scene_script:SceneBattle):
 	var unit : Character = battle_scene_script.battle_data.selected_character
-	var move_action : ActionData = unit.action_list[unit.ACTION.MOVE]
-	var command : ActionCommand = move_action.create_command(unit,battle_scene_script,move_action,true)
+	#var move_action : ActionData = unit.action_list[unit.ACTION.MOVE]
+	#var command : ActionCommand = move_action.create_command(unit,battle_scene_script,move_action,true)
+	var command : ActionCommand = battle_scene_script.battle_data.all_character_actions[unit.action_names[BattleData.ACTION_KEY.MOVE]]
+	command.on_action_activated(unit)
 	battle_scene_script.command_processor.add_action(command)
+
 
 
 func attack_command(battle_scene_script:SceneBattle):
 	var unit : Character = battle_scene_script.battle_data.selected_character
-	var attack_action : ActionData = unit.action_list[unit.ACTION.ATTACK]
-	var command : ActionCommand = attack_action.create_command(unit,battle_scene_script,attack_action,true)
+	#var attack_action : ActionData = unit.action_list[unit.ACTION.ATTACK]
+	#var command : ActionCommand = attack_action.create_command(unit,battle_scene_script,attack_action,true)
+	var command : ActionCommand = battle_scene_script.battle_data.all_character_actions[unit.action_names[BattleData.ACTION_KEY.ATTACK]]
+	command.on_action_activated(unit)
 	battle_scene_script.command_processor.add_action(command)

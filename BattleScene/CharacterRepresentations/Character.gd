@@ -19,9 +19,9 @@ var weapon_current : Weapon
 	set(value):
 		action_points_current = value
 		on_stat_changed.emit(self)
-enum ACTION {MOVE,ATTACK}
-@export var actions : Array[ACTION]
-@export var action_list : Dictionary[ACTION,ActionData]
+#enum ACTION {MOVE,ATTACK}
+@export var action_names : Array[BattleData.ACTION_KEY]
+#@export var action_list : Dictionary[ACTION,Resource]
 @export var available_decisions : Array[AIDecision]
 
 
@@ -35,11 +35,11 @@ func _ready() -> void:
 		_setStats()
 
 
-
 func _setStats() -> void:
 	char_sprite.texture = base_stats.sprite
 	health_current = base_stats.health
-	
+
+
 func apply_health_change(amount:int):
 	health_current += amount
 

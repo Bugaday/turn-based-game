@@ -21,7 +21,7 @@ func _draw() -> void:
 func draw_items(validCells:PackedVector2Array,tgts:Array[Character],width:float = 2.0):
 	valid_cells.clear()
 	targets.clear()
-	valid_cells = validCells
-	targets = tgts
+	valid_cells = validCells.duplicate()
+	targets = tgts.duplicate()
 	line_width = width
 	queue_redraw()

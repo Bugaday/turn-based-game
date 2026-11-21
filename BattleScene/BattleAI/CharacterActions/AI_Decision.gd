@@ -3,6 +3,9 @@ extends Resource
 
 class_name AIDecision
 
-@abstract func _get_action(unit:Character,battle_scene:SceneBattle)->ActionCommand
+@abstract func get_action(unit:Character,battle_scene:SceneBattle)->ActionCommand
 
-@abstract func _get_score(_unit:Character,battle_scene:SceneBattle) -> float
+@abstract func get_score(_unit:Character,battle_scene:SceneBattle) -> float
+
+func get_action_points_required(_unit:Character,battle_scene:SceneBattle)->int:
+	return get_action(_unit,battle_scene).calc_action_point_cost()

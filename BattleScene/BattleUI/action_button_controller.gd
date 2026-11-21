@@ -17,9 +17,9 @@ func update_button_set(unit:Character,battle_scene:SceneBattle):
 		return
 	for button in buttons:
 		button.clear_action_button()
-	for i in unit.action_list.size():
+	for i in unit.action_names.size():
 		#var action_keys : Array[String] = unit.action_list.keys()
-		buttons[i].action_data = unit.action_list[unit.actions[i]]
+		buttons[i].action_ = battle_scene.battle_data.all_character_actions[unit.action_names[i]]
 		buttons[i].battle_scene = battle_scene
 		buttons[i].char_linked = unit
 		buttons[i].initialise_action_button()

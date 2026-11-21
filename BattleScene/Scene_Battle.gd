@@ -32,6 +32,8 @@ func _ready() -> void:
 	for c in battle_data.all_characters:
 		var card : UIUnitCardMini = ui_battle.ui_unit_cards.ui_unit_mini_cards_group.get_card_by_character(c)
 		card.card_character_hovered.connect(mini_card_hovered)
+	for action in battle_data.all_character_actions:
+		battle_data.all_character_actions[action].battle_scene_ = self
 
 	#Dependency injection
 	#ui_battle.button
@@ -133,7 +135,8 @@ func start_new_ai_action():
 		print("No actions available for: ",battle_data.active_character.character_name)
 		finish_ai_unit_turn()
 	else:
-		var action_chosen = decision_chosen._get_action(battle_data.active_character,self)
+		var action_chosen = decision_chosen.get_action(battle_data.active_character,self)
+		action_chosen.on_action_activated(battle_data.active_character)
 		command_processor.add_action(action_chosen)
 
 

@@ -6,8 +6,7 @@ var potential_target_list : Array[Character]
 var cells_in_range : Array[Vector2i]
 var target : Character
 
-func _init(src_char:Character,battle_scene:SceneBattle,_data:ActionData,b_is_player:bool) -> void:
-	super(src_char,battle_scene,_data,b_is_player)
+func _init() -> void:
 	action_name = "Attack"
 	action_verb = "Attacking"
 
@@ -44,8 +43,9 @@ func update_action():
 	var mouseCellPos = GridService.world_to_grid(battle_scene_.get_global_mouse_position())
 	var cellData : GridCellData = GridService.get_cell_data_at_pos(mouseCellPos,battle_scene_.battle_data.grid)
 	if potential_target_list.has(cellData.UnitOccupying):
+		#print("This is a target cell!")
 		target = cellData.UnitOccupying
-		action_location = target.position
+		action_location_ = target.position
 		show_action_point_cost_text(Color.RED)
 	else:
 		battle_scene_.drawing_battle.draw_text.clear_text()
@@ -53,13 +53,14 @@ func update_action():
 
 func end_action():
 	print("Ending attack action")
-	super()
 	potential_target_list.clear()
 	cells_in_range.clear()
 	battle_scene_.drawing_battle.draw_action.draw_items(cells_in_range,potential_target_list)
+	super()
 
 
 func get_viable_targets():
+	print("Running Get Viable Targets")
 	potential_target_list.clear()
 	cells_in_range.clear()
 	
@@ -68,6 +69,8 @@ func get_viable_targets():
 	for i:int in range(-1,2):
 		for j:int in range(-1,2):
 			var cell : Vector2i = Vector2i(char_cell.x+i,char_cell.y+j)
+			#If this cell is the one the character is standing on, or it is out of bounds
+			#then go straight to the next iteration of the loop, as this is an invalid cell
 			if cell == char_cell or !battle_scene_.battle_data.grid.has(cell):
 				continue
 			cells_in_range.append(Vector2(cell))
@@ -80,4 +83,5 @@ func get_viable_targets():
 			if unit:
 				if unit.faction != source_char.faction:
 					potential_target_list.append(unit)
+					print("Found a unit to attack!")
 	battle_scene_.drawing_battle.draw_action.draw_items(cells_in_range,potential_target_list)

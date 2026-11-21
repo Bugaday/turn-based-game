@@ -3,12 +3,12 @@ extends ActionCommand
 class_name ActionCommandMove
 
 var move_path : PackedVector2Array
-var valid_path : PackedVector2Array
-var invalid_path : PackedVector2Array
-
+#var valid_path : PackedVector2Array
+#var invalid_path : PackedVector2Array
+var move_speed_modifier : float = 3.0
 
 #This is the desired destination, regardless of action points available
-var destination_cell : Vector2i
+#var destination_cell : Vector2i
 #This is the actual destination index of the path reached ..
 #.. before we run out of action points
 var valid_cell_number : int = 0
@@ -17,15 +17,19 @@ var mousePos : Vector2
 var choosing_destination : bool = true
 
 
-func _init(src_char:Character,battle_scene:SceneBattle,_data:ActionData,b_is_player:bool,destination:Vector2i=Vector2.ZERO) -> void:
-	super(src_char,battle_scene,_data,b_is_player)
+func _init() -> void:
 	action_name = "Move"
 	action_verb = "Moving"
+
+#When choosing an action via either the player, or AI
+func on_action_activated(unit:Character):
+	super(unit)
+	choosing_destination = true
 	if b_is_player_:
 		move_path = battle_scene_.path_finder.get_path_from_char(source_char.position,battle_scene_.get_global_mouse_position(),true)
 	else:
-		move_path = battle_scene_.path_finder.get_path_from_char(source_char.position,GridService.grid_to_world(destination),true)
-		destination_cell = GridService.world_to_grid(move_path.get(move_path.size()-1))
+		move_path = battle_scene_.path_finder.get_path_from_char(source_char.position,action_location_,true)
+		#destination_cell = GridService.world_to_grid(move_path.get(move_path.size()-1))
 	pass
 
 
@@ -40,7 +44,7 @@ func start_action():
 		execute_action()
 
 
-func _get_score()->float:
+func get_score()->float:
 	var enemies_in_range : Array[Character] = battle_scene_.battle_data.ai_registry.unit_blackboards[source_char].get_value("Enemies_in_Range")
 	if enemies_in_range.size() <= 0:
 		var closest_enemy : Character = battle_scene_.battle_data.ai_registry.unit_blackboards[source_char].get_value("Closest_Enemy")
@@ -77,7 +81,7 @@ func update_action():
 		move_path = battle_scene_.path_finder.get_path_from_char(source_char.position,battle_scene_.get_global_mouse_position(),true)
 		calc_action_point_cost()
 	#Need to check if we have a path here?
-	action_location = move_path[move_path.size()-1]
+	action_location_ = move_path[move_path.size()-1]
 	battle_scene_.drawing_battle.draw_move_path._drawPath(move_path,valid_cell_number,source_char)
 
 	#This is the super version that uses calc_action_point_cost
@@ -85,6 +89,7 @@ func update_action():
 
 
 func end_action():
+	#choosing_destination = true
 	battle_scene_.drawing_battle.draw_move_path.clear_path()
 	battle_scene_.drawing_battle.draw_box.position = source_char.position
 	battle_scene_.drawing_battle.draw_box.visible = true
@@ -100,14 +105,13 @@ func move_to_next_waypoint():
 	
 	var tween : Tween = source_char.create_tween()
 	var move_distance : float = move_path[0].distance_to(move_path[1])
-	var move_time = move_distance / GridProps2D.gridSizeX * source_char.base_stats.move_speed
+	var move_time = move_distance / GridProps2D.gridSizeX * source_char.base_stats.move_speed * (1.0 / move_speed_modifier)
 	tween.tween_property(source_char,"global_position",move_path[1],move_time)
 	tween.finished.connect(section_complete)
 
 
 #A section of path has just completed
 func section_complete():
-
 	source_char.action_points_current -= calc_single_cell_cost(move_path[0],source_char.position,source_char)
 	battle_scene_.path_finder.set_cell_free_from_vector2(move_path[0])
 	var last_cell : Vector2i = GridService.world_to_grid(move_path[0])
@@ -133,24 +137,24 @@ static func calc_single_cell_cost(start:Vector2,end:Vector2,unit:Character)->flo
 
 
 func calc_action_point_cost()->int:
-	valid_path.clear()
-	invalid_path.clear()
+	#valid_path.clear()
+	#invalid_path.clear()
 	var total_cost : int = 0
 	valid_cell_number = 0
 
 	if move_path.size() < 2:
 		return 0
 		
-	valid_path.append(source_char.position)
+	#valid_path.append(source_char.position)
 
 	for i in range(move_path.size() - 1):
 		var dest : Vector2 = move_path[i+1]
 		total_cost += calc_single_cell_cost(move_path[i],dest,source_char)
 		if total_cost <= source_char.action_points_current:
 			valid_cell_number += 1
-			valid_path.append(dest)
+			#valid_path.append(dest)
 		else:
-			invalid_path.append(dest)
+			return total_cost
 	return total_cost
 
 	return 0

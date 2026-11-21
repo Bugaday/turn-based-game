@@ -1,4 +1,4 @@
-extends Node2D
+extends Resource
 
 class_name ActionCommand
 
@@ -6,16 +6,18 @@ signal action_finished()
 
 var action_name : String = "Unnamed Action"
 var action_verb : String
-var action_location : Vector2
+var action_location_ : Vector2
 var source_char : Character
 var b_is_player_ : bool = false
 var battle_scene_ : SceneBattle
 
 
-func _init(src_char:Character,battle_scene:SceneBattle,_data:ActionData,b_is_player:bool) -> void:
-	source_char = src_char
-	battle_scene_ = battle_scene
-	b_is_player_ = b_is_player
+func on_action_activated(unit:Character):
+	source_char = unit
+	if unit.faction == "Player":
+		b_is_player_ = true
+	else:
+		b_is_player_ = false
 
 
 func start_action():
@@ -52,7 +54,7 @@ func calc_action_point_cost()->int:
 func show_action_point_cost_text(text_colour:Color=Color.WHITE,action_point_scalar:int=1):
 	if calc_action_point_cost() > source_char.action_points_current:
 		text_colour = Color.RED
-	battle_scene_.drawing_battle.draw_text.draw_text_on_screen(str(calc_action_point_cost()),action_location+Vector2(5,-5),text_colour)
+	battle_scene_.drawing_battle.draw_text.draw_text_on_screen(str(calc_action_point_cost()),action_location_+Vector2(5,-5),text_colour)
 
 
 func log_action_verb():

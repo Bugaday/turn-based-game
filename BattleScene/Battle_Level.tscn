@@ -3,8 +3,11 @@
 [ext_resource type="TileSet" uid="uid://uf68vmgahhy8" path="res://BattleScene/BattleGrid/BattleEnvironment/BattleTileSets/new_tile_set.tres" id="1_0r1ij"]
 [ext_resource type="Script" uid="uid://b266d3rmygp2g" path="res://BattleScene/Scene_Battle.gd" id="2_saywf"]
 [ext_resource type="Script" uid="uid://8q86ld088lto" path="res://BattleScene/BattleCamera/Camera_2D.gd" id="3_1a458"]
+[ext_resource type="Script" uid="uid://x12gykobdspr" path="res://BattleScene/BattleData/Action_Command.gd" id="3_udycp"]
 [ext_resource type="Script" uid="uid://coh5p3imqmxic" path="res://BattleScene/BattleAI/CharacterActions/AI_Decision_Maker.gd" id="4_5tsxv"]
+[ext_resource type="Script" uid="uid://q5crdixh6b87" path="res://BattleScene/BattleData/Action_Command_Move.gd" id="4_o2vke"]
 [ext_resource type="Script" uid="uid://cnjmrmric06ny" path="res://BattleScene/BattleGrid/Pathfinding/Pathfinder2D.gd" id="4_pgmky"]
+[ext_resource type="Script" uid="uid://d36h7ciaeberg" path="res://BattleScene/BattleData/Action_Command_Attack.gd" id="5_xwcth"]
 [ext_resource type="PackedScene" uid="uid://h52sgpw0xgx3" path="res://BattleScene/Drawing_Battle.tscn" id="7_p58h3"]
 [ext_resource type="Script" uid="uid://u8abbnqnmas6" path="res://BattleScene/Battle_Data.gd" id="8_65vi3"]
 [ext_resource type="Resource" uid="uid://ctbpko7qk6t0s" path="res://BattleScene/BattleData/Battle_Spawner_Default.tres" id="9_65vi3"]
@@ -13,6 +16,14 @@
 [ext_resource type="Script" uid="uid://bxd7pf7u4hqrd" path="res://static_test.gd" id="13_hjj05"]
 [ext_resource type="PackedScene" uid="uid://dnb7vlopx80d" path="res://BattleScene/BattleUI/UI_Battle.tscn" id="19_winyt"]
 [ext_resource type="Script" uid="uid://dulbfwuva74yp" path="res://GameStateMachine/Game_State_Machine.gd" id="20_65vi3"]
+
+[sub_resource type="Resource" id="Resource_winyt"]
+script = ExtResource("4_o2vke")
+metadata/_custom_type_script = "uid://q5crdixh6b87"
+
+[sub_resource type="Resource" id="Resource_65vi3"]
+script = ExtResource("5_xwcth")
+metadata/_custom_type_script = "uid://d36h7ciaeberg"
 
 [node name="BattleLevel" type="Node2D" unique_id=1879491861 node_paths=PackedStringArray("battle_data", "path_finder", "drawing_battle", "ui_battle", "command_processor") groups=["SceneGame"]]
 script = ExtResource("2_saywf")
@@ -25,6 +36,10 @@ command_processor = NodePath("CommandProcessor")
 [node name="BattleData" type="Node" parent="." unique_id=304589 node_paths=PackedStringArray("tilemap")]
 unique_name_in_owner = true
 script = ExtResource("8_65vi3")
+all_character_actions = Dictionary[int, ExtResource("3_udycp")]({
+0: SubResource("Resource_winyt"),
+1: SubResource("Resource_65vi3")
+})
 tilemap = NodePath("../BattleTileMap")
 battle_spawner = ExtResource("9_65vi3")
 metadata/_custom_type_script = "uid://u8abbnqnmas6"

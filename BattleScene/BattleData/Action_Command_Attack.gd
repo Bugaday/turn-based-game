@@ -43,16 +43,14 @@ func update_action():
 	var mouseCellPos = GridService.world_to_grid(battle_scene_.get_global_mouse_position())
 	var cellData : GridCellData = GridService.get_cell_data_at_pos(mouseCellPos,battle_scene_.battle_data.grid)
 	if potential_target_list.has(cellData.UnitOccupying):
-		#print("This is a target cell!")
 		target = cellData.UnitOccupying
 		action_location_ = target.position
-		show_action_point_cost_text(Color.RED)
+		show_action_point_cost_text()
 	else:
 		battle_scene_.drawing_battle.draw_text.clear_text()
 
 
 func end_action():
-	print("Ending attack action")
 	potential_target_list.clear()
 	cells_in_range.clear()
 	battle_scene_.drawing_battle.draw_action.draw_items(cells_in_range,potential_target_list)
@@ -60,7 +58,6 @@ func end_action():
 
 
 func get_viable_targets():
-	print("Running Get Viable Targets")
 	potential_target_list.clear()
 	cells_in_range.clear()
 	
@@ -83,5 +80,4 @@ func get_viable_targets():
 			if unit:
 				if unit.faction != source_char.faction:
 					potential_target_list.append(unit)
-					print("Found a unit to attack!")
 	battle_scene_.drawing_battle.draw_action.draw_items(cells_in_range,potential_target_list)

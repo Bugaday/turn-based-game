@@ -49,4 +49,4 @@ func check_health():
 		die()
 		
 func die():
-	print("Character has died!")
+	pass

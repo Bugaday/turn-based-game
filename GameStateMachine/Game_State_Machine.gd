@@ -35,5 +35,4 @@ func change_state(newState : StateGame):
 	var hex_colour : String = string_colour.to_html()
 	UIBattle.game_log.log("[color=#"+hex_colour+"]Changing state to " + current_state.state_name + "[/color]")
 	newState.on_state_finished.connect(change_state,CONNECT_ONE_SHOT)
-	#print("Changing to state: ", newState.get_script().get_global_name())
 	current_state._enter_state(scene_battle)

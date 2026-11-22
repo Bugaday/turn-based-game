@@ -23,7 +23,7 @@ func on_action_activated(unit:Character):
 func start_action():
 	var className : String = get_script().get_global_name()
 	var log_string : String = "Starting action: " + className
-	#print(log_string)
+	#log_string)
 
 
 func update_action():
@@ -37,7 +37,6 @@ func action_input_confirm():
 func execute_action():
 	var className:String = get_script().get_global_name()
 	var log_string : String = source_char.character_name  + " is executing action: " + className + " with " + str(source_char.action_points_current) + " action points left."
-	print(log_string)
 	source_char.action_points_current -= calc_action_point_cost()
 
 
@@ -51,7 +50,7 @@ func calc_action_point_cost()->int:
 	return 40
 
 
-func show_action_point_cost_text(text_colour:Color=Color.WHITE,action_point_scalar:int=1):
+func show_action_point_cost_text(text_colour:Color=Color.WHITE):
 	if calc_action_point_cost() > source_char.action_points_current:
 		text_colour = Color.RED
 	battle_scene_.drawing_battle.draw_text.draw_text_on_screen(str(calc_action_point_cost()),action_location_+Vector2(5,-5),text_colour)

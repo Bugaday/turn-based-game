@@ -32,7 +32,6 @@ static func get_cell_data_at_pos(pos:Vector2i,grid:Dictionary[Vector2i,GridCellD
 		var cell_data : GridCellData = grid[pos]
 		return cell_data
 	else:
-		print("No grid cell at: ",pos,"!")
 		return null
 
 	

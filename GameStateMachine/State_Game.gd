@@ -14,7 +14,7 @@ func handle_input(_event : InputEvent,_battle_scene_script:SceneBattle)->StateGa
 	return null
 
 
-func Update(_delta: float,battle_scene:SceneBattle) -> void:
+func Update(_delta: float,_battle_scene:SceneBattle) -> void:
 	pass
 
 

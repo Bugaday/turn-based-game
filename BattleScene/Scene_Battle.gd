@@ -48,7 +48,7 @@ func character_spawned(unit:Character):
 func mini_card_hovered(unit:Character):
 	#drawing_battle.cursor.visible = true
 	#drawing_battle.cursor.position = GridService.snap_pos_to_grid(unit.position)
-	print("Card hovered")
+	pass
 
 
 func CreateGrid():
@@ -90,7 +90,6 @@ func update_unit_ui(value_name:String,value):
 
 
 func end_turn():
-	print("Turn ended")
 	faction_turn_finished()
 
 
@@ -108,21 +107,14 @@ func faction_turn_finished():
 func start_faction_turn():
 	battle_data.active_faction_index = (battle_data.active_faction_index + 1) % battle_data.factions_in_battle.size()
 	ui_battle.turn_text.text = BattleData.active_faction + " Turn"
-	print("New Faction's turn: ",battle_data.active_faction)
-	if battle_data.active_faction == "Player":
-		print("Player's turn!")
-	else:
-		print("AI's turn!")
-		#battle_data.active_factions_units[battle_data.active_faction] = ai_registry.get_faction_units(battle_data.factions_in_battle[battle_data.active_faction_index])
+	if battle_data.active_faction != "Player":
 		start_ai_unit_turn()
 
 
 #Starts an AI Character from the beginning of their turn
 func start_ai_unit_turn():
-	print("Starting AI unit's turn")
 	#Set the Active AI Character
 	battle_data.active_character = battle_data.active_factions_units[battle_data.active_faction][battle_data.active_ai_char_index]
-	print("Active AI NPC is: ",battle_data.active_character.character_name,": ",battle_data.active_character)
 	start_new_ai_action()
 
 
@@ -132,7 +124,6 @@ func start_new_ai_action():
 	battle_data.ai_registry.update_unit_blackboards()
 	var decision_chosen : AIDecision = AIDecisionMaker.make_decision(battle_data.active_character,self)
 	if decision_chosen == null:
-		print("No actions available for: ",battle_data.active_character.character_name)
 		finish_ai_unit_turn()
 	else:
 		var action_chosen = decision_chosen.get_action(battle_data.active_character,self)
@@ -142,7 +133,6 @@ func start_new_ai_action():
 
 func command_queue_finished():
 	if battle_data.active_faction != "Player":
-		print("Command queue finished!")
 		start_new_ai_action()
 
 

@@ -11,7 +11,7 @@ region = Rect2(256, 0, 64, 64)
 [resource]
 script = ExtResource("1_ti8bi")
 unit_name = "Rogue"
-stamina = 15
+stamina = 7
 strength = 15
 agility = 100.0
 sprite = SubResource("AtlasTexture_e2usl")

@@ -27,7 +27,7 @@ func update_all_values(unit:Character):
 
 
 func _pressed() -> void:
-	print("Mini card pressed!")
+	pass
 	#on_mini_portrait_pressed.emit(character_linked,self)
 
 

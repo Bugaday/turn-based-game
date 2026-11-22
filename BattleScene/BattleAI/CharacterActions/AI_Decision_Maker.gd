@@ -12,11 +12,12 @@ static func make_decision(unit:Character,battle_scene:SceneBattle) -> AIDecision
 	for decision in unit.available_decisions:
 		if decision:
 			if decision.get_action_points_required(unit,battle_scene) > unit.action_points_current:
-				UIBattle.game_log.log("Unit does not have enough action points!")
+				var className : String = decision.get_script().get_global_name()
+				UIBattle.game_log.log(unit.character_name + " does not have enough action points in " + className)
 				decision_scores[decision] = 0.0
 			else:
 				decision_scores[decision] = decision.get_score(unit,battle_scene)
-	UIBattle.game_log.log("Score is: " + str(get_highest_scoring_action(decision_scores)))
+	#UIBattle.game_log.log("Score is: " + str(get_highest_scoring_action(decision_scores)))
 	return get_highest_scoring_action(decision_scores)
 
 

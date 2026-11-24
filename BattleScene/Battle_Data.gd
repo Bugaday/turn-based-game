@@ -10,7 +10,7 @@ enum ACTION_KEY {MOVE,ATTACK}
 @export var tilemap:TileMapLayer
 @export var battle_spawner : Spawner = Spawner.new()
 
-signal on_character_hovered(unit:Character,bIsHovered:bool)
+signal on_character_hovered(unit:Character)
 signal on_character_unhovered()
 signal on_active_character_changed(unit:Character)
 
@@ -25,7 +25,7 @@ var hovered_character : Character:
 			on_character_unhovered.emit()
 		elif value != null and value != hovered_character:
 			on_character_unhovered.emit()
-			on_character_hovered.emit(value,true)
+			on_character_hovered.emit(value)
 		hovered_character = value
 
 var active_ai_char_index : int
@@ -43,7 +43,7 @@ var global_blackboard : AIBlackboard = AIBlackboard.new()
 var ai_registry : AIRegistry = AIRegistry.new(global_blackboard)
 
 
-func setup(pathfinder:Pathfinder2D,ui:UIBattle) -> void:
+func setup(pathfinder:Pathfinder2D) -> void:
 	
 	factions_in_battle = battle_spawner.factions
 	#AI Registry version for  factions

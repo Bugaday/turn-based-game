@@ -19,9 +19,7 @@ var weapon_current : Weapon
 	set(value):
 		action_points_current = value
 		on_stat_changed.emit(self)
-#enum ACTION {MOVE,ATTACK}
 @export var action_names : Array[BattleData.ACTION_KEY]
-#@export var action_list : Dictionary[ACTION,Resource]
 @export var available_decisions : Array[AIDecision]
 
 
@@ -47,6 +45,7 @@ func apply_health_change(amount:int):
 func check_health():
 	if health_current <= 0:
 		die()
-		
+
+
 func die():
-	pass
+	char_sprite.texture = base_stats.death_sprite

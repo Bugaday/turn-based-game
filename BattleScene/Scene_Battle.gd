@@ -22,33 +22,20 @@ func _ready() -> void:
 	#Signal connections
 	command_processor.on_command_queue_finished.connect(command_queue_finished)
 	battle_data.on_active_character_changed.connect(ui_battle.on_active_character_changed)
-	#ai_decision_maker.all_actions_finished.connect(finish_ai_unit_turn)
 
 	CreateGrid()
 	battle_data.battle_spawner.new_character_spawned.connect(character_spawned)
-	battle_data.setup(path_finder,ui_battle)
+	battle_data.setup(path_finder)
 	battle_data.on_character_hovered.connect(ui_battle.on_character_hovered)
 	battle_data.on_character_unhovered.connect(ui_battle.on_character_unhovered)
-	for c in battle_data.all_characters:
-		var card : UIUnitCardMini = ui_battle.ui_unit_cards.ui_unit_mini_cards_group.get_card_by_character(c)
-		card.card_character_hovered.connect(mini_card_hovered)
 	for action in battle_data.all_character_actions:
 		battle_data.all_character_actions[action].battle_scene_ = self
-
-	#Dependency injection
-	#ui_battle.button
 
 	DebugVis.update_blocked_positions()
 
 	
 func character_spawned(unit:Character):
-	ui_battle.on_character_spawned(unit,self)
-
-
-func mini_card_hovered(unit:Character):
-	#drawing_battle.cursor.visible = true
-	#drawing_battle.cursor.position = GridService.snap_pos_to_grid(unit.position)
-	pass
+	ui_battle.on_character_spawned(unit)
 
 
 func CreateGrid():
@@ -82,7 +69,6 @@ func select_character(unit:Character):
 	ui_battle.on_character_selected(unit,self)
 	drawing_battle.draw_box.visible = true
 	drawing_battle.draw_box.position = unit.position
-	StaticTest.do_static_things(battle_data.selected_character)
 
 
 func update_unit_ui(value_name:String,value):

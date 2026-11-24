@@ -36,7 +36,6 @@ func _draw() -> void:
 			draw_rect(block_box,box_colour,filled)
 		for pos:Vector2i in occupied_boxes:
 			var occupied_pos : Vector2 = GridService.grid_to_world(pos)
-			#position -= Vector2(32,32)
 			draw_circle(occupied_pos,12.0,Color.YELLOW,false,2.0,true)
 
 

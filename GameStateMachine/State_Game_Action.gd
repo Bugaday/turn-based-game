@@ -25,6 +25,5 @@ func handle_input(_event : InputEvent,_battle_scene_script:SceneBattle)->StateGa
 		UIBattle.game_log.log("Confirming Action")
 	elif _event.is_action_released("Cancel"):
 		action_.end_action()
-		#return StateGameSelect.new()
 
 	return null

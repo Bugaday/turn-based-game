@@ -3,6 +3,8 @@ extends Resource
 
 class_name AIDecision
 
+var considerations : Array
+
 @abstract func get_action(unit:Character,battle_scene:SceneBattle)->ActionCommand
 
 @abstract func get_score(_unit:Character,battle_scene:SceneBattle) -> float

@@ -2,11 +2,8 @@ extends Node
 
 class_name AIDecisionMaker
 
-signal all_actions_finished()
 
 static func make_decision(unit:Character,battle_scene:SceneBattle) -> AIDecision:
-	#if !can_make_more_decisions(unit):
-		#return null
 	var decision_scores : Dictionary[AIDecision,float]
 	#Set scores in dictionary
 	for decision in unit.available_decisions:
@@ -35,9 +32,3 @@ static func get_highest_scoring_action(decision_scores : Dictionary[AIDecision,f
 		return null
 	else:
 		return highest_scoring_decision
-
-
-#static func can_make_more_decisions(unit:Character)->bool:
-	#if unit.action_points_current <= 0:
-		#return false
-	#return true

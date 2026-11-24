@@ -13,7 +13,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 	
 static func do_static_things(unit:Character):
@@ -24,4 +24,3 @@ static func do_static_things(unit:Character):
 func do_things():
 	normal_char = Character.new()
 	print(normal_char.test_int)
-	

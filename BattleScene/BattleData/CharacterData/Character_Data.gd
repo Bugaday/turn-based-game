@@ -3,15 +3,19 @@ extends Resource
 class_name CharacterData
 
 @export var unit_name : String = "Generic Unit";
-#@export var faction_id : String
 @export var stamina : int = 10
 @export var strength : int = 25
 @export var agility : float = 70
 @export var sprite: AtlasTexture
+@export var death_sprite : Texture2D = preload("res://BattleScene/BattleGrid/BattleEnvironment/BattleTileSets/death-skull.png")
 @export var class_weapon : Weapon = preload("res://Weapons/Weapon_Unarmed.tres")
 
 var extra_actions : Array[ActionCommand]
 var action_points_max : int = 100
+
+
+#func _init() -> void:
+	#death_sprite.atlas = preload("res://BattleScene/BattleGrid/BattleEnvironment/BattleTileSets/death-skull.png")
 
 
 #Offensive stats

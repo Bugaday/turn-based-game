@@ -6,7 +6,7 @@ extends Control
 var unit_selection_cards : Dictionary[Character,UIUnitCardMini] = {}
 var mini_card_scene : PackedScene = load("res://BattleScene/BattleUI/UnitInfo/UI_Unit_Card_Mini.tscn")
 
-func add_card(unit:Character,battle_scene:SceneBattle):
+func add_card(unit:Character):
 	var new_mini_card : UIUnitCardMini = mini_card_scene.instantiate()
 	if unit.faction == "Player":
 		ui_unit_mini_cards_group_player.add_child(new_mini_card)
@@ -15,7 +15,6 @@ func add_card(unit:Character,battle_scene:SceneBattle):
 	unit_selection_cards.set(unit,new_mini_card)
 	update_single_card(unit,new_mini_card)
 	new_mini_card.character_linked = unit
-	new_mini_card.on_card_hovered.connect(battle_scene.mini_card_hovered)
 	unit.on_stat_changed.connect(new_mini_card.update_all_values)
 
 
@@ -35,7 +34,7 @@ func unhover_all_mini_cards():
 func mini_card_select(card_selected:UIUnitCardMini):
 	var current_stylebox : StyleBox = card_selected.get_theme_stylebox("normal")
 	var new_borderless_stylebox : StyleBoxFlat = current_stylebox.duplicate()
-	new_borderless_stylebox.set_border_width_all(0.0)
+	new_borderless_stylebox.set_border_width_all(0)
 	for card : UIUnitCardMini in ui_unit_mini_cards_group_player.get_children():
 		if current_stylebox is StyleBoxFlat:
 			card.add_theme_stylebox_override("normal",new_borderless_stylebox)

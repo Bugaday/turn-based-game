@@ -21,9 +21,7 @@ func on_action_activated(unit:Character):
 
 
 func start_action():
-	var className : String = get_script().get_global_name()
-	var log_string : String = "Starting action: " + className
-	#log_string)
+	pass
 
 
 func update_action():
@@ -35,13 +33,10 @@ func action_input_confirm():
 
 
 func execute_action():
-	var className:String = get_script().get_global_name()
-	var log_string : String = source_char.character_name  + " is executing action: " + className + " with " + str(source_char.action_points_current) + " action points left."
 	source_char.action_points_current -= calc_action_point_cost()
 
 
 func end_action():
-	var className:String = get_script().get_global_name()
 	battle_scene_.drawing_battle.draw_text.clear_text()
 	action_finished.emit()
 

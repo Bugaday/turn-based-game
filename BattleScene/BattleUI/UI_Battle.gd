@@ -26,14 +26,13 @@ func clear_log():
 func on_character_selected(unit:Character,battle_scene:SceneBattle):
 	ui_unit_cards.update_selected_character(unit)
 	action_button_controller.update_button_set(unit,battle_scene)
-	#ui_unit_cards._update_all_labels(unit)
 
 
-func on_character_hovered(unit:Character,bIsHovered:bool):
+func on_character_hovered(unit:Character):
 	ui_unit_cards.activate_unit_hover_card(unit)
 	var mini_card : UIUnitCardMini = ui_unit_cards.ui_unit_mini_cards_group.get_card_by_character(unit)
 	mini_card.card_hovered()
-	
+
  
 func on_character_unhovered():
 	ui_unit_cards.deactivate_unit_hover_card()
@@ -46,8 +45,8 @@ func on_active_character_changed(unit:Character):
 	active_unit_name.text = unit.character_name
 
 
-func on_character_spawned(unit:Character,battle_scene:SceneBattle):
-	ui_unit_cards.add_new_character(unit,battle_scene)
+func on_character_spawned(unit:Character):
+	ui_unit_cards.add_new_character(unit)
 
 
 func spawn_floating_text(text,pos:Vector2,parent:Node2D):

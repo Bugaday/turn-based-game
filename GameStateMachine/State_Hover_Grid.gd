@@ -2,7 +2,7 @@ extends StateHover
 
 class_name StateHoverGrid
 
-func _enter_state(_battle_scene_script:SceneBattle,drawing:Drawing,ui_battle:UIBattle):
+func _enter_state(_battle_scene_script:SceneBattle,drawing:Drawing,_ui_battle:UIBattle):
 	drawing.cursor.visible = true
 
 
@@ -13,7 +13,6 @@ func Update(_delta: float,battle_scene:SceneBattle,drawing:Drawing,ui_battle:UIB
 		drawing.cursor.position = GridService.snap_pos_to_grid(battle_scene.get_global_mouse_position())
 		if cell_data.UnitOccupying:
 			ui_battle.ui_unit_cards.activate_unit_hover_card(cell_data.UnitOccupying)
-			cell_data.UnitOccupying
 		else:
 			ui_battle.ui_unit_cards.deactivate_unit_hover_card()
 	else:

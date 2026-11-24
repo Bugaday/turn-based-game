@@ -6,11 +6,7 @@ extends UIUnitCard
 @export var mini_card_button : Button
 var character_linked : Character
 
-signal on_mini_portrait_pressed(unit:Character,card:UIUnitCardMini)
 signal card_character_hovered(unit:Character)
-
-signal on_card_hovered(unit:Character)
-signal on_card_unhovered(unit:Character)
 
 func _ready() -> void:
 	mini_card_button.pressed.connect(_pressed)
@@ -28,7 +24,6 @@ func update_all_values(unit:Character):
 
 func _pressed() -> void:
 	pass
-	#on_mini_portrait_pressed.emit(character_linked,self)
 
 
 func character_hovered_in_world():

@@ -3,7 +3,7 @@ extends Resource
 
 class_name AIDecision
 
-var considerations : Array
+var considerations : Array[float]
 
 @abstract func get_action(unit:Character,battle_scene:SceneBattle)->ActionCommand
 

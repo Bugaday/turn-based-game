@@ -29,6 +29,7 @@ static func get_highest_scoring_action(decision_scores : Dictionary[AIDecision,f
 	#If the highest score is 0, that means that no decisions can be performed
 	#due to, for example, no path to target, no viable targets, insufficient action points etc.
 	if highest_value <= 0.0:
+		print("All decisions have scored 0.0!")
 		return null
 	else:
 		return highest_scoring_decision

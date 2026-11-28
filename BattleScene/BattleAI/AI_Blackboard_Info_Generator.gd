@@ -14,7 +14,7 @@ static func get_all_enemy_characters(unit:Character,ai_registry:AIRegistry)->Arr
 
 static func enemies_in_range(unit:Character,ai_registry:AIRegistry)->Array[Character]:
 	var enemiesInRange : Array[Character]
-	for enemy : Character in ai_registry.unit_blackboards[unit].get_value("Enemies"):
+	for enemy : Character in enemiesInRange:
 		var unit_grid_pos : Vector2i = GridService.world_to_grid(unit.position)
 		var enemy_grid_pos : Vector2i = GridService.world_to_grid(enemy.position)
 		if enemy_grid_pos.distance_to(unit_grid_pos) <= float(unit.base_stats.class_weapon.weapon_range):
@@ -23,7 +23,7 @@ static func enemies_in_range(unit:Character,ai_registry:AIRegistry)->Array[Chara
 
 
 static func get_closest_enemy(unit:Character,ai_registry:AIRegistry)->Character:
-	var enemiesInRange : Array[Character] = ai_registry.unit_blackboards[unit].get_value("Enemies")
+	var enemiesInRange : Array[Character] = get_all_enemy_characters(unit,ai_registry)
 	if enemiesInRange.size() <= 0:
 		return
 	var closest_enemy : Character = enemiesInRange[0]

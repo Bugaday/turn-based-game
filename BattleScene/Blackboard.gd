@@ -1,18 +1,20 @@
 extends RefCounted
 
-class_name BattleBlackboard
+class_name Blackboard
 
 var local_data: Dictionary = {}
-var parent_blackboard: BattleBlackboard = null # Points to Faction or Global
+var parent_blackboard: Blackboard = null # Points to Faction or Global
 
+signal on_blackboard_value_set()
 
 #_init is Godot's constructor
-func _init(_parent: BattleBlackboard = null) -> void:
+func _init(_parent: Blackboard = null) -> void:
 	parent_blackboard = _parent
 
 
 func get_value(key: String, default = null):
 	#Check if key exists here first
+
 	if local_data.has(key):
 		return local_data[key]
 
@@ -21,6 +23,12 @@ func get_value(key: String, default = null):
 		return parent_blackboard.get_value(key, default)
 
 	return default
+	
+	#Shorter version:
+	#if !local_data.has(key) or parent_blackboard != null:
+		#return parent_blackboard.get_value(key,default)
+	#
+	#return local_data[key]
 
 
 #Sets value using Generic/Template/Untyped value allowing any type to be set
@@ -28,3 +36,4 @@ func get_value(key: String, default = null):
 # or 'Set Blackboard Value as Object' which is strictly typed
 func set_value(key: String, value) -> void:
 	local_data[key] = value
+	on_blackboard_value_set.emit()

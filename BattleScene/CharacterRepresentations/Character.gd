@@ -7,6 +7,7 @@ var char_last_cell_pos : Vector2
 var faction : String
 var weapons_available : Array[Weapon]
 var weapon_current : Weapon
+var character_blackboard_ : BlackboardCharacter = BlackboardCharacter.new()
 
 @export var char_sprite : Sprite2D
 @export var base_stats : CharacterData

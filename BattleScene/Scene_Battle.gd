@@ -2,6 +2,9 @@ extends Node2D
 
 class_name SceneBattle
 
+enum TESTENUM{FIRST,MIDDLE,LAST,DEFAULT = -1}
+@export var newEnum : TESTENUM
+
 @export var battle_data : BattleData
 @export var path_finder : Pathfinder2D
 @export var drawing_battle : Drawing

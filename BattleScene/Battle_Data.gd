@@ -38,7 +38,6 @@ var active_faction_index : int:
 		active_faction_index = value
 		active_faction = factions_in_battle[value]
 #Blackboards
-var battle_blackboard : BattleBlackboard = BattleBlackboard.new()
 var global_blackboard : AIBlackboard = AIBlackboard.new()
 var ai_registry : AIRegistry = AIRegistry.new(global_blackboard)
 

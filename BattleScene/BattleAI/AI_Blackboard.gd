@@ -1,37 +1,3 @@
-extends RefCounted
+extends Blackboard
 
 class_name AIBlackboard
-
-var local_data: Dictionary = {}
-var parent_blackboard: AIBlackboard = null # Points to Faction or Global
-
-
-#_init is Godot's constructor
-func _init(_parent: AIBlackboard = null) -> void:
-	parent_blackboard = _parent
-
-
-func get_value(key: String, default = null):
-	#Check if key exists here first
-
-	if local_data.has(key):
-		return local_data[key]
-
-	#If key not found, try the parent (Faction or Global)
-	if parent_blackboard != null:
-		return parent_blackboard.get_value(key, default)
-
-	return default
-	
-	#Shorter version:
-	#if !local_data.has(key) or parent_blackboard != null:
-		#return parent_blackboard.get_value(key,default)
-	#
-	#return local_data[key]
-
-
-#Sets value using Generic/Template/Untyped value allowing any type to be set
-#Note, Unreal uses 'Set Blackboard Value as Float'
-# or 'Set Blackboard Value as Object' which is strictly typed
-func set_value(key: String, value) -> void:
-	local_data[key] = value

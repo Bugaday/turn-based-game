@@ -1,6 +1,6 @@
-extends RefCounted
-
 class_name AIRegistry
+
+extends RefCounted
 
 var global_ai_blackboard : AIBlackboard
 var faction_blackboards : Dictionary[String,AIBlackboard] = {}
@@ -45,14 +45,13 @@ func register_unit(unit:Character,faction_id:String) -> AIBlackboard:
 	return bb
 
 
-	
 func get_faction_units(faction:String) -> Array[Character]:
 	var units:Array[Character] = faction_unit_mappings.get(faction)
 	return units
 
 
 func update_unit_blackboards():
-	for current_char in unit_blackboards.keys():
-		unit_blackboards[current_char].set_value("Enemies",AIBlackboardInfoGenerator.get_all_enemy_characters(current_char,self))
-		unit_blackboards[current_char].set_value("Enemies_in_Range",AIBlackboardInfoGenerator.enemies_in_range(current_char,self))
-		unit_blackboards[current_char].set_value("Closest_Enemy",AIBlackboardInfoGenerator.get_closest_enemy(current_char,self))
+	for current_char : Character in unit_blackboards.keys():
+		current_char.character_blackboard_.set_value("Enemies",AIBlackboardInfoGenerator.get_all_enemy_characters(current_char,self))
+		current_char.character_blackboard_.set_value("Enemies_in_Range",AIBlackboardInfoGenerator.enemies_in_range(current_char,self))
+		current_char.character_blackboard_.set_value("Closest_Enemy",AIBlackboardInfoGenerator.get_closest_enemy(current_char,self))

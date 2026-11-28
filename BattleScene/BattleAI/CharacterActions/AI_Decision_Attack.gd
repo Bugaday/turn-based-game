@@ -10,8 +10,9 @@ func get_action(unit:Character,battle_scene:SceneBattle)->ActionCommand:
 
 
 func get_score(unit:Character,battle_scene:SceneBattle) -> float:
-	var enemies_in_range : Array[Character] = battle_scene.battle_data.ai_registry.unit_blackboards[unit].get_value("Enemies_in_Range")
+	var enemies_in_range : Array[Character] = unit.character_blackboard_.get_value("Enemies_in_Range")
 	if enemies_in_range.size() <= 0:
+		print("No enemies to attack!")
 		return 0.0
 	else:
 		return 1.0
